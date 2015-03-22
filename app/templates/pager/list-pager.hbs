@@ -1,0 +1,18 @@
+{{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+<ul class="list-group">
+    {{#each record in this}}
+        <li class="list-group-item" style="line-height: 2em">
+            {{#link-to linkPath record}}
+                {{#each col in columns}}
+                    {{pager-loop record col}} <br/>
+                {{/each}}
+            {{/link-to}}
+        </li>
+    {{else}}
+        <li>no records… :-(</li>
+    {{/each}}
+</ul>
+<div>
+    <button type="button" class="btn btn-default" {{action "fetch"}}>Refresh</button>
+</div>
+{{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}

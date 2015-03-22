@@ -1,0 +1,26 @@
+{{page-numbers currentPage=page totalPages=totalPages numPagesToShow=5 showFL=true}}
+
+<table class="table table-striped table-condensed">
+    <tr>
+        {{#each item in columns}}
+            <th> <a {{action "sortField" item.fieldName}}>{{item.displayName}}</a></th>
+        {{/each}}
+        <th>Actions</th>
+    </tr>
+    {{#each record in this}}
+        <tr>
+            {{#each col in columns}}
+                <td>{{pager-loop record col}}</td>
+            {{/each}}
+            <td>
+                {{#link-to linkPath record class="btn btn-default"}} Open {{/link-to}}
+            </td>
+        </tr>
+    {{else}}
+        <tr>no records found ... :-(</tr>
+    {{/each}}
+</table>
+<div>
+    <button type="button" class="btn btn-default" {{action "fetch"}}>Refresh</button>
+</div>
+{{page-numbers currentPage=page totalPages=totalPages numPagesToShow=5 showFL=true}}
