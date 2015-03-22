@@ -18,32 +18,19 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 
-/**
- * BOOTSTRAP CONFIG
- */
+// bootstrap config
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
-app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
-    destDir: 'assets'
-});
-app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {
-    destDir: 'fonts'
-});
-app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', {
-    destDir: 'fonts'
-});
-app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {
-    destDir: 'fonts'
-});
-app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
-    destDir: 'fonts'
-});
-app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
-    destDir: 'fonts'
-});
+app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {destDir: 'assets'});
+app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {destDir: 'fonts'});
+app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', {destDir: 'fonts'});
+app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {destDir: 'fonts'});
+app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {destDir: 'fonts'});
+app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {destDir: 'fonts'});
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
-/**
- * END
- */
+// end bootstrap
+
+// add custom style sheets
+app.import('app/styles/side-menu.css');
 
 
 module.exports = app.toTree();

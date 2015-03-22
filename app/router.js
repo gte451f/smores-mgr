@@ -16,6 +16,7 @@ Router.map(function () {
   this.route('auth', function() {
     this.route('login');
   });
+  this.route('camp-mgr');
 });
 
 export default Router;
