@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>SmoresMgr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,17 +18,13 @@
 
     {{content-for 'head-footer'}}
 </head>
-<body role="document">
-
-
-
-
+<body class="theme-dust main-menu-animated main-navbar-fixed main-menu-fixed" role="document">
+<script>
+    var init = [];
+</script>
     {{content-for 'body'}}
-
-
 <script src="assets/vendor.js"></script>
 <script src="assets/smores-mgr.js"></script>
-
 {{content-for 'body-footer'}}
 </body>
 </html>

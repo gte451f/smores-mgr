@@ -17,6 +17,11 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
+app.import('app/styles/google-font.css');
+
+// add styles & javascript required by the template
+app.import('app/styles/landerapp.css');
+app.import('app/styles/theme.dust.css');
 
 // bootstrap config
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
@@ -29,8 +34,8 @@ app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.w
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 // end bootstrap
 
-// add custom style sheets
-app.import('app/styles/side-menu.css');
+
+
 
 
 module.exports = app.toTree();
