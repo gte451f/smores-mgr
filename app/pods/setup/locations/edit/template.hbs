@@ -1,0 +1,50 @@
+<div class="panel panel-success panel-dark widget-profile">
+    <div class="panel-heading">
+        <div class="widget-profile-bg-icon"><span class="glyphicon glyphicon-tent"></span></div>
+        <div class="widget-profile-header">
+            <span>Lake Fieldstone</span>
+            <div class="btn-group btn-group-sm pull-right">
+                <button class="btn btn-primary" type="button">Save</button>
+                {{#link-to "setup.locations.info" class="btn btn-primary"}}Cancel{{/link-to}}
+            </div>
+        </div>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">Name:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="name">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">Description:</label>
+            <div class="col-sm-8">
+                <input type="textarea" class="form-control" name="description">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">Street:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="addr_1">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">Street2:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="addr_2">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">City:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="city">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">Zip:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="zip">
+            </div>
+        </div>
+    </div>
+</div>

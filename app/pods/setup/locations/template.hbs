@@ -1,0 +1,36 @@
+<div class="page-header">
+    <h1>Locations</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel widget-notifications">
+            <div class="panel-body padding-sm">
+                <div class="notifications-list">
+
+                    <div class="notification">
+                        <div>
+                            <div class="notification-title text-info">Lake Fieldstone</div>
+                            <div class="notification-description">You host <strong>9</strong> programs here.</div>
+                            <div class="notification-ago">description here....</div>
+                        </div>
+                        {{#link-to "setup.locations.info" class="notification-icon fa fa-folder-open bg-info"}}{{/link-to}}
+                    </div>
+
+                    <div class="notification">
+                        <div class="notification-title text-info">Metro Facility</div>
+                        <div class="notification-description">You host <strong>4</strong> program.</div>
+                        <div class="notification-ago">description here....</div>
+                        {{#link-to "setup.locations.info" class="notification-icon fa fa-folder-open bg-info"}}{{/link-to}}
+                    </div>
+
+                </div>
+                <a class="notifications-link" href="#">MORE NOTIFICATIONS</a>
+            </div>
+            <!-- / .panel-body -->
+        </div>
+    </div>
+    <div class="col-md-7">
+        {{outlet}}
+    </div>
+</div>

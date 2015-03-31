@@ -12,7 +12,7 @@
             </a>
 
             <!-- Main navbar toggle -->
-            <button data-target="#main-navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button"><i class="navbar-icon fa fa-bars"></i></button>
+            <button data-target="#main-navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">{{fa-icon "bars" classNames="navbar-icon"}}</button>
 
         </div> <!-- / .navbar-header -->
 
@@ -20,42 +20,12 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Home</a>
+                        {{#link-to 'dash'}}Home{{/link-to}}
                     </li>
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">First item</a></li>
-                            <li><a href="#">Second item</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Third item</a></li>
-                        </ul>
-                    </li>
+
                 </ul> <!-- / .navbar-nav -->
 
-                <div class="right clearfix">
-                    <ul class="nav navbar-nav pull-right right-navbar-nav">
-                        <li>
-                            <form class="navbar-form pull-left">
-                                <input type="text" placeholder="Search" class="form-control">
-                            </form>
-                        </li>
-
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#">
-                                <img alt="" src="assets/demo/avatars/1.jpg">
-                                <span>John Doe</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Profile <span class="label label-warning pull-right">new</span></a></li>
-                                <li><a href="#">Account <span class="badge badge-primary pull-right">new</span></a></li>
-                                <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
-                                <li class="divider"></li>
-                                <li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul> <!-- / .navbar-nav -->
-                </div> <!-- / .right -->
+                {{partial "navigation/profile"}}
             </div>
         </div> <!-- / #main-navbar-collapse -->
     </div> <!-- / .navbar-inner -->

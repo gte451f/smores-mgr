@@ -21,6 +21,8 @@ app.import('app/styles/google-font.css');
 
 // add styles & javascript required by the template
 app.import('app/styles/landerapp.css');
+app.import('app/styles/widgets.css');
+app.import('app/styles/pages.css');
 app.import('app/styles/theme.dust.css');
 
 // bootstrap config
