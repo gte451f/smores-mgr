@@ -23,11 +23,6 @@ var MixinPaginate = Ember.Mixin.create(RouteMixin, {
     //store a reference to the current route, since I don't know how to look this up
     currentRoute: 'CHANGE ME IN THE ROUTE',
 
-    //the name of the current controller since I don't know how to auto detect
-    controllerName: function () {
-        return this.get('modelName') + 's';
-    }.property('modelName'),
-
     actions: {
         canary: function () {
             console.log('canary in the coal mine!');

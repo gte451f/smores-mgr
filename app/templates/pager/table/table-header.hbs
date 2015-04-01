@@ -1,0 +1,6 @@
+<tr role="row">
+    {{#each item in columns}}
+        <th>{{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort"></i></th>
+    {{/each}}
+    <th tabindex="0" rowspan="1" colspan="1">Actions</th>
+</tr>
