@@ -13,14 +13,13 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="box">
                         {{ partial "pager/table/header"}}
                         <div class="box-body">
-                            <div role="grid" class="dataTables_wrapper form-inline" id="example1_wrapper">
+                            <div role="grid" class="form-inline">
                                 {{partial "pager/table/tools"}}
-                                <table class="table table-bordered table-striped dataTable" id="example1"
-                                       aria-describedby="example1_info">
+                                <table class="table table-bordered table-striped">
                                     {{partial "pager/table/table-header"}}
                                     <tbody>
                                     {{#each record in this}}
@@ -42,7 +41,7 @@
                     </div>
                     <!-- /.box -->
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     {{outlet}}
                 </div>
             </div>

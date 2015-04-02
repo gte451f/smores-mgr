@@ -1,24 +1,45 @@
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right">
-        <li class="active"><a data-toggle="tab" href="#main">Main</a></li>
         <li><a data-toggle="tab" href="#payments">Payments</a></li>
         <li><a data-toggle="tab" href="#registrations">Registrations</a></li>
+        <li class="active"><a data-toggle="tab" href="#main">Main</a></li>
         <li class="pull-left header"><i class="fa fa-th"></i> #{{model.id}} - {{model.name}}</li>
 
     </ul>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
             <b>Main:</b>
+
             <p>Body</p>
 
-        </div><!-- /.tab-pane -->
+            <p>Attendees:</p>
+            <ul>
+                {{#each attendee in model.attendees}}
+                    <li>{{attendee.firstName}}</li>
+                {{/each}}
+            </ul>
+
+            <p>Owners:</p>
+            <ul>
+                {{#each owner in model.owners}}
+                    <li>{{owners.firstName}}</li>
+                {{/each}}
+            </ul>
+
+        </div>
+        <!-- /.tab-pane -->
         <div id="registrations" class="tab-pane">
             <b>Registrations</b>
+
             <p>Body</p>
-        </div><!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-pane -->
         <div id="payments" class="tab-pane">
             <b>Payments</b>
+
             <p>Body</p>
-        </div><!-- /.tab-pane -->
-    </div><!-- /.tab-content -->
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
 </div>

@@ -5,7 +5,9 @@ export default DS.Model.extend({
     password: DS.attr('string'),
     createdOn: DS.attr('date'),
     updatedOn: DS.attr('date'),
-    name: DS.attr('string')
+    name: DS.attr('string'),
 
-
+    // relationships
+    attendees: DS.hasMany('attendee'),
+    owners: DS.hasMany('owner')
 });

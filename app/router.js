@@ -24,25 +24,31 @@ Router.map(function () {
         this.route('add');
         this.route('edit');
     });
+    this.route('registration', {"path": "registration/:registration_id"});
+
     this.route('accounts', function () {
         this.route("account", {
             path: "/account/:account_id"
         });
     });
     this.route('attendees');
+    this.route('attendee', {"path": "attendees/:attendee_id"});
+
     this.route('setup', function () {
         this.route('locations', function () {
             this.route('edit');
             this.route('info');
         });
-        this.route('programs', function() {
-          this.route('info');
-          this.route('edit');
+        this.route('programs', function () {
+            this.route('info');
+            this.route('edit');
         });
         this.route('events');
     });
     this.route('dash');
     this.route('reports');
+
+
 });
 
 export default Router;
