@@ -1,5 +1,6 @@
+<tbody>
 {{#each record in this}}
-    <tr class="gradeA even">
+    <tr>
         {{#each col in columns}}
             <td>{{pager-loop record col}}</td>
         {{/each}}
@@ -10,3 +11,4 @@
 {{else}}
     <tr>no records found ... :-(</tr>
 {{/each}}
+</tbody>

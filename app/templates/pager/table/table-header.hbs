@@ -1,6 +1,24 @@
+<thead>
 <tr role="row">
     {{#each item in columns}}
-        <th>{{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort"></i></th>
+        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            {{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort"></i>
+        </th>
     {{/each}}
-    <th tabindex="0" rowspan="1" colspan="1">Actions</th>
+
+    <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+        Actions
+    </th>
 </tr>
+</thead>
+
+<tfoot>
+<tr>
+    {{#each item in columns}}
+        <th rowspan="1" colspan="1">
+            {{item.displayName}}
+        </th>
+    {{/each}}
+    <th rowspan="1" colspan="1">Actions</th>
+</tr>
+</tfoot>

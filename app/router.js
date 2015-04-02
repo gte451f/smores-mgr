@@ -35,7 +35,10 @@ Router.map(function () {
             this.route('edit');
             this.route('info');
         });
-        this.route('programs');
+        this.route('programs', function() {
+          this.route('info');
+          this.route('edit');
+        });
         this.route('events');
     });
     this.route('dash');

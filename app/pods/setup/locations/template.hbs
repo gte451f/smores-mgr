@@ -1,36 +1,51 @@
-<div class="page-header">
-    <h1>Locations</h1>
-</div>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1> Setup: Locations </h1>
+    {{partial "navigation/main-breadcrumb"}}
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <section class="col-lg-4">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="ion ion-clipboard"></i>
 
-<div class="row">
-    <div class="col-md-5">
-        <div class="panel widget-notifications">
-            <div class="panel-body padding-sm">
-                <div class="notifications-list">
+                    <h3 class="box-title">Locations</h3>
 
-                    <div class="notification">
-                        <div>
-                            <div class="notification-title text-info">Lake Fieldstone</div>
-                            <div class="notification-description">You host <strong>9</strong> programs here.</div>
-                            <div class="notification-ago">description here....</div>
-                        </div>
-                        {{#link-to "setup.locations.info" class="notification-icon fa fa-folder-open bg-info"}}{{/link-to}}
+                    <div class="box-tools pull-right">
+                        <ul class="pagination pagination-sm inline">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
                     </div>
-
-                    <div class="notification">
-                        <div class="notification-title text-info">Metro Facility</div>
-                        <div class="notification-description">You host <strong>4</strong> program.</div>
-                        <div class="notification-ago">description here....</div>
-                        {{#link-to "setup.locations.info" class="notification-icon fa fa-folder-open bg-info"}}{{/link-to}}
-                    </div>
-
                 </div>
-                <a class="notifications-link" href="#">MORE NOTIFICATIONS</a>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="todo-list">
+                        <li>
+                            <span class="text">Let theme shine like a star</span>
+
+                            <div class="tools">
+                                {{#link-to "setup.locations.info"}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                                {{#link-to "setup.locations.edit"}}{{fa-icon "edit"}}{{/link-to}}
+                                {{fa-icon "trash-o"}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer clearfix no-border">
+                    <button class="btn btn-default btn-sm pull-right"><i class="fa fa-plus"></i> Add item</button>
+                </div>
             </div>
-            <!-- / .panel-body -->
-        </div>
+            <!-- /. end box-primary -->
+        </section>
+        <section class="col-lg-8">
+            {{outlet}}
+        </section>
     </div>
-    <div class="col-md-7">
-        {{outlet}}
-    </div>
-</div>
+    <!-- ./row -->
+</section>
+<!-- /.content -->

@@ -1,15 +1,13 @@
-<div class="table-primary">
-    <div role="grid" class="dataTables_wrapper">
-        {{ partial "pager/table/header"}}
-        <table cellspacing="0" cellpadding="0" border="0"
-               class="table table-striped table-bordered dataTable">
-            <thead>
-            {{partial "pager/table/table-header"}}
-            </thead>
-            <tbody>
-            {{partial "pager/table/row"}}
-            </tbody>
-        </table>
-        {{partial "pager/table/footer"}}
+<div class="box">
+    {{ partial "pager/table/header"}}
+    <div class="box-body">
+        <div role="grid" class="dataTables_wrapper form-inline" id="example1_wrapper">
+            {{partial "pager/table/tools"}}
+            <table class="table table-bordered table-striped dataTable" id="example1" aria-describedby="example1_info">
+                {{partial "pager/table/table-header"}}
+                {{partial "pager/table/row"}}
+            </table>
+            {{partial "pager/table/footer"}}
+        </div>
     </div>
 </div>

@@ -1,19 +1,24 @@
-<div class="panel colourable">
-    <div class="panel-heading">
-        <span class="panel-title">#{{model.id}} - {{model.name}}</span>
-        <ul class="nav nav-tabs nav-tabs-xs">
-            <li class="active">
-                <a data-toggle="tab" href="#">Main</a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#">Payments</a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#">Registrations</a>
-            </li>
-        </ul> <!-- / .nav -->
-    </div> <!-- / .panel-heading -->
-    <div class="panel-body">
-        Panel body content
-    </div>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs pull-right">
+        <li class="active"><a data-toggle="tab" href="#main">Main</a></li>
+        <li><a data-toggle="tab" href="#payments">Payments</a></li>
+        <li><a data-toggle="tab" href="#registrations">Registrations</a></li>
+        <li class="pull-left header"><i class="fa fa-th"></i> #{{model.id}} - {{model.name}}</li>
+
+    </ul>
+    <div class="tab-content">
+        <div id="main" class="tab-pane active">
+            <b>Main:</b>
+            <p>Body</p>
+
+        </div><!-- /.tab-pane -->
+        <div id="registrations" class="tab-pane">
+            <b>Registrations</b>
+            <p>Body</p>
+        </div><!-- /.tab-pane -->
+        <div id="payments" class="tab-pane">
+            <b>Payments</b>
+            <p>Body</p>
+        </div><!-- /.tab-pane -->
+    </div><!-- /.tab-content -->
 </div>

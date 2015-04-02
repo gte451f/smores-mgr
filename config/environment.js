@@ -56,7 +56,7 @@ module.exports = function (environment) {
         'font-src': "'self' fonts.gstatic.com",
         'connect-src': "'self' " + ENV.APP.restDestination,
         'img-src': "'self' data:",
-        'style-src': "'self' 'unsafe-inline'",
+        'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
         'media-src': "'self'"
     };
 

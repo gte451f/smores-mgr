@@ -1,8 +1,10 @@
-<div id="main-wrapper">
-    {{partial "navigation/menu"}}
-    {{partial "navigation/setup-navbar"}}
-    <div id="content-wrapper">
+<div class="wrapper">
+    {{partial "navigation/setup-header"}}
+    {{partial "navigation/main-sidebar"}}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 1068px;">
         {{outlet}}
     </div>
+    <!-- /.content-wrapper -->
+    {{partial "navigation/main-footer"}}
 </div>
-<div id="main-menu-bg"></div>
