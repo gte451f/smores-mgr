@@ -8,6 +8,10 @@ export default Ember.Mixin.create({
     // setup our query params including custom sortField value
     queryParams: ["page", "perPage", "sortField"],
 
+    pageList: [
+        5, 10, 25, 50, 100, 250, 500
+    ],
+
     // binding the property on the paged array
     // to the query params on the controller
     pageBinding: "content.page",
@@ -18,8 +22,14 @@ export default Ember.Mixin.create({
     sortField: 'id',
     sortOrder: '', // a - means desc
 
+    // disabled by default
+    // set these in the controller to enable and bind to a specific field
+    quickSearchField: null,
+    quickSearch: null,
+
     page: 1,
     perPage: 10,
+    totalRecords: null,
 
     column: Ember.Object.extend({
         display: null,
@@ -31,6 +41,6 @@ export default Ember.Mixin.create({
         Column.create({'displayName': '#', 'fieldName': 'id'})
     ],
 
-    linkPath: "SET_ME_IN_CONTROLLER",
-    createPath: "SET_ME_IN_CONTROLLER"
+    linkPath: "set linkPath in the controller",
+    createPath: "set createPath in the controller"
 });

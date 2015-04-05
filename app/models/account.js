@@ -9,5 +9,6 @@ export default DS.Model.extend({
 
     // relationships
     attendees: DS.hasMany('attendee'),
+    accountAddrs: DS.hasMany('accountAddr'),
     owners: DS.hasMany('owner')
 });

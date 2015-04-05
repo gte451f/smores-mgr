@@ -18,10 +18,10 @@ var MixinPaginate = Ember.Mixin.create(RouteMixin, {
 
     //store a reference to the route's model
     //i couldn't figure out how to look this up
-    modelName: 'CHANGE ME IN ROUTE',
+    modelName: 'set modelName in the route',
 
     //store a reference to the current route, since I don't know how to look this up
-    currentRoute: 'CHANGE ME IN THE ROUTE',
+    currentRoute: 'set currentRoute in the route',
 
     actions: {
         canary: function () {
@@ -54,27 +54,19 @@ var MixinPaginate = Ember.Mixin.create(RouteMixin, {
             } else {
                 this.controller.set('sortField', field);
             }
-            //this.controller.transitionToRoute(this.get('currentRoute'), {queryParams: {sortField: newSortOrder + field}});
-            this.transitionTo(this.get('currentRoute'), {queryParams: {sortField: newSortOrder + field}});
+            //this.transitionTo(this.get('currentRoute'), {queryParams: {sortField: newSortOrder + field}});
+            this.fetch();
+
         },
 
-        //refresh the current route by rebuilding based on paginator values
-        fetch: function () {
-            this.refresh();
+        refresh: function () {
+            this.fetch();
+        },
 
-            //console.log('routes/***:fetch attempted');
-            //var controller = this.controller;
-            //
-            ////create a hash of default search paramaters
-            //var params = {
-            //    page: controller.get('page'),
-            //    perPage: controller.get('perPage'),
-            //    sortField: controller.get('sortField')
-            //};
-            //
-            //this.findPaged(this.modelName, params).then(function (items) {
-            //    controller.set('model', items);
-            //});
+
+        // take the supplied search field and ask the api to filter by it
+        runQuickSearch: function () {
+            this.fetch();
         },
 
         //general function to open a record from a paginated list
@@ -86,6 +78,27 @@ var MixinPaginate = Ember.Mixin.create(RouteMixin, {
             this.controller.transitionToRoute(controller.get('modelName'), record);
 
         }
+    },
+
+    //refresh the current route by rebuilding based on paginator values
+    fetch: function () {
+        var controller = this.controller;
+        var name = controller.get('quickSearchField');
+        var value = controller.get('quickSearch');
+
+        var params = {
+            page: controller.get('page'),
+            perPage: controller.get('perPage'),
+            sortField: controller.get('sortField')
+        };
+
+        if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {
+            params[name] = value;
+        }
+
+        this.findPaged(this.modelName, params).then(function (items) {
+            controller.set('model', items);
+        });
     },
 
     model: function (params) {
@@ -101,6 +114,7 @@ var MixinPaginate = Ember.Mixin.create(RouteMixin, {
         //pass route properties on to controller
         controller.set('modelName', this.modelName);
         controller.set('controllerName', this.controllerName);
+        controller.set('totalRecords', model.meta.total_record_count);
     }
 });
 

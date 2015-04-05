@@ -8,21 +8,39 @@
     </ul>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-            <b>Main:</b>
-
-            <p>Body</p>
-
-            <p>Attendees:</p>
+            <b>Attendees:</b>
             <ul>
                 {{#each attendee in model.attendees}}
-                    <li>{{attendee.firstName}}</li>
+                    <li>
+                        {{attendee.firstName}} {{attendee.lastName}}
+                        {{#link-to "attendee" attendee.id}}Open{{/link-to}}
+                    </li>
                 {{/each}}
             </ul>
 
-            <p>Owners:</p>
+            <b>Owners:</b>
             <ul>
                 {{#each owner in model.owners}}
-                    <li>{{owners.firstName}}</li>
+                    <li>
+                        {{owner.firstName}} {{owner.lastName}}
+                        {{#link-to "owner" owner.id}}Open{{/link-to}}
+                    </li>
+                {{/each}}
+            </ul>
+
+            <b>Addresses:</b>
+            <ul>
+                {{#each addr in model.accountAddrs}}
+                    <address>
+                        {{addr.addr_1}}<br>
+                        {{addr.city}}, {{addr.state}} {{addr.zip}}<br>
+                        <dl class="dl-horizontal">
+                            <dt>Billing:</dt>
+                            <dd>{{addr.billing}}</dd>
+                            <dt>Mailing:</dt>
+                            <dd>{{addr.mailing}}</dd>
+                        </dl>
+                    </address>
                 {{/each}}
             </ul>
 

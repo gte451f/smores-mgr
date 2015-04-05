@@ -1,15 +1,30 @@
 <div class="row">
     <div class="col-xs-6">
-        <div id="example1_length" class="dataTables_length"><label><select name="example1_length" size="1" aria-controls="example1">
-            <option value="10" selected="selected">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select> records per page</label></div>
+        <div id="example1_length" class="dataTables_length">
+            <label>Per Page: <br>
+                {{view "select"
+                content=pageList
+                optionValuePath="content"
+                optionLabelPath="content"
+                value=perPage}}
+            </label>
+
+            <button {{action 'refresh'}} class="btn btn-xs btn-primary">{{fa-icon 'refresh'}}</button>
+        </div>
     </div>
     <div class="col-xs-6">
-        <div class="dataTables_filter" id="example1_filter"><label>Search: <input type="text"
-                                                                                  aria-controls="example1"></label>
-        </div>
+        {{#if quickSearchField}}
+            <div class="dataTables_filter">
+                <label>Search:
+                    <div class="input-group input-group-sm">
+                        {{input type="text" class="form-control" value=quickSearch}}
+                        <span class="input-group-btn">
+                            <button {{action 'runQuickSearch'}}
+                                    class="btn btn-primary btn-flat">{{fa-icon 'search'}}</button>
+                        </span>
+                    </div>
+                </label>
+            </div>
+        {{/if}}
     </div>
 </div>

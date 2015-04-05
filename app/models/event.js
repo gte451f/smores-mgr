@@ -7,5 +7,5 @@ export default DS.Model.extend({
     maxAge: DS.attr('number'),
     gender: DS.attr('string'),
     capacity: DS.attr('number'),
-    cost: DS.attr(number)
+    cost: DS.attr('number')
 });

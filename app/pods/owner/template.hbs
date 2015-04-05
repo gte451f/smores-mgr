@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Attendee: {{model.firstName}} {{model.lastName}}
+                Account Owner: {{model.firstName}} {{model.lastName}}
             </h1>
             {{partial "navigation/main-breadcrumb"}}
         </section>
@@ -25,12 +25,11 @@
                                 <dd>{{model.email}}</dd>
                                 <dt>Birthday</dt>
                                 <dd>{{model.dob}}</dd>
-                                <dt>Siblings</dt>
+                                <dt>Phone Numbers</dt>
                                 <dd>
                                     <ul>
-                                        <li>Sibling #1</li>
-                                        <li>Sibling #1</li>
-                                        <li>Sibling #1</li>
+                                        <li>Home</li>
+                                        <li>Work</li>
                                     </ul>
                                 </dd>
                             </dl>

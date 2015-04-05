@@ -4,18 +4,20 @@
             <a href="#" class="btn btn-default btn-xs">Delete</a>
             {{#link-to "setup.locations.edit" class="btn btn-default btn-xs"}}Edit{{/link-to}}
         </div>
-        <h4 class="panel-title"><span class="glyphicon glyphicon-tent"></span>Lake Fieldstone</h4>
+        <h4 class="panel-title"><span class="glyphicon glyphicon-tent"></span> {{model.name}}</h4>
     </div>
     <div class="panel-body">
-        <ul class="list-group">
-            <address class="list-group-item">
-                <strong>Twitter, Inc.</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                <abbr title="Phone">P:</abbr> (123) 456-7890
-            </address>
-            <span class="list-group-item">Description (What your customers see)</span>
-            <span class="list-group-item">Description (What your customers see)</span>
-        </ul>
+
+        <dl class="dl-horizontal">
+            <dt>Description:</dt>
+            <dd>{{model.description}}</dd>
+            <dt>Address:</dt>
+            <dd>
+                <address>
+                    {{model.addr_1}}<br>
+                    {{model.city}}, {{model.state}} {{model.zip}}<br>
+                </address>
+            </dd>
+        </dl>
     </div>
 </div>

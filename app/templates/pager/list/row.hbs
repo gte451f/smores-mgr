@@ -1,0 +1,14 @@
+{{#each record in this}}
+    <li>
+    <span class="text">
+        {{#each col in columns}}
+            {{pager-loop record col}}
+        {{/each}}
+    </span>
+        <div class="tools">
+            {{#link-to linkPath record}} {{fa-icon "folder-open-o"}} {{/link-to}}
+        </div>
+    </li>
+{{else}}
+    <li>no records found ... :-(</li>
+{{/each}}

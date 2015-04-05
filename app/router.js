@@ -33,21 +33,23 @@ Router.map(function () {
     });
     this.route('attendees');
     this.route('attendee', {"path": "attendees/:attendee_id"});
+    this.route('owner', {"path": "owner/:owner_id"});
 
     this.route('setup', function () {
         this.route('locations', function () {
-            this.route('edit');
-            this.route('info');
+            this.route('edit', {"path": "setup/locations/edit/:location_id"});
+            this.route('info', {"path": "setup/locations/info/:location_id"});
         });
         this.route('programs', function () {
-            this.route('info');
-            this.route('edit');
+            this.route('edit', {"path": "setup/programs/edit/:program_id"});
+            this.route('info', {"path": "setup/programs/info/:program_id"});
         });
         this.route('events');
     });
     this.route('dash');
     this.route('reports');
 
+    this.route('locations');
 
 });
 

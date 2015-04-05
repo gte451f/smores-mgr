@@ -1,6 +1,6 @@
-import Configuration from 'simple-auth/configuration';
-import setup from 'simple-auth/setup';
-import ENV from '../config/environment';
+// import Configuration from 'simple-auth/configuration';
+// import setup from 'simple-auth/setup';
+// import ENV from '../config/environment';
 import CustomAuthenticator from "../authenticators/custom";
 
 export default {
