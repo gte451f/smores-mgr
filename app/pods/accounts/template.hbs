@@ -1,0 +1,53 @@
+<div class="wrapper">
+    {{partial "navigation/main-header"}}
+    {{partial "navigation/main-sidebar"}}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 1068px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Accounts {{totalPages}}
+            </h1>
+            {{partial "navigation/main-breadcrumb"}}
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="box">
+                        {{ partial "pager/table/header"}}
+                        <div class="box-body">
+                            <div role="grid" class="form-inline">
+                                {{partial "pager/table/tools"}}
+                                <table class="table table-bordered table-striped">
+                                    {{partial "pager/table/table-header"}}
+                                    <tbody>
+                                    {{#each record in this}}
+                                        <tr>
+                                            <td>{{record.name}}</td>
+                                            <td>{{moment record.createdOn 'MM/DD/YY'}}</td>
+                                            <td>
+                                                {{#link-to linkPath record class="btn btn-default"}} Open {{/link-to}}
+                                            </td>
+                                        </tr>
+                                    {{else}}
+                                        <tr>no records found ... :-(</tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                                {{partial "pager/table/footer"}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <div class="col-md-8">
+                    {{outlet}}
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    {{partial "navigation/main-footer"}}
+</div>

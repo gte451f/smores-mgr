@@ -1,0 +1,42 @@
+<div role="navigation" class="navbar navbar-inverse" id="main-navbar">
+    <!-- Main menu toggle -->
+    <button id="main-menu-toggle" type="button"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span>
+    </button>
+
+    <div class="navbar-inner">
+        <!-- Main navbar header -->
+        <div class="navbar-header">
+
+            <!-- Logo -->
+            <a class="navbar-brand" href="../../index.html">
+                <strong>Lander</strong>App
+            </a>
+
+            <!-- Main navbar toggle -->
+            <button data-target="#main-navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed"
+                    type="button">{{fa-icon "bars" classNames="navbar-icon"}}</button>
+
+        </div>
+        <!-- / .navbar-header -->
+
+        <div class="collapse navbar-collapse main-navbar-collapse" id="main-navbar-collapse">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        {{#link-to 'dash'}}Home{{/link-to}}
+                    </li>
+                    <li>
+                        {{#link-to "setup.locations"}}Custom Fields{{/link-to}}
+                    </li>
+                    <li>
+                        {{#link-to "setup.locations"}}Payments & Billing?{{/link-to}}
+                    </li>
+                </ul>
+                <!-- / .navbar-nav -->
+                {{partial "navigation/profile"}}
+            </div>
+        </div>
+        <!-- / #main-navbar-collapse -->
+    </div>
+    <!-- / .navbar-inner -->
+</div>

@@ -1,0 +1,97 @@
+<div class="page-signin">
+    <div id="page-signin-bg">
+        <!-- Background overlay -->
+        <div class="overlay"></div>
+        <!-- Replace this with your bg image -->
+        <img alt="" src="assets/demo/banner-4.jpg" style="">
+    </div>
+
+    <div class="signin-container">
+
+        <!-- Left side -->
+        <div class="signin-info">
+            <a class="logo" href="index.html">
+                The Smores <span style="font-weight:100;">Project</span>
+            </a> <!-- / .logo -->
+            <div class="slogan">
+                Elegant Camp Software
+            </div>
+            <!-- / .slogan -->
+            <ul>
+                <li><i class="fa fa-star signin-icon"></i> Flexible</li>
+                <li><i class="fa fa-star signin-icon"></i> Simple</li>
+                <li><i class="fa fa-star signin-icon"></i> Powerfull</li>
+            </ul>
+            <!-- / Info list -->
+        </div>
+        <!-- / Left side -->
+
+        <!-- Right side -->
+        <div class="signin-form">
+
+            <!-- Form -->
+            <form id="signin-form_id" action="index.html" novalidate="novalidate">
+                <div class="signin-text">
+                    <span>Sign In to your account</span>
+                </div>
+                <!-- / .signin-text -->
+
+                <div class="form-group w-icon">
+                    <input type="text" placeholder="Username or email" class="form-control input-lg" id="username_id"
+                           name="signin_username"
+                           autocomplete="off">
+                    <span class="fa fa-user signin-form-icon"></span>
+                </div>
+                <!-- / Username -->
+
+                <div class="form-group w-icon">
+                    <input type="password" placeholder="Password" class="form-control input-lg" id="password_id"
+                           name="signin_password"
+                           autocomplete="off">
+                    <span class="fa fa-lock signin-form-icon"></span>
+                </div>
+                <!-- / Password -->
+
+                <div class="form-actions">
+                    {{#link-to 'test' class="signin-btn bg-primary"}}Sign In{{/link-to}}
+                    {{#link-to 'auth.reminder' class="forgot-password"}}Forgot your password?{{/link-to}}
+                </div>
+                <!-- / .form-actions -->
+            </form>
+            <!-- / Form -->
+
+            <!-- Password reset form -->
+            <div id="password-reset-form" class="password-reset-form">
+                <div class="header">
+                    <div class="signin-text">
+                        <span>Password reset</span>
+
+                        <div class="close">×</div>
+                    </div>
+                    <!-- / .signin-text -->
+                </div>
+                <!-- / .header -->
+
+                <!-- Form -->
+                <form id="password-reset-form_id" action="index.html" novalidate="novalidate">
+                    <div class="form-group w-icon">
+                        <input type="text" placeholder="Enter your email" class="form-control input-lg" id="p_email_id"
+                               name="password_reset_email"
+                               autocomplete="off">
+                        <span class="fa fa-envelope signin-form-icon"></span>
+                    </div>
+                    <!-- / Email -->
+
+                    <div class="form-actions">
+                        <input type="submit" class="signin-btn bg-primary" value="SEND PASSWORD RESET LINK">
+                    </div>
+                    <!-- / .form-actions -->
+                </form>
+                <!-- / Form -->
+            </div>
+            <!-- / Password reset form -->
+        </div>
+        <!-- Right side -->
+    </div>
+
+</div>

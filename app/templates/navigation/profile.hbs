@@ -1,0 +1,26 @@
+<div class="right clearfix">
+    <ul class="nav navbar-nav pull-right right-navbar-nav">
+        <li>
+            <form class="navbar-form pull-left">
+                <input type="text" placeholder="Search" class="form-control">
+            </form>
+        </li>
+
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#">
+                <img alt="" src="assets/demo/avatars/1.jpg">
+                <span>John Doe</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    {{#link-to 'user-mgr.profile'}}Profile{{/link-to}}
+                </li>
+                <li class="divider"></li>
+                <li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log
+                    Out</a></li>
+            </ul>
+        </li>
+    </ul>
+    <!-- / .navbar-nav -->
+</div>
+<!-- / .right -->
