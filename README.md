@@ -19,17 +19,19 @@ The api has it's own set of requirements.
 **Important**
 Modify the following files BEFORE you attempt to run the application
 
-bower_components/admin-lte/build/less/AdminLTE.less
-
+**bower_components/admin-lte/build/less/AdminLTE.less**
 Comment out lines 15 & 16  
-`//@import "../bootstrap-less/mixins.less";
-//@import "../bootstrap-less/variables.less";`
+```
+//@import "../bootstrap-less/mixins.less";  
+//@import "../bootstrap-less/variables.less";
+```
 
-bower_components/admin-lte/build/less/skins/skin-blue.less
-
+**bower_components/admin-lte/build/less/skins/skin-blue.less**
 Comment out lines #5 & 6  
-`//@import "../../bootstrap-less/mixins.less";
-//@import "../../bootstrap-less/variables.less";`
+```
+//@import "../../bootstrap-less/mixins.less";  
+//@import "../../bootstrap-less/variables.less";
+```
 
 
 ## Running / Development
