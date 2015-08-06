@@ -1,10 +1,9 @@
 import Ember from "ember";
 import Base from "simple-auth/authenticators/base";
 import LocalStorage from 'simple-auth/stores/local-storage';
+import ENV from 'smores-mgr/config/environment';
 
 export default Base.extend({
-    url: 'http://localhost:4200/smores-api/v1/auth/login',
-
     /**
      * @param data
      */
@@ -15,24 +14,40 @@ export default Base.extend({
     },
 
     /**
+     * submit user supplied credentials to the API for authentication
+     * for a good reference check here:
+     * https://github.com/simplabs/ember-simple-auth/blob/master/examples/4-authenticated-account.html
      * @param credentials
      * @param options
      * @returns {Rx.Promise}
      */
     authenticate: function (credentials, options) {
-        var _this = this;
+        // var self = this;
         return new Ember.RSVP.Promise(function (resolve, reject) {
-            var loginPromise = Ember.$.ajax(_this.url, {
-                username: credentials.identification,
-                password: credentials.password
-            });
-            loginPromise.then(function (data) {
-                resolve({
-                    token2: 'yellow',
-                    userData2: 12
-                }, function (error) {
-                    reject(error);
+            // make the request to authenticate the user at endpoint /v3/token
+            Ember.$.ajax({
+                url: ENV.auth.login,
+                type: 'POST',
+                data: {
+                    username: credentials.identification,
+                    password: credentials.password
+                }
+            }).then(function (response) {
+                Ember.run(function () {
+                    // resolve (including the account id) as the AJAX request was successful; all properties this promise resolves
+                    // with will be available through the session
+                    resolve({
+                        token: response.token,
+                        email: response.email,
+                        expiresOn: response.expiresOn,
+                        userName: response.userName,
+                        firstName: response.firstName,
+                        lastName: response.LastName,
+                        id: response.id
+                    });
                 });
+            }, function (xhr, status, error) {
+                console.log(xhr.responseJSON);
             });
         });
     },
@@ -42,19 +57,21 @@ export default Base.extend({
      * @returns {Rx.Promise}
      */
     invalidate: function () {
-        console.log('ran invalidate');
-        var _this = this;
-
-        function success(resolve) {
-            Ember.run.cancel(_this._refreshTokenTimeout);
-            delete _this._refreshTokenTimeout;
-            resolve();
-        }
-
+        // var self = this;
         return new Ember.RSVP.Promise(function (resolve, reject) {
-            var invalidatePromise = Ember.$.ajax(_this.url, {});
-            invalidatePromise.then(function (data) {
-                success(resolve);
+            // make the request to authenticate the user at endpoint /v3/token
+            Ember.$.ajax({
+                url: ENV.auth.logout,
+                type: 'GET'
+            }).then(function (response) {
+                Ember.run(function () {
+                    // nothing to do...
+                    resolve();
+                });
+            }, function (xhr, status, error) {
+                console.log(xhr.responseJSON);
+                //resolve anyway
+                resolve();
             });
         });
     }

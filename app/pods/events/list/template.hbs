@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary box-top">
+            <div class="box-body">
+                <div role="grid" class="form-inline">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label>Per Page:</label>
+                            {{x-select
+                            content=pageList
+                            optionValuePath="content"
+                            optionLabelPath="content"
+                            value=perPage
+                            class="form-control input-sm"}}
+                            <button {{action 'refresh'}} class="btn btn-sm btn-primary">{{fa-icon 'refresh'}}</button>
+                            {{#link-to "events.add" class="btn btn-primary btn-sm"}}{{fa-icon "plus"}}
+                                Add{{/link-to}}
+                        </div>
+
+                        <div class="col-xs-7">
+                            {{x-select
+                            content=locations
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            prompt="All Locations"
+                            value=location_id
+                            class="form-control input-sm"}}
+
+                            {{x-select
+                            content=cabins
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            prompt="All Cabins"
+                            value=cabin_id
+                            class="form-control input-sm"}}
+
+                            {{x-select
+                            content=programs
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            prompt="All Programs"
+                            value=program_id
+                            class="form-control input-sm"}}
+
+                            {{x-select
+                            content=sessions
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            prompt="All Sessions"
+                            value=session_id
+                            class="form-control input-sm"}}
+                        </div>
+
+                        <div class="col-xs-2">
+                            {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-striped">
+                        {{partial 'table-pager/table/table-header'}}
+                        <tbody>
+                        {{#each this as |record| }}
+                            <tr>
+                                {{#each columns as |col| }}
+                                    <td>{{pager-loop record col}}</td>
+                                {{/each}}
+                                <td class="pull-right">
+                                    {{#link-to 'events.edit' record.id class="btn btn-primary btn-xs"}}
+                                        Edit {{/link-to}}
+                                    {{#link-to linkPath record class="btn btn-primary btn-xs"}}
+                                        Open {{/link-to}}
+                                    <button {{action 'showModal' 'modals/delete-confirm' record}}
+                                            class="btn btn-primary btn-xs">Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>no records found ... :-(</tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    {{partial 'table-pager/table/footer'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

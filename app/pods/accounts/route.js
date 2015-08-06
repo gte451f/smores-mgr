@@ -1,8 +1,17 @@
 import Ember from 'ember';
-import Paginate from 'smores-mgr/mixins/pager/base-route';
+import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Route.extend(Paginate, {
-    modelName: 'account',
-    controllerName: 'accounts',
-    currentRoute: 'accounts'
+var User = Ember.Object.extend({id: '', fullName: '', firstName: '', lastName: '', accountId: ''});
+
+export default Ember.Route.extend(ErrorHandler, {
+    model: function () {
+        return Ember.RSVP.hash({
+            model: User.create()
+        });
+    },
+    setupController: function (controller, resolved) {
+        controller.set("model", resolved.model);
+        var users = [];
+        controller.set("users", users);
+    }
 });

@@ -21,21 +21,32 @@ module.exports = function (environment) {
         }
     };
 
+
     if (environment === 'development') {
+        // used for CSP
+        ENV.APP.restDestination = 'http://localhost:4200';
+        //need for ember data?
+        ENV.APP.restNameSpace = 'smores-api/v1';
+
+        // Testem prefers this...
+        ENV.baseURL = '/';
+
         // ENV.APP.LOG_RESOLVER = true;
         // ENV.APP.LOG_ACTIVE_GENERATION = true;
         // ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-        //used for CSP
-        ENV.APP.restDestination = 'http://localhost:8080';
     }
 
     if (environment === 'test') {
         // Testem prefers this...
         ENV.baseURL = '/';
         ENV.locationType = 'none';
+
+        //need for ember data?
+        ENV.APP.restNameSpace = 'smores-api/v1';
+        // used for CSP
+        ENV.APP.restDestination = 'http://localhost:4200';
 
         // keep test console output quieter
         ENV.APP.LOG_ACTIVE_GENERATION = false;
@@ -45,7 +56,13 @@ module.exports = function (environment) {
     }
 
     if (environment === 'production') {
-
+        // ENV.baseURL = '/portal/';
+        ENV.baseURL = '/hhy/mgr/';
+        ENV.locationType = 'none';
+        //need for ember data?
+        ENV.APP.restNameSpace = 'api/v1';
+        // used for CSP
+        ENV.APP.restDestination = 'https://app.smores.camp/hhy';
     }
 
 
@@ -61,11 +78,29 @@ module.exports = function (environment) {
     };
 
     ENV['simple-auth'] = {
-        serverTokenRevocationEndpoint: '/revoke',
-        serverTokenEndpoint: 'http://localhost:8080/smors-api/v1/auth/login',
+        serverTokenRevocationEndpoint: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/auth/logout',
+        serverTokenEndpoint: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/auth/login',
         store: 'simple-auth-session-store:local-storage',
-        authenticationRoute: 'auth.login'
+        authenticationRoute: 'auth.login',
+        authorizer: 'authorizer:custom',
+        routeAfterAuthentication: 'dash'
+    };
+
+    ENV['auth'] = {
+        login: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/auth/login',
+        logout: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/auth/logout'
+    };
+
+
+    ENV['ember-cli-toggle'] = {
+        includedThemes: ['flat', 'light', 'default', 'flip'],
+        excludedThemes: ['flat'],
+        defaultTheme: 'light',  // defaults to 'default'
+        defaultSize: 'medium',   // defaults to 'medium'
+        defaultOff: 'False',    // defaults to 'Off'
+        defaultOn: 'True'       // defaults to 'On'
     };
 
     return ENV;
-};
+}
+;

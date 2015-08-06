@@ -1,0 +1,84 @@
+<div class="alert bg-gray  alert-dismissable hidden" id="helpBox">
+    <button type="button" class="close" {{action 'hideHelp'}}>×</button>
+    <h4><i class="icon fa fa-info"></i> Help</h4>
+    <ul>
+        <li>Registration options are limited to what your attendee is eligible for based on age and gender.</li>
+        <li>Use different Priorities to indicated how many weeks your camper wishes to attend and in which order to
+            process your preferences.
+        </li>
+        <p>For example, to attend One session and indicate a second choice (in case your first choice is full), add
+            another request with a
+            priority of 2.</p>
+
+        <p>To attend multiple weeks of camp, make more than one request <strong>with the same priority</strong>.</p>
+
+        <p>Using the Priority field, you can construct your camper's summer plan just the way you want while adding
+            backup options if your first choice isn't available.</p>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <dl class="">
+                            <dt>Attending Camper</dt>
+                            <dd>{{step1.attendee.firstName}} {{step1.attendee.lastName}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-3">
+                        <dl class="">
+                            <dt>Grade</dt>
+                            <dd>{{step1.attendee.schoolGrade}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-3">
+                        <dl class="">
+                            <dt>Gender</dt>
+                            <dd>{{step1.user.gender}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-3">
+                        <dl class="">
+                            <dt>Birthday</dt>
+                            <dd>{{moment step1.user.dob 'MM/DD/YYYY'}}</dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-solid bg-yellow disabled">
+            <div class="box-header">
+                {{ fa-icon "calendar"}}
+                <h3 class="box-title">Step 2: Request Specific Events To Attend</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm" {{action "addRequest"}}>Add Request</button>
+                    </div>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-black">
+                {{#each requests as |item|}}
+                    {{registrations/new-request request=item action="removeRequest" locations=locations sessions=sessions events=events }}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

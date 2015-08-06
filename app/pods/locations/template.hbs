@@ -1,0 +1,58 @@
+<div class="wrapper">
+    {{partial "navigation/setup-header"}}
+    {{partial "navigation/main-sidebar"}}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 1068px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1> Setup: Locations </h1>
+            {{partial "navigation/main-breadcrumb"}}
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-4">
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"></h3>
+
+                            <div class="box-tools">
+                                <div class="btn-group pull-right">
+                                    {{#link-to "locations.add" class="btn btn-primary btn-xs"}}
+                                        {{fa-icon "plus"}} Add
+                                    {{/link-to}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <ul class="todo-list">
+                                {{#each this as |record| }}
+                                    <li class="clearfix">
+                                        <span class="text">{{record.name}}</span>
+
+                                        <div class="tools">
+                                            {{#link-to "locations.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                                            {{#link-to "locations.edit" record}}{{fa-icon "edit"}}{{/link-to}}
+                                        </div>
+                                    </li>
+                                {{else}}
+                                    <li>no records found ... :-(</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        {{partial "table-pager/list/footer"}}
+                    </div>
+                    <!-- /. end box-primary -->
+                </section>
+                <section class="col-lg-8">
+                    {{outlet}}
+                </section>
+            </div>
+            <!-- ./row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    {{partial "navigation/main-footer"}}
+</div>

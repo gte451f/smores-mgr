@@ -1,24 +1,37 @@
 # Smores-mgr
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is a swanky camp management system written in the very fine Ember framework.
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
-
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+A working Ember CLI Environment
+Linux (I don't do much Windows work so the help is biased)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
+* `git clone https://github.com/gte451f/smores-mgr.git`
+* `cd smores-mgr`
 * `npm install`
 * `bower install`
+* `bower install admin-lte`  (for some reason this doesn't install on its own)
+
+**Important**
+Modify the following files BEFORE you attempt to run the application
+
+bower_components/admin-lte/build/less/AdminLTE.less
+
+Comment out lines 15 & 16
+//@import "../bootstrap-less/mixins.less";
+//@import "../bootstrap-less/variables.less";
+
+bower_components/admin-lte/build/less/skins/skin-blue.less
+
+Comment out lines #5 & 6
+//@import "../../bootstrap-less/mixins.less";
+//@import "../../bootstrap-less/variables.less";
+
+
+
 
 ## Running / Development
 

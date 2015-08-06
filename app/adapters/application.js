@@ -1,8 +1,9 @@
 import DS from 'ember-data';
+import ENV from 'smores-mgr/config/environment';
 
 var ApplicationAdapter = DS.ActiveModelAdapter.extend({
-    //host: 'http://localhost:8080',
-    namespace: 'smores-api/v1'
+    namespace: ENV.APP.restNameSpace,
+    host: ENV.APP.restDestination
 });
 
 export default ApplicationAdapter;

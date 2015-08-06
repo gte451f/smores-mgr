@@ -2,17 +2,6 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- search form -->
-        <form class="sidebar-form" method="get" action="#">
-            <div class="input-group">
-                <input type="text" placeholder="Search..." class="form-control" name="q">
-              <span class="input-group-btn">
-                <button class="btn btn-flat" id="search-btn" name="seach" type="submit"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>
-        <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
@@ -24,7 +13,7 @@
                 {{/link-to}}
             </li>
             <li>
-                {{#link-to 'registrations'}}
+                {{#link-to 'registrations.list'}}
                     {{fa-icon "clipboard"}}
                     <span>Registrations</span>
                     {{fa-icon "angle-left" classNames="pull-right"}}
@@ -38,7 +27,7 @@
                 {{/link-to}}
             </li>
             <li>
-                {{#link-to 'attendees'}}
+                {{#link-to 'attendees.list'}}
                     {{fa-icon "child"}}
                     <span>Attendees</span>
                     {{fa-icon "angle-left" classNames="pull-right"}}
@@ -67,6 +56,16 @@
             </li>
             <li><a>{{fa-icon "envelope"}} <span>Camper Email</span></a></li>
             <li><a>{{fa-icon "photo"}} <span>Photo Album</span></a></li>
+
+            {{#if session.isAuthenticated}}
+                <li>
+                    <a href="" {{ action 'invalidateSession' }}>
+                        <span class="glyphicon glyphicon-log-out menu-icon"></span>
+                        <span>Logout</span>
+                        {{fa-icon "angle-left" classNames="pull-right"}}
+                    </a>
+                </li>
+            {{/if}}
         </ul>
     </section>
     <!-- /.sidebar -->

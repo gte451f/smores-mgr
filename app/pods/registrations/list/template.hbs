@@ -1,0 +1,63 @@
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="box box-{{box}} box-top">
+
+                {{#if tableTitle}}
+                    {{ partial "table-pager/table/header"}}
+                {{/if}}
+
+                <div class="box-body">
+                    <div role="grid" class="form-inline">
+                        <div class="row">
+                            <div class="col-xs-7">
+                                {{partial "table-pager/table/widgets/quick-search"}}
+                                {{partial "table-pager/table/widgets/per-page"}}
+                            </div>
+
+
+                            <div class="col-xs-5">
+                                {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+
+                                <div class="pull-right" style="margin-right: 10px;">
+                                    {{#link-to "registrations.add.step1" class="btn btn-default btn-sm"}}{{fa-icon 'plus'}}
+                                        Registration{{/link-to}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-bordered table-striped">
+                            {{partial "table-pager/table/table-header"}}
+                            <tbody>
+                            {{#each this as |record| }}
+                                <tr>
+                                    <td>{{record.id}}</td>
+                                    <td>{{record.attendee.firstName}}</td>
+                                    <td>{{record.attendee.lastName}}</td>
+                                    <td>{{moment record.createdOn 'MM/DD/YYYY'}}</td>
+                                    <td>{{record.notes}}</td>
+                                    <td class="clearfix">
+                                        {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}
+                                            {{fa-icon 'folder-open'}}
+                                        {{/link-to}}
+                                        <button class="btn btn-default btn-xs pull-right" {{action "delete" record}}>
+                                            {{fa-icon 'trash'}}
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{else}}
+                                <tr>no records found ... :-(</tr>
+                            {{/each}}
+                            </tbody>
+
+                        </table>
+                        {{partial "table-pager/table/footer"}}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>

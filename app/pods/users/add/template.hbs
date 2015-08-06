@@ -1,0 +1,56 @@
+<div class="box box-warning">
+    <!-- /.box-header -->
+    <div class="box-body form-horizontal">
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">First:</label>
+
+            <div class="col-sm-8">
+                {{input class="form-control" value=model.firstName}}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Last:</label>
+
+            <div class="col-sm-8">
+                {{input class="form-control" value=model.lastName }}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Email:</label>
+
+            <div class="col-sm-8">
+                {{input class="form-control" value=model.email }}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Position:</label>
+
+            <div class="col-sm-8">
+                {{input class="form-control" value=model.position }}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Password:</label>
+
+            <div class="col-sm-8">
+                {{input class="form-control" value=model.password }}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Gender</label>
+
+            <div class="col-sm-8">
+                {{#each listService.gender as |item| }}
+                    {{radio-button value=item.value checked=model.gender}} {{item.display}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="box-footer clearfix">
+        <div class="btn-group pull-right">
+            <button class="btn btn-primary btn-xs" {{action "save" model}}>Save</button>
+            {{#link-to "users.info" model class="btn btn-primary btn-xs"}}Cancel{{/link-to}}
+        </div>
+    </div>
+</div>
+

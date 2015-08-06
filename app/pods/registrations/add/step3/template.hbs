@@ -1,0 +1,48 @@
+<div class="alert bg-gray alert-dismissable hidden" id="helpBox">
+    <button type="button" class="close" {{action 'hideHelp'}}>×</button>
+    <h4><i class="icon fa fa-info"></i> Help</h4>
+    Use this wizard to register a singler attendee for a single camp event. You will get a chance to review your
+    selections before saving the registration.
+</div>
+
+<div class="panel">
+    <div class="panel-heading bg-yellow">
+        <h4 class="panel-title"><span class="glyphicon glyphicon-tent"></span> Step 3: Confirm & Save</h4>
+    </div>
+    <div class="panel-body form-horizontal">
+        {{#each step2.requests as |item| }}
+            <div class="info-box">
+                <span class="info-box-icon bg-green">#{{item.priority}}</span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Location</dt>
+                                        <dd>{{item.event.location.name}}</dd>
+                                        <dt>Cabin</dt>
+                                        <dd>{{item.event.cabin.name}}</dd>
+                                        <dt>Program</dt>
+                                        <dd>{{item.event.program.name}}</dd>
+                                        <dt>Session</dt>
+                                        <dd>{{item.event.session.name}}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Event Cost (If Any)</dt>
+                                        <dd>{{item.event.cost}}</dd>
+                                        <dt>Note</dt>
+                                        <dd>{{item.note}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        {{/each}}
+    </div>
+</div>
+<button class="btn btn-primary pull-right" {{action 'save'}}>Confirm & Submit</button>

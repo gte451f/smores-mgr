@@ -1,0 +1,59 @@
+<div class="wrapper">
+    {{partial "navigation/main-header"}}
+    {{partial "navigation/main-sidebar"}}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 1068px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Attendees
+            </h1>
+            {{partial "navigation/main-breadcrumb"}}
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary box-top">
+                        <div class="box-body">
+                            <div role="grid" class="form-inline">
+                                {{partial 'table-pager/table/tools'}}
+                                <table class="table table-bordered table-striped">
+                                    {{partial 'table-pager/table/table-header'}}
+                                    <tbody>
+                                    {{#each this as |model| }}
+                                        <tr>
+                                            <td>{{model.firstName}}</td>
+                                            <td>{{model.lastName}}</td>
+                                            <td>{{model.schoolGrade}}</td>
+
+                                            {{#if model.active}}
+                                                <td><span class="label label-success">Active</span></td>
+                                            {{else}}
+                                                <td><span class="label label-warning">Inactive</span></td>
+                                            {{/if}}
+
+                                            <td>{{moment model.dob 'MM/DD/YYYY'}}</td>
+
+                                            <td class="pull-right">
+                                                {{#link-to linkPath model.id class="btn btn-primary btn-sm"}} Open {{/link-to}}
+                                                {{#link-to "attendees.edit" model.id class="btn btn-primary btn-sm"}} Edit {{/link-to}}
+                                            </td>
+                                        </tr>
+                                    {{else}}
+                                        <tr>no records found ... :-(</tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                                {{partial 'table-pager/table/footer'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    {{partial "navigation/main-footer"}}
+</div>

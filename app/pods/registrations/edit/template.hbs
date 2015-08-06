@@ -1,1 +1,47 @@
-{{outlet}}
+<section class="content">
+
+    <div class="alert bg-gray alert-dismissable">
+        <p>{{fa-icon 'info'}}
+            Most changes do not take affect until you click save except for delete actions which are applied right away.
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-solid bg-yellow">
+                <div class="box-header">
+                    {{ fa-icon "calendar"}}
+                    <h3 class="box-title">Event Registration</h3>
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <!-- button with a dropdown -->
+                        <div class="btn-group">
+                            <button class="btn btn-primary btn-sm" {{action "addRequest"}}>Add Request</button>
+                        </div>
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-black">
+                    {{#each model.requests as |item| }}
+                        {{registrations/edit-request request=item action="removeRequest" locations=locations sessions=sessions events=events }}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <div class="pull-right">
+                <button class="btn btn-primary" {{action "save"}}>Save</button>
+                {{#link-to "registrations.info" model.id class="btn btn-primary"}}Back{{/link-to}}
+            </div>
+        </div>
+
+    </div>
+</section>

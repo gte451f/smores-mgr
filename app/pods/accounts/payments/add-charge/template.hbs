@@ -1,0 +1,58 @@
+<div class="nav-tabs-custom">
+    {{accounts/tab-nav model=model isPayment='active'}}
+    <div class="tab-content">
+        <div id="main" class="tab-pane active">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h3>Add Charge</h3>
+
+                    <div class="box-body">
+
+                        <div class="form-group required">
+                            <label>Link Request</label>
+                            {{x-select
+                            content=model.requests
+                            optionValuePath="content"
+                            optionLabelPath="content.id"
+                            prompt="Select"
+                            value=model.request
+                            class="form-control"}}
+                        </div>
+
+                        <div class="form-group required">
+                            <label>Link Fee</label>
+                            {{x-select
+                            content=model.fees
+                            optionValuePath="content"
+                            optionLabelPath="content.name"
+                            prompt="Select"
+                            value=model.fee
+                            class="form-control"}}
+
+                        </div>
+
+                        <div class="form-group required">
+                            <label>Amount</label>
+
+                            <div class="input-group">
+                                {{input type="text" class="form-control" value=model.amount}}
+
+                                {{#input-tooltip content="Amount should not exceed this account's outstanding balance."}}
+                                    {{fa-icon "info"}}
+                                {{/input-tooltip}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button class="btn btn-primary" {{action 'save' model}}>Submit</button>
+                        {{#link-to 'accounts.payments.info' class="btn btn-primary"}}Cancel{{/link-to}}
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </div>
+</div>

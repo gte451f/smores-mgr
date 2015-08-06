@@ -1,0 +1,7 @@
+{{#each steps as |step| }}
+    {{wizard-step name=step.step activeIndex=activeIndex index=_view.contentIndex}}
+{{/each}}
+
+<div class="pull-right">
+    <button class="btn btn-info" style="margin: 5px;" {{action 'showHelp'}}>{{fa-icon 'question'}}</button>
+</div>

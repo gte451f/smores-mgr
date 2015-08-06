@@ -1,3 +1,37 @@
 @import 'bower_components/bootstrap/less/bootstrap.less';
 @import 'bower_components/admin-lte/build/less/AdminLTE.less';
-@import 'bower_components/admin-lte/build/less/skins/skin-green.less';
+@import 'bower_components/admin-lte/build/less/skins/skin-blue.less';
+@import 'nav-wizard.less';
+
+/* added since the template doesn't seem to enforce this rule */
+.form-control {
+  color: #555;
+}
+
+.nav-pills > li > a:hover {
+  background-color: #d2d6de;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  color: #555;
+}
+
+.form-group.required .control-label:after {
+  content: "*";
+  color: red;
+}
+
+/*
+ * Set a z-index to the drop down always appears on top
+ */
+span.tt-dropdown-menu {
+  z-index: 1;
+}
+
+
+/*
+ * Wizard styles
+ */
+.step-content {
+  margin-top: 10px;
+}

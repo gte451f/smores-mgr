@@ -1,0 +1,55 @@
+<div class="alert bg-gray alert-dismissable hidden" id="helpBox">
+    <button type="button" class="close" {{action 'hideHelp'}}>×</button>
+    <h4><i class="icon fa fa-info"></i> Help</h4>
+    Use this wizard to register a singler attendee for a single camp event. You will get a chance to review your
+    selections before saving the registration.
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-solid bg-yellow disabled">
+            <div class="box-header">
+                {{ fa-icon "calendar"}}
+                <h3 class="box-title">Step 1: Choose A Camper</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group">
+                    </div>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-black">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Attending Camper:</label>
+                            {{#attendee-finder
+                            options=users
+                            triggerSuggestions=triggerSuggestions
+                            action="refreshOptions"
+                            selectedValue=model.fullName
+                            placeHolderText="Search Users By Last Name..."
+                            noMesssagePlaceHolderText="No users match that search."
+                            selectItem="itemSelected" as |result|}}
+                                <p><b>#{{result.accountId}}</b>{{result.fullName}}</p>
+                            {{/attendee-finder}}
+                            <p class="selection">{{controller.selection}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Registration Notes:</label>
+                            {{textarea class="form-control" value=registrationNote cols="80" rows="6"}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

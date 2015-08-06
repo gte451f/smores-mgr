@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Priority</label>
+            {{x-select
+            content=priorities
+            optionValuePath="content"
+            optionLabelPath="content"
+            selection=request.priority
+            prompt="Select"
+            class="form-control"}}
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Location</label>
+            {{x-select
+            content=locations
+            optionValuePath="content.id"
+            optionLabelPath="content.name"
+            selection=currentLocation
+            prompt="Select"
+            class="form-control"}}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Session</label>
+            {{x-select
+            content=filteredSessions
+            optionValuePath="content.id"
+            optionLabelPath="content.name"
+            selection=currentSession
+            prompt="Select"
+            class="form-control"
+            disabled=sessionState}}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Program / Cabin</label>
+            {{x-select
+            content=filteredEvents
+            optionValuePath="content.id"
+            optionLabelPath="content.fullName"
+            selection=request.event
+            prompt="Select"
+            class="form-control"
+            disabled=eventState}}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Note</label>
+            {{input type="text" class="form-control" value=request.note}}
+            <a {{action "removeRequest" }}>
+                {{fa-icon 'trash'}}
+            </a>
+        </div>
+    </div>
+</div>

@@ -6,45 +6,36 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Accounts {{totalPages}}
+                Accounts
             </h1>
             {{partial "navigation/main-breadcrumb"}}
         </section>
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="box">
-                        {{ partial "pager/table/header"}}
+                <div class="col-md-12">
+                    <div class="box box-primary">
                         <div class="box-body">
-                            <div role="grid" class="form-inline">
-                                {{partial "pager/table/tools"}}
-                                <table class="table table-bordered table-striped">
-                                    {{partial "pager/table/table-header"}}
-                                    <tbody>
-                                    {{#each record in this}}
-                                        <tr>
-                                            <td>{{record.name}}</td>
-                                            <td>{{moment record.createdOn 'MM/DD/YY'}}</td>
-                                            <td>
-                                                {{#link-to linkPath record class="btn btn-default"}} Open {{/link-to}}
-                                            </td>
-                                        </tr>
-                                    {{else}}
-                                        <tr>no records found ... :-(</tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                                {{partial "pager/table/footer"}}
+                            <div class="box-body">
+                                {{#account-finder
+                                options=users
+                                triggerSuggestions=triggerSuggestions
+                                action="refreshOptions"
+                                selectedValue=model.fullName
+                                placeHolderText="Search Users By Last Name..."
+                                noMesssagePlaceHolderText="No users match that search."
+                                selectItem="itemSelected" as |result|}}
+                                    <p><b>#{{result.accountId}}</b>{{result.fullName}}</p>
+                                {{/account-finder}}
+                                <p class="selection">{{controller.selection}}</p>
                             </div>
+
                         </div>
                     </div>
                     <!-- /.box -->
                 </div>
-                <div class="col-md-8">
-                    {{outlet}}
-                </div>
             </div>
+                {{outlet}}
         </section>
         <!-- /.content -->
     </div>

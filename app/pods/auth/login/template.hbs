@@ -1,97 +1,41 @@
-<div class="page-signin">
-    <div id="page-signin-bg">
-        <!-- Background overlay -->
-        <div class="overlay"></div>
-        <!-- Replace this with your bg image -->
-        <img alt="" src="assets/demo/banner-4.jpg" style="">
+<div class="login-box">
+    <div class="login-logo">
+        <a href=""><b>SMORES</b>.camp</a>
     </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to your SMORES.camp site</p>
 
-    <div class="signin-container">
-
-        <!-- Left side -->
-        <div class="signin-info">
-            <a class="logo" href="index.html">
-                The Smores <span style="font-weight:100;">Project</span>
-            </a> <!-- / .logo -->
-            <div class="slogan">
-                Elegant Camp Software
+        {{#if errorMessage}}
+            <div class="alert alert-danger">
+                <strong>Login failed:</strong> {{errorMessage}}
             </div>
-            <!-- / .slogan -->
-            <ul>
-                <li><i class="fa fa-star signin-icon"></i> Flexible</li>
-                <li><i class="fa fa-star signin-icon"></i> Simple</li>
-                <li><i class="fa fa-star signin-icon"></i> Powerfull</li>
-            </ul>
-            <!-- / Info list -->
-        </div>
-        <!-- / Left side -->
+        {{/if}}
 
-        <!-- Right side -->
-        <div class="signin-form">
-
-            <!-- Form -->
-            <form id="signin-form_id" action="index.html" novalidate="novalidate">
-                <div class="signin-text">
-                    <span>Sign In to your account</span>
+        {{! login form; the fields must be named "identification" and "password"; the controller action is "authenticate" }}
+        <form {{action 'authenticate' on='submit'}}>
+            <div class="form-group has-feedback">
+                <div class="input-group">
+                    {{input type="text" class="form-control" value=identification }}
+                    <span class="input-group-addon">{{fa-icon 'user'}}</span>
                 </div>
-                <!-- / .signin-text -->
-
-                <div class="form-group w-icon">
-                    <input type="text" placeholder="Username or email" class="form-control input-lg" id="username_id"
-                           name="signin_username"
-                           autocomplete="off">
-                    <span class="fa fa-user signin-form-icon"></span>
-                </div>
-                <!-- / Username -->
-
-                <div class="form-group w-icon">
-                    <input type="password" placeholder="Password" class="form-control input-lg" id="password_id"
-                           name="signin_password"
-                           autocomplete="off">
-                    <span class="fa fa-lock signin-form-icon"></span>
-                </div>
-                <!-- / Password -->
-
-                <div class="form-actions">
-                    {{#link-to 'test' class="signin-btn bg-primary"}}Sign In{{/link-to}}
-                    {{#link-to 'auth.reminder' class="forgot-password"}}Forgot your password?{{/link-to}}
-                </div>
-                <!-- / .form-actions -->
-            </form>
-            <!-- / Form -->
-
-            <!-- Password reset form -->
-            <div id="password-reset-form" class="password-reset-form">
-                <div class="header">
-                    <div class="signin-text">
-                        <span>Password reset</span>
-
-                        <div class="close">×</div>
-                    </div>
-                    <!-- / .signin-text -->
-                </div>
-                <!-- / .header -->
-
-                <!-- Form -->
-                <form id="password-reset-form_id" action="index.html" novalidate="novalidate">
-                    <div class="form-group w-icon">
-                        <input type="text" placeholder="Enter your email" class="form-control input-lg" id="p_email_id"
-                               name="password_reset_email"
-                               autocomplete="off">
-                        <span class="fa fa-envelope signin-form-icon"></span>
-                    </div>
-                    <!-- / Email -->
-
-                    <div class="form-actions">
-                        <input type="submit" class="signin-btn bg-primary" value="SEND PASSWORD RESET LINK">
-                    </div>
-                    <!-- / .form-actions -->
-                </form>
-                <!-- / Form -->
             </div>
-            <!-- / Password reset form -->
-        </div>
-        <!-- Right side -->
+            <div class="form-group has-feedback">
+                <div class="input-group">
+                    {{input type="password" class="form-control" value=password }}
+                    <span class="input-group-addon">{{fa-icon 'lock'}}</span>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                <p>- OR -</p>
+                <button type="submit" class="btn btn-default btn-block btn-flat">What is my password?</button>
+            </div>
+
+        </form>
+
+
     </div>
-
+    <!-- /.login-box-body -->
 </div>

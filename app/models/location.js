@@ -8,5 +8,8 @@ export default DS.Model.extend({
     country: DS.attr('string'),
     zip: DS.attr('string'),
     name: DS.attr('string'),
-    description: DS.attr('string')
+    description: DS.attr('string'),
+
+    // relationships
+    events: DS.hasMany('event')
 });

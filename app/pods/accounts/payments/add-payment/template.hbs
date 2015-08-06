@@ -1,0 +1,127 @@
+<div class="nav-tabs-custom">
+    {{accounts/tab-nav model=model isPayment='active'}}
+    <div class="tab-content">
+        <div id="main" class="tab-pane active">
+            <h3>Add A {{mode}} Payment</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3><span class="label label-info">#1</span> Choose which type of payment to make</h3>
+
+                    <div class="panel panel-success" id="cash-panel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <h3 class="panel-title">Cash Payment</h3>
+                                </div>
+                                <div class="2">
+                                    <button class="btn btn-primary btn-sm" {{action "activateCash"}}>Select</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" id="credit-panel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <h3 class="panel-title">Credit Card Payment</h3>
+                                </div>
+                                <div class="2">
+                                    <button class="btn btn-primary btn-sm" {{action "activateCredit"}}>Select</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group required">
+                                <label>Credit Card On File</label>
+
+                                <div class="input-group">
+                                    {{x-select
+                                    content=model.cards
+                                    optionValuePath="content"
+                                    optionLabelPath="content.name"
+                                    prompt="Select"
+                                    value=model.card
+                                    class="form-control"
+                                    id="cardOnFile"
+                                    disabled=true}}
+
+                                    {{#input-tooltip content="Only active credit cards will appear in this list."}}
+                                        {{fa-icon "info"}}
+                                    {{/input-tooltip}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" id="check-panel">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <h3 class="panel-title">Check Payment</h3>
+                                </div>
+                                <div class="2">
+                                    <button class="btn btn-primary btn-sm" {{action "activateCheck"}}>Select</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Check #</label>
+
+                                        <div class="input-group">
+                                            {{input type="text" class="form-control" value=model.blankCheck.number id="checkNumber" disabled=true}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Check Date</label>
+
+                                        <div class="input-group">
+                                            {{date-picker date=model.blankCheck.date format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4" id="checkDate" disabled=true}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <h3><span class="label label-info">#2</span> Enter the payment amount</h3>
+
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Amount</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    {{input type="text" class="form-control input-lg" value=model.amount}}
+
+                                    {{#input-tooltip content="Amount should not exceed this account's outstanding balance."}}
+                                        {{fa-icon "info"}}
+                                    {{/input-tooltip}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" {{action 'save' model}}>Submit</button>
+                                {{#link-to 'accounts.payments.info' class="btn btn-primary"}}Cancel{{/link-to}}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

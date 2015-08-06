@@ -1,0 +1,5 @@
+<li class="pull-left header">{{fa-icon 'fa-th'}} #{{model.id}}</li>
+<li class="{{isPayment}}">{{#link-to 'accounts.payments.info' model.id }}Payments{{/link-to}}</li>
+<li class="{{isRegistration}}">{{#link-to 'accounts.registrations' model.id }}Registrations{{/link-to}}</li>
+<li class="{{isCard}}">{{#link-to 'accounts.cards' model.id}}Credit Cards{{/link-to}}</li>
+<li class="{{isInfo}}">{{#link-to 'accounts.info' model.id }}Main{{/link-to}}</li>

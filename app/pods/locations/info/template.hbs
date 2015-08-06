@@ -1,0 +1,27 @@
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <span class="glyphicon glyphicon-tent"></span> {{model.name}}
+        </h3>
+
+        <div class="box-tools">
+            <button {{action 'showModal' 'modals/delete-confirm' model}} class="btn btn-primary btn-xs">Delete</button>
+            {{#link-to "locations.edit" model class="btn btn-primary btn-xs"}}Edit{{/link-to}}
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <dl class="dl-horizontal">
+            <dt>Description:</dt>
+            <dd>{{model.description}}</dd>
+            <dt>Address:</dt>
+            <dd>
+                <address>
+                    {{model.addr_1}}<br>
+                    {{model.city}}, {{model.state}} {{model.zip}}<br>
+                </address>
+            </dd>
+        </dl>
+    </div>
+    <div class="box-footer"></div>
+</div>

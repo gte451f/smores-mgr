@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-1">
+        <div class="form-group">
+            <label>Remove</label>
+            <a {{action "removeRequest" }} class="btn btn-primary">
+                {{fa-icon 'trash'}}
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+        <div class="form-group">
+            <label>Priority</label>
+            {{x-select
+            content=priorities
+            optionValuePath="content"
+            optionLabelPath="content"
+            selection=request.priority
+            prompt="Select"
+            class="form-control"}}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Location</label>
+            {{x-select
+            content=locations
+            optionValuePath="content.id"
+            optionLabelPath="content.name"
+            selection=currentLocation
+            prompt="Select"
+            class="form-control"}}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Session</label>
+            {{x-select
+            content=filteredSessions
+            optionValuePath="content.id"
+            optionLabelPath="content.name"
+            selection=currentSession
+            prompt="Select"
+            class="form-control"
+            disabled=sessionState}}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Program / Cabin</label>
+            {{x-select
+            content=filteredEvents
+            optionValuePath="content.id"
+            optionLabelPath="content.fullName"
+            selection=request.event
+            prompt="Select"
+            class="form-control"
+            disabled=eventState}}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Status</label>
+            {{x-select
+            content=listService.regStatus
+            optionValuePath="content.value"
+            optionLabelPath="content.label"
+            value=request.submitStatus
+            prompt="Select"
+            class="form-control"}}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Confirmed
+                {{#my-tooltip content="Will this request occupy one of the available spaces for this event?"}}
+                    {{fa-icon "info"}}
+                {{/my-tooltip}}
+            </label>
+            {{x-select
+            content=listService.boolean
+            optionValuePath="content.value"
+            optionLabelPath="content.name"
+            value=request.attending
+            prompt="Select"
+            class="form-control"}}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Note</label>
+            {{input type="text" class="form-control" value=request.note}}
+        </div>
+    </div>
+</div>
+
+<hr/>
