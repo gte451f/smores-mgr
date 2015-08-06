@@ -6,6 +6,8 @@ This is a swanky camp management system written in the very fine Ember framework
 
 A working Ember CLI Environment
 Linux (I don't do much Windows work so the help is biased)
+The API!  Smores depends on a sister project that runs a Phalcon based API
+The api has it's own set of requirements.
 
 ## Installation
 
@@ -13,24 +15,21 @@ Linux (I don't do much Windows work so the help is biased)
 * `cd smores-mgr`
 * `npm install`
 * `bower install`
-* `bower install admin-lte`  (for some reason this doesn't install on its own)
 
 **Important**
 Modify the following files BEFORE you attempt to run the application
 
 bower_components/admin-lte/build/less/AdminLTE.less
 
-Comment out lines 15 & 16
-//@import "../bootstrap-less/mixins.less";
-//@import "../bootstrap-less/variables.less";
+Comment out lines 15 & 16  
+`//@import "../bootstrap-less/mixins.less";
+//@import "../bootstrap-less/variables.less";`
 
 bower_components/admin-lte/build/less/skins/skin-blue.less
 
-Comment out lines #5 & 6
-//@import "../../bootstrap-less/mixins.less";
-//@import "../../bootstrap-less/variables.less";
-
-
+Comment out lines #5 & 6  
+`//@import "../../bootstrap-less/mixins.less";
+//@import "../../bootstrap-less/variables.less";`
 
 
 ## Running / Development
