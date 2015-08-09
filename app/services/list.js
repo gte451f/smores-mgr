@@ -8,7 +8,7 @@ export default Ember.Object.extend({
     logMe: function () {
         console.log('service available');
         var store = this.get('store');
-        store.find('employee');
+        store.query('employee');
     },
 
     gender: [

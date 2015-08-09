@@ -5,12 +5,12 @@ export default Ember.Route.extend(ErrorHandler, {
     model: function (params) {
         //params.event_id
         return Ember.RSVP.hash({
-            model: this.store.find('setting'),
-            locations: this.store.find('location', {with:'none'}),
-            programs: this.store.find('program', {with:'none'}),
-            events: this.store.find('event', {with:'none'}),
-            sessions: this.store.find('session', {with:'none'}),
-            cabins: this.store.find('cabin', {with:'none'})
+            model: this.store.findAll('setting'),
+            locations: this.store.query('location', {with:'none'}),
+            programs: this.store.query('program', {with:'none'}),
+            events: this.store.query('event', {with:'none'}),
+            sessions: this.store.query('session', {with:'none'}),
+            cabins: this.store.query('cabin', {with:'none'})
         });
     },
 

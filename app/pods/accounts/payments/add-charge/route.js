@@ -6,22 +6,20 @@ export default Ember.Route.extend(ErrorHandler, {
     model: function (params) {
         // pull account from parent
         var account = this.modelFor('accounts.payments');
-        var charge = {account: account};
         return Ember.RSVP.hash({
-            model: charge,
+            model: {account: account},
             //depend on sideloading for related requests
-            registrations: this.store.find('registration', {account_id: params.account_id}),
-            fees: this.store.find('fee')
+            registrations: this.store.findAll('registration'),
+            fees: this.store.findAll('fee')
         });
-
     },
 
     // format cards for display in select box
     setupController: function (controller, resolved) {
         this._super(controller, resolved.model);
 
-        controller.set('model.registrations', resolved.registrations);
-        controller.set('model.fees', resolved.fees);
+        controller.set('registrations', resolved.registrations);
+        controller.set('fees', resolved.fees);
     },
 
 

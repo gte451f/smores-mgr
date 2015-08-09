@@ -7,21 +7,20 @@ export default Ember.Route.extend(Paginate, {
     currentRoute: 'events.list',
 
     model: function (params) {
-
         // clear out nulls
-        if (Ember.typeOf(params.location_id) === 'null') {
+        if (Ember.isEmpty(params.location_id) || params.location_id === 'undefined') {
             //unset an empty value
             delete params.location_id;
         }
-        if (Ember.typeOf(params.program_id) === 'null') {
+        if (Ember.isEmpty(params.program_id) || params.program_id === 'undefined') {
             //unset an empty value
             delete params.program_id;
         }
-        if (Ember.typeOf(params.cabin_id) === 'null') {
+        if (Ember.isEmpty(params.cabin_id) || params.cabin_id === 'undefined') {
             //unset an empty value
             delete params.cabin_id;
         }
-        if (Ember.typeOf(params.session_id) === 'null') {
+        if (Ember.isEmpty(params.session_id) || params.session_id === 'undefined') {
             //unset an empty value
             delete params.session_id;
         }
@@ -46,7 +45,6 @@ export default Ember.Route.extend(Paginate, {
         processFilter: function () {
             this.fetch();
         }
-
     },
 
 
@@ -67,16 +65,16 @@ export default Ember.Route.extend(Paginate, {
             sortField: controller.get('sortField')
         };
 
-        if (Ember.typeOf(location_id) !== 'null') {
+        if (!Ember.isEmpty(location_id) && location_id !== 'undefined') {
             params['location_id'] = location_id;
         }
-        if (Ember.typeOf(program_id) !== 'null') {
+        if (!Ember.isEmpty(program_id) && program_id !== 'undefined') {
             params['program_id'] = program_id;
         }
-        if (Ember.typeOf(cabin_id) !== 'null') {
+        if (!Ember.isEmpty(cabin_id) && cabin_id !== 'undefined') {
             params['cabin_id'] = cabin_id;
         }
-        if (Ember.typeOf(session_id) !== 'null') {
+        if (!Ember.isEmpty(session_id) && session_id !== 'undefined') {
             params['session_id'] = session_id;
         }
 

@@ -14,7 +14,7 @@ export default Ember.Route.extend(ErrorHandler, {
 
         return Ember.RSVP.hash({
             model: payment,
-            cards: this.store.find('card', {account_id: params.account_id}),
+            cards: this.store.query('card', {account_id: params.account_id}),
             check: check
         });
 

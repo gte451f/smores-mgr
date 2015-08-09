@@ -5,7 +5,7 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(ErrorHandler, {
     model: function (params) {
-        return this.store.find('account', {id: params.account_id, with: 'cards'});
+        return this.store.query('account', {id: params.account_id, with: 'cards'});
     },
 
     setupController: function (controller, resolved) {

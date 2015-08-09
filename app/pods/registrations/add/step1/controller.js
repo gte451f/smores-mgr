@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
         // triggers when a value has been selected in the auto suggest
         itemSelected: function (item) {
             var self = this;
-            this.store.find('attendee', item.id).then(function (item) {
+            this.store.query('attendee', item.id).then(function (item) {
                 self.set('attendee', item);
                 self.set('user', item);
             });
@@ -29,8 +29,8 @@ export default Ember.Controller.extend({
             var triggerSuggestions = this.get('triggerSuggestions');
 
             return Ember.RSVP.hash({
-                firstName: this.store.find('attendee', {first_name: inputVal + wildcard, limit: 25}),
-                lastName: this.store.find('attendee', {last_name: inputVal + wildcard, limit: 25})
+                firstName: this.store.query('attendee', {first_name: inputVal + wildcard, limit: 25}),
+                lastName: this.store.query('attendee', {last_name: inputVal + wildcard, limit: 25})
             }).then(function (hash) {
                 hash.lastName.forEach(function (item) {
                     var found = users.isAny('id', item.get('id'));

@@ -16,11 +16,11 @@ export default Ember.Route.extend({
         //params.event_id
         return Ember.RSVP.hash({
             model: {},
-            locations: this.store.find('location'),
-            programs: this.store.find('program'),
-            events: this.store.find('event'),
-            sessions: this.store.find('session'),
-            cabins: this.store.find('cabin')
+            locations: this.store.findAll('location'),
+            programs: this.store.findAll('program'),
+            events: this.store.findAll('event'),
+            sessions: this.store.findAll('session'),
+            cabins: this.store.findAll('cabin')
         });
     },
     setupController: function (controller, resolved) {

@@ -7,9 +7,9 @@ export default Ember.Route.extend({
         var account = this.modelFor('accounts.payments');
 
         return Ember.RSVP.hash({
-            model: this.store.find('account', {id: account.get('id'), with: 'cards,checks,charges,payments'}),
-            //charges: this.store.find('charge', {account_id: account.get('id')}),
-            //payments: this.store.find('payment', {account_id: account.get('id')})
+            model: this.store.query('account', {id: account.get('id'), with: 'cards,checks,charges,payments'}),
+            //charges: this.store.query('charge', {account_id: account.get('id')}),
+            //payments: this.store.query('payment', {account_id: account.get('id')})
         });
     },
 

@@ -1,10 +1,6 @@
 import Ember from 'ember';
 var User = Ember.Object.extend({id: '', fullName: '', firstName: '', lastName: '', accountId: ''});
 
-Ember.LinkView.reopen({
-    attributeBindings: ['data-toggle']
-});
-
 export default Ember.Controller.extend({
     account: null,
 
@@ -24,8 +20,8 @@ export default Ember.Controller.extend({
             var triggerSuggestions = this.get('triggerSuggestions');
 
             return Ember.RSVP.hash({
-                attendees: this.store.find('attendee', {last_name: inputVal + wildcard, limit: 25, with: 'accounts'}),
-                owners: this.store.find('owner', {last_name: inputVal + wildcard, limit: 25, with: 'accounts'})
+                attendees: this.store.query('attendee', {last_name: inputVal + wildcard, limit: 25, with: 'accounts'}),
+                owners: this.store.query('owner', {last_name: inputVal + wildcard, limit: 25, with: 'accounts'})
             }).then(function (hash) {
                 hash.attendees.forEach(function (item) {
                     var full = item.get('lastName') + ', ' + item.get('firstName') + ' - ' + item.get('schoolGrade');

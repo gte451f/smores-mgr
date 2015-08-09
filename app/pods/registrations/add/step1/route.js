@@ -12,7 +12,7 @@ export default Ember.Route.extend({
         //params.event_id
         return Ember.RSVP.hash({
             model: {},
-            attendees: this.store.find('attendee', {limit: 1})
+            attendees: this.store.query('attendee', {limit: 1})
         });
     },
     setupController: function (controller, resolved) {

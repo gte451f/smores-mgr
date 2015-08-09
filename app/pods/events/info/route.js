@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Route.extend({
     model: function (params) {
         return Ember.RSVP.hash({
-            events: this.store.find('event', {id: params.event_id, with: 'locations,sessions,cabins,programs'}),
-            requests: this.store.find('request', {event_id: params.event_id})
+            events: this.store.query('event', {id: params.event_id, with: 'locations,sessions,cabins,programs'}),
+            requests: this.store.query('request', {event_id: params.event_id})
         });
     },
     setupController: function (controller, resolved) {

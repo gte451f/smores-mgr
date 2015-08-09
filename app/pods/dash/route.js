@@ -4,13 +4,13 @@ export default Ember.Route.extend({
 
     model: function (params) {
         return Ember.RSVP.hash({
-            location: this.store.find('location')
+            location: this.store.findAll('location')
         });
     },
 
     setupController: function (controller, resolved) {
 
-        this._super(controller, resolved);
+        this._super(controller, resolved.location);
 
         var data1 = {
             labels: ['Day1', 'Day2', 'Day3'],

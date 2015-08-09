@@ -8,6 +8,4 @@ export default Ember.ArrayController.extend(Paginate, {
 
     //need to open single matter record
     linkPath: "locations.info"
-
-
 });

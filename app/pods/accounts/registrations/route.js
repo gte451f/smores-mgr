@@ -5,8 +5,8 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
 export default Ember.Route.extend(ErrorHandler, {
     model: function (params) {
         return Ember.RSVP.hash({
-            model: this.store.find('account', params.account_id),
-            registrations: this.store.find('registration', {'attendees:account_id': params.account_id, with: 'all'})
+            model: this.store.findRecord('account', params.account_id),
+            registrations: this.store.query('registration', {'attendees:account_id': params.account_id, with: 'all'})
         });
 
     },
