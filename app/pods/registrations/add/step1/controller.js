@@ -15,11 +15,7 @@ export default Ember.Controller.extend({
     actions: {
         // triggers when a value has been selected in the auto suggest
         itemSelected: function (item) {
-            var self = this;
-            this.store.query('attendee', item.id).then(function (item) {
-                self.set('attendee', item);
-                self.set('user', item);
-            });
+            this.set('attendee', item);
         },
         // when the user types new values into the select box
         refreshOptions: function (inputVal) {
@@ -28,49 +24,60 @@ export default Ember.Controller.extend({
             var self = this;
             var triggerSuggestions = this.get('triggerSuggestions');
 
-            return Ember.RSVP.hash({
-                firstName: this.store.query('attendee', {first_name: inputVal + wildcard, limit: 25}),
-                lastName: this.store.query('attendee', {last_name: inputVal + wildcard, limit: 25})
-            }).then(function (hash) {
-                hash.lastName.forEach(function (item) {
-                    var found = users.isAny('id', item.get('id'));
-                    if (found === false) {
-                        var full = item.get('lastName') + ', ' + item.get('firstName') + ' - ' + item.get('schoolGrade');
-                        users.pushObject(User.create({
-                            id: item.get('id'),
-                            fullName: full,
-                            firstName: item.get('firstName'),
-                            lastName: item.get('lastName'),
-                            accountId: item.get('account.id')
-                        }));
-                    }
-                });
 
-                hash.firstName.forEach(function (item) {
-                    var found = users.isAny('id', item.get('id'));
-                    if (found === false) {
-                        var full = item.get('lastName') + ', ' + item.get('firstName') + ' - ' + item.get('schoolGrade');
-                        users.pushObject(User.create({
-                            id: item.get('id'),
-                            fullName: full,
-                            firstName: item.get('firstName'),
-                            lastName: item.get('lastName'),
-                            accountId: item.get('account.id')
-                        }));
-                    }
-                });
-
-                // handy dandy sort feature
-                var userList = Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
-                    sortProperties: ['lastName'],
-                    sortAscending: false,
-                    content: users
-                });
-
-                self.set('users', userList);
+            self.store.findQuery('attendee', {
+                'first_name||last_name': wildcard + inputVal + wildcard,
+                limit: 20,
+                sortField: 'last_name,first_name'
+            }).then(function (data) {
+                self.set('users', data);
                 triggerSuggestions = triggerSuggestions + 1;
                 self.set('triggerSuggestions', triggerSuggestions);
             });
+
+            //return Ember.RSVP.hash({
+            //    firstName: this.store.query('attendee', {first_name: inputVal + wildcard, limit: 25}),
+            //    lastName: this.store.query('attendee', {last_name: inputVal + wildcard, limit: 25})
+            //}).then(function (hash) {
+            //    hash.lastName.forEach(function (item) {
+            //        var found = users.isAny('id', item.get('id'));
+            //        if (found === false) {
+            //            var full = item.get('lastName') + ', ' + item.get('firstName') + ' - ' + item.get('schoolGrade');
+            //            users.pushObject(User.create({
+            //                id: item.get('id'),
+            //                fullName: full,
+            //                firstName: item.get('firstName'),
+            //                lastName: item.get('lastName'),
+            //                accountId: item.get('account.id')
+            //            }));
+            //        }
+            //    });
+            //
+            //    hash.firstName.forEach(function (item) {
+            //        var found = users.isAny('id', item.get('id'));
+            //        if (found === false) {
+            //            var full = item.get('lastName') + ', ' + item.get('firstName') + ' - ' + item.get('schoolGrade');
+            //            users.pushObject(User.create({
+            //                id: item.get('id'),
+            //                fullName: full,
+            //                firstName: item.get('firstName'),
+            //                lastName: item.get('lastName'),
+            //                accountId: item.get('account.id')
+            //            }));
+            //        }
+            //    });
+            //
+            //    // handy dandy sort feature
+            //    var userList = Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
+            //        sortProperties: ['lastName'],
+            //        sortAscending: false,
+            //        content: users
+            //    });
+            //
+            //    self.set('users', userList);
+            //    triggerSuggestions = triggerSuggestions + 1;
+            //    self.set('triggerSuggestions', triggerSuggestions);
+            //});
         }
     }
 });

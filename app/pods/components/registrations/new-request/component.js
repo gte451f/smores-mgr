@@ -14,8 +14,15 @@ export default Ember.Component.extend({
     currentEvent: false,
     currentPriority: false,
 
+    // listbox state
+    // should the following listboxes be enabled/disabled
+    sessionState: false,
+    eventState: false,
+
+
     // set some default values based on the supplied object
     setup: function () {
+        console.log('component setup called');
         var event = this.get('request.event.id');
         if (event) {
             this.set('currentLocation', this.get('request.event.location'));
@@ -37,34 +44,40 @@ export default Ember.Component.extend({
     //select list
     priorities: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 
-    // disable or enable and build list
-    eventState: function () {
-        var current = this.get('currentSession');
-        console.log('Event State');
-        if (current === false || current === null || current === undefined) {
-            return true;
-        } else {
-            this.buildEvents();
-            return false;
-        }
-    }.property('currentSession'),
 
     // disable or enable and build list
-    sessionState: function () {
-        var current = this.get('currentLocation');
-        console.log('Session State');
-        if (current === false || current === null || current === undefined) {
+    locationChanged: function (value, component) {
+        console.log('Location Changed');
+        var self = component.get('comp');
+        console.log(value);
+        if (value === false || value === null || value === undefined) {
             return true;
         } else {
-            this.buildSessions();
+            self.set('currentLocation', value);
+            self.buildSessions();
             return false;
         }
-    }.property('currentLocation'),
+    },
+
+    // disable or enable and build list
+    sessionChanged: function (value, component) {
+        var self = component.get('comp');
+        console.log('Session Changed');
+        if (value === false || value === null || value === undefined) {
+            return true;
+        } else {
+            self.set('currentSession', value);
+            self.buildEvents();
+            return false;
+        }
+    },
+
 
     // build a list of sessions based on previous choices
     buildSessions() {
         var currentLocation = this.get('currentLocation');
-        var eventList = this.get('events').filterBy('location', currentLocation);
+        var allEvents = this.get('events');
+        var eventList = allEvents.filterBy('location.id', currentLocation);
         var sessionList = this.get('sessions');
         var finalList = [];
         sessionList.forEach(function (item) {
@@ -86,9 +99,9 @@ export default Ember.Component.extend({
         var currentLocation = this.get('currentLocation');
         var currentSession = this.get('currentSession');
 
-        var eventList1 = this.get('events');
-        var eventList2 = eventList1.filterBy('location', currentLocation);
-        var eventList3 = eventList2.filterBy('session', currentSession);
+        var allEvents = this.get('events');
+        var eventList2 = allEvents.filterBy('location.id', currentLocation);
+        var eventList3 = eventList2.filterBy('session.id', currentSession);
 
         var finalList = [];
         eventList3.forEach(function (item) {
@@ -99,11 +112,10 @@ export default Ember.Component.extend({
         this.set('filteredEvents', eventList3);
     },
     actions: {
-
         /**
          * pass it out to controller to handle this record
          */
-        removeRequest() {
+            removeRequest() {
             this.sendAction('action', this.get('request'));
         }
     }

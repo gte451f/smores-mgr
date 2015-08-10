@@ -28,7 +28,9 @@ export default Ember.Route.extend({
 
         // load gender so we can filter cabins
         var step1 = this.controllerFor('registrations.add.step1');
-        var gender = step1.get('user.gender');
+        var attendee = step1.attendee;
+        var gender = attendee.get('gender');
+        console.log('Gender: ' + gender);
         //var cabinList = [];
         //resolved.cabins.forEach(function (item) {
         //    if (item.get('gender') === gender || item.get('gender') === 'Mixed') {
@@ -38,7 +40,7 @@ export default Ember.Route.extend({
 
         var modifiedEvents = [];
         resolved.events.forEach(function (item, index, enumerable) {
-            //var cabinGender = item.get('cabin').get('gender');
+            var cabinGender = item.get('cabin').get('gender');
             if (item.get('cabin').get('gender') === gender || item.get('cabin').get('gender') === 'Mixed') {
                 item.set('fullName', item.get('program').get('name') + ' / ' + item.get('cabin').get('name'));
                 modifiedEvents.addObject(item);

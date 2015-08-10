@@ -16,24 +16,28 @@
         <div class="form-group">
             <label>Location</label>
             {{x-select
+            action=locationChanged
             content=locations
             optionValuePath="content.id"
             optionLabelPath="content.name"
             selection=currentLocation
             prompt="Select"
-            class="form-control"}}
+            class="form-control"
+            comp=this}}
         </div>
     </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>Session</label>
             {{x-select
+            action=sessionChanged
             content=filteredSessions
             optionValuePath="content.id"
             optionLabelPath="content.name"
             selection=currentSession
             prompt="Select"
             class="form-control"
+            comp=this
             disabled=sessionState}}
         </div>
     </div>
@@ -59,5 +63,24 @@
                 {{fa-icon 'trash'}}
             </a>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        {{request.priority}}
+    </div>
+    <div class="col-md-2">
+        {{currentLocation}}
+    </div>
+    <div class="col-md-2">
+        {{currentSession}}
+    </div>
+    <div class="col-md-3">
+        {{request.event}}
+    </div>
+
+    <div class="col-md-3">
+        {{request.note}}
     </div>
 </div>

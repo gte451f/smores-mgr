@@ -17,9 +17,7 @@ export default Ember.Route.extend({
     },
     setupController: function (controller, resolved) {
         this._super(controller, resolved.model);
-
         var users = [];
-
         controller.set('attendees', resolved.attendees);
         controller.set("users", users);
     }
