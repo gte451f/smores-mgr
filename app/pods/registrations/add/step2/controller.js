@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
         note: null,
         priority: null
     },
-    // list of request to submit
+    // list of requests to submit
     // this is only for add, not edit mode
     requests: [],
     actions: {
@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
         },
 
         /**
-         * remove an expense record from the store
+         * remove a request record from the store
          */
         removeRequest: function (object) {
             var requestList = this.get('requests');

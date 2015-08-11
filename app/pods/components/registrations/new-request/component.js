@@ -16,8 +16,8 @@ export default Ember.Component.extend({
 
     // listbox state
     // should the following listboxes be enabled/disabled
-    sessionState: false,
-    eventState: false,
+    isSessionDisabled: true,
+    isEventDisabled: true,
 
 
     // set some default values based on the supplied object
@@ -51,8 +51,10 @@ export default Ember.Component.extend({
         var self = component.get('comp');
         console.log(value);
         if (value === false || value === null || value === undefined) {
+            self.set('isSessionDisabled', true);
             return true;
         } else {
+            self.set('isSessionDisabled', false);
             self.set('currentLocation', value);
             self.buildSessions();
             return false;
@@ -64,14 +66,25 @@ export default Ember.Component.extend({
         var self = component.get('comp');
         console.log('Session Changed');
         if (value === false || value === null || value === undefined) {
+            self.set('isEventDisabled', true);
             return true;
         } else {
+            self.set('isEventDisabled', false);
             self.set('currentSession', value);
             self.buildEvents();
             return false;
         }
     },
 
+    eventChanged: function (value, component) {
+        var request = component.get('comp.request');
+        request.set('event', value);
+    },
+
+    priorityChanged: function (value, component) {
+        var request = component.get('comp.request');
+        request.set('priority', value);
+    },
 
     // build a list of sessions based on previous choices
     buildSessions() {
