@@ -2,8 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     //load up step1 for reference in template
-    needs: ['registrations/add/step1'],
-    step1: Ember.computed.alias("controllers.registrations/add/step1"),
+    step1: Ember.inject.controller('registrations/add/step1'),
 
     location: null,
     event: null,

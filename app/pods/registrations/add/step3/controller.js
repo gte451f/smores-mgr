@@ -3,9 +3,9 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     needs: ['registrations/add/step2', 'registrations/add/step1', 'registrations/list'],
 
-    list: Ember.computed.alias("controllers.registrations/list"),
-    step2: Ember.computed.alias("controllers.registrations/add/step2"),
-    step1: Ember.computed.alias("controllers.registrations/add/step1"),
+    list: Ember.inject.controller('registrations/list'),
+    step2: Ember.inject.controller('registrations/add/step2'),
+    step1: Ember.inject.controller('registrations/add/step1'),
 
     actions: {
         save: function () {
