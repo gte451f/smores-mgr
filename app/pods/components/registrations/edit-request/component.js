@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     currentPriority: false,
 
     // set some default values based on the supplied object
-    setup: function () {
+    setup: Ember.on("init", function () {
         var event = this.get('request.event.id');
         if (event) {
             this.set('currentLocation', this.get('request.event.location'));
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
         }
         //this.set('currentPriority', this.get('request.priority'));
         //this.set('currentEvent', this.get('request.event'));
-    }.on("init"),
+    }),
 
     request: null,
 
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     priorities: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
 
     // disable or enable and build list
-    eventState: function () {
+    eventState: Ember.computed('currentSession', function () {
         var current = this.get('currentSession');
         console.log('Event State');
         if (current === false || current === null || current === undefined) {
@@ -47,10 +47,10 @@ export default Ember.Component.extend({
             this.buildEvents();
             return false;
         }
-    }.property('currentSession'),
+    }),
 
     // disable or enable and build list
-    sessionState: function () {
+    sessionState: Ember.computed('currentLocation', function () {
         var current = this.get('currentLocation');
         console.log('Session State');
         if (current === false || current === null || current === undefined) {
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
             this.buildSessions();
             return false;
         }
-    }.property('currentLocation'),
+    }),
 
     // build a list of sessions based on previous choices
     buildSessions() {

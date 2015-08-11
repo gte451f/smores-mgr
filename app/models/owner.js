@@ -13,5 +13,7 @@ export default DS.Model.extend({
     gender: DS.attr('string'),
 
     // relationshps
-    account: DS.belongsTo('account')
+    account: DS.belongsTo('account', {
+      async: false
+    })
 });

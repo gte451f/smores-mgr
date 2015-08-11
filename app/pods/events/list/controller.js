@@ -22,9 +22,9 @@ export default Ember.ArrayController.extend(Paginate, {
     // monitor and update pager when this changes
     // use this two stage approach to cut down on the number of repeat requests
     // notice a pass to the route's refresh action
-    filterChanged: function () {
+    filterChanged: Ember.observer('location_id', 'program_id', 'cabin_id', 'session_id', function () {
         Ember.run.once(this, 'processChange');
-    }.observes('location_id', 'program_id', 'cabin_id', 'session_id'),
+    }),
 
     processChange: function () {
         this.send('refresh');

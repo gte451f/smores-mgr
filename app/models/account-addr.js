@@ -12,5 +12,7 @@ export default DS.Model.extend({
 
 
     // relationships
-    account: DS.belongsTo('account')
+    account: DS.belongsTo('account', {
+      async: false
+    })
 });

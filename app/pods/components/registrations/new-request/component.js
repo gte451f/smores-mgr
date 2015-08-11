@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 
 
     // set some default values based on the supplied object
-    setup: function () {
+    setup: Ember.on("init", function () {
         console.log('component setup called');
         var event = this.get('request.event.id');
         if (event) {
@@ -33,7 +33,7 @@ export default Ember.Component.extend({
         }
         //this.set('currentPriority', this.get('request.priority'));
         //this.set('currentEvent', this.get('request.event'));
-    }.on("init"),
+    }),
 
     request: null,
 

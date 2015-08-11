@@ -8,10 +8,10 @@ export default DS.Model.extend({
     dob: DS.attr('string'),
 
     //calculated
-    fullName: function () {
+    fullName: Ember.computed('firstName', 'lastName', function () {
         var fullName = this.get('lastName') + ', ' + this.get('firstName');
         return Ember.$("<div/>").html(fullName).text();
-    }.property('firstName', 'lastName'),
+    }),
 
     // by way of user
     email: DS.attr('string'),
@@ -21,6 +21,8 @@ export default DS.Model.extend({
     gender: DS.attr('string'),
 
     // relationships
-    registrations: DS.hasMany('registration'),
+    registrations: DS.hasMany('registration', {
+      async: false
+    }),
     account: DS.belongsTo('account', {async: true})
 });

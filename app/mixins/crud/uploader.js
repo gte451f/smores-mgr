@@ -15,9 +15,9 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
 
     // config server values
-    postURL: function () {
+    postURL: Ember.computed('postResource', 'postBase', function () {
         return this.postBase + this.postResource;
-    }.property('postResource', 'postBase'),
+    }),
     postResource: 'documents',
     postBase: '/phalcon-base/v1/',
 

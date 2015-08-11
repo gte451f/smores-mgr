@@ -6,5 +6,7 @@ export default DS.Model.extend({
     description: DS.attr('string'),
 
     // relationships
-    events: DS.hasMany('event')
+    events: DS.hasMany('event', {
+      async: false
+    })
 });

@@ -9,6 +9,10 @@ export default DS.Model.extend({
     request: DS.belongsTo('request', {async: true}),
     registration: DS.belongsTo('registration', {async: true}),
     user: DS.belongsTo('user', {async: true}),
-    fee: DS.belongsTo('fee'),
-    account: DS.belongsTo('account')
+    fee: DS.belongsTo('fee', {
+      async: false
+    }),
+    account: DS.belongsTo('account', {
+      async: false
+    })
 });

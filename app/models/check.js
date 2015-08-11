@@ -8,6 +8,10 @@ export default DS.Model.extend({
     nameOnCheck: DS.attr('string'),
 
     //relationships
-    account: DS.belongsTo('account'),
-    payment: DS.hasMany('payment')
+    account: DS.belongsTo('account', {
+      async: false
+    }),
+    payment: DS.hasMany('payment', {
+      async: false
+    })
 });

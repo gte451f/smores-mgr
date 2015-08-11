@@ -11,11 +11,11 @@ export default Ember.Component.extend({
             this.sendAction('ok', this.get('model'));
         }
     },
-    show: function () {
+    show: Ember.on('didInsertElement', function () {
         this.$('.modal').modal().on('hidden.bs.modal', function () {
             this.sendAction('close');
         }.bind(this));
-    }.on('didInsertElement'),
+    }),
     // place holder for supplied mode
     model: false
 });

@@ -5,8 +5,16 @@ export default DS.Model.extend({
     feeDescription: DS.attr('string'),
 
     // relationships
-    location: DS.belongsTo('location'),
-    program: DS.belongsTo('program'),
-    session: DS.belongsTo('session'),
-    cabin: DS.belongsTo('cabin')
+    location: DS.belongsTo('location', {
+      async: false
+    }),
+    program: DS.belongsTo('program', {
+      async: false
+    }),
+    session: DS.belongsTo('session', {
+      async: false
+    }),
+    cabin: DS.belongsTo('cabin', {
+      async: false
+    })
 });

@@ -13,6 +13,10 @@ export default DS.Model.extend({
     active: DS.attr('number'),
 
     // relationships
-    account: DS.belongsTo('account'),
-    payments: DS.hasMany('payment')
+    account: DS.belongsTo('account', {
+      async: false
+    }),
+    payments: DS.hasMany('payment', {
+      async: false
+    })
 });

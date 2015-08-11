@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -7,7 +8,7 @@ export default DS.Model.extend({
     amount: DS.attr('number'),
 
     // calculated fields
-    type: function () {
+    type: Ember.computed('card', 'check', function () {
         if (this.get('check')) {
             return 'Check';
         }
@@ -15,10 +16,16 @@ export default DS.Model.extend({
             return 'Credit';
         }
         return 'Cash';
-    }.property('card', 'check'),
+    }),
 
     // relationships
-    account: DS.belongsTo('account'),
-    card: DS.belongsTo('card'),
-    check: DS.belongsTo('check')
+    account: DS.belongsTo('account', {
+      async: false
+    }),
+    card: DS.belongsTo('card', {
+      async: false
+    }),
+    check: DS.belongsTo('check', {
+      async: false
+    })
 });

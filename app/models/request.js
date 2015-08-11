@@ -8,5 +8,7 @@ export default DS.Model.extend({
 
     // relationships
     event: DS.belongsTo('event', {async: true}),
-    registration: DS.belongsTo('registration')
+    registration: DS.belongsTo('registration', {
+      async: false
+    })
 });
