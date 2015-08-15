@@ -40,7 +40,6 @@ export default Ember.Route.extend({
 
         var modifiedEvents = [];
         resolved.events.forEach(function (item, index, enumerable) {
-            var cabinGender = item.get('cabin').get('gender');
             if (item.get('cabin').get('gender') === gender || item.get('cabin').get('gender') === 'Mixed') {
                 item.set('fullName', item.get('program').get('name') + ' / ' + item.get('cabin').get('name'));
                 modifiedEvents.addObject(item);

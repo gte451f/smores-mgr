@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.Object.extend({
+export default Ember.Service.extend({
 
     /**
      * verify that the service is accessible and that the store has been injected

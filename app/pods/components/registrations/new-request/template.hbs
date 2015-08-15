@@ -3,13 +3,12 @@
         <div class="form-group">
             <label>Priority</label>
             {{x-select
-            action=priorityChanged
             content=priorities
             optionValuePath="content"
             optionLabelPath="content"
+            value=request.priority
             prompt="Select"
-            class="form-control"
-            comp=this}}
+            class="form-control"}}
         </div>
     </div>
 
@@ -21,7 +20,6 @@
             content=locations
             optionValuePath="content.id"
             optionLabelPath="content.name"
-            selection=currentLocation
             prompt="Select"
             class="form-control"
             comp=this}}
@@ -35,7 +33,7 @@
             content=filteredSessions
             optionValuePath="content.id"
             optionLabelPath="content.name"
-            selection=currentSession
+            value=currentSession
             prompt="Select"
             class="form-control"
             comp=this
@@ -46,14 +44,13 @@
         <div class="form-group">
             <label>Program / Cabin</label>
             {{x-select
-            action=eventChanged
+            value=request.event
             content=filteredEvents
             optionValuePath="content"
             optionLabelPath="content.fullName"
             prompt="Select"
             class="form-control"
-            disabled=isEventDisabled
-            comp=this}}
+            disabled=isEventDisabled}}
         </div>
     </div>
 

@@ -21,9 +21,53 @@
 
                 <div class="box-body">
                     <div>Toggle Test:</div>
-                    {{x-toggle showLabels=true off='Hey' on='Ho' toggle='letsGo'}}
-                    <hr />
-                    {{letsGo}}
+                    {{!--{{x-toggle showLabels=true off='Hey' on='Ho' toggle='letsGo'}}--}}
+                    <hr/>
+                    {{!--{{letsGo}}--}}
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>currentController:{{model.currentLocation.name}}</td>
+                            <td>currentColor: {{model.currentColor}}</td>
+                        </tr>
+                    </table>
+
+
+                    <h2>X-Select</h2>
+                    {{x-select
+                    content=model.locations
+                    optionValuePath="content"
+                    optionLabelPath="content.name"
+                    value=model.currentLocation
+                    class="form-control"}}
+
+                    <h2>Ember.Select</h2>
+                    {{view "select"
+                    content=model.locations
+                    optionValuePath="content"
+                    optionLabelPath="content.name"
+                    selection=model.currentLocation
+                    class="form-control"}}
+
+                    <hr/>
+
+                    <h3>Ember.Select</h3>
+                    {{view "select"
+                    content=model.colors
+                    optionValuePath="content"
+                    optionLabelPath="content"
+                    selection=model.currentColor
+                    class="form-control"}}
+
+                    <h3>X-Select</h3>
+                    {{x-select
+                    content=model.colors
+                    optionValuePath="content"
+                    optionLabelPath="content"
+                    value=model.currentColor
+                    class="form-control"}}
+
+
                 </div>
             </div>
             <!-- /.box -->

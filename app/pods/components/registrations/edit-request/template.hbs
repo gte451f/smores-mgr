@@ -1,79 +1,58 @@
 <div class="row">
-    <div class="col-md-1">
-        <div class="form-group">
-            <label>Remove</label>
-            <a {{action "removeRequest" }} class="btn btn-primary">
-                {{fa-icon 'trash'}}
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-1">
+    <div class="col-md-2">
         <div class="form-group">
             <label>Priority</label>
-            {{x-select
-            content=priorities
-            optionValuePath="content"
-            optionLabelPath="content"
-            selection=request.priority
-            prompt="Select"
-            class="form-control"}}
+            {{#x-select value=request.priority class="form-control"}}
+                {{#each priorities as |item|}}
+                    {{#x-option value=item}}{{item}}{{/x-option}}
+                {{/each}}
+            {{/x-select}}
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="form-group">
             <label>Location</label>
-            {{x-select
-            content=locations
-            optionValuePath="content.id"
-            optionLabelPath="content.name"
-            selection=currentLocation
-            prompt="Select"
-            class="form-control"}}
+            {{#x-select action="locationChanged" class="form-control" comp=this value=currentLocation}}
+                {{#each locations as |item|}}
+                    {{#x-option value=item}}{{item.name}}{{/x-option}}
+                {{/each}}
+            {{/x-select}}
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label>Session</label>
-            {{x-select
-            content=filteredSessions
-            optionValuePath="content.id"
-            optionLabelPath="content.name"
-            selection=currentSession
-            prompt="Select"
-            class="form-control"
-            disabled=sessionState}}
+            {{#x-select action="sessionChanged" class="form-control" comp=this disabled=isSessionDisabled value=currentSession}}
+                {{#x-option value=null}}Select{{/x-option}}
+                {{#each filteredSessions as |item|}}
+                    {{#x-option value=item}}{{item.name}}{{/x-option}}
+                {{/each}}
+            {{/x-select}}
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Program / Cabin</label>
-            {{x-select
-            content=filteredEvents
-            optionValuePath="content.id"
-            optionLabelPath="content.fullName"
-            selection=request.event
-            prompt="Select"
-            class="form-control"
-            disabled=eventState}}
+            {{#x-select class="form-control" comp=this disabled=isEventDisabled value=request.event.content}}
+                {{#x-option value=null}}Select{{/x-option}}
+                {{#each filteredEvents as |item|}}
+                    {{#x-option value=item}}{{item.program.name}} / {{item.cabin.name}}{{/x-option}}
+                {{/each}}
+            {{/x-select}}
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
         <div class="form-group">
             <label>Status</label>
-            {{x-select
-            content=listService.regStatus
-            optionValuePath="content.value"
-            optionLabelPath="content.label"
-            value=request.submitStatus
-            prompt="Select"
-            class="form-control"}}
+            {{#x-select class="form-control" value=request.submitStatus}}
+                {{#each listService.regStatus as |item|}}
+                    {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                {{/each}}
+            {{/x-select}}
         </div>
     </div>
 
@@ -84,13 +63,11 @@
                     {{fa-icon "info"}}
                 {{/my-tooltip}}
             </label>
-            {{x-select
-            content=listService.boolean
-            optionValuePath="content.value"
-            optionLabelPath="content.name"
-            value=request.attending
-            prompt="Select"
-            class="form-control"}}
+            {{#x-select class="form-control" value=request.attending}}
+                {{#each listService.boolean as |item|}}
+                    {{#x-option value=item.value}}{{item.name}}{{/x-option}}
+                {{/each}}
+            {{/x-select}}
         </div>
     </div>
 
@@ -102,4 +79,14 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-11"></div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <a {{action "removeRequest" }} class="btn btn-primary">
+                {{fa-icon 'trash'}}
+            </a>
+        </div>
+    </div>
+</div>
 <hr/>

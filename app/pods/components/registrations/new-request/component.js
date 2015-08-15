@@ -76,16 +76,6 @@ export default Ember.Component.extend({
         }
     },
 
-    eventChanged: function (value, component) {
-        var request = component.get('comp.request');
-        request.set('event', value);
-    },
-
-    priorityChanged: function (value, component) {
-        var request = component.get('comp.request');
-        request.set('priority', value);
-    },
-
     // build a list of sessions based on previous choices
     buildSessions() {
         var currentLocation = this.get('currentLocation');

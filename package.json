@@ -51,7 +51,7 @@
     "ember-moment": "1.1.1",
     "ember-notify": "^3.4.0",
     "ember-watson": "^0.6.2",
-    "emberx-select": "1.1.4"
+    "emberx-select": "2.0.0"
   },
   "dependencies": {
     "ember-radio-buttons": "^3.0.1",
