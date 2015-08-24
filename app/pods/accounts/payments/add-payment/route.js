@@ -49,7 +49,7 @@ export default Ember.Route.extend(ErrorHandler, {
                     model.check = post;
                     self.savePayment(model);
                 }, function (reason) {
-                    self.handleXHR(reason);
+                    self.validationReport(check);
                 });
 
             } else {
@@ -67,7 +67,7 @@ export default Ember.Route.extend(ErrorHandler, {
             self.notify.success('Success saving payment!');
             self.transitionTo('accounts.payments.info', id);
         }, function (reason) {
-            self.handleXHR(reason);
+            self.validationReport(payment);
         });
     }
 });

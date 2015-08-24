@@ -6,11 +6,11 @@ export default Ember.Route.extend({
         //wipe the supplied record and go back to the mother ship
         delete: function (model) {
             var self = this;
-            var controller = this.controllerFor('locations');
+            //var controller = this.controllerFor('locations');
             model.destroyRecord().then(function () {
-                controller.get('model').content.removeObject(model);
-                self.notify.success('Successfully removed location');
-                self.transitionTo('locations');
+                //controller.get('model').content.removeObject(model);
+                self.notify.success('Successfully removed program');
+                self.transitionTo('programs');
             }, function (reason) {
                 console.log(reason);
                 self.notify.error('Could not delete record!');

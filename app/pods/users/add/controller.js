@@ -13,7 +13,7 @@ export default Ember.Controller.extend(ErrorHandler, {
                 self.notify.success('Success saving employee!');
                 self.transitionToRoute('users.info', post);
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(newRecord);
             });
         }
     }

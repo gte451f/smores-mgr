@@ -33,7 +33,7 @@
                                     <td>{{record.id}}</td>
                                     <td>{{record.attendee.firstName}}</td>
                                     <td>{{record.attendee.lastName}}</td>
-                                    <td>{{moment record.createdOn 'MM/DD/YYYY'}}</td>
+                                    <td>{{moment-format record.createdOn 'MM/DD/YYYY'}}</td>
                                     <td>{{record.notes}}</td>
                                     <td class="clearfix">
                                         {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}

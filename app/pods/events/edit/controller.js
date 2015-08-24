@@ -11,7 +11,7 @@ export default Ember.Controller.extend(ErrorHandler, {
                 self.transitionToRoute('events.list');
                 self.notify.success('Event was saved!');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(model);
             });
         }
     }

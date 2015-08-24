@@ -35,7 +35,7 @@
                                 <dt>Email</dt>
                                 <dd>{{model.email}}</dd>
                                 <dt>Birthday</dt>
-                                <dd>{{moment model.dob 'MM/DD/YYYY'}}</dd>
+                                <dd>{{moment-format model.dob 'MM/DD/YYYY'}}</dd>
                                 <dt>Gender</dt>
                                 <dd>{{model.gender}}</dd>
                                 <dt>Grade</dt>
@@ -76,7 +76,7 @@
                                 {{#each model.registrations as |record| }}
                                     <span class="list-group-item">
                                         {{#link-to 'registrations.info' record.id}}
-                                            #{{record.id}} at {{moment record.createdOn 'MM/DD/YYYY'}}
+                                            #{{record.id}} at {{moment-format record.createdOn 'MM/DD/YYYY'}}
                                         {{/link-to}}
                                         <ul>
                                             <li>Show request here but need to manually load related</li>

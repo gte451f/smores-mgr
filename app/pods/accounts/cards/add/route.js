@@ -26,7 +26,7 @@ export default Ember.Route.extend(ErrorHandler, {
                 self.notify.success('Success saving card!');
                 self.transitionTo('accounts.cards');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(newCard);
             });
         }
     }

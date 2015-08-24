@@ -7,12 +7,11 @@ export default Ember.Route.extend(ErrorHandler, {
         //handle save operation
         save: function (model) {
             var self = this;
-
             model.save().then(function (post) {
                 self.notify.success('Credit Card Saved!!');
                 self.transitionTo('accounts.cards');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(model);
             });
         }
     }

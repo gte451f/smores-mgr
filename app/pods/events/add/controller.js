@@ -12,7 +12,7 @@ export default Ember.Controller.extend(ErrorHandler, {
                 self.notify.success('Success saving event!');
                 self.transitionToRoute('events.list');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(model);
             });
         }
     }

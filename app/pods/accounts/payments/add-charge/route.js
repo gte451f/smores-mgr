@@ -32,7 +32,7 @@ export default Ember.Route.extend(ErrorHandler, {
                 self.notify.success('Success saving charge!');
                 self.transitionTo('accounts.payments.info', id);
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(charge);
             });
         }
     }

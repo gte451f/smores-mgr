@@ -10,7 +10,7 @@ export default Ember.Controller.extend(ErrorHandler, {
                 self.notify.success('Fee Saved');
                 self.transitionToRoute('fees.info', post);
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(model);
             });
         }
     }

@@ -20,7 +20,7 @@ export default Ember.Route.extend(ErrorHandler, {
                 //controller.get('model').content.removeObject(model);
                 self.notify.success('Successfully removed credit card');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(card);
             });
         }
     }

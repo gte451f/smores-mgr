@@ -33,7 +33,7 @@
                                                 <td><span class="label label-warning">Inactive</span></td>
                                             {{/if}}
 
-                                            <td>{{moment model.dob 'MM/DD/YYYY'}}</td>
+                                            <td>{{moment-format model.dob 'MM/DD/YYYY'}}</td>
 
                                             <td class="pull-right">
                                                 {{#link-to linkPath model.id class="btn btn-primary btn-sm"}} Open {{/link-to}}

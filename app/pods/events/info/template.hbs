@@ -27,7 +27,7 @@
                     <dt>Session</dt>
                     <dd>{{model.session.name}}</dd>
                     <dt>Date Range</dt>
-                    <dd>{{moment model.session.start 'MM/DD/YYYY'}} - {{moment model.session.end 'MM/DD/YYYY'}}</dd>
+                    <dd>{{moment-format model.session.start 'MM/DD/YYYY'}} - {{moment model.session.end 'MM/DD/YYYY'}}</dd>
                     <dt>Age Range</dt>
                     <dd>{{model.cabin.minAge}} - {{model.cabin.maxAge}} years</dd>
                     <dt>Gender</dt>

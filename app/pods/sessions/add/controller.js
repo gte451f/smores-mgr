@@ -13,7 +13,7 @@ export default Ember.Controller.extend(ErrorHandler, {
                 self.notify.success('Success saving session!');
                 self.transitionToRoute('sessions');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(model);
             });
         }
     }

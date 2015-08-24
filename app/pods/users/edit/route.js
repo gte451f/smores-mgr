@@ -14,7 +14,7 @@ export default Ember.Route.extend(ErrorHandler, {
                 self.notify.success('Employee Updated!');
                 self.transitionTo('users.info', employee.get('id'));
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(employee);
             });
         }
     }

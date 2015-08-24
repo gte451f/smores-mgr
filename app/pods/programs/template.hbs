@@ -27,12 +27,11 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <ul class="todo-list">
-                                {{#each this as |record| }}
+                                {{#each model as |record| }}
                                     <li class="clearfix">
                                         <span class="text">
                                             {{record.name}}
                                         </span>
-
                                         <div class="tools">
                                             {{#link-to "programs.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
                                             {{#link-to "programs.edit" record}}{{fa-icon "edit"}}{{/link-to}}
@@ -43,7 +42,6 @@
                                 {{/each}}
                             </ul>
                         </div>
-                        {{partial "table-pager/list/footer"}}
                     </div>
                     <!-- /. end box-primary -->
                 </section>

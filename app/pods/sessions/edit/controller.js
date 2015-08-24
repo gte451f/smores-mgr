@@ -6,14 +6,14 @@ export default Ember.Controller.extend(ErrorHandler, {
         //handle save operation
         save: function () {
             var self = this;
-            var location = self.get('model');
+            var location = this.get('model');
 
             location.save().then(function (post) {
                 console.log('success!');
                 self.notify.success('Session Saved!!');
                 self.transitionToRoute('sessions');
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(location);
             });
         }
     }

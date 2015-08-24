@@ -2,6 +2,7 @@ import Ember from "ember";
 import Base from "simple-auth/authenticators/base";
 import LocalStorage from 'simple-auth/stores/local-storage';
 import ENV from 'smores-mgr/config/environment';
+import Notify from 'ember-notify';
 
 export default Base.extend({
   /**
@@ -26,7 +27,7 @@ export default Base.extend({
         url: ENV.auth.login,
         type: 'POST',
         data: {
-          username: credentials.identification,
+          email: credentials.identification,
           password: credentials.password
         }
       }).then(function (response) {
@@ -39,12 +40,15 @@ export default Base.extend({
             expiresOn: response.expiresOn,
             userName: response.userName,
             firstName: response.firstName,
-            lastName: response.LastName,
-            id: response.id
+            lastName: response.lastName,
+            id: response.id,
+            accountId: response.accountId,
+            type: 'Account'
           });
         });
       }, function (xhr, status, error) {
-        console.log(xhr.responseJSON);
+        var errorMessage = "<h4>Could not log you into the system: </h4>" + xhr.responseJSON.records.userMessage;
+        Notify.alert({raw: errorMessage, closeAfter: 10000});
       });
     });
   },

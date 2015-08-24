@@ -11,7 +11,7 @@ export default Ember.Controller.extend(ErrorHandler, {
                 self.notify.success('Cabin Saved');
                 self.transitionToRoute('cabins', post);
             }, function (reason) {
-                self.handleXHR(reason);
+                self.validationReport(model);
             });
         }
     }
