@@ -5,7 +5,15 @@
     <div class="content-wrapper" style="min-height: 1068px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1> Setup: Programs </h1>
+            <h1>
+                Setup: Programs
+                {{#my-tooltip contentAsHTML=true
+                content='Each program represents a camp\'s set of related activites and trips that the camper particpates in during their session. <ul>
+                <li>A program includes an associated fee that the camper is charged when they register for an event with that program. </li>
+                <li>Smores requires at least one program to be configured in order to accept registrations. </li></ul>'}}
+                    {{fa-icon "info"}}
+                {{/my-tooltip}}
+            </h1>
             {{partial "navigation/main-breadcrumb"}}
         </section>
         <!-- Main content -->

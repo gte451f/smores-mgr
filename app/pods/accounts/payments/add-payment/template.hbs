@@ -36,15 +36,12 @@
                                 <label>Credit Card On File</label>
 
                                 <div class="input-group">
-                                    {{x-select
-                                    content=model.cards
-                                    optionValuePath="content"
-                                    optionLabelPath="content.name"
-                                    prompt="Select"
-                                    value=model.card
-                                    class="form-control"
-                                    id="cardOnFile"
-                                    disabled=true}}
+                                    {{#x-select value=model.card class='form-control' disabled=true id="cardOnFile"}}
+                                        <option>Select</option>
+                                        {{#each model.cards as |item|}}
+                                            {{#x-option value=item}}{{item.name}}{{/x-option}}
+                                        {{/each}}
+                                    {{/x-select}}
 
                                     {{#input-tooltip content="Only active credit cards will appear in this list."}}
                                         {{fa-icon "info"}}

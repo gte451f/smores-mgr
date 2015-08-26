@@ -19,22 +19,21 @@
             <label class="col-sm-4 control-label">Expiration</label>
 
             <div class="col-sm-4">
-                {{x-select
-                content=listService.monthNumber
-                optionValuePath="content.value"
-                optionLabelPath="content.label"
-                prompt="Select"
-                value=model.expirationMonth
-                class="form-control"}}
+                {{#x-select value=model.expirationMonth class='form-control'}}
+                    <option>Select</option>
+                    {{#each listService.monthNumber as |item|}}
+                        {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                    {{/each}}
+                {{/x-select}}
+
             </div>
             <div class="col-sm-4">
-                {{x-select
-                content=listService.cardExpirationYear
-                optionValuePath="content.value"
-                optionLabelPath="content.label"
-                prompt="Select"
-                value=model.expirationYear
-                class="form-control"}}
+                {{#x-select value=model.expirationYear class='form-control'}}
+                    <option>Select</option>
+                    {{#each listService.cardExpirationYear as |item|}}
+                        {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                    {{/each}}
+                {{/x-select}}
             </div>
         </div>
         <div class="row form-group required">
@@ -48,13 +47,12 @@
             <label class="col-sm-4 control-label">Vendor</label>
 
             <div class="col-sm-8">
-                {{x-select
-                content=listService.cardVendor
-                optionValuePath="content.value"
-                optionLabelPath="content.label"
-                prompt="Select"
-                value=model.vendor
-                class="form-control"}}
+                {{#x-select value=model.vendor class='form-control'}}
+                    <option>Select</option>
+                    {{#each listService.cardVendor as |item|}}
+                        {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                    {{/each}}
+                {{/x-select}}
             </div>
         </div>
         <div class="row form-group required">

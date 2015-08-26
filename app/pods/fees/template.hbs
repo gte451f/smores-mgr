@@ -5,7 +5,16 @@
     <div class="content-wrapper" style="min-height: 1068px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1> Setup: Fees </h1>
+            <h1>
+                Setup: Fees
+                {{#my-tooltip contentAsHTML=true
+                content="Use Fees to tell Smores when and how much to charge your camp's customers flat rate amounts. <ul>
+                 <li>For example, charge a standard fee when a new registration is created. </li>
+                 <li>Fee's are not required in order to accept camper registrations. </li>
+                 <li>Individual programs may also have a fee associated with them that only apply when a camper registers for them</li></ul>"}}
+                    {{fa-icon "info"}}
+                {{/my-tooltip}}
+            </h1>
             {{partial 'navigation/main-breadcrumb'}}
         </section>
         <!-- Main content -->
@@ -25,27 +34,29 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <ul class="todo-list">
-                                {{#each this as |record| }}
-                                    <li class="clearfix">
+                                {{#each model as |record| }}
+                                    {{#if record.id}}
+                                        <li class="clearfix">
                                         <span class="text">
-                                            {{record.name}} ({{record.amount}})<br/>
+                                            {{record.name}}
+                                            ({{format-money record.amount symbol=selectedCurrency format="%s%v"}})<br/>
                                             <small>
                                                 Basis: {{record.basis}}<br/>
                                                 Payment Schedule: {{record.paymentSchedule}}
                                             </small>
                                         </span>
 
-                                        <div class="tools">
-                                            {{#link-to "fees.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
-                                            {{#link-to "fees.edit" record}}{{fa-icon "edit"}}{{/link-to}}
-                                        </div>
-                                    </li>
+                                            <div class="tools">
+                                                {{#link-to "fees.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                                                {{#link-to "fees.edit" record}}{{fa-icon "edit"}}{{/link-to}}
+                                            </div>
+                                        </li>
+                                    {{/if}}
                                 {{else}}
                                     <li>no records found ... :-(</li>
                                 {{/each}}
                             </ul>
                         </div>
-                        {{partial "table-pager/list/footer"}}
                     </div>
                     <!-- /. end box-primary -->
                 </section>

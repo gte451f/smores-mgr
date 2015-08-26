@@ -33,13 +33,12 @@
             <label class="col-sm-4 control-label">State:</label>
 
             <div class="col-sm-8">
-                {{x-select
-                content=listService.americanStates
-                optionValuePath="content.value"
-                optionLabelPath="content.label"
-                prompt="Select"
-                value=model.state
-                class="form-control"}}
+                {{#x-select value=model.state class='form-control'}}
+                    <option>Select</option>
+                    {{#each listService.americanStates as |item|}}
+                        {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                    {{/each}}
+                {{/x-select}}
             </div>
         </div>
         <div class="row form-group">

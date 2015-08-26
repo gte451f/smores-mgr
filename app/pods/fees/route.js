@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import Paginate from 'smores-mgr/mixins/table-pager/route';
+import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Route.extend(Paginate, {
-    modelName: 'fee',
-    controllerName: 'fees',
-    currentRoute: 'fees'
+export default Ember.Route.extend(ErrorHandler, {
+  model: function (params) {
+    return this.store.findAll('fee');
+  }
 });
