@@ -11,7 +11,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <section class="col-lg-4">
+                <section class="col-sm-4">
                     <div class="box box-warning">
                         <div class="box-header">
                             <div class="box-tools">
@@ -25,29 +25,30 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <ul class="todo-list">
-                                {{#each this as |record| }}
-                                    <li class="clearfix">
+                                {{#each model as |record| }}
+                                    {{#if record.id}}
+                                        <li class="clearfix">
                                         <span class="text">
-                                            {{record.name}} <br/>
-                                            <small>{{moment-format record.start 'MM/DD/YY'}}
-                                                - {{moment-format record.end 'MM/DD/YY'}}</small>
+                                            {{record.name}} <small>from {{moment-format record.start 'MM/DD'}} to {{moment-format record.end 'MM/DD'}}</small>
                                         </span>
 
-                                        <div class="tools">
-                                            {{#link-to "sessions.edit" record}}{{fa-icon "edit"}}{{/link-to}}
-                                            <a {{action 'showModal' 'modals/delete-confirm' record}}>{{fa-icon "trash-o"}}</a>
-                                        </div>
-                                    </li>
+                                            <div class="tools">
+                                                {{#link-to "sessions.edit" record}}{{fa-icon "edit"}}{{/link-to}}
+                                                <a {{action 'showModal' 'modals/delete-confirm' record}}>{{fa-icon "trash-o"}}</a>
+                                            </div>
+                                        </li>
+                                    {{/if}}
                                 {{else}}
                                     <li>no records found ... :-(</li>
                                 {{/each}}
                             </ul>
                         </div>
-                        {{partial "table-pager/list/footer"}}
                     </div>
                     <!-- /. end box-primary -->
                 </section>
-                <section class="col-lg-8">
+                <section class="col-sm-2">
+                </section>
+                <section class="col-sm-6">
                     {{outlet}}
                 </section>
             </div>

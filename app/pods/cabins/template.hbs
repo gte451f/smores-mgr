@@ -15,32 +15,38 @@
                     <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title"></h3>
+
                             <div class="box-tools">
                                 <div class="btn-group pull-right">
-                                    {{#link-to "cabins.add" class="btn btn-primary btn-xs"}}{{fa-icon "plus"}} Cabin {{/link-to}}
+                                    {{#link-to "cabins.add" class="btn btn-primary btn-xs"}}{{fa-icon "plus"}}
+                                        Cabin {{/link-to}}
                                 </div>
                             </div>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <ul class="todo-list">
-                                {{#each this as |record| }}
-                                    <li>
+                                {{#each model as |record| }}
+                                    {{#if record.id}}
+                                        <li>
                                         <span class="text">
-                                            {{record.name}} <small>({{record.gender}})</small> <br/>
-                                            <small>Ages: {{record.minAge}} - {{record.maxAge}} | Capacity: {{record.capacity}}</small>
+                                            {{record.name}}
+                                            <small>({{record.gender}})</small> <br/>
+                                            <small>Ages: {{record.minAge}} - {{item.maxAge}} |
+                                                Capacity: {{record.capacity}}</small>
                                         </span>
-                                        <div class="tools">
-                                            {{#link-to "cabins.edit" record}}{{fa-icon "edit"}}{{/link-to}}
-                                            <a {{action 'showModal' 'modals/delete-confirm' record}}>{{fa-icon "trash-o"}}</a>
-                                        </div>
-                                    </li>
+
+                                            <div class="tools">
+                                                {{#link-to "cabins.edit" record}}{{fa-icon "edit"}}{{/link-to}}
+                                                <a {{action 'showModal' 'modals/delete-confirm' record}}>{{fa-icon "trash-o"}}</a>
+                                            </div>
+                                        </li>
+                                    {{/if}}
                                 {{else}}
                                     <li>no records found ... :-(</li>
                                 {{/each}}
                             </ul>
                         </div>
-                        {{partial "table-pager/list/footer"}}
                     </div>
                     <!-- /. end box-primary -->
                 </section>

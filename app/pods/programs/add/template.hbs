@@ -1,13 +1,6 @@
 <div class="box box-warning">
     <div class="box-header with-border"></div>
     <!-- /.box-header -->
-
-    {{#if model.errors}}
-        {{#each errors.messages}}
-
-        {{/each}}
-    {{/if}}
-
     <div class="box-body form-horizontal">
         <div class="row form-group required">
             <label class="col-sm-4 control-label">Name:</label>
@@ -41,7 +34,7 @@
     <div class="box-footer clearfix">
         <div class="btn-group pull-right">
             <button class="btn btn-primary btn-xs" {{action "save" model}}>Save</button>
-            {{#link-to "programs.info" model class="btn btn-primary btn-xs"}}Cancel{{/link-to}}
+            {{#link-to "programs" class="btn btn-primary btn-xs"}}Cancel{{/link-to}}
         </div>
     </div>
 </div>

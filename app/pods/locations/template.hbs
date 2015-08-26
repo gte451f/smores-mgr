@@ -27,21 +27,22 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <ul class="todo-list">
-                                {{#each this as |record| }}
-                                    <li class="clearfix">
-                                        <span class="text">{{record.name}}</span>
+                                {{#each model as |record| }}
+                                    {{#if record.id}}
+                                        <li class="clearfix">
+                                            <span class="text">{{record.name}}</span>
 
-                                        <div class="tools">
-                                            {{#link-to "locations.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
-                                            {{#link-to "locations.edit" record}}{{fa-icon "edit"}}{{/link-to}}
-                                        </div>
-                                    </li>
+                                            <div class="tools">
+                                                {{#link-to "locations.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                                                {{#link-to "locations.edit" record}}{{fa-icon "edit"}}{{/link-to}}
+                                            </div>
+                                        </li>
+                                    {{/if}}
                                 {{else}}
                                     <li>no records found ... :-(</li>
                                 {{/each}}
                             </ul>
                         </div>
-                        {{partial "table-pager/list/footer"}}
                     </div>
                     <!-- /. end box-primary -->
                 </section>

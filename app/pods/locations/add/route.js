@@ -1,9 +1,24 @@
 import Ember from 'ember';
+import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ErrorHandler, {
 
-    //reset the model in case you return to add another record
-    model: function () {
-        return {};
+  //reset the model in case you return to add another record
+  model: function () {
+    return {};
+  },
+
+  actions: {
+    save: function (model) {
+      var self = this;
+      var newRecord = this.store.createRecord('location', model);
+      newRecord.save().then(function (post) {
+        self.notify.success('Location Created');
+        self.transitionTo('locations.info', newRecord);
+      }, function (reason) {
+        self.validationReport(newRecord);
+        newRecord.deleteRecord();
+      });
     }
+  }
 });

@@ -6,49 +6,47 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label>Per Page:</label>
-                            {{x-select
-                            content=pageList
-                            optionValuePath="content"
-                            optionLabelPath="content"
-                            value=perPage
-                            class="form-control input-sm"}}
+                            {{#x-select value=perPage class='form-control input-sm'}}
+                                {{#each pageList as |item|}}
+                                    {{#x-option value=item}}{{item}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
                             <button {{action 'refresh'}} class="btn btn-sm btn-primary">{{fa-icon 'refresh'}}</button>
-                            {{#link-to "events.add" class="btn btn-primary btn-sm"}}{{fa-icon "plus"}}
-                                Add{{/link-to}}
+                            {{#link-to "events.add" class="btn btn-primary btn-sm"}}
+                                {{fa-icon "plus"}} Add
+                            {{/link-to}}
                         </div>
 
                         <div class="col-xs-7">
-                            {{x-select
-                            content=locations
-                            optionValuePath="content.id"
-                            optionLabelPath="content.name"
-                            prompt="All Locations"
-                            value=location_id
-                            class="form-control input-sm"}}
+                            {{#x-select value=location_id class='form-control input-sm'}}
+                                <option>All Locations</option>
+                                {{#each locations as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
 
-                            {{x-select
-                            content=cabins
-                            optionValuePath="content.id"
-                            optionLabelPath="content.name"
-                            prompt="All Cabins"
-                            value=cabin_id
-                            class="form-control input-sm"}}
+                            {{#x-select value=cabin_id class='form-control input-sm'}}
+                                <option>All Cabins</option>
+                                {{#each cabins as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
 
-                            {{x-select
-                            content=programs
-                            optionValuePath="content.id"
-                            optionLabelPath="content.name"
-                            prompt="All Programs"
-                            value=program_id
-                            class="form-control input-sm"}}
+                            {{#x-select value=program_id class='form-control input-sm'}}
+                                <option>All Programs</option>
+                                {{#each programs as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
 
-                            {{x-select
-                            content=sessions
-                            optionValuePath="content.id"
-                            optionLabelPath="content.name"
-                            prompt="All Sessions"
-                            value=session_id
-                            class="form-control input-sm"}}
+                            {{#x-select value=session_id class='form-control input-sm'}}
+                                <option>All Sessions</option>
+                                {{#each sessions as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
                         </div>
 
                         <div class="col-xs-2">
@@ -59,16 +57,18 @@
                     <table class="table table-bordered table-striped">
                         {{partial 'table-pager/table/table-header'}}
                         <tbody>
-                        {{#each this as |record| }}
+                        {{#each model as |record| }}
                             <tr>
                                 {{#each columns as |col| }}
-                                    <td>{{pager-loop record col}}</td>
+                                    <td>{{pager-loop model=record field=col}}</td>
                                 {{/each}}
                                 <td class="pull-right">
                                     {{#link-to 'events.edit' record.id class="btn btn-primary btn-xs"}}
-                                        Edit {{/link-to}}
-                                    {{#link-to linkPath record class="btn btn-primary btn-xs"}}
-                                        Open {{/link-to}}
+                                        Edit
+                                    {{/link-to}}
+                                    {{#link-to linkPath record.id class="btn btn-primary btn-xs"}}
+                                        Open
+                                    {{/link-to}}
                                     <button {{action 'showModal' 'modals/delete-confirm' record}}
                                             class="btn btn-primary btn-xs">Delete
                                     </button>

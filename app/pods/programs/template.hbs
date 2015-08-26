@@ -28,15 +28,18 @@
                         <div class="box-body">
                             <ul class="todo-list">
                                 {{#each model as |record| }}
-                                    <li class="clearfix">
+                                    {{#if record.id}}
+                                        <li class="clearfix">
                                         <span class="text">
                                             {{record.name}}
                                         </span>
-                                        <div class="tools">
-                                            {{#link-to "programs.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
-                                            {{#link-to "programs.edit" record}}{{fa-icon "edit"}}{{/link-to}}
-                                        </div>
-                                    </li>
+
+                                            <div class="tools">
+                                                {{#link-to "programs.info" record}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                                                {{#link-to "programs.edit" record}}{{fa-icon "edit"}}{{/link-to}}
+                                            </div>
+                                        </li>
+                                    {{/if}}
                                 {{else}}
                                     <li>no records found ... :-(</li>
                                 {{/each}}

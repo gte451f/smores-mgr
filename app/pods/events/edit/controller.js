@@ -8,7 +8,7 @@ export default Ember.Controller.extend(ErrorHandler, {
             var model = this.get('model');
             var self = this;
             model.save().then(function () {
-                self.transitionToRoute('events.list');
+                self.transitionToRoute('events.info', model.get('id'));
                 self.notify.success('Event was saved!');
             }, function (reason) {
                 self.validationReport(model);

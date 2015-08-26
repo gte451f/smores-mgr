@@ -2,23 +2,23 @@
     <!-- /.box-header -->
     <div class="box-body form-horizontal">
         <div class="form-group">
-            <label class="col-sm-2">Name</label>
+            <label class="col-sm-4">Name</label>
 
-            <div class="col-sm-10">
+            <div class="col-sm-8">
                 {{input type="text" class="form-control" value=model.name}}
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2">Start Date</label>
+            <label class="col-sm-4">Start Date</label>
 
-            <div class="col-sm-10">
+            <div class="col-sm-8">
                 {{date-picker date=model.start format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2">End Date</label>
+            <label class="col-sm-4">End Date</label>
 
-            <div class="col-sm-10">
+            <div class="col-sm-8">
                 {{date-picker date=model.end format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
             </div>
         </div>

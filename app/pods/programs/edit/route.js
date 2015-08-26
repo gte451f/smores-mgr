@@ -7,8 +7,8 @@ export default Ember.Route.extend(ErrorHandler, {
     save: function (model) {
       var self = this;
       model.save().then(function (post) {
-        self.notify.success('Record Saved!!');
-        self.transitionToRoute('programs.info', post);
+        self.notify.success('Location Saved');
+        self.transitionTo('programs.info', model);
       }, function (reason) {
         self.simpleReport(model);
         // self.validationReport(model);
