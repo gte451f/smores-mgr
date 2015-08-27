@@ -2,39 +2,39 @@ var User = Ember.Object.extend({id: '', fullName: '', firstName: '', lastName: '
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    model: function (params) {
-        // pull account from parent
-        var account = this.modelFor('accounts.payments');
+  model: function (params) {
+    // pull account from parent
+    var account = this.modelFor('accounts.payments');
 
-        return Ember.RSVP.hash({
-            model: this.store.query('account', {id: account.get('id'), with: 'cards,checks,charges,payments'}),
-            //charges: this.store.query('charge', {account_id: account.get('id')}),
-            //payments: this.store.query('payment', {account_id: account.get('id')})
-        });
-    },
+    return Ember.RSVP.hash({
+      model: this.store.query('account', {id: account.get('id'), with: 'cards,checks,charges,payments'}),
+      //charges: this.store.query('charge', {account_id: account.get('id')}),
+      //payments: this.store.query('payment', {account_id: account.get('id')})
+    });
+  },
 
-    setupController: function (controller, resolved) {
-        var model = resolved.model.get('firstObject');
-        this._super(controller, model);
-        //controller.set("model", model);
+  setupController: function (controller, resolved) {
+    var model = resolved.model.get('firstObject');
+    this._super(controller, model);
+    //controller.set("model", model);
 
-        //notify parent of current account
-        var accounts = this.controllerFor("accounts");
-        var item = User.create({accountId: model.id});
-        accounts.set('model', item);
-    },
+    //notify parent of current account
+    var accounts = this.controllerFor("accounts");
+    var item = User.create({accountId: model.id});
+    accounts.set('model', item);
+  },
 
-    actions: {
-        //wipe the supplied record and go back to the mother ship
-        delete: function (model) {
-            var self = this;
-            model.destroyRecord().then(function () {
-                self.notify.success('Successfully deleted!');
-                //self.transitionTo('events.list');
-            }, function (reason) {
-                console.log(reason);
-                self.notify.error('Could not delete record!');
-            });
-        }
+  actions: {
+    //wipe the supplied record and go back to the mother ship
+    delete: function (model) {
+      var self = this;
+      model.destroyRecord().then(function () {
+        self.notify.success('Successfully deleted!');
+        //self.transitionTo('events.list');
+      }, function (reason) {
+        console.log(reason);
+        self.notify.error('Could not delete record!');
+      });
     }
+  }
 });

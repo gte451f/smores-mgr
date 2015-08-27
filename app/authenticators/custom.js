@@ -1,10 +1,10 @@
 import Ember from "ember";
 import Base from "simple-auth/authenticators/base";
-import LocalStorage from 'simple-auth/stores/local-storage';
 import ENV from 'smores-mgr/config/environment';
 import Notify from 'ember-notify';
+import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
-export default Base.extend({
+export default Base.extend(ErrorHandler, {
   /**
    * @param data
    */
@@ -21,6 +21,7 @@ export default Base.extend({
    * @returns {Rx.Promise}
    */
   authenticate: function (credentials, options) {
+    var self = this;
     return new Ember.RSVP.Promise(function (resolve, reject) {
       // make the request to authenticate the user at endpoint /v3/token
       Ember.$.ajax({
@@ -31,24 +32,31 @@ export default Base.extend({
           password: credentials.password
         }
       }).then(function (response) {
-        Ember.run(function () {
-          // resolve (including the account id) as the AJAX request was successful; all properties this promise resolves
-          // with will be available through the session
-          resolve({
-            token: response.token,
-            email: response.email,
-            expiresOn: response.expiresOn,
-            userName: response.userName,
-            firstName: response.firstName,
-            lastName: response.lastName,
-            id: response.id,
-            accountId: response.accountId,
-            type: 'Account'
+        var token = response.token;
+        var id = response.id;
+        // perform some validation to verify that we can a valid response from API
+        if ((typeof token === 'undefined') || (typeof id === 'undefined')) {
+          var errorMessage = "<h4>Could not log you into the system: </h4> No valid user found";
+          Notify.alert({raw: errorMessage, closeAfter: 10000});
+        } else {
+          Ember.run(function () {
+            // resolve (including the account id) as the AJAX request was successful; all properties this promise resolves
+            // with will be available through the session
+            resolve({
+              token: response.token,
+              email: response.email,
+              expiresOn: response.expiresOn,
+              userName: response.userName,
+              firstName: response.firstName,
+              lastName: response.lastName,
+              id: response.id,
+              accountId: response.accountId,
+              type: 'Account'
+            });
           });
-        });
+        }
       }, function (xhr, status, error) {
-        var errorMessage = "<h4>Could not log you into the system: </h4>" + xhr.responseJSON.records.userMessage;
-        Notify.alert({raw: errorMessage, closeAfter: 10000});
+        self.handleXHR(xhr);
       });
     });
   },

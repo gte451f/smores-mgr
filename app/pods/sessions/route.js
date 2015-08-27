@@ -15,7 +15,7 @@ export default Ember.Route.extend(ErrorHandler, {
         self.notify.success('Session Removed');
         self.transitionTo('sessions');
       }, function (reason) {
-        self.validationReport(newRecord);
+        self.validationReport(model);
       });
     }
   }

@@ -27,7 +27,7 @@
                         <dt>BirthDay</dt>
                         <dd>{{moment-format model.attendee.dob 'MM/DD/YYYY'}}</dd>
                         <dt>Gender</dt>
-                        <dd>{{model.user.gender}}</dd>
+                        <dd>{{model.attendee.gender}}</dd>
                         <dt>Notes</dt>
                         <dd>{{model.notes}}</dd>
 
@@ -52,7 +52,7 @@
                     <dl class="dl-horizontal">
                         {{#each model.charges as |item| }}
                             <dt>{{item.name}}</dt>
-                            <dd>{{item.amount}}</dd>
+                            <dd>{{format-money item.amount}}</dd>
                         {{/each}}
                     </dl>
                 </div>

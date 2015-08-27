@@ -14,7 +14,7 @@ export default Ember.Route.extend(ErrorHandler, {
         self.notify.success('Cabin Removed');
         self.transitionTo('cabins');
       }, function (reason) {
-        self.validationReport(newRecord);
+        self.validationReport(model);
       });
     }
   }

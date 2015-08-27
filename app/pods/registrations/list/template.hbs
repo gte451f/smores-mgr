@@ -39,9 +39,9 @@
                                         {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}
                                             {{fa-icon 'folder-open'}}
                                         {{/link-to}}
-                                        <button class="btn btn-default btn-xs pull-right" {{action "delete" record}}>
-                                            {{fa-icon 'trash'}}
-                                        </button>
+                                        <a {{action 'showModal' 'modals/delete-confirm' record}} class="btn btn-default btn-xs pull-right">
+                                            {{fa-icon "trash"}}
+                                        </a>
                                     </td>
                                 </tr>
                             {{else}}

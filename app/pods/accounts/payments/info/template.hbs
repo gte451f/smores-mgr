@@ -10,7 +10,8 @@
                             <h3 class="box-title">Charges</h3>
 
                             <div class="pull-right box-tools">
-                                {{#link-to 'accounts.payments.add-charge' class="btn btn-primary btn-xs"}}{{fa-icon 'plus'}} Charge{{/link-to}}
+                                {{#link-to 'accounts.payments.add-charge' class="btn btn-primary btn-xs"}}{{fa-icon 'plus'}}
+                                    Charge{{/link-to}}
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -32,7 +33,9 @@
                                             {{item.registration.attendee.firstName}}
                                         </td>
                                         <td><span class="label label-warning">{{format-money item.amount}}</span></td>
-                                        <td><a {{action 'showModal' 'modals/delete-confirm' item }}>{{fa-icon "trash-o"}}</a></td>
+                                        <td>
+                                            <a {{action 'showModal' 'modals/delete-confirm' item }}>{{fa-icon "trash-o"}}</a>
+                                        </td>
                                     </tr>
                                 {{/each}}
                                 </tbody>
@@ -71,7 +74,9 @@
                                         <td>{{moment-format item.createdOn 'MM-DD-YYYY'}}</td>
                                         <td>{{item.type}}</td>
                                         <td><span class="label label-success">{{format-money item.amount}}</span></td>
-                                        <td><a {{action 'showModal' 'modals/delete-confirm' item}}>{{fa-icon "trash-o"}}</a></td>
+                                        <td>
+                                            <a {{action 'showModal' 'modals/delete-confirm' item}}>{{fa-icon "trash-o"}}</a>
+                                        </td>
                                     </tr>
                                 {{/each}}
 

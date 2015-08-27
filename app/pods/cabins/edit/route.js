@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ErrorHandler, {
   setupController: function (controller, model) {
     this._super(controller, model);
     controller.set("genders", ["Male", "Female", "Mixed"]);

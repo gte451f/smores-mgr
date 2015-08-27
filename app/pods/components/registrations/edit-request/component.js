@@ -91,11 +91,10 @@ export default Ember.Component.extend({
      */
     locationChanged: function (value, component) {
       console.log('Location Changed');
+      var self = this;
       //use provided context if provided
       if (!Ember.isEmpty(component)) {
-        var self = component.get('comp');
-      } else {
-        var self = this;
+        self = component.get('comp');
       }
       console.log(value);
       if (Ember.isEmpty(value)) {
@@ -116,11 +115,10 @@ export default Ember.Component.extend({
      * @param component
      */
     sessionChanged: function (value, component) {
+      var self = this;
       //use provided context instead
       if (!Ember.isEmpty(component)) {
-        var self = component.get('comp');
-      } else {
-        var self = this;
+        self = component.get('comp');
       }
       console.log('Session Changed');
       if (Ember.isEmpty(value)) {
