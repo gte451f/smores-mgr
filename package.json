@@ -51,6 +51,7 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-moment": "3.6.1",
     "ember-notify": "^3.4.0",
+    "ember-spinner-button": "0.0.10",
     "ember-watson": "^0.6.2",
     "emberx-select": "2.0.0"
   },

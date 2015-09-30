@@ -114,7 +114,7 @@ export default Ember.Service.extend({
     {label: 'Canceled', value: 'Canceled'}
   ],
 
-  /*
+  /**
    * Fee related lists
    */
 
@@ -130,14 +130,14 @@ export default Ember.Service.extend({
     {label: 'Deferred', value: 'Deferred'}
   ],
 
-  /*
+  /**
    * Credit Card Related lists
    */
-
   cardVendor: [
-    {label: 'American Express', value: 'American Express'},
-    {label: 'Visa', value: 'Visa'},
-    {label: 'Master Card', value: 'Master Card'}
+    {label: 'American Express', value: 'amex'},
+    {label: 'Visa', value: 'visa'},
+    {label: 'Master Card', value: 'mastercard'},
+    {label: 'Discover', value: 'discover'}
   ],
 
   cardExpirationYear: [
