@@ -80,6 +80,19 @@
                                             </div>
                                         </div>
                                         <div class="row form-group required">
+                                            <label class="col-sm-4 control-label">CVN or CVC</label>
+
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    {{input type="text" class="form-control" value=model.newCard.cvc}}
+
+                                                    {{#input-tooltip content="A 3 or 4 digit code on your credit card."}}
+                                                        {{fa-icon "info"}}
+                                                    {{/input-tooltip}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group required">
                                             <label class="col-sm-4 control-label">Vendor</label>
 
                                             <div class="col-sm-8">
@@ -91,6 +104,23 @@
                                                 {{/x-select}}
                                             </div>
                                         </div>
+
+                                        <div class="row form-group required">
+                                            <label class="col-sm-4 control-label">Billing Address</label>
+
+                                            <div class="col-sm-8">
+                                                {{input type="text" class="form-control" value=model.newCard.address}}
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group required">
+                                            <label class="col-sm-4 control-label">Billing Zip Code</label>
+
+                                            <div class="col-sm-8">
+                                                {{input type="text" class="form-control" value=model.newCard.zip}}
+                                            </div>
+                                        </div>
+
                                         <div class="row form-group required">
                                             <label class="col-sm-4 control-label">Is this a debit card?</label>
 

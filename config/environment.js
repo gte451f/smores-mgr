@@ -26,7 +26,7 @@ module.exports = function (environment) {
         // used for CSP
         ENV.APP.restDestination = 'http://localhost:4200';
         //need for ember data?
-        ENV.APP.restNameSpace = 'smores-api/v1';
+        ENV.APP.restNameSpace = 'v1';
 
         // Testem prefers this...
         ENV.baseURL = '/';
@@ -44,7 +44,7 @@ module.exports = function (environment) {
         ENV.locationType = 'none';
 
         //need for ember data?
-        ENV.APP.restNameSpace = 'smores-api/v1';
+        ENV.APP.restNameSpace = 'v1';
         // used for CSP
         ENV.APP.restDestination = 'http://localhost:4200';
 

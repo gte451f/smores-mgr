@@ -74,7 +74,13 @@ export default Ember.Route.extend(ErrorHandler, {
         model.payment.mode = 'credit';
         if (model.cardMode === 'file') {
           // use existing card, skip to the payment with file'd card in tow
-          model.payment.card = model.selectedCard;
+          if (model.selectedCard) {
+            model.payment.card = model.selectedCard;
+          } else {
+            this.notify.alert('Error: You must choose a credit card on file or enter a new card.');
+            controller.set('model.isSpinning', false);
+            return;
+          }
           this.savePayment(model);
         } else {
           // must be a new card
