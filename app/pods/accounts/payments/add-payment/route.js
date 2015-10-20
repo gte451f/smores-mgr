@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import ENV from 'smores-mgr/config/environment';
 // import { moment, ago } from 'ember-moment/computed';
 
 export default Ember.Route.extend(ErrorHandler, {
@@ -28,7 +29,7 @@ export default Ember.Route.extend(ErrorHandler, {
         selectedCard: null,
         isSpinning: false
       },
-      cards: this.store.query('card', {account_id: params.account_id}),
+      cards: this.store.query('card', {account_id: account.id}),
       account: account
     });
   },
@@ -83,8 +84,47 @@ export default Ember.Route.extend(ErrorHandler, {
           }
           this.savePayment(model);
         } else {
-          // must be a new card
-          this.saveNewFilePayment(model);
+          if (this.get('saveCard') === false) {
+            // what do we do with a new credit card that we only want for this payment?
+            // probably a custom jquery xhr request here
+            // since we can't post a model w/ custom properties
+
+            // setup the new card & payment to mirror what ember passes the api
+            var newPayment = {
+              payment: {
+                amount: model.payment.amount,
+                mode: 'credit',
+                account_id: model.account.id,
+                cvc: model.newCard.cvc,
+                name: model.newCard.nameOnCard,
+                expiration_month: model.newCard.expirationMonth,
+                expiration_year: model.newCard.expirationYear,
+                number: model.newCard.number,
+                vendor: model.newCard.vendor,
+                address: model.newCard.address,
+                zip: model.newCard.zip,
+                is_debit: model.newCard.isDebit
+              }
+            }
+
+            $.ajax({
+              url: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/payments',
+              type: "POST",
+              data: JSON.stringify(newPayment),
+              dataType: 'json',
+              contentType: "application/json"
+            }).then(function (response) {
+              //create a local version of the newly created payment
+              var payment = this.store.createRecord('credit', response);
+            }, function (reason) {
+              self.handleXHR(reason);
+            });
+
+          } else {
+            // must be a new card
+            this.saveNewFilePayment(model);
+          }
+
         }
 
       }

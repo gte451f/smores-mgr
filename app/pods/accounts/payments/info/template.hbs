@@ -70,14 +70,31 @@
                                 </tr>
 
                                 {{#each model.payments as |item| }}
-                                    <tr>
-                                        <td>{{moment-format item.createdOn 'MM-DD-YYYY'}}</td>
-                                        <td>{{item.mode}}</td>
-                                        <td><span class="label label-success">{{format-money item.amount}}</span></td>
-                                        <td>
-                                            <a {{action 'showModal' 'modals/delete-confirm' item}}>{{fa-icon "trash-o"}}</a>
-                                        </td>
-                                    </tr>
+                                    {{#if item.isRefund}}
+                                    {{else}}
+                                        <tr>
+                                            <td>{{moment-format item.createdOn 'MM-DD-YY'}}</td>
+                                            <td><span class="label label-default">{{item.mode}}</span></td>
+                                            <td><span class="label label-success">{{format-money item.amount}}</span>
+                                            </td>
+                                            <td>
+                                                <a {{action 'showModal' 'modals/delete-confirm' item}}>{{fa-icon "trash-o"}}</a>
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                {{/each}}
+
+                                {{#each model.payments as |item| }}
+                                    {{#if item.isRefund}}
+                                        <tr>
+                                            <td>{{moment-format item.createdOn 'MM-DD-YY'}}</td>
+                                            <td><span class="label label-default">{{item.mode}}</span></td>
+                                            <td><span class="label label-default">{{format-money item.amount}}</span>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    {{/if}}
+
                                 {{/each}}
 
                                 </tbody>
