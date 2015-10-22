@@ -3,7 +3,6 @@
 @import 'bower_components/admin-lte/build/less/skins/skin-blue.less';
 @import 'nav-wizard.less';
 
-
 /* added since the template doesn't seem to enforce this rule */
 .form-control {
   color: #555;
@@ -20,6 +19,22 @@
 .form-group.required .control-label:after {
   content: "*";
   color: red;
+}
+
+/*
+ * End template shims
+ */
+
+/*
+ * make font awesome icons behave like a button
+ */
+.icon-button {
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  color: green;
+  opacity: 0.4;
 }
 
 /*

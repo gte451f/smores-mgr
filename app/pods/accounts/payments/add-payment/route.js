@@ -105,9 +105,9 @@ export default Ember.Route.extend(ErrorHandler, {
                 zip: model.newCard.zip,
                 is_debit: model.newCard.isDebit
               }
-            }
+            };
 
-            $.ajax({
+            Ember.$.ajax({
               url: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/payments',
               type: "POST",
               data: JSON.stringify(newPayment),
@@ -115,8 +115,21 @@ export default Ember.Route.extend(ErrorHandler, {
               contentType: "application/json"
             }).then(function (response) {
               //create a local version of the newly created payment
-              var payment = this.store.createRecord('credit', response);
+              self.store.createRecord('payment', response);
+
+              // reset the spinner no matter the result
+              var controller = self.controllerFor(self.routeName);
+              controller.set('model.isSpinning', false);
+
+              //return to payments w/ alert
+              self.notify.success('Success creating payment!');
+              self.transitionTo('accounts.payments.info', model.account.id);
+
             }, function (reason) {
+              // reset the spinner no matter the result
+              var controller = self.controllerFor(self.routeName);
+              controller.set('model.isSpinning', false);
+
               self.handleXHR(reason);
             });
 
@@ -182,6 +195,15 @@ export default Ember.Route.extend(ErrorHandler, {
 
       // now save the payment
       self.savePayment(model);
+
+      // reset the spinner no matter the result
+      var controller = self.controllerFor(self.routeName);
+      controller.set('model.isSpinning', false);
+
+      //return to payments w/ alert
+      self.notify.success('Success creating payment!');
+      self.transitionTo('accounts.payments.info', model.account.id);
+
     }, function (reason) {
       // roll back progress
       newRecord.deleteRecord();

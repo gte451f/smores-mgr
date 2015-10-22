@@ -34,7 +34,7 @@
                                         </td>
                                         <td><span class="label label-warning">{{format-money item.amount}}</span></td>
                                         <td>
-                                            <a {{action 'showModal' 'modals/delete-confirm' item }}>{{fa-icon "trash-o"}}</a>
+                                            <i class="fa fa-trash-o icon-button" {{action 'showModal' 'modals/delete-confirm' item}}></i>
                                         </td>
                                     </tr>
                                 {{/each}}
@@ -74,11 +74,18 @@
                                     {{else}}
                                         <tr>
                                             <td>{{moment-format item.createdOn 'MM-DD-YY'}}</td>
-                                            <td><span class="label label-default">{{item.mode}}</span></td>
-                                            <td><span class="label label-success">{{format-money item.amount}}</span>
+                                            <td>
+                                                <span class="label label-default">{{item.mode}}</span>
                                             </td>
                                             <td>
-                                                <a {{action 'showModal' 'modals/delete-confirm' item}}>{{fa-icon "trash-o"}}</a>
+                                                <span class="label label-success">{{format-money item.amount}}</span>
+                                            </td>
+                                            <td>
+                                                {{#if item.isChargeCard}}
+                                                    <i class="fa fa-trash-o icon-button" {{action 'showModal' 'modals/refund-charge' item}}></i>
+                                                {{else}}
+                                                    <i class="fa fa-trash-o icon-button" {{action 'showModal' 'modals/delete-confirm' item}}></i>
+                                                {{/if}}
                                             </td>
                                         </tr>
                                     {{/if}}
