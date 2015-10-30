@@ -57,12 +57,12 @@ module.exports = function (environment) {
 
     if (environment === 'production') {
         // ENV.baseURL = '/portal/';
-        ENV.baseURL = '/hhy/mgr/';
+        ENV.baseURL = '/##CLIENT##/mgr/';
         ENV.locationType = 'none';
         //need for ember data?
         ENV.APP.restNameSpace = 'api/v1';
         // used for CSP
-        ENV.APP.restDestination = 'https://app.smores.camp/hhy';
+        ENV.APP.restDestination = 'https://app.smores.camp/##CLIENT##';
     }
 
 
