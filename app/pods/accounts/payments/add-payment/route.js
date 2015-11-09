@@ -4,7 +4,7 @@ import ENV from 'smores-mgr/config/environment';
 // import { moment, ago } from 'ember-moment/computed';
 
 export default Ember.Route.extend(ErrorHandler, {
-
+  notify: Ember.inject.service(),
   // file|new
   // tell the system which way to process card data
   cardMode: 'file',
@@ -78,7 +78,7 @@ export default Ember.Route.extend(ErrorHandler, {
           if (model.selectedCard) {
             model.payment.card = model.selectedCard;
           } else {
-            this.notify.alert('Error: You must choose a credit card on file or enter a new card.');
+            this.get('notify').alert('Error: You must choose a credit card on file or enter a new card.');
             controller.set('model.isSpinning', false);
             return;
           }
@@ -122,7 +122,7 @@ export default Ember.Route.extend(ErrorHandler, {
               controller.set('model.isSpinning', false);
 
               //return to payments w/ alert
-              self.notify.success('Success creating payment!');
+              self.get('notify').success('Success creating payment!');
               self.transitionTo('accounts.payments.info', model.account.id);
 
             }, function (reason) {
@@ -183,7 +183,7 @@ export default Ember.Route.extend(ErrorHandler, {
 
     var newRecord = this.store.createRecord('card', newCard);
     newRecord.save().then(function (post) {
-      self.notify.success('Card saved to your file');
+      self.get('notify').success('Card saved to your file');
 
       // update selected card to match the newly created card
       model.payment.card = newRecord;
@@ -201,7 +201,7 @@ export default Ember.Route.extend(ErrorHandler, {
       controller.set('model.isSpinning', false);
 
       //return to payments w/ alert
-      self.notify.success('Success creating payment!');
+      self.get('notify').success('Success creating payment!');
       self.transitionTo('accounts.payments.info', model.account.id);
 
     }, function (reason) {
@@ -227,7 +227,7 @@ export default Ember.Route.extend(ErrorHandler, {
     var payment = this.store.createRecord('payment', model.payment);
     payment.save().then(function (post) {
       var id = model.account.get('id');
-      self.notify.success('Success saving payment!');
+      self.get('notify').success('Success saving payment!');
       self.transitionTo('accounts.payments.info', id);
     }, function (reason) {
       // roll back payment

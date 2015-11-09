@@ -2,7 +2,8 @@ var User = Ember.Object.extend({id: '', fullName: '', firstName: '', lastName: '
 import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend( ErrorHandler, {
+  notify: Ember.inject.service(),
   model: function (params) {
     // pull account from parent
     var account = this.modelFor('accounts.payments');
@@ -31,12 +32,12 @@ export default Ember.Route.extend({
 
       //check for credit card payments, in which case make this a soft delete instead
       let mode = model.get('mode');
-      let id = model.get('id');
+      // let id = model.get('id');
       if (!Ember.isEmpty(mode) && mode === 'credit') {
         // submit a refund request instead
         model.set('mode', 'refund');
         model.save().then(function (post) {
-          self.notify.success('Charge refunded!');
+          self.get('notify').success('Charge refunded!');
         }, function (reason) {
           self.validationReport(model);
         });
@@ -46,10 +47,10 @@ export default Ember.Route.extend({
 
       var self = this;
       model.destroyRecord().then(function () {
-        self.notify.success('Successfully deleted!');
+        self.get('notify').success('Successfully deleted!');
       }, function (reason) {
         console.log(reason);
-        self.notify.error('Could not delete record!');
+        self.get('notify').error('Could not delete record!');
       });
     }
   }

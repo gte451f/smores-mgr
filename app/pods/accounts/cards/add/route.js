@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(ErrorHandler, {
+  notify: Ember.inject.service(),
 
   //reset the model in case you return to add another record
   model: function (params) {
@@ -20,7 +21,7 @@ export default Ember.Route.extend(ErrorHandler, {
       var newCard = this.store.createRecord('card', model);
       newCard.save().then(function (post) {
         self.set('model', {});
-        self.notify.success('Success saving card!');
+        self.get('notify').success('Success saving card!');
         self.transitionTo('accounts.cards');
       }, function (reason) {
         // roll back the newly created card

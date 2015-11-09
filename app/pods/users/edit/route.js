@@ -2,6 +2,8 @@ import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(ErrorHandler, {
+  notify: Ember.inject.service(),
+
   actions: {
     //handle save operation
     save: function (employee) {
@@ -13,7 +15,7 @@ export default Ember.Route.extend(ErrorHandler, {
         //reset password to blank
         // employee.set('password', null);
 
-        self.notify.success('Employee Saved');
+        self.get('notify').success('Employee Saved');
         self.transitionTo('users.info', employee.get('id'));
       }, function (reason) {
         self.validationReport(employee);

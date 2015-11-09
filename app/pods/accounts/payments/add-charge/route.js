@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(ErrorHandler, {
+  notify: Ember.inject.service(),
   // plug in account, load requests and fees
   model: function (params) {
     // pull account from parent
@@ -37,7 +38,7 @@ export default Ember.Route.extend(ErrorHandler, {
       var charge = this.store.createRecord('charge', model);
       charge.save().then(function (post) {
         var id = charge.get('account').get('id');
-        self.notify.success('Success saving charge!');
+        self.get('notify').success('Success saving charge!');
         self.transitionTo('accounts.payments.info', id);
       }, function (reason) {
         self.validationReport(charge);

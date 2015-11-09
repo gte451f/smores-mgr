@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(ErrorHandler, {
+  notify: Ember.inject.service(),
 
   //reset the model in case you return to add another record
   model: function () {
@@ -17,7 +18,7 @@ export default Ember.Route.extend(ErrorHandler, {
       var self = this;
       var newRecord = this.store.createRecord('program', formData);
       newRecord.save().then(function (post) {
-        self.notify.success('Program Created');
+        self.get('notify').success('Program Created');
         self.transitionTo('programs.info', newRecord);
       }, function (reason) {
         self.validationReport(newRecord);
