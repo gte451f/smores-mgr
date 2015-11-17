@@ -6,8 +6,8 @@ export default Ember.ArrayController.extend(Paginate, {
     //load pager specific variables
     columns: [
         Column.create({'displayName': '#', 'fieldName': 'id', 'order': 0}),
-        Column.create({'displayName': 'First', 'fieldName': 'user.firstName', 'order': 1}),
-        Column.create({'displayName': 'Last', 'fieldName': 'user.lastName', 'order': 2}),
+        Column.create({'displayName': 'First', 'fieldName': 'firstName', 'order': 1}),
+        Column.create({'displayName': 'Last', 'fieldName': 'lastName', 'order': 2}),
         Column.create({'displayName': 'Created', 'fieldName': 'createdOn', 'order': 2}),
         Column.create({'displayName': 'Notes', 'fieldName': 'notes', 'order': 4})
     ],

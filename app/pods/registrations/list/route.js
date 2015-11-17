@@ -7,7 +7,7 @@ export default Ember.Route.extend(Paginate, {
   // ask for additional data to be side-loaded
   model: function (params) {
     params.with = 'attendees';
-    return this.findPaged(this.modelName, params);
+    return this.findPaged(this.modelName, this.getAllParams(params));
   },
 
   modelName: 'registration',

@@ -59,9 +59,9 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>Confirmed
-                {{#my-tooltip content="Will this request occupy one of the available spaces for this event?"}}
+                {{#x-tooltip content="Will this request occupy one of the available spaces for this event?"}}
                     {{fa-icon "info"}}
-                {{/my-tooltip}}
+                {{/x-tooltip}}
             </label>
             {{#x-select class="form-control" value=request.attending}}
                 {{#each listService.boolean as |item|}}
