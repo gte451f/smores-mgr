@@ -1,37 +1,57 @@
 import Ember from 'ember';
+import Error from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Controller.extend({
-    // the selected attendee model
-    attendee: null,
-    // the selected user model,
-    user: null,
+var Item = Ember.Object.extend({id: '', name: ''});
 
-    registrationNotes: null,
+export default Ember.Controller.extend(Error, {
+  notify: Ember.inject.service(),
+  registration: Ember.inject.service(),
 
-    // used to trigger updating the suggestions array after the remote store has time to update the options array
-    triggerSuggestions: 1,
+  // used to trigger updating the suggestions array after the remote store has time to update the options array
+  triggerSuggestions: 1,
 
-    actions: {
-        // triggers when a value has been selected in the auto suggest
-        itemSelected: function (item) {
-            this.set('attendee', item);
-        },
-        // when the user types new values into the select box
-        refreshOptions: function (inputVal) {
-            var wildcard = '*';
-            var self = this;
-            var triggerSuggestions = this.get('triggerSuggestions');
+  selectOptions: [],
 
+  actions: {
+    // triggers when a value has been selected in the auto suggest
+    itemSelected: function (item) {
+      this.set('attendee', item);
+      this.set('registration.camper', item.get('camper'));
+    },
+    // when the user types new values into the select box
+    refreshOptions: function (inputVal) {
+      var self = this;
+      clearTimeout(this.keyDownTimer);
 
-            self.store.findQuery('attendee', {
-                'first_name||last_name': wildcard + inputVal + wildcard,
-                limit: 20,
-                sortField: 'last_name,first_name'
-            }).then(function (data) {
-                self.set('users', data);
-                triggerSuggestions = triggerSuggestions + 1;
-                self.set('triggerSuggestions', triggerSuggestions);
+      this.set('keyDownTimer', setTimeout(function () {
+        var wildcard = '*';
+
+        self.store.findQuery('attendee', {
+          'first_name||last_name': wildcard + inputVal + wildcard,
+          limit: 20,
+          sortField: 'last_name,first_name'
+        }).then(function (data) {
+          var optionsList = [];
+
+          // build generic object from each client object and add to optionsList array
+          data.forEach(function (attendee) {
+            var item = Item.create({
+              id: attendee.get('id'),
+              name: attendee.get('fullName'),
+              camper: attendee
             });
-        }
+            optionsList.pushObject(item);
+          });
+
+          // set optionsList on the controller
+          self.set('selectOptions', optionsList);
+        }, function (reason) {
+          self.handleXHR(reason);
+          return false;
+        });
+
+      }, 400));
+
     }
+  }
 });

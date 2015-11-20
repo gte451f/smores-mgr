@@ -1,11 +1,8 @@
 import Ember from 'ember';
-import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Controller.extend(ErrorHandler, {
+export default Ember.Controller.extend(Error, {
   notify: Ember.inject.service(),
-
-  location: null,
-  event: null,
 
   //list of request to submit
   actions: {

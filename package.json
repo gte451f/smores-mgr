@@ -43,7 +43,6 @@
     "ember-cli-simple-auth": "0.8.0",
     "ember-cli-sri": "^1.0.3",
     "ember-cli-table-pagination": "git+https://github.com/gte451f/ember-cli-table-pagination.git",
-    "smores-common": "git+https://github.com/gte451f/smores-common.git",
     "ember-cli-toggle": "0.5.11",
     "ember-cli-tooltipster": "0.1.2",
     "ember-cli-uglify": "^1.2.0",
@@ -53,7 +52,8 @@
     "ember-notify": "^4.3.0",
     "ember-spinner-button": "0.0.10",
     "ember-watson": "^0.6.2",
-    "emberx-select": "2.0.2"
+    "emberx-select": "2.0.2",
+    "smores-common": "git+https://github.com/gte451f/smores-common.git"
   },
   "dependencies": {
     "ember-radio-buttons": "^4.0.1",

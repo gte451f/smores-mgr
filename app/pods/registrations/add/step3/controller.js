@@ -1,42 +1,41 @@
 import Ember from 'ember';
+import Error from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(Error, {
   notify: Ember.inject.service(),
-
-  needs: ['registrations/add/step2', 'registrations/add/step1', 'registrations/list'],
-
-  list: Ember.inject.controller('registrations/list'),
-  step2: Ember.inject.controller('registrations/add/step2'),
-  step1: Ember.inject.controller('registrations/add/step1'),
+  registration: Ember.inject.service(),
 
   actions: {
+
+    /**
+     * gather all data from the wizard and issue a save
+     */
     save: function () {
       var self = this;
-      var step2 = this.get('step2');
-      var step1 = this.get('step1');
-      //var list = this.get('list');
 
       //first save a registration
       var data = {
-        attendee: step1.get('attendee'),
-        notes: step1.get('registrationNote')
+        attendee: this.get('registration.camper'),
+        notes: this.get('registration.registrationNote')
       };
-      var registration = this.store.createRecord('registration', data);
+      var newRegistration = this.store.createRecord('registration', data);
 
-      //array a billables that should be saved before the billable group is saved
+      // group of requests to also save
       var subItems = [];
 
-      // a function to save a sub-item
-      var subItemSave = function (item) {
+      // a function to save a request
+      var requestSave = function (item) {
         //console.log('save updated record');
         return item.save();
       };
 
-      function success(post) {
+      // it's go time, perform the save
+      newRegistration.save().then(function (post) {
+        var that = self;
+
         //now add requests for the registration
-        var requests = step2.get('requests');
+        var requests = self.get('registration.requests');
         var requestCount = requests.length;
-        //var listModel = list.get('model');
         var registrationId = post.get('id');
 
         requests.forEach(function (item, index, enumerable) {
@@ -47,29 +46,21 @@ export default Ember.Controller.extend({
             note: item.get('note')
           };
           var request = self.store.createRecord('request', data);
-          subItems.push(subItemSave(request));
+          subItems.push(requestSave(request));
         }, this);
 
         Ember.RSVP.all(subItems).then(function () {
-          // listModel.content.addRecord(post);
+          // reset registration wizard
+          that.get('registration').resetRegistration();
           self.get('notify').success('Success saving registration including ' + requestCount + ' individual requests.');
           self.transitionToRoute('registrations.info', registrationId);
-        }, failure);
-      }
+        }, function (reason) {
+          self.handleXHR(reason);
+        });
+      }, function (reason) {
+        self.validationReport(newRegistration);
+      });
+    } // end save function
 
-      function failure(reason) {
-        // handle the error
-        //console.log(reason);
-        //var foo = reason.responseJSON;
-        var errorHTML = '<strong>' + reason.responseJSON.records.userMessage + '</strong> <br/>';
-        reason.responseJSON.records.validationList.forEach(function (item) {
-          errorHTML = errorHTML + item.message + '<br/>';
-        }, this);
-
-        self.get('notify').warning({raw: errorHTML});
-      }
-
-      registration.save().then(success, failure);
-    }
   }
 });

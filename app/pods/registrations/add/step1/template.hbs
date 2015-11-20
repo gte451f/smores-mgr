@@ -4,8 +4,6 @@
     Use this wizard to register a singler attendee for a single camp event. You will get a chance to review your
     selections before saving the registration.
 </div>
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="box box-solid bg-yellow disabled">
@@ -26,26 +24,44 @@
             <!-- /.box-body -->
             <div class="box-footer text-black">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Attending Camper:</label>
-                            {{#attendee-finder
-                            options=users
-                            triggerSuggestions=triggerSuggestions
-                            action="refreshOptions"
-                            selectedValue=model.fullName
-                            placeHolderText="Search Users By Last Name..."
-                            noMesssagePlaceHolderText="No users match that search."
-                            selectItem="itemSelected" as |result|}}
-                                <p><b>#{{result.id}}</b>{{result.fullName}}</p>
-                            {{/attendee-finder}}
-                            <p class="selection">{{this.selection}}</p>
+                    <div class="col-md-12">
+                        <div class="form-group required">
+                            <label>Select the camper attending camp:</label>
+                            <div class="form-group">
+                                <label>Attending Camper:</label>
+                                {{#x-autosuggest
+                                options=selectOptions
+                                action="refreshOptions"
+                                selectedValue=dummyContent.name
+                                placeHolderText="Find an attendee"
+                                noMesssagePlaceHolderText="No attendees found"
+                                selectItem="itemSelected" as |result search|}}
+                                    <div>
+                                        <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{highlight-result result.name query=search}}</span>
+                                    </div>
+                                {{/x-autosuggest}}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group required">
+                            <label>How many sessions is your camper attending?:</label>
+                            {{#x-select value=registration.mode class="form-control"}}
+                                <option value="0">A single session of camp</option>
+                                <option value="1">Multiple sessions of camp</option>
+                            {{/x-select}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label>Registration Notes:</label>
-                            {{textarea class="form-control" value=registrationNote cols="80" rows="6"}}
+                            <label>Enter any important notes to camp staff here:</label>
+                            {{textarea class="form-control" value=registration.registrationNote cols="80" rows="6"}}
                         </div>
                     </div>
                 </div>
