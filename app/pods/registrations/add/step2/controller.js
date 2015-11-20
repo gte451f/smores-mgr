@@ -12,14 +12,13 @@ export default Ember.Controller.extend({
       var requests = this.get('registration.requests');
 
       //requests in single mode should not exceed three
-      var length = requests.length;
-      if (length === 3) {
+      var requestLength = requests.length;
+      if (requestLength === 3) {
         this.get('notify').alert('Number of requests should not exceed: 3');
         return;
       }
-      var count = length + 1;
       var requestContainer = this.get('registration.requestContainer');
-      requests.pushObject(requestContainer.create({priority: count}));
+      requests.pushObject(requestContainer.create({priority: requestLength+1}));
     },
 
     /**
