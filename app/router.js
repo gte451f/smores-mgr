@@ -14,6 +14,8 @@ Router.map(function () {
     this.route('reminder');
     this.route('profile');
     this.route('logout');
+    this.route('activate');
+    this.route('reset');
   });
 
   this.route('registrations', function () {

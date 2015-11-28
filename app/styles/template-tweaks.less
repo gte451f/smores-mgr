@@ -1,0 +1,36 @@
+/*
+ * various rules to make the AdminLTE theme behavior as shown in the demo
+ */
+
+/* added since the template doesn't seem to enforce this rule */
+.form-control {
+  color: #555;
+}
+
+/* apply me to content-wrapper to make room for the side bar on the left side */
+/* important because it is over written otherwise */
+.sidebar-offset {
+  margin-left: 230px !important;
+}
+
+/* apply required style to forms */
+.form-group.required .control-label:after {
+  content: "*";
+  color: red;
+}
+
+/* tab rules seem to be missing, adding these restores their appearance to match the demo */
+.nav-tabs-custom > .nav-tabs > li.active > a, .nav-tabs-custom > .nav-tabs > li.active:hover > a {
+  background-color: #fff;
+  color: #444;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a, .nav-tabs-custom > .nav-tabs > span > li > a {
+  color: #444;
+  border-radius: 0 !important;
+}
+
+/* not sure what this is for */
+.nav-pills > li > a:hover {
+  background-color: #d2d6de;
+}

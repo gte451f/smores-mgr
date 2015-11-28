@@ -1,52 +1,8 @@
 @import 'bower_components/bootstrap/less/bootstrap.less';
 @import 'bower_components/admin-lte/build/less/AdminLTE.less';
 @import 'bower_components/admin-lte/build/less/skins/skin-blue.less';
+/* local changes */
 @import 'nav-wizard.less';
-
-/* added since the template doesn't seem to enforce this rule */
-.form-control {
-  color: #555;
-}
-
-.nav-pills > li > a:hover {
-  background-color: #d2d6de;
-}
-
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-  color: #555;
-}
-
-.form-group.required .control-label:after {
-  content: "*";
-  color: red;
-}
-
-/*
- * End template shims
- */
-
-/*
- * make font awesome icons behave like a button
- */
-.icon-button {
-  cursor: pointer;
-}
-
-.icon-button:hover {
-  color: green;
-  opacity: 0.4;
-}
-
-/*
- * Set a z-index to the drop down always appears on top
- */
-span.tt-dropdown-menu {
-  z-index: 1;
-}
-
-/*
- * Wizard styles
- */
-.step-content {
-  margin-top: 10px;
-}
+@import 'local.less';
+@import 'template-tweaks.less';
+@import 'paginated-table.less';

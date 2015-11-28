@@ -1,14 +1,17 @@
 import Ember from "ember";
-import Base from "simple-auth/authenticators/base";
+import Base from "ember-simple-auth/authenticators/base";
 import ENV from 'smores-mgr/config/environment';
-import Notify from 'ember-notify';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Base.extend(ErrorHandler, {
+  notify: Ember.inject.service(),
+  session: Ember.inject.service(),
+
   /**
    * @param data
    */
   restore: function (data) {
+    console.log('authenticators:custom:restore was called');
     return Ember.RSVP.resolve(data);
   },
 
@@ -20,43 +23,25 @@ export default Base.extend(ErrorHandler, {
    * @param options
    * @returns {Rx.Promise}
    */
-  authenticate: function (credentials, options) {
+  authenticate: function (identification, password) {
+    console.log('authenticators:custom:authenticate was called');
     var self = this;
     return new Ember.RSVP.Promise(function (resolve, reject) {
-      // make the request to authenticate the user at endpoint /v3/token
-      Ember.$.ajax({
-        url: ENV.auth.login,
-        type: 'POST',
-        data: {
-          email: credentials.identification,
-          password: credentials.password
-        }
-      }).then(function (response) {
-        var token = response.token;
-        var id = response.id;
-        // perform some validation to verify that we can a valid response from API
-        if ((typeof token === 'undefined') || (typeof id === 'undefined')) {
+      // make XHR request to api
+      self.makeRequest({email: identification, password: password}).then(function (response) {
+        // perform some validation to verify that we got a valid response from API
+        if ((typeof response.token === 'undefined') || (typeof response.id === 'undefined')) {
           var errorMessage = "<h4>Could not log you into the system: </h4> No valid user found";
-          Notify.alert({raw: errorMessage, closeAfter: 10000});
+          this.get('notify').alert({raw: errorMessage, closeAfter: 10000});
+          reject();
         } else {
-          Ember.run(function () {
-            // resolve (including the account id) as the AJAX request was successful; all properties this promise resolves
-            // with will be available through the session
-            resolve({
-              token: response.token,
-              email: response.email,
-              expiresOn: response.expiresOn,
-              userName: response.userName,
-              firstName: response.firstName,
-              lastName: response.lastName,
-              id: response.id,
-              accountId: response.accountId,
-              type: 'Account'
-            });
-          });
+          console.log('authenticators:custom:authenticate....resolving');
+          resolve(response);
         }
       }, function (xhr, status, error) {
+        // use local error handling mixin
         self.handleXHR(xhr);
+        reject(error);
       });
     });
   },
@@ -65,22 +50,36 @@ export default Base.extend(ErrorHandler, {
    * logout
    * @returns {Rx.Promise}
    */
-  invalidate: function () {
+  invalidate: function (data) {
+    console.log('authenticators:custom:invalidate was called');
     return new Ember.RSVP.Promise(function (resolve, reject) {
-      // make the request to authenticate the user at endpoint /v3/token
       Ember.$.ajax({
         url: ENV.auth.logout,
-        type: 'GET'
+        type: 'GET',
+        headers: {'X-Authorization': 'Token: ' + data.token}
       }).then(function (response) {
-        Ember.run(function () {
-          // nothing to do...
-          resolve();
-        });
+        resolve(response);
       }, function (xhr, status, error) {
         console.log(xhr.responseJSON);
-        //resolve anyway
+        // resolve anyway so simple auth will wipe the cached value
         resolve();
       });
     });
+  },
+
+  /**
+   Makes a request to the API server.
+   @method makeRequest
+   @param {Object} data The request data
+   @return {jQuery.Deferred} A promise like jQuery.Deferred as returned by `$.ajax`
+   @protected
+   */
+    makeRequest(data) {
+    return Ember.$.ajax({
+      url: ENV.auth.login,
+      type: 'POST',
+      data: data
+    });
   }
+
 });

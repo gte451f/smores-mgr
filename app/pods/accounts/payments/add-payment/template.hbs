@@ -126,7 +126,7 @@
 
                                             <div class="col-sm-8">
                                                 {{#each listService.boolean  as |item|}}
-                                                    {{radio-button value=item.value checked=model.newCard.isDebit}} {{item.name}}
+                                                    {{radio-button value=item.value groupValue=model.newCard.isDebit}} {{item.name}}
                                                 {{/each}}
                                             </div>
                                         </div>

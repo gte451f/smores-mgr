@@ -20,7 +20,7 @@
 
             <div class="col-sm-7">
                 {{#each listService.feeBasis as |item| }}
-                    {{radio-button value=item.value checked=model.basis}} {{item.label}}
+                    {{radio-button value=item.value groupValue=model.basis}} {{item.label}}
                 {{/each}}
             </div>
             <div class="col-sm-1">
@@ -34,7 +34,7 @@
 
             <div class="col-sm-7">
                 {{#each listService.feePaymentSchedule as |item| }}
-                    {{radio-button value=item.value checked=model.paymentSchedule}} {{item.label}}
+                    {{radio-button value=item.value groupValue=model.paymentSchedule}} {{item.label}}
                 {{/each}}
             </div>
             <div class="col-sm-1">

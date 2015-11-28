@@ -34,7 +34,7 @@
 
             <div class="col-sm-8">
                 {{#each listService.gender as |item| }}
-                    {{radio-button value=item.value checked=model.gender}} {{item.display}}
+                    {{radio-button value=item.value groupValue=model.gender}} {{item.display}}
                 {{/each}}
             </div>
         </div>

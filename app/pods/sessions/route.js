@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(ErrorHandler, {
+export default Ember.Route.extend(ErrorHandler, AuthenticatedRouteMixin, {
   notify: Ember.inject.service(),
 
   model: function (params) {
