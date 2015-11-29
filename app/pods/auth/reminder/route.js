@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
 import ENV from 'smores-mgr/config/environment';
+import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Ember.Route.extend(ErrorHandler, {
+export default Ember.Route.extend(ErrorHandler, UnauthenticatedRouteMixin, {
   notify: Ember.inject.service(),
 
   //reset the model in case you return to add another record

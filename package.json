@@ -19,7 +19,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "active-model-adapter": "1.13.6",
+    "active-model-adapter": "2.0.3",
     "broccoli-asset-rev": "^2.1.2",
     "ember-cli": "1.13.8",
     "ember-cli-accounting": "^1.0.0",
