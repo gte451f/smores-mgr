@@ -17,6 +17,8 @@ export default Ember.Controller.extend(RouteAware, {
   notify: Ember.inject.service(),
   registration: Ember.inject.service(),
 
+  breadCrumb: 'Add',
+
   routeValues: [
     Ember.Object.create({
       route: 'registrations.add.step1',

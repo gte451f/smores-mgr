@@ -9,11 +9,11 @@ export default Ember.Route.extend(ErrorHandler, AuthenticatedRouteMixin, {
     //params.event_id
     return Ember.RSVP.hash({
       model: this.store.findAll('setting'),
-      locations: this.store.query('location', {with: 'none'}),
-      programs: this.store.query('program', {with: 'none'}),
-      events: this.store.query('event', {with: 'none'}),
-      sessions: this.store.query('session', {with: 'none'}),
-      cabins: this.store.query('cabin', {with: 'none'})
+      locations: this.store.findAll('location'),
+      programs: this.store.findAll('program'),
+      events: this.store.findAll('event'),
+      sessions: this.store.findAll('session'),
+      cabins: this.store.findAll('cabin')
     });
   },
 

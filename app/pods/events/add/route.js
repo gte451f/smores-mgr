@@ -6,10 +6,10 @@ export default Ember.Route.extend({
         //params.event_id
         return Ember.RSVP.hash({
             model: this.store.createRecord('event'),
-            locations: this.store.query('location'),
-            programs: this.store.query('program'),
-            cabins: this.store.query('cabin'),
-            sessions: this.store.query('session')
+            locations: this.store.findAll('location'),
+            programs: this.store.findAll('program'),
+            cabins: this.store.findAll('cabin'),
+            sessions: this.store.findAll('session')
         });
     },
     setupController: function (controller, resolved) {

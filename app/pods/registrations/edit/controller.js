@@ -4,6 +4,8 @@ import Error from 'smores-mgr/mixins/crud/error';
 export default Ember.Controller.extend(Error, {
   notify: Ember.inject.service(),
 
+  breadCrumb: 'Edit',
+
   //list of request to submit
   actions: {
     /**

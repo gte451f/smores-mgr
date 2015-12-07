@@ -1,0 +1,19 @@
+<ol class="breadcrumb">
+    {{#each breadCrumbs as |crumb|}}
+        <li class={{if crumb.isCurrent 'active'}}>
+            {{#if crumb.linkable}}
+                {{#if crumb.model}}{{! to avoid null/undefined model in link-to }}
+                    {{#link-to crumb.path crumb.model}}
+                        {{crumb.label}}
+                    {{/link-to}}
+                {{else}}
+                    {{#link-to crumb.path}}
+                        {{crumb.label}}
+                    {{/link-to}}
+                {{/if}}
+            {{else}}
+                {{crumb.label}}
+            {{/if}}
+        </li>
+    {{/each}}
+</ol>

@@ -3,6 +3,8 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Controller.extend(ErrorHandler, {
   notify: Ember.inject.service(),
+  breadCrumb: 'Add',
+
   needs: ['events/list'],
   actions: {
     save: function (model) {
