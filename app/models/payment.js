@@ -34,6 +34,9 @@ export default DS.Model.extend({
   }),
   check: DS.belongsTo('check', {
     async: false
+  }),
+  paymentBatch: DS.belongsTo('payment-batch', {
+    async: false
   })
 })
 ;

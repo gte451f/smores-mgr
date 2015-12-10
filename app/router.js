@@ -99,6 +99,13 @@ Router.map(function () {
     this.route('edit', {"path": "edit/:employee_id"});
     this.route('info', {"path": "info/:employee_id"});
   });
+  this.route('billing', function () {
+    this.route('dash');
+    this.route('batch', function () {
+      this.route('info', {"path": "info/:payment_batch_id"});
+      this.route('add');
+    });
+  });
 });
 
 export default Router;
