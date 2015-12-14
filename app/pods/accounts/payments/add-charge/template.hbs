@@ -10,7 +10,7 @@
                     <div class="box-body">
 
                         <div class="form-group required">
-                            <label>Link Request</label>
+                            <label>Link Request (only confirmed requests appear below)</label>
                             {{#x-select value=model.request class='form-control'}}
                                 <option>Select</option>
                                 {{#each requests as |item|}}
@@ -40,6 +40,11 @@
                             <div>
                                 <label>Amount (If Fee is not selected)</label>
                                 {{input type="text" class="form-control" value=model.amount}}
+                            </div>
+
+                            <div>
+                                <label>Fee Description</label>
+                                {{input type="text" class="form-control" value=model.name}}
                             </div>
                         {{/if}}
                     </div>

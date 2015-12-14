@@ -9,7 +9,7 @@
                 <div class="box-tools">
                     <div class="btn-group pull-right">
                         <button class="btn btn-default btn-sm">{{fa-icon "trash"}} Delete</button>
-                        <button class="btn btn-default btn-sm">{{fa-icon "trash"}} Print?</button>
+                        <button class="btn btn-default btn-sm">{{fa-icon "printer"}} Print?</button>
                     </div>
                 </div>
             </div>
@@ -44,40 +44,65 @@
 
 
     <div class="col-md-7">
-        <div class="box box-success box-solid">
+        <div class="box box-success box-solid" id="fail-payments">
             <div class="box-header with-border">
-                <h3 class="box-title">Removable</h3>
+                <h3 class="box-title">Failed Payments</h3>
 
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool">
+                    <button type="button" class="btn btn-box-tool hidden"
+                            id="fail-show" {{action 'togglePayments' 'fail'}}>
                         {{fa-icon "plus"}}
                     </button>
+                    <button type="button" class="btn btn-box-tool"
+                            id="fail-hide" {{action 'togglePayments' 'fail'}}>
+                        {{fa-icon "minus"}}
+                    </button>
                 </div>
+
                 <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                The body of the box
+                {{#each failedPayments as |record|}}
+                    <li>
+                        #{{record.id}} for {{format-money record.amount}} in
+                        Account {{#link-to 'accounts.info' record.account.id}}
+                        #{{record.account.id}}{{/link-to}}
+                    </li>
+                {{/each}}
             </div>
             <!-- /.box-body -->
         </div>
     </div>
 
     <div class="col-md-7">
-        <div class="box box-success box-solid">
+        <div class="box box-success box-solid" id="success-payments">
             <div class="box-header with-border">
-                <h3 class="box-title">Removable</h3>
+                <h3 class="box-title">Successful Payments</h3>
 
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool">
+                    <button type="button" class="btn btn-box-tool hidden"
+                            id="success-show" {{action 'togglePayments' 'success'}}>
                         {{fa-icon "plus"}}
+                    </button>
+                    <button type="button" class="btn btn-box-tool"
+                            id="success-hide" {{action 'togglePayments' 'success'}}>
+                        {{fa-icon "minus"}}
                     </button>
                 </div>
                 <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                The body of the box
+                <ul class="list-unstyled">
+                    {{#each successfulPayments as |record|}}
+                        <li>
+                            #{{record.id}} for {{format-money record.amount}} in
+                            Account {{#link-to 'accounts.info' record.account.id}}
+                            #{{record.account.id}}{{/link-to}}
+                        </li>
+                    {{/each}}
+                </ul>
             </div>
             <!-- /.box-body -->
         </div>

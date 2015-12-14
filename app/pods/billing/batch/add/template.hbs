@@ -1,1 +1,150 @@
-<h1>Add Batch</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Batch Payments By Rule</h3>
+
+                <div class="box-tools pull-right">
+                    {{#x-tooltip contentAsHTML=true
+                    content='Choose between the rules below to build a list of accounts for inclusion.'}}
+                        {{fa-icon "info"}}
+                    {{/x-tooltip}}
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="form-group">
+                    {{radio-button value='days' groupValue=paymentRule}} All accounts with a positive balance who
+                    have not been billed within the last [{{paymentDays}}] of days <br/>
+                    {{radio-button value='unpaid' groupValue=paymentRule}} Only accounts that have yet to make any
+                    payments
+                </div>
+
+
+                <div class="row form-group hidden" id="payment-days">
+                    <label class="col-sm-4 control-label">Days since last payment</label>
+
+                    <div class="col-sm-4">
+                        {{input type="text" class="form-control" value=paymentDays}}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Select an amount to be billed</h3>
+
+                <div class="box-tools pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" id="batch-button" {{action 'toggleBatchMode' 'payment_batches'}}>
+                            Charge Cards
+                        </button>
+
+                        <button type="button" class="btn btn-default" id="statement-button" {{action 'toggleBatchMode' 'statement_batches'}}>
+                            Generate Statements
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <p>
+                    <small>Amount billed will never exceed total remaining balance.</small>
+                </p>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            {{radio-button value='Flat' groupValue=minPaymentType}}
+                            Bill a flat amount
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            {{radio-button value='Outstanding' groupValue=minPaymentType}}
+                            Bill a percent of <strong>outstanding</strong> balance
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            {{radio-button value='Total' groupValue=minPaymentType}}
+                            Bill a percent of <strong>total</strong> balance
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row form-group" id="paymentDays">
+                    <label class="col-sm-6 control-label">Amount to bill {{minPaymentNotes}}</label>
+
+                    <div class="col-sm-4">
+                        {{input type="text" class="form-control" value=minPaymentAmount}}
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Eligible Accounts</h3>
+
+                <div class="box-tools pull-right">
+                    {{#x-tooltip content='Listed below are all accounts that fit your selected rule.  You may further customize by selecting only some accounts to be included in the batch'}}
+                        {{fa-icon "info"}}
+                    {{/x-tooltip}}
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th style="width: 10px">
+                            {{x-checkbox action="toggleAllAccounts" checked=allSelected}}
+                        </th>
+                        <th>Account #</th>
+                        <th>Primary Owner</th>
+                        <th>Paid</th>
+                        <th>Remaining</th>
+                    </tr>
+                    {{#each availableAccounts as |account|}}
+                        <tr>
+                            <td>
+                                {{x-checkbox action="toggleAccount" checked=account.isSelected value=account}}
+                            </td>
+                            <td>{{account.id}}</td>
+                            <td>Tom Selleck</td>
+                            <td>$750</td>
+                            <td>$250</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 col-md-offset-9">
+        <button class="btn btn-primary" {{action 'save'}}>Submit</button>
+        {{#link-to 'billing.dash' class='btn btn-primary'}}Cancel{{/link-to}}
+    </div>
+
+</div>
+
+
+

@@ -11,7 +11,7 @@ export default DS.Model.extend({
   processedOn: DS.attr('date'),
 
   createdBy: DS.belongsTo('user', { async: true }),
-  payments: DS.hasMany('request', {
+  payments: DS.hasMany('payment', {
     async: false
   })
 

@@ -32,7 +32,7 @@ export default Base.extend(ErrorHandler, {
         // perform some validation to verify that we got a valid response from API
         if ((typeof response.token === 'undefined') || (typeof response.id === 'undefined')) {
           var errorMessage = "<h4>Could not log you into the system: </h4> No valid user found";
-          this.get('notify').alert({raw: errorMessage, closeAfter: 10000});
+          self.get('notify').alert({raw: errorMessage, closeAfter: 10000});
           reject();
         } else {
           console.log('authenticators:custom:authenticate....resolving');
