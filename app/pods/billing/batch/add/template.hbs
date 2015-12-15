@@ -41,11 +41,13 @@
 
                 <div class="box-tools pull-right">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary" id="batch-button" {{action 'toggleBatchMode' 'payment_batches'}}>
+                        <button type="button" class="btn btn-primary"
+                                id="batch-button" {{action 'toggleBatchMode' 'payment_batches'}}>
                             Charge Cards
                         </button>
 
-                        <button type="button" class="btn btn-default" id="statement-button" {{action 'toggleBatchMode' 'statement_batches'}}>
+                        <button type="button" class="btn btn-default"
+                                id="statement-button" {{action 'toggleBatchMode' 'statement_batches'}}>
                             Generate Statements
                         </button>
                     </div>
@@ -121,15 +123,19 @@
                         <th>Paid</th>
                         <th>Remaining</th>
                     </tr>
-                    {{#each availableAccounts as |account|}}
+                    {{#each availableAccounts as |record|}}
                         <tr>
                             <td>
-                                {{x-checkbox action="toggleAccount" checked=account.isSelected value=account}}
+                                {{x-checkbox action="toggleAccount" checked=record.isSelected value=record.account}}
                             </td>
-                            <td>{{account.id}}</td>
+                            <td>{{record.account.id}}</td>
                             <td>Tom Selleck</td>
-                            <td>$750</td>
-                            <td>$250</td>
+                            <td>{{format-money record.paymentTotal}}</td>
+                            <td>{{format-money record.chargeTotal}}</td>
+                        </tr>
+                    {{else}}
+                        <tr>
+                            <td colspan="4>">Select a payment rule...</td>
                         </tr>
                     {{/each}}
                     </tbody>

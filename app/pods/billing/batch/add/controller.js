@@ -21,20 +21,32 @@ export default Ember.Controller.extend(ErrorHandler, {
 
   availableAccounts: [],
 
-  updateAccounts: Ember.observer('paymentRule', function () {
+  updateAccounts: Ember.observer('paymentRule', 'paymentDays', function () {
     var self = this;
     var rule = this.get('paymentRule');
 
     if (rule === 'days') {
+      var days = '>' + this.get('paymentDays');
       Ember.$('#payment-days').removeClass("hidden");
+      return this.store.find('account-billing-summary', {
+        with: 'all',
+        payment_days: days,
+        total_balance: '>0'
+      }).then(function (accounts) {
+        self.set('availableAccounts', accounts);
+      });
     } else {
       Ember.$('#payment-days').addClass("hidden");
       this.set('paymentDays', '*');
+      return this.store.find('account-billing-summary', {
+        with: 'all',
+        total_balance: '>0',
+        payment_count: '0'
+      }).then(function (accounts) {
+        self.set('availableAccounts', accounts);
+      });
     }
 
-    return this.store.find('account', {limit: 10}).then(function (accounts) {
-      self.set('availableAccounts', accounts);
-    });
   }),
 
   updateMinPayment: Ember.observer('minPaymentType', function () {
