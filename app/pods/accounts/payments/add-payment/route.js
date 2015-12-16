@@ -66,13 +66,13 @@ export default Ember.Route.extend(ErrorHandler, {
       // create a new check first then create the payment
 
       if (controller.isCash === true) {
-        model.payment.mode = 'cash';
+        model.payment.mode = 'Cash';
         this.savePayment(model);
       } else if (controller.isCheck === true) {
-        model.payment.mode = 'check';
+        model.payment.mode = 'Check';
         this.saveCheck(model);
       } else {
-        model.payment.mode = 'credit';
+        model.payment.mode = 'Credit';
         if (model.cardMode === 'file') {
           // use existing card, skip to the payment with file'd card in tow
           if (model.selectedCard) {
@@ -93,7 +93,7 @@ export default Ember.Route.extend(ErrorHandler, {
             var newPayment = {
               payment: {
                 amount: model.payment.amount,
-                mode: 'credit',
+                mode: 'Credit',
                 account_id: model.account.id,
                 cvc: model.newCard.cvc,
                 name: model.newCard.nameOnCard,

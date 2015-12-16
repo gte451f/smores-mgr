@@ -7,10 +7,11 @@ export default DS.Model.extend({
   settledOn: DS.attr('string'),
   amount: DS.attr('number'),
   mode: DS.attr('string'),
+  status: DS.attr('string'),
 
   //calc to include both refund and credit, basically is this a charge against a credit card
   isChargeCard: Ember.computed('mode', function () {
-    if (this.get('mode') === 'credit' || this.get('mode') === 'refund') {
+    if (this.get('mode') === 'Credit' || this.get('mode') === 'Refund') {
       return true;
     } else {
       return false;
@@ -18,7 +19,7 @@ export default DS.Model.extend({
   }),
 
   isRefund: Ember.computed('mode', function () {
-    if (this.get('mode') === 'refund') {
+    if (this.get('mode') === 'Refund') {
       return true;
     } else {
       return false;

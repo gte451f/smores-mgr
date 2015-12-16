@@ -25,7 +25,7 @@ export default Ember.Route.extend(ErrorHandler, {
     let requests = [];
     resolved.registrations.forEach(function (registration) {
       registration.get('requests').forEach(function (request) {
-        if (request.get('submitStatus') == 'Confirmed') {
+        if (request.get('submitStatus') === 'Confirmed') {
           requests.push(request);
         }
       });

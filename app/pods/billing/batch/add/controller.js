@@ -4,6 +4,7 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Controller.extend(ErrorHandler, {
   session: Ember.inject.service(),
+  notify: Ember.inject.service(),
 
   breadCrumb: 'New Batch',
 
@@ -18,6 +19,8 @@ export default Ember.Controller.extend(ErrorHandler, {
   minPaymentNotes: 'in dollars',
   // all all accounts selected?
   allSelected: false,
+  // is the save action in progress?
+  isProcessing: false,
 
   availableAccounts: [],
 
@@ -131,6 +134,7 @@ export default Ember.Controller.extend(ErrorHandler, {
         }
       };
 
+      this.set('isProcessing', true);
       Ember.$.ajax({
         url: ENV.APP.restDestination + '/v1/' + this.get('batchMode'),
         type: 'POST',
@@ -139,8 +143,12 @@ export default Ember.Controller.extend(ErrorHandler, {
         contentType: "application/json; charset=utf-8",
         dataType: "json"
       }).then(function (response) {
-        debugger;
+        self.set('isProcessing', false);
+        let payment_batch = response.payment_batch[0];
+        self.get('notify').success('Batch payment issued!');
+        self.transitionTo('billing.batch.info', payment_batch.id);
       }, function (xhr, status, error) {
+        self.set('isProcessing', false);
         self.handleXHR(xhr);
       });
     }

@@ -9,6 +9,7 @@ export default DS.Model.extend({
   successCount: DS.attr('number'),
   createdOn: DS.attr('date'),
   processedOn: DS.attr('date'),
+  log: DS.attr('string'),
 
   createdBy: DS.belongsTo('user', { async: true }),
   payments: DS.hasMany('payment', {

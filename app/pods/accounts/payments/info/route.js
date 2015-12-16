@@ -33,9 +33,9 @@ export default Ember.Route.extend( ErrorHandler, {
       //check for credit card payments, in which case make this a soft delete instead
       let mode = model.get('mode');
       // let id = model.get('id');
-      if (!Ember.isEmpty(mode) && mode === 'credit') {
+      if (!Ember.isEmpty(mode) && mode === 'Credit') {
         // submit a refund request instead
-        model.set('mode', 'refund');
+        model.set('mode', 'Refund');
         model.save().then(function (post) {
           self.get('notify').success('Charge refunded!');
         }, function (reason) {

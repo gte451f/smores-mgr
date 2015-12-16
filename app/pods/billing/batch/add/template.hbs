@@ -146,7 +146,10 @@
 </div>
 <div class="row">
     <div class="col-md-3 col-md-offset-9">
-        <button class="btn btn-primary" {{action 'save'}}>Submit</button>
+        {{#spinner-button action="save" isSpinning=isProcessing class="btn btn-primary"}}
+            Submit
+        {{/spinner-button}}
+
         {{#link-to 'billing.dash' class='btn btn-primary'}}Cancel{{/link-to}}
     </div>
 
