@@ -126,11 +126,31 @@ export default Ember.Controller.extend(ErrorHandler, {
       var self = this;
       var session = this.get('session.data.authenticated');
 
+      let minPaymentAmount = this.get('minPaymentAmount');
+      let minPaymentType = this.get('minPaymentType');
+      let selectedAccounts = this.get('selectedAccounts');
+
+      // validate inputs
+      if (selectedAccounts.length === 0) {
+        this.get('notify').alert("You must choose at least one account to bill.")
+        return false;
+      }
+
+      if (Ember.isEmpty(minPaymentType)) {
+        this.get('notify').alert("You must choose a batch payment rule.")
+        return false;
+      }
+
+      if (!minPaymentAmount > 0) {
+        this.get('notify').alert('Amount to bill each account must not be blank.');
+        return false;
+      }
+
       var paymentBatch = {
         payment_batch: {
-          min_type: this.get('minPaymentType'),
-          min_amount: this.get('minPaymentAmount'),
-          selectedAccounts: this.get('selectedAccounts').mapBy('id')
+          min_type: minPaymentType,
+          min_amount: minPaymentAmount,
+          selectedAccounts: selectedAccounts.mapBy('id')
         }
       };
 

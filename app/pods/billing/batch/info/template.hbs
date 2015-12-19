@@ -8,8 +8,12 @@
 
                 <div class="box-tools">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-default btn-sm">{{fa-icon "trash"}} Delete</button>
-                        <button class="btn btn-default btn-sm">{{fa-icon "printer"}} Print?</button>
+                        <button class="btn btn-default btn-sm" {{action "deleteBatch" model}}>
+                            {{fa-icon "trash"}} Delete
+                        </button>
+                        <button class="btn btn-default btn-sm">
+                            {{fa-icon "printer"}} Print?
+                        </button>
                     </div>
                 </div>
             </div>
