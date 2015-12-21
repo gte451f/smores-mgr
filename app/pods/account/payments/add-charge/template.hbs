@@ -1,0 +1,62 @@
+<div class="nav-tabs-custom">
+    {{accounts/tab-nav model=model isPayment='active'}}
+    <div class="tab-content">
+        <div id="main" class="tab-pane active">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h3>Add Charge</h3>
+
+                    <div class="box-body">
+
+                        <div class="form-group required">
+                            <label>Link Request (only confirmed requests appear below)</label>
+                            {{#x-select value=model.request class='form-control'}}
+                                <option>Select</option>
+                                {{#each requests as |item|}}
+                                    {{#x-option value=item}}
+                                        #{{item.id}} - {{item.event.location.name}} ({{item.event.program.name}}) {{item.event.session.name}}
+                                    {{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+                        </div>
+
+                        <div class="form-group required">
+                            <label>Link Fee</label>
+                            {{#x-select value=model.fee class='form-control'}}
+                                <option>Select</option>
+                                {{#each fees as |item|}}
+                                    {{#x-option value=item}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+                            {{#if model.fee}}
+                                <div><strong>Fee Description</strong> {{model.fee.description}}</div>
+                            {{/if}}
+                        </div>
+
+                        {{#if model.fee}}
+                            <div><strong>Fee Amount</strong> {{format-money model.fee.amount}}</div>
+                        {{else}}
+                            <div>
+                                <label>Amount (If Fee is not selected)</label>
+                                {{input type="text" class="form-control" value=model.amount}}
+                            </div>
+
+                            <div>
+                                <label>Fee Description</label>
+                                {{input type="text" class="form-control" value=model.name}}
+                            </div>
+                        {{/if}}
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button class="btn btn-primary" {{action 'save' model}}>Submit</button>
+                        {{#link-to 'account.payments.info' class="btn btn-primary"}}Cancel{{/link-to}}
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </div>
+</div>

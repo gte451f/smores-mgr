@@ -1,0 +1,57 @@
+<div class="nav-tabs-custom">
+    {{accounts/tab-nav model=model isRegistration='active'  redirect="redirect" suggestedEntry=suggestedEntry}}
+    <div class="tab-content">
+        <div id="main" class="tab-pane active">
+            {{#each registrations as |reg| }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">#{{reg.id}}  {{reg.firstName}} {{reg.lastName}}</h3>
+
+                                <div class="box-tools pull-right">
+                                    {{#link-to "registrations.info" reg.id class="btn btn-box-tool"}}{{fa-icon 'folder'}} {{/link-to}}
+                                    {{#link-to "registrations.edit" reg.id class="btn btn-box-tool"}}{{fa-icon 'pencil'}} {{/link-to}}
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <th>Location</th>
+                                        <th>Program</th>
+                                        <th>Session</th>
+                                        <th>Cabin</th>
+                                        <th>Status</th>
+                                        <th>Confirmed?</th>
+                                    </tr>
+                                    {{#each reg.requests as |record|}}
+                                        <tr>
+                                            <td>{{record.event.location.name}}</td>
+                                            <td>{{record.event.program.name}}</td>
+                                            <td>{{record.event.session.name}}</td>
+                                            <td>{{record.event.cabin.name}}</td>
+                                            <td><span class="label label-success">{{record.submitStatus}}</span></td>
+                                            <td>
+                                                {{#if record.attending}}
+                                                    <span class="label label-success">Yes</span>
+                                                {{else}}
+                                                    <span class="label label-warning">No</span>
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+</div>
+<!-- /.tab-content -->

@@ -39,26 +39,6 @@ Router.map(function () {
 
   this.route('owner', {"path": "owner/:owner_id"});
 
-  this.route('accounts', function () {
-    this.route("info", {path: "/:account_id/info"});
-    this.route("payments", {path: "/:account_id/payments"},
-      function () {
-        this.route('info');
-        this.route('add-charge');
-        this.route('add-payment');
-      });
-
-    this.route("registrations", {
-      path: "/:account_id/registrations"
-    });
-    this.route('cards', {path: "/:account_id/cards"},
-      function () {
-        this.route('info');
-        this.route('edit', {"path": "edit/:card_id"});
-        this.route('add');
-      });
-  });
-
   this.route('setup');
   this.route('fees', function () {
     this.route('info', {"path": "info/:fee_id"});
@@ -105,6 +85,28 @@ Router.map(function () {
       this.route('info', {"path": "info/:payment_batch_id"});
       this.route('add');
     });
+  });
+
+  this.route('account', {path: "account/:account_id"}, function () {
+    this.route("info");
+    this.route("payments",
+      function () {
+        this.route('info');
+        this.route('add-charge');
+        this.route('add-payment');
+      });
+
+    this.route("registrations");
+    this.route('cards',
+      function () {
+        this.route('edit', {"path": "edit/:card_id"});
+        this.route('add');
+      });
+
+  });
+
+  this.route('accounts', function () {
+    this.route('list');
   });
 });
 

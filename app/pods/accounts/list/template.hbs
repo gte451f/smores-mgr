@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Search accounts by name or related owner last name</h3>
+
+                <div class="box-tools pull-right"></div>
+                <!-- /.box-tools -->
+            </div>
+
+
+            <div class="box-body">
+                {{input class="form-control" value=termsSurrogate placeholder="Enter search terms here"}}
+            </div>
+        </div>
+        <!-- /.box -->
+
+        <div class="box box-{{box}}">
+            <div class="box-header">
+                <h3 class="box-title">{{fa-icon 'flash'}} Search Results</h3>
+
+                <div class="box-tools pull-right"></div>
+            </div>
+            <div class="box-body chat" id="chat-box">
+                {{#each model as |item| }}
+                    <div class="row">
+                        <div class="col-md-1">
+                            {{fa-icon 'user' size=2}}
+                        </div>
+                        <div class="col-md-3">
+                            <strong>
+                                {{#link-to 'account.info' item.id}}
+                                    {{item.name}}
+                                {{/link-to}}
+                            </strong>
+                        </div>
+                        <div class="col-md-8">
+                            {{#each item.owners as |item|}}
+                                <span class="label label-default">{{item.firstName}} {{item.lastName}}</span>
+                            {{/each}}
+                        </div>
+
+                    </div>
+                {{else}}
+                    <p class="message">no records found ... :-(</p>
+                    <!-- /.item -->
+                {{/each}}
+            </div>
+            <!-- /.chat -->
+        </div>
+
+    </div>
+</div>

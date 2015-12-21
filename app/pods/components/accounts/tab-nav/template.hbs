@@ -1,5 +1,23 @@
-<li class="pull-left header">{{fa-icon 'fa-th'}} #{{model.id}}</li>
-<li class="{{isPayment}}">{{#link-to 'accounts.payments.info' model.id }}Balance{{/link-to}}</li>
-<li class="{{isRegistration}}">{{#link-to 'accounts.registrations' model.id }}Registrations{{/link-to}}</li>
-<li class="{{isCard}}">{{#link-to 'accounts.cards' model.id}}Credit Cards{{/link-to}}</li>
-<li class="{{isInfo}}">{{#link-to 'accounts.info' model.id }}Main{{/link-to}}</li>
+<li class="pull-left header">
+    {{fa-icon 'fa-th'}}
+</li>
+
+<li class="pull-left" style="width: 300px; margin-top:5px;">
+    {{#x-autosuggest
+    options=selectOptions
+    action="refreshOptions"
+    selectedValue=model.fullName
+    placeHolderText=suggestedEntry
+    noMesssagePlaceHolderText="No matching entries found"
+    selectItem="itemSelected" as |result search|}}
+        <div>
+            <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{result.accountId}}
+                - {{highlight-result result.fullName query=search}}</span>
+        </div>
+    {{/x-autosuggest}}
+</li>
+
+<li class="{{isPayment}}">{{#link-to 'account.payments.info' model.id }}Balance{{/link-to}}</li>
+<li class="{{isRegistration}}">{{#link-to 'account.registrations' model.id }}Registrations{{/link-to}}</li>
+<li class="{{isCard}}">{{#link-to 'account.cards' model.id}}Credit Cards{{/link-to}}</li>
+<li class="{{isInfo}}">{{#link-to 'account.info' model.id }}Main{{/link-to}}</li>
