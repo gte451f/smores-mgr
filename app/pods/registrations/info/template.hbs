@@ -4,7 +4,7 @@
         <section class="col-md-4">
             <div class="box box-primary">
                 <div class="box-header ">
-                    <h3 class="box-title"></h3>
+                    <h3 class="box-title"># {{model.id}}</h3>
 
                     <div class="box-tools pull-right">
                         <div class="btn-group">
@@ -28,6 +28,12 @@
                         <dd>{{moment-format model.attendee.dob 'MM/DD/YYYY'}}</dd>
                         <dt>Gender</dt>
                         <dd>{{model.attendee.gender}}</dd>
+
+                        {{#each registrationFields as |field|}}
+                            <dt>{{field.display}}</dt>
+                            <dd>{{get model field.modelName}}</dd>
+                        {{/each}}
+
                         <dt>Notes</dt>
                         <dd>{{model.notes}}</dd>
 

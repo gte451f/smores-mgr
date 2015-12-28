@@ -3,7 +3,16 @@
     <div class="tab-content">
         <div id="main" class="tab-pane active">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <h4 class="text-blue">Account: #{{model.id}} - {{model.name}}:</h4>
+                    <dl class="dl">
+                        {{#each accountFields as |field|}}
+                            <dt>{{field.display}}</dt>
+                            <dd>{{get model field.modelName}}</dd>
+                        {{/each}}
+                    </dl>
+                </div>
+                <div class="col-md-3">
                     <h4 class="text-blue">Owners:</h4>
                     <ul class="nav nav-pills nav-stacked">
                         {{#each model.owners as |owner| }}
@@ -13,7 +22,7 @@
                         {{/each}}
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h4 class="text-blue">Attendees:</h4>
                     <ul class="nav nav-pills nav-stacked">
                         {{#each model.attendees as |attendee| }}
@@ -23,7 +32,7 @@
                         {{/each}}
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h4 class="text-blue">Addresses:</h4>
                     <ul class="list-unstyled">
                         {{#each model.accountAddrs as |addr| }}
@@ -43,6 +52,7 @@
                     </ul>
                 </div>
             </div>
+
         </div>
         <!-- /.tab-pane -->
     </div>

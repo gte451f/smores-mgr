@@ -24,6 +24,12 @@
                                 <dt>Email</dt>
                                 <dd>{{model.email}}</dd>
                                 <dt>Birthday</dt>
+
+                                {{#each ownerFields as |item|}}
+                                    <dt>{{item.display}}</dt>
+                                    <dd>{{get model item.modelName}}</dd>
+                                {{/each}}
+
                                 <dd>{{model.dob}}</dd>
                                 <dt>Phone Numbers</dt>
                                 <dd>

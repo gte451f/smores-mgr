@@ -40,6 +40,13 @@
                                 <dd>{{model.gender}}</dd>
                                 <dt>Grade</dt>
                                 <dd>{{model.schoolGrade}}</dd>
+
+                                {{#each attendeeFields as |item|}}
+                                    <dt>{{item.display}}</dt>
+                                    <dd>{{get model item.modelName}}</dd>
+                                {{/each}}
+
+
                                 <dt>Status</dt>
                                 <dd>
                                     {{#if model.active}}

@@ -39,7 +39,10 @@ Router.map(function () {
 
   this.route('owner', {"path": "owner/:owner_id"});
 
-  this.route('setup');
+  this.route('setup', function() {
+    this.route('settings');
+    this.route('fields');
+  });
   this.route('fees', function () {
     this.route('info', {"path": "info/:fee_id"});
     this.route('edit', {"path": "edit/:fee_id"});

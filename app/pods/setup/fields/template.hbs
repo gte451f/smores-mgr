@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Custom Fields</h3>
+                <span class="pull-right">
+                    <button class="btn btn-primary" style="margin-left: 5px;" {{action "addField"}}>New Field</button>
+                    <button class="btn btn-primary" style="margin-left: 5px;" {{action "rebuildView"}}>Rebuild View</button>
+                </span>
+                <span class="pull-right">
+                    {{#x-select value=currentGroup class='form-control'}}
+                        <option>Select</option>
+                        {{#each customGroups as |item|}}
+                            {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                        {{/each}}
+                    {{/x-select}}
+                </span>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-2"><strong>Field Name</strong></div>
+                    <div class="col-md-1"><strong>Portal?</strong></div>
+                    <div class="col-md-2"><strong>Type</strong></div>
+                    <div class="col-md-2"><strong>Data</strong></div>
+                    <div class="col-md-4">
+                        <strong>Allowed Values (Comma separated)</strong>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+
+                {{#each currentFields as |item|}}
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            {{input value=item.display class="form-control"}}
+                        </div>
+                        <div class="col-md-1">
+                            {{input type="checkbox" name="isPrivate" checked=item.private}}
+                        </div>
+                        <div class="col-md-2">
+                            {{#x-select value=item.input class='form-control'}}
+                                {{#each fieldTypes as |item|}}
+                                    {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+                        </div>
+                        <div class="col-md-2">
+                            {{#x-select value=item.allowedData class='form-control'}}
+                                {{#each fieldData as |item|}}
+                                    {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+                        </div>
+                        <div class="col-md-4">
+                            {{#if item.enableAllowedValues}}
+                                {{input value=item.possibleValues class="form-control"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-md-1">
+                            <span class="pull-left">
+                                {{!--<button class="btn btn-primary btn-sm" {{action "removeField" item}} >{{fa-icon "trash"}}</button>--}}
+                                <button class="btn btn-primary btn-sm" {{action 'showModal' 'modals/delete-custom-field' item}} class="btn btn-primary btn-xs">{{fa-icon "trash"}}</button>
+                            </span>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                {{#spinner-button action="saveGroup" isSpinning=isSpinning class="btn btn-primary" }}
+                    Save Changes
+                {{/spinner-button}}
+            </div>
+        </div>
+    </div>
+</div>

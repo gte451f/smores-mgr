@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-3">
+        <!-- small box -->
+        {{setup/info-box count=model.locationCount name='Locations' color='bg-green' location='locations'}}
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-2">
+        <!-- small box -->
+        {{setup/info-box count=model.programCount name='Programs' color='bg-aqua' location='programs'}}
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-2">
+        <!-- small box -->
+        {{setup/info-box count=model.cabinCount name='Cabins' color='bg-yellow' location='cabins'}}
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-2">
+        <!-- small box -->
+        {{setup/info-box count=model.sessionCount name='Sessions' color='bg-red' location='sessions'}}
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3">
+        <!-- small box -->
+        {{setup/info-box count=model.eventCount name='Events' color='bg-blue' location='events.list'}}
+    </div>
+    <!-- ./col -->
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">System Settings</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="box-body">
+                    {{#each model as |item|}}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">{{item.name}}</label>
+                            {{input value=item.value class="form-control"}}
+                            <p class="help-block">{{item.help}}</p>
+                        </div>
+                    {{/each}}
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button {{action "save" model}} class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{outlet}}
