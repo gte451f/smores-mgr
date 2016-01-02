@@ -23,12 +23,15 @@ export default Ember.Controller.extend(Error, {
     {display: 'Text', value: 'text'},
     {display: 'Text Area', value: 'textarea'},
     {display: 'List Box', value: 'select'},
+    {display: 'Single Check Box', value: 'single-check'},
+    {display: 'Multi Check Box', value: 'multi-check'},
+    {display: 'Radio Button', value: 'radio'},
+    {display: 'Date', value: 'date'}
   ],
 
   fieldData: [
     {display: 'Text', value: 'string'},
-    {display: 'Numbers', value: 'number'},
-    {display: 'Dates', value: 'date'},
+    {display: 'Numbers', value: 'number'}
   ],
 
   currentFields: [],
@@ -51,10 +54,16 @@ export default Ember.Controller.extend(Error, {
       var session = this.get('session.data.authenticated');
 
       currentFields.forEach(function (item) {
-
         // reset this value when text or text area is selected
         if (item.get('enableAllowedValues') === false) {
           item.set('possibleValues', '');
+        }
+
+        if (item.get('input') === 'date') {
+          item.set('allowedData', 'utcdate');
+        }
+        if (item.get('input') === 'single-check') {
+          item.set('allowedData', 'boolean');
         }
 
         if (item.get('hasDirtyAttributes')) {
@@ -98,7 +107,7 @@ export default Ember.Controller.extend(Error, {
         display: 'Default ' + fieldNameNum,
         table: this.get('currentGroup'),
         input: 'text',
-        allowedData: 'text',
+        allowedData: 'string',
         private: 0
       });
       this.set('fieldNameNum', fieldNameNum + 1);

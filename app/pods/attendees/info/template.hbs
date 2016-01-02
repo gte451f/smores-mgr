@@ -41,8 +41,8 @@
                                 <dt>Grade</dt>
                                 <dd>{{model.schoolGrade}}</dd>
 
-                                {{#each attendeeFields as |item|}}
-                                    <dt>{{item.display}}</dt>
+                                {{#each customFields as |item|}}
+                                    <dt>{{item.display}} ({{item.modelName}})</dt>
                                     <dd>{{get model item.modelName}}</dd>
                                 {{/each}}
 

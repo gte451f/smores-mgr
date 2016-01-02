@@ -1,14 +1,9 @@
 import Ember from 'ember';
+import CustomFields from 'smores-mgr/mixins/crud/custom-fields';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(CustomFields, {
   breadCrumb: 'Info',
-  // load registration fields for display
-  registrationFields: Ember.computed(function () {
-    return this.store.peekAll('field').filter(function (item) {
-      if (item.get('table') === 'registrations') {
-        return true;
-      }
-      return false;
-    });
-  })
+
+  // configure custom fields base table
+  baseTable: 'registrations'
 });

@@ -132,16 +132,16 @@ export default Ember.Controller.extend(ErrorHandler, {
 
       // validate inputs
       if (selectedAccounts.length === 0) {
-        this.get('notify').alert("You must choose at least one account to bill.")
+        this.get('notify').alert("You must choose at least one account to bill.");
         return false;
       }
 
       if (Ember.isEmpty(minPaymentType)) {
-        this.get('notify').alert("You must choose a batch payment rule.")
+        this.get('notify').alert("You must choose a batch payment rule.");
         return false;
       }
 
-      if (!minPaymentAmount > 0) {
+      if (minPaymentAmount <= 0) {
         this.get('notify').alert('Amount to bill each account must not be blank.');
         return false;
       }

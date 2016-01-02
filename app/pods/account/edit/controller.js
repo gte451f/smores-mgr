@@ -5,20 +5,16 @@ import CustomFields from 'smores-mgr/mixins/crud/custom-fields';
 export default Ember.Controller.extend(ErrorHandler, CustomFields, {
   notify: Ember.inject.service(),
   breadCrumb: 'Edit',
-
   // configure custom fields base table
-  baseTable: 'attendees',
-
-  activeStatus: null,
+  baseTable: 'accounts',
 
   actions: {
-    save: function (event) {
-      var model = this.get('model');
+    save: function (model) {
       var self = this;
       model.save().then(function () {
         var id = model.get('id');
-        self.transitionToRoute('attendees.info', id);
-        self.get('notify').success('Attendee was updated');
+        self.transitionToRoute('account.info', id);
+        self.get('notify').success('Account was updated');
       }, function (reason) {
         self.validationReport(model);
       });

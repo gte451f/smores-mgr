@@ -17,8 +17,14 @@ export default Ember.Route.extend({
     return true;
   },
 
+  /**
+   * side load a bunch of extra records
+   *
+   * @param params
+   * @returns {*}
+   */
   model: function (params) {
-    return this.store.query('account', {id: params.account_id, with: 'all'});
+    return this.store.queryRecord('account', {id: params.account_id, with: 'all'});
   },
 
   /**
@@ -27,13 +33,12 @@ export default Ember.Route.extend({
    * @param controller
    * @param model
    */
-  setupController: function (controller, resolved) {
-    let account = resolved.get('firstObject');
-    this._super(controller, account);
+  setupController: function (controller, model) {
+    this._super(controller, model);
 
     // notify account service
     let currentAccount = this.get('currentAccount');
-    currentAccount.set('account', account);
+    currentAccount.set('account', model);
     this.set('currentAccount', currentAccount);
   }
 });

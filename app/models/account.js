@@ -2,8 +2,8 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   active: DS.attr('string'),
-  createdOn: DS.attr('date'),
-  updatedOn: DS.attr('date'),
+  createdOn: DS.attr('utcdate'),
+  updatedOn: DS.attr('utcdate'),
   notes: DS.attr('string'),
   name: DS.attr('string'),
 

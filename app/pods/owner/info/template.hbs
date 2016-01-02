@@ -1,0 +1,46 @@
+<!-- Default box -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title"></h3>
+
+                <div class="box-tools">
+                    <div class="btn-group pull-right">
+                        {{#link-to "owner.edit" model.id class="btn btn-default btn-xs"}} {{fa-icon "pencil"}}
+                            Edit{{/link-to}}
+                        <button class="btn btn-default btn-xs">{{fa-icon "trash"}} Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <dl class="dl-horizontal">
+                    <dt>Account</dt>
+                    <dd>{{#link-to "account.info" model.account.id}}Open{{/link-to}}</dd>
+                    <dt>Email</dt>
+                    <dd>{{model.email}}</dd>
+                    <dt>Birthday</dt>
+
+                    {{#each customFields as |item|}}
+                        <dt>{{item.display}}</dt>
+                        <dd>{{get model item.modelName}}</dd>
+                    {{/each}}
+
+                    <dd>{{model.dob}}</dd>
+                    <dt>Phone Numbers</dt>
+                    <dd>
+                        <ul>
+                            <li>Home</li>
+                            <li>Work</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            <div class="box-footer">
+                Footer
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

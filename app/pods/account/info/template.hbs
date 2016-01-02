@@ -4,20 +4,25 @@
         <div id="main" class="tab-pane active">
             <div class="row">
                 <div class="col-md-3">
-                    <h4 class="text-blue">Account: #{{model.id}} - {{model.name}}:</h4>
+                    <h4 class="text-blue">#{{model.id}} - {{model.name}}:   {{#link-to 'account.edit' model.id class="btn btn-default btn-xs pull-right"}}Edit{{/link-to}}</h4>
+
                     <dl class="dl">
-                        {{#each accountFields as |field|}}
+                        {{#each customFields as |field|}}
                             <dt>{{field.display}}</dt>
                             <dd>{{get model field.modelName}}</dd>
                         {{/each}}
+
+                        <dt>Notes</dt>
+                        <dd>{{model.notes}}</dd>
                     </dl>
+
                 </div>
                 <div class="col-md-3">
                     <h4 class="text-blue">Owners:</h4>
                     <ul class="nav nav-pills nav-stacked">
                         {{#each model.owners as |owner| }}
                             <li>
-                                {{#link-to "owner" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
+                                {{#link-to "owner.info" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
                             </li>
                         {{/each}}
                     </ul>

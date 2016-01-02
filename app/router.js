@@ -37,9 +37,7 @@ Router.map(function () {
     this.route('edit', {"path": "edit/:attendee_id"});
   });
 
-  this.route('owner', {"path": "owner/:owner_id"});
-
-  this.route('setup', function() {
+  this.route('setup', function () {
     this.route('settings');
     this.route('fields');
   });
@@ -92,6 +90,7 @@ Router.map(function () {
 
   this.route('account', {path: "account/:account_id"}, function () {
     this.route("info");
+    this.route("edit");
     this.route("payments",
       function () {
         this.route('info');
@@ -102,10 +101,13 @@ Router.map(function () {
     this.route("registrations");
     this.route('cards',
       function () {
-        this.route('edit', {"path": "edit/:card_id"});
         this.route('add');
       });
+  });
 
+  this.route('owner', {path: "owner/:owner_id"}, function () {
+    this.route("info");
+    this.route("edit");
   });
 
   this.route('accounts', function () {

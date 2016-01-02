@@ -16,7 +16,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{date-picker date=model.start format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
+                    {{pikaday-input value=model.start format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
                     {{#input-tooltip content='When does the session begin?'}}
                         {{fa-icon "info"}}
                     {{/input-tooltip}}
@@ -31,7 +31,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{date-picker date=model.end format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
+                    {{pikaday-input value=model.end format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
                     {{#input-tooltip content='When does the session end?'}}
                         {{fa-icon "info"}}
                     {{/input-tooltip}}

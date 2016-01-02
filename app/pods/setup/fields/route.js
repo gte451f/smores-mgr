@@ -18,7 +18,7 @@ export default Ember.Route.extend(Error, {
       var self = this;
       model.destroyRecord().then(function () {
 
-        self.get('notify').success('Field & related data removed from system!')
+        self.get('notify').success('Field & related data removed from system!');
       }, function (reason) {
         self.handleXHR(reason);
       });

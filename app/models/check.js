@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
     number: DS.attr('string'),
-    date: DS.attr('date'),
+    date: DS.attr('utcdate'),
     accountNumber: DS.attr('string'),
     routingNumber: DS.attr('string'),
     nameOnCheck: DS.attr('string'),

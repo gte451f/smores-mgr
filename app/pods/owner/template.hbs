@@ -12,52 +12,7 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <!-- Default box -->
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="box-body">
-                            <dl class="">
-                                <dt>Account</dt>
-                                <dd>{{#link-to "account.info" model.account.id}}Open{{/link-to}}</dd>
-                                <dt>Email</dt>
-                                <dd>{{model.email}}</dd>
-                                <dt>Birthday</dt>
-
-                                {{#each ownerFields as |item|}}
-                                    <dt>{{item.display}}</dt>
-                                    <dd>{{get model item.modelName}}</dd>
-                                {{/each}}
-
-                                <dd>{{model.dob}}</dd>
-                                <dt>Phone Numbers</dt>
-                                <dd>
-                                    <ul>
-                                        <li>Home</li>
-                                        <li>Work</li>
-                                    </ul>
-                                </dd>
-                            </dl>
-                        </div>
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                    </div>
-                    <!-- /.box -->
-                </div>
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="box-body">
-                            Body
-                        </div>
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                    </div>
-                    <!-- /.box -->
-                </div>
-            </div>
+            {{outlet}}
         </section>
         <!-- /.content -->
     </div>

@@ -7,8 +7,8 @@ export default DS.Model.extend({
   amountProcessed: DS.attr('number'),
   failCount: DS.attr('number'),
   successCount: DS.attr('number'),
-  createdOn: DS.attr('date'),
-  processedOn: DS.attr('date'),
+  createdOn: DS.attr('utcdate'),
+  processedOn: DS.attr('utcdate'),
   log: DS.attr('string'),
 
   createdBy: DS.belongsTo('user', { async: true }),

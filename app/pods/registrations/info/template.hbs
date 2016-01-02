@@ -29,7 +29,7 @@
                         <dt>Gender</dt>
                         <dd>{{model.attendee.gender}}</dd>
 
-                        {{#each registrationFields as |field|}}
+                        {{#each customFields as |field|}}
                             <dt>{{field.display}}</dt>
                             <dd>{{get model field.modelName}}</dd>
                         {{/each}}

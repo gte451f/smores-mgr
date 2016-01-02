@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export function initialize(applicationInstance) {
@@ -17,7 +18,7 @@ export function initialize(applicationInstance) {
       {model: 'account', table: 'accounts'},
       {model: 'owner', table: 'owners'},
       {model: 'attendee', table: 'attendees'}
-    ]
+    ];
 
     groupList.forEach(function (item) {
       var model = applicationInstance.registry.lookupFactory('model:' + item.model);

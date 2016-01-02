@@ -5,7 +5,8 @@
                 <h3 class="box-title">Custom Fields</h3>
                 <span class="pull-right">
                     <button class="btn btn-primary" style="margin-left: 5px;" {{action "addField"}}>New Field</button>
-                    <button class="btn btn-primary" style="margin-left: 5px;" {{action "rebuildView"}}>Rebuild View</button>
+                    <button class="btn btn-primary" style="margin-left: 5px;" {{action "rebuildView"}}>Rebuild View
+                    </button>
                 </span>
                 <span class="pull-right">
                     {{#x-select value=currentGroup class='form-control'}}
@@ -46,11 +47,13 @@
                             {{/x-select}}
                         </div>
                         <div class="col-md-2">
-                            {{#x-select value=item.allowedData class='form-control'}}
-                                {{#each fieldData as |item|}}
-                                    {{#x-option value=item.value}}{{item.display}}{{/x-option}}
-                                {{/each}}
-                            {{/x-select}}
+                            {{#if item.enableInput}}
+                                {{#x-select value=item.allowedData class='form-control'}}
+                                    {{#each fieldData as |item|}}
+                                        {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                                    {{/each}}
+                                {{/x-select}}
+                            {{/if}}
                         </div>
                         <div class="col-md-4">
                             {{#if item.enableAllowedValues}}
@@ -60,7 +63,8 @@
                         <div class="col-md-1">
                             <span class="pull-left">
                                 {{!--<button class="btn btn-primary btn-sm" {{action "removeField" item}} >{{fa-icon "trash"}}</button>--}}
-                                <button class="btn btn-primary btn-sm" {{action 'showModal' 'modals/delete-custom-field' item}} class="btn btn-primary btn-xs">{{fa-icon "trash"}}</button>
+                                <button class="btn btn-primary btn-sm" {{action 'showModal' 'modals/delete-custom-field' item}}
+                                        class="btn btn-primary btn-xs">{{fa-icon "trash"}}</button>
                             </span>
                         </div>
                     </div>

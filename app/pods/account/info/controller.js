@@ -1,16 +1,10 @@
 import Ember from 'ember';
 import Account from 'smores-mgr/mixins/accounts/controller';
+import CustomFields from 'smores-mgr/mixins/crud/custom-fields';
 
-export default Ember.Controller.extend(Account, {
+export default Ember.Controller.extend(Account, CustomFields, {
   breadCrumb: 'Info',
 
-  // load registration fields for display
-  accountFields: Ember.computed(function () {
-    return this.store.peekAll('field').filter(function (item) {
-      if (item.get('table') === 'accounts') {
-        return true;
-      }
-      return false;
-    });
-  })
+  // configure custom fields base table
+  baseTable: 'accounts'
 });
