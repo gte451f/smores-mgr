@@ -40,6 +40,7 @@ Router.map(function () {
   this.route('setup', function () {
     this.route('settings');
     this.route('fields');
+    this.route('dash');
   });
   this.route('fees', function () {
     this.route('info', {"path": "info/:fee_id"});

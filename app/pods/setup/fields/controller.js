@@ -3,7 +3,8 @@ import Error from 'smores-mgr/mixins/crud/error';
 import ENV from 'smores-mgr/config/environment';
 
 export default Ember.Controller.extend(Error, {
-  breadCrumb: 'Fields',
+  breadCrumb: 'Custom Fields',
+
   notify: Ember.inject.service(),
   session: Ember.inject.service(),
   isSpinning: false,
