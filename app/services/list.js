@@ -16,6 +16,15 @@ export default Ember.Service.extend({
     {display: "Male", value: 'Male'}
   ],
 
+  ownerRelationship: [
+    {label: "Mother", value: 'Mother'},
+    {label: "Father", value: 'Father'},
+    {label: "Guardian", value: 'Guardian'},
+    {label: "Grand Parent", value: 'Grand Parent'},
+    {label: "Other", value: 'Other'}
+  ],
+
+
   grade: [
     {display: "Pre-K", value: 'Pre-K'},
     {display: "Kindergarten", value: 'Kindergarten'},

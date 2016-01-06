@@ -15,6 +15,6 @@ export default Ember.Route.extend({
     this._super(controller, model);
 
     controller.set('paymentBatches', resolved.paymentBatches);
-    controller.set('paymentBatches', resolved.statementBatches);
+    controller.set('statementBatches', resolved.statementBatches);
   }
 });

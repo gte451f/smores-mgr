@@ -17,7 +17,7 @@ export default Ember.Controller.extend(ErrorHandler, CustomFields, {
       var self = this;
       model.save().then(function () {
         var id = model.get('id');
-        self.transitionToRoute('owners.info', id);
+        self.transitionToRoute('owner.info', id);
         self.get('notify').success('Owner was updated');
       }, function (reason) {
         self.validationReport(model);

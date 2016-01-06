@@ -74,7 +74,7 @@
                 {{#each failedPayments as |record|}}
                     <li>
                         #{{record.id}} for {{format-money record.amount}} in
-                        Account {{#link-to 'accounts.info' record.account.id}}
+                        Account {{#link-to 'account.info' record.account.id}}
                         #{{record.account.id}}{{/link-to}}
                     </li>
                 {{/each}}
@@ -106,8 +106,10 @@
                     {{#each successfulPayments as |record|}}
                         <li>
                             #{{record.id}} for {{format-money record.amount}} in
-                            Account {{#link-to 'accounts.info' record.account.id}}
-                            #{{record.account.id}}{{/link-to}}
+                            Account
+                            {{#link-to 'account.info' record.account.id}}
+                                #{{record.account.id}} - {{record.account.name}}
+                        {{/link-to}}
                         </li>
                     {{/each}}
                 </ul>
