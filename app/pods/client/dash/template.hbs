@@ -1,0 +1,69 @@
+<div id="mainWrapper" class="wrapper">
+    {{partial "client/theme/setup-header"}}
+    {{client/side-bar}}
+    <!-- Content Wrapper. Contains page content -->
+    <div id="contentWrapper" class="content-wrapper" style="min-height: 1068px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Home
+            </h1>
+            {{partial "client/theme/main-breadcrumb"}}
+        </section>
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="info-box">
+                        {{#link-to 'client.members.list'}}
+                            <span class="info-box-icon bg-aqua-gradient">{{fa-icon 'users'}}</span>
+                        {{/link-to}}
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{#link-to 'client.members.list'}}
+                                Account Members{{/link-to}}</span>
+
+                            <div>Register all parents and children in your account before you attempt to sign anyone up
+                                for camp.
+                            </div>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+
+                    <div class="info-box">
+                        <span class="info-box-icon bg-red-gradient">
+                                <span class="glyphicon glyphicon-tent"></span>
+                        </span>
+
+                        <div class="info-box-content">
+                            {{#link-to 'client.registrations.list'}}
+                                <span class="info-box-number">Registrations</span>
+                            {{/link-to}}
+
+                            <div>Sign children up for camp or view existing registrations.</div>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+
+
+                    <div class="info-box">
+                        <span class="info-box-icon bg-yellow-gradient">{{fa-icon 'shopping-cart'}}</span>
+
+                        <div class="info-box-content">
+                            {{#link-to 'client.billing.summary'}}
+                                <span class="info-box-number">Billing & Payments</span>
+                            {{/link-to}}
+                            <div>Review your account's current charges and payments as camp approaches.</div>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    {{partial "client/theme/main-footer"}}
+</div>

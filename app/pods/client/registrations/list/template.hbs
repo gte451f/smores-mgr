@@ -1,0 +1,32 @@
+<div class="box box-{{box}}">
+    <div class="box-header with-border">
+        <h3 class="box-title"><span class="glyphicon glyphicon-tent"></span> Registrations</h3>
+
+        <div class="box-tools pull-right">
+            {{#link-to 'client.registrations.add.step1' class="btn btn-box-tool" }}{{fa-icon "plus"}} Register For Camp{{/link-to}}
+        </div>
+    </div>
+    <div class="box-body">
+        {{partial "table-pager/slim-table/widgets/quick-search"}}
+        <div class="list-group registration-list">
+            {{#each this.model as |item|}}
+                {{#link-to 'client.registrations.info' item.id class="list-group-item"}}
+                    <h4 class="list-group-item-heading">#
+                        {{item.id}} for {{item.attendee.firstName}} {{item.attendee.lastName}}
+                        on {{moment item.createdOn 'MM/DD/YY'}}
+                    </h4>
+
+                    <p class="list-group-item-text">
+                    <h4>Registration Requests:</h4>
+                    {{#each record.requests as |item|}}
+                        <div class="well">{{item.submitStatus}} - {{item.priority}} - {{item.note}}
+                            - {{item.event.location.name}}</div>
+                    {{/each}}
+                    </p>
+                {{/link-to}}
+            {{else}}
+                <li>no records found ... :-(</li>
+            {{/each}}
+        </div>
+    </div>
+</div>

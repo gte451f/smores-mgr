@@ -1,0 +1,63 @@
+<div class="alert bg-gray alert-dismissable hidden" id="helpBox">
+    <button type="button" class="close" {{action 'hideHelp'}}>×</button>
+    <h4><i class="icon fa fa-info"></i> Help</h4>
+    Use this wizard to register a singler attendee for a single camp event. You will get a chance to review your
+    selections before saving the registration.
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-solid bg-yellow disabled">
+            <div class="box-header">
+                {{ fa-icon "calendar"}}
+                <h3 class="box-title">Step 1: Choose A Camper</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group">
+                    </div>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-black">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group required">
+                            <label>Select the camper attending camp:</label>
+                            {{#x-select value=registration.camper class="form-control"}}
+                                <option>Select</option>
+                                {{#each attendees as |item|}}
+                                    {{#x-option value=item}}{{item.firstName}} {{item.lastName}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group required">
+                            <label>How many sessions is your camper attending?:</label>
+                            {{#x-select value=registration.mode class="form-control"}}
+                                <option value="0">A single session of camp</option>
+                                <option value="1">Multiple sessions of camp</option>
+                            {{/x-select}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Enter any important notes to camp staff here:</label>
+                            {{textarea class="form-control" value=registration.registrationNote cols="80" rows="6"}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

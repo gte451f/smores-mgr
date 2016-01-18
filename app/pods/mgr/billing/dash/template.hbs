@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-yellow">
+                <h3 class="widget-user-username">Batch Billing
+                    {{#link-to 'mgr.billing.batch.add' class="btn btn-default btn-sm pull-right"}}Add{{/link-to}}
+                </h3>
+                <h5 class="widget-user-desc">Bill multiple accounts based on common rules</h5>
+            </div>
+            <div class="box-footer no-padding">
+                <ul class="nav nav-stacked">
+                    {{#each paymentBatches as |record| }}
+                        <li>
+                            {{#link-to 'mgr.billing.batch.info' record.id}}
+                                {{record.status}} - {{moment record.processedOn 'MM-DD-YYYY'}}
+                                <span class="pull-right badge bg-green">{{format-money record.amountProcessed}}</span>
+                                <span class="pull-right badge bg-red"
+                                      style="margin-right: 5px;;">{{format-money record.amountFailed}}</span>
+                            {{/link-to}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-yellow">
+                <h3 class="widget-user-username">Batch Statements
+                    {{#link-to 'mgr.billing.batch.add' class="btn btn-default btn-sm pull-right"}}Add{{/link-to}}
+                </h3>
+                <h5 class="widget-user-desc">View and print statements to mail/email your accounts.</h5>
+            </div>
+            <div class="box-footer no-padding">
+                <ul class="nav nav-stacked">
+                    {{#each statementBatches as |record| }}
+                        <li>
+                            {{#link-to 'mgr.billing.batch.info' record.id}}
+                                {{record.status}} - {{moment record.processedOn 'MM-DD-YYYY'}}
+                                <span class="pull-right badge bg-green">{{format-money record.amountProcessed}}</span>
+                                <span class="pull-right badge bg-red"
+                                      style="margin-right: 5px;;">{{format-money record.amountFailed}}</span>
+                            {{/link-to}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

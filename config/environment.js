@@ -28,6 +28,10 @@ module.exports = function (environment) {
     ENV.APP.restNameSpace = 'v1';
     // Testem prefers this...
     ENV.baseURL = '/';
+
+    ENV['camp'] = {
+      name: 'Test Camp'
+    };
   }
 
   if (environment === 'test') {
@@ -45,6 +49,10 @@ module.exports = function (environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+
+    ENV['camp'] = {
+      name: 'Test Camp'
+    };
   }
 
   if (environment === 'production') {
@@ -55,6 +63,10 @@ module.exports = function (environment) {
     ENV.APP.restNameSpace = 'api/v1';
     // used for CSP
     ENV.APP.restDestination = 'https://app.smores.camp/##CLIENT##';
+
+    ENV['camp'] = {
+      name: '##CLIENT##'
+    };
   }
 
   //https://github.com/rwjblue/ember-cli-content-security-policy
@@ -69,9 +81,9 @@ module.exports = function (environment) {
   };
 
   ENV['ember-simple-auth'] = {
-    authenticationRoute: 'auth.login',
-    routeAfterAuthentication: 'dash',
-    routeIfAlreadyAuthenticated: 'dash'
+    authenticationRoute: 'client.auth.login',
+    // routeAfterAuthentication: '',
+    // routeIfAlreadyAuthenticated: ''
   };
 
   ENV['auth'] = {

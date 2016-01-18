@@ -1,0 +1,18 @@
+<div class="info-box bg-yellow">
+    <span class="info-box-icon">{{fa-icon 'credit-card'}}</span>
+
+    <div class="info-box-content">
+        <span class="info-box-text">{{card.vendor}} ending in...{{card.number}}</span>
+        <span class="info-box-number">
+            Expires: {{card.expirationMonth}}/{{card.expirationYear}} <br/>
+        </span>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: 100%"></div>
+        </div>
+        <span class="progress-description">
+            Added: {{moment card.createdOn 'MM-DD-YYYY'}}
+        </span>
+    </div>
+    <!-- /.info-box-content -->
+</div>

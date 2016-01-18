@@ -12,7 +12,7 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.4.0",
     "pikaday": "~1.4.0",
-    "moment": ">= 2.8.0",
+    "moment": "~2.11.1",
     "bootstrap": "~3.3.5",
     "ember-cli-moment-shim": "~0.0.3",
     "admin-lte": "2.3.0",

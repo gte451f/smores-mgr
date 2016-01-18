@@ -1,0 +1,134 @@
+<div class="nav-tabs-custom">
+    {{accounts/tab-nav model=model isPayment='active' redirect="redirect" suggestedEntry=suggestedEntry}}
+    <div class="tab-content">
+        <div id="main" class="tab-pane active">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="box box-warning">
+                        <div class="box-header">
+                            {{fa-icon 'cart-plus'}}
+                            <h3 class="box-title">Charges</h3>
+
+                            <div class="pull-right box-tools">
+                                {{#link-to 'mgr.account.payments.add-charge' class="btn btn-primary btn-xs"}}{{fa-icon 'plus'}}
+                                    Charge{{/link-to}}
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Fee</th>
+                                    <th>Attendee</th>
+                                    <th style="width: 40px">Amount</th>
+                                    <th></th>
+                                </tr>
+                                {{#each model.charges as |item| }}
+                                    <tr>
+                                        <td>{{moment-format item.createdOn 'MM-DD-YYYY'}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>
+                                            {{item.registration.attendee.firstName}}
+                                        </td>
+                                        <td><span class="label label-warning">{{format-money item.amount}}</span></td>
+                                        <td>
+                                            <i class="fa fa-trash-o icon-button" {{action 'showModal' 'modals/delete-confirm' item}}></i>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-success">
+                        <div class="box-header">
+                            {{fa-icon 'money'}}
+                            <h3 class="box-title">Payments</h3>
+
+                            <div class="pull-right box-tools">
+                                {{#link-to 'mgr.account.payments.add-payment' class="btn btn-primary btn-xs"}}
+                                    {{fa-icon 'plus'}} Payment
+                                {{/link-to}}
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th style="width: 40px">Amount</th>
+                                    <th></th>
+                                </tr>
+
+                                {{#each model.payments as |item| }}
+                                    {{#if item.isRefund}}
+                                    {{else}}
+                                        <tr>
+                                            <td>{{moment-format item.createdOn 'MM-DD-YY'}}</td>
+                                            <td>
+                                                <span class="label label-default">{{item.mode}}</span>
+                                            </td>
+                                            <td>
+                                                <span class="label label-success">{{format-money item.amount}}</span>
+                                            </td>
+                                            <td>
+                                                {{#if item.isChargeCard}}
+                                                    <i class="fa fa-trash-o icon-button" {{action 'showModal' 'modals/refund-charge' item}}></i>
+                                                {{else}}
+                                                    <i class="fa fa-trash-o icon-button" {{action 'showModal' 'modals/delete-confirm' item}}></i>
+                                                {{/if}}
+                                            </td>
+                                        </tr>
+                                    {{/if}}
+                                {{/each}}
+
+                                {{#each model.payments as |item| }}
+                                    {{#if item.isRefund}}
+                                        <tr>
+                                            <td>{{moment-format item.createdOn 'MM-DD-YY'}}</td>
+                                            <td><span class="label label-default">{{item.mode}}</span></td>
+                                            <td><span class="label label-default">{{format-money item.amount}}</span>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    {{/if}}
+
+                                {{/each}}
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <hr/>
+                    <div class="clearfix pull-right">
+                        Total:
+                        <span class="label label-warning">{{format-money chargeTotal}}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <hr/>
+                    <div class="clearfix pull-right">
+                        Total:
+                        <span class="label label-success">{{format-money paymentTotal}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+</div>
+<!-- /.tab-content -->

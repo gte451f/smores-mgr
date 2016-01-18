@@ -1,0 +1,122 @@
+<section class="content">
+    <!-- Default box -->
+    <div class="row">
+        <section class="col-md-4">
+            <div class="box box-primary">
+                <div class="box-header ">
+                    <h3 class="box-title"># {{model.id}}</h3>
+
+                    <div class="box-tools pull-right">
+                        <div class="btn-group">
+                            {{#link-to "registrations.edit" model.id class="btn btn-primary btn-sm"}}Edit{{/link-to}}
+                            {{#link-to "registrations.list" class="btn btn-primary btn-sm"}}Back{{/link-to}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        <dt>Attendee</dt>
+                        <dd>
+                            {{#link-to 'mgr.attendees.info' model.attendee.id}}
+                                {{model.attendee.firstName}} {{model.attendee.lastName}}
+                            {{/link-to}}
+                        </dd>
+                        <dt>Grade</dt>
+                        <dd>{{model.attendee.schoolGrade}}</dd>
+                        <dt>BirthDay</dt>
+                        <dd>{{moment-format model.attendee.dob 'MM/DD/YYYY'}}</dd>
+                        <dt>Gender</dt>
+                        <dd>{{model.attendee.gender}}</dd>
+
+                        {{#each customFields as |field|}}
+                            <dt>{{field.display}}</dt>
+                            <dd>{{get model field.modelName}}</dd>
+                        {{/each}}
+
+                        <dt>Notes</dt>
+                        <dd>{{model.notes}}</dd>
+
+                        <dt>Created On</dt>
+                        <dd>{{moment-format model.createdOn 'MM/DD/YYYY'}}</dd>
+
+                        <dt>Updated On</dt>
+                        <dd>
+                            {{moment-format model.updatedOn 'MM/DD/YYYY'}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+
+            <!-- /.box -->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Registration Related Charges</h3>
+                </div>
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        {{#each model.charges as |item| }}
+                            <dt>{{item.name}}</dt>
+                            <dd>{{format-money item.amount}}</dd>
+                        {{/each}}
+                    </dl>
+                </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+        </section>
+        <section class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="btn-group pull-right">
+                    </div>
+                    <h4 class="panel-title"><span class="glyphicon glyphicon-tent"></span> Individual Requests</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                            <tr>
+                                <th>Priority</th>
+                                <th>Location</th>
+                                <th>Program</th>
+                                <th>Session</th>
+                                <th>Cabin</th>
+                                <th>Status</th>
+                                <th>Confirmed?</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each model.requests as |record| }}
+                                <tr>
+                                    <td>{{record.priority}}</td>
+                                    <td>{{record.event.location.name}}</td>
+                                    <td>{{record.event.program.name}}</td>
+                                    <td>{{record.event.session.name}}</td>
+                                    <td>{{record.event.cabin.name}}</td>
+                                    <td><span class="label label-success">{{record.submitStatus}}</span></td>
+                                    <td>
+                                        {{#if record.attending}}
+                                            <span class="label label-success">Yes</span>
+                                        {{else}}
+                                            <span class="label label-warning">No</span>
+                                        {{/if}}
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

@@ -3,13 +3,13 @@
          style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
         <ul class="navigation">
             <li>
-                {{#link-to 'dash'}}
+                {{#link-to 'mgr.dash'}}
                     {{fa-icon "dashboard" classNames="menu-icon"}}
                     <span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
                 {{/link-to}}
             </li>
             <li>
-                {{#link-to 'registrations'}}
+                {{#link-to 'mgr.registrations'}}
                     {{fa-icon "clipboard" classNames="menu-icon"}}
                     <span class="mm-text mmc-dropdown-delay animated fadeIn">Registrations</span>
                 {{/link-to}}
@@ -19,13 +19,13 @@
                         class="mm-text">Accounts & Attendees</span></a>
                 <ul class="mmc-dropdown-delay animated fadeInLeft collapse" id="test">
                     <li>
-                        {{#link-to 'accounts'}}
+                        {{#link-to 'mgr.accounts'}}
                             <span class="glyphicon glyphicon-user"></span>
                             <span class="mm-text">Accounts</span>
                         {{/link-to}}
                     </li>
                     <li>
-                        {{#link-to 'attendees'}}
+                        {{#link-to 'mgr.attendees'}}
                             {{fa-icon "child" classNames="menu-icon"}}<span
                                 class="mm-text">Attendees</span>
                         {{/link-to}}
@@ -35,19 +35,19 @@
 
 
             <li>
-                {{#link-to "reports"}}
+                {{#link-to "mgr.reports"}}
                     {{fa-icon "pie-chart" classNames="menu-icon"}}
                     <span class="mm-text mmc-dropdown-delay animated fadeIn">Reports</span>
                 {{/link-to}}
             </li>
             <li>
-                {{#link-to "setup"}}
+                {{#link-to "mgr.setup"}}
                     <span class="glyphicon glyphicon-tent menu-icon"></span>
                     <span class="mm-text mmc-dropdown-delay animated fadeIn">Camp Setup</span>
                 {{/link-to}}
             </li>
             <li>
-                {{#link-to "test"}}
+                {{#link-to "mgr.test"}}
                     {{fa-icon "flask" classNames="menu-icon"}}
                     <span class="mm-text mmc-dropdown-delay animated fadeIn">Experimental Features</span>
                 {{/link-to}}

@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-{{box}}">
+            <div class="box-header with-border">
+                <h3 class="box-title">Edit Owner Information</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group required">
+                    <label class="control-label">First Name</label>
+                    {{input type="text" class="form-control" value=model.firstName placeholder="First Name"}}
+                </div>
+                <div class="form-group required">
+                    <label class="control-label">Last Name</label>
+                    {{input type="text" class="form-control" value=model.lastName placeholder="Last Name"}}
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Relationship to Camper</label>
+
+                    <div>
+                        {{#each listService.ownerRelationship as |item|}}
+                            {{radio-button value=item.value groupValue=model.relationship}} {{item.label}}
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Gender</label>
+
+                    <div>
+                        {{#each listService.gender as |item|}}
+                            {{radio-button value=item.value groupValue=model.gender}} {{item.display}}
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="control-label">Email</label>
+
+                    {{input type="email" class="form-control" value=model.email placeholder="Email Address"}}
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <div class="pull-right">
+                    {{#link-to 'client.members.list' class="btn btn-primary "}}Back{{/link-to}}
+                    <button class="btn btn-primary" {{action "save" model}}>Save</button>
+                </div>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-{{box}}">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{fa-icon 'phone'}} Phone Information</h3>
+                <div class="box-tools">
+                    <button class="btn btn-box-tool" {{action 'toggleNewPhone'}}>{{fa-icon 'plus'}} Phone</button>
+                </div>
+            </div>
+            <div class="box-body">
+                {{client/members/add-phone owner=model isAdding=newPhone}}
+                <ul class="nav nav-pills nav-stacked">
+                    {{#each model.ownerNumbers as |item|}}
+                        {{client/members/edit-phone phone=item}}
+                    {{/each}}
+                </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="row" style="margin-bottom: 5px;">
+    <div class="col-md-12">
+        {{#link-to 'client.billing.cards.list' class="btn btn-primary"}}{{fa-icon 'credit-card'}} Manage Credit Cards{{/link-to}}
+        {{#link-to 'client.billing.add-payment' class="btn btn-primary"}}
+            {{fa-icon 'usd'}} Make Payment
+        {{/link-to}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="box box-warning">
+            <div class="box-header">
+                {{fa-icon 'cart-plus'}}
+                <h3 class="box-title">
+                    Charges
+                    {{#x-tooltip content='Charges appear here when registrations or other billable activity is confirmed by camp staff.'}}
+                        {{fa-icon "info"}}
+                    {{/x-tooltip}}
+                </h3>
+
+                <div class="pull-right box-tools"></div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Date</th>
+                        <th>Fee</th>
+                        <th>Camper</th>
+                        <th style="width: 40px">Amount</th>
+                        <th></th>
+                    </tr>
+                    {{#each model.charges as |item|}}
+                        <tr>
+                            <td>{{moment item.createdOn 'MM-DD-YYYY'}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                {{item.registration.attendee.firstName}}
+                            </td>
+                            <td><span class="label label-warning">{{format-money item.amount}}</span></td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="box box-success">
+            <div class="box-header">
+                {{fa-icon 'money'}}
+                <h3 class="box-title">
+                    Payment History
+                    {{#x-tooltip content='Settled and pending payments are listed here.'}}
+                        {{fa-icon "info"}}
+                    {{/x-tooltip}}
+                </h3>
+
+                <div class="pull-right box-tools"></div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th style="width: 40px">Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    {{#each model.payments as |item|}}
+                        <tr>
+                            <td>{{moment item.createdOn 'MM-DD-YYYY'}}</td>
+                            <td>{{capitalize-word item.mode}}</td>
+                            <td><span class="label label-success">{{format-money item.amount}}</span></td>
+                            <td><span class="label label-info">Pending</span></td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <hr/>
+        <div class="clearfix pull-right">
+            Total:
+            <span class="label label-warning">{{format-money chargeTotal}}</span>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <hr/>
+        <div class="clearfix pull-right">
+            Total:
+            <span class="label label-success">{{format-money paymentTotal}}</span>
+        </div>
+    </div>
+</div>

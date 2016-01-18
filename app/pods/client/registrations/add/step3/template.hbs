@@ -1,0 +1,93 @@
+<div class="alert bg-gray alert-dismissable hidden" id="helpBox">
+    <button type="button" class="close" {{action 'hideHelp'}}>×</button>
+    <h4><i class="icon fa fa-info"></i> Help</h4>
+    Listed below are the full details to be registration request to be submitted. Please review selected sessions as
+    well as related fees. To make changes, click back to Step 2.
+</div>
+
+<div class="panel">
+    <div class="panel-heading bg-yellow">
+        <h4 class="panel-title"><span class="glyphicon glyphicon-tent"></span> Step 3: Confirm & Save</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Camper: </strong>
+                {{registration.camper.firstName}} {{registration.camper.lastName}}
+            </div>
+            <div class="col-md-3">
+                <strong>Grade: </strong>
+                {{registration.camper.schoolGrade}}
+            </div>
+            <div class="col-md-3">
+                <strong>Gender: </strong>
+                {{registration.camper.gender}}
+            </div>
+            <div class="col-md-3">
+                <strong>Birthday: </strong>
+                {{moment registration.camper.dob 'MM/DD/YYYY'}}
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <strong>Notes: </strong>
+                {{#if registration.registrationNote}}
+                    {{registration.registrationNote}}
+                {{else}}
+                    No notes supplied.
+                {{/if}}
+            </div>
+        </div>
+
+        {{#each registration.requests as |item|}}
+            <div class="info-box">
+                <span class="info-box-icon bg-green">#{{item.priority}}</span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt>Location</dt>
+                                        <dd>{{item.event.location.name}}</dd>
+                                        <dt>Cabin</dt>
+                                        <dd>{{item.event.cabin.name}}</dd>
+                                        <dt>Program</dt>
+                                        <dd>{{item.event.program.name}}</dd>
+                                        <dt>Session</dt>
+                                        <dd>{{item.event.session.name}}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        {{#if item.event.fee}}
+                                            <dt>Event Fee</dt>
+                                            <dd>{{format-money item.event.fee}}</dd>
+                                        {{/if}}
+                                        {{#if item.event.program.fee}}
+                                            <dt>Program Fee</dt>
+                                            <dd>{{format-money item.event.program.fee}}</dd>
+                                        {{/if}}
+                                    </dl>
+                                </div>
+                            </div>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        {{/each}}
+
+
+        <div class="alert bg-gray">
+            <h4>{{fa-icon 'money'}} Registration Fees </h4>
+            {{#each fees as |item|}}
+                <div>
+                    <h5>{{item.name}}: {{format-money item.amount}}</h5>
+                    <small>{{item.description}}</small>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary pull-right" {{action 'save'}}>Confirm & Submit</button>

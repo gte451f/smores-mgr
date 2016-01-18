@@ -1,0 +1,59 @@
+<div class="login-box" style="width: 75%;">
+    <div class="login-logo">
+        <b>Activate new account</b>
+    </div>
+
+    <h4 class="text-center">
+        Right after you creating an account, check your email for a super secret code and enter it below along with your
+        username.<br/>
+    </h4>
+    <h4 class="text-center">
+        This is a security step that proves you are a human and not a robot. You aren't a robot are you?
+    </h4>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+
+    <div class="col-md-8">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Enter Activation Information</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+                <div class="box-body">
+                    <div class="form-group required">
+                        <label class="col-sm-4 control-label">Email</label>
+
+                        <div class="col-sm-8">
+                            {{input type="text" class="form-control" value=model.email placeholder="my-awesome@email.com"}}
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-sm-4 control-label">Secret Code</label>
+
+                        <div class="col-sm-8">
+                            {{input type="text" class="form-control" value=model.code placeholder="#####"}}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer clearfix">
+                    {{#link-to 'client.auth.login' class="btn btn-primary"}}Return To Login{{/link-to}}
+                    <button class="btn btn-primary" {{action "resend" model}}>Resend My Code</button>
+                    <button class="btn btn-primary pull-right" {{action "activate" model}}>Activate My Account</button>
+                </div>
+                <!-- /.box-footer -->
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+    </div>
+
+</div>
