@@ -20,7 +20,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       this.transitionTo('client.auth.login');
     }
     if (userType === 'Employee') {
-      this.transitionTo('auth.login');
+      this.transitionTo('mgr.auth.login');
     }
   },
 

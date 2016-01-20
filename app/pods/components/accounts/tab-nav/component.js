@@ -9,14 +9,6 @@ export default Ember.Component.extend({
   isInfo: '',
   isCard: '',
 
-  // suggestedEntry: 'Search by name...',
-  // deal with changes to model
-  //watchModel: Ember.observer('model', function () {
-  //  debugger;
-  //  var model = this.get('model');
-  //  this.set('suggestedEntry', model.get('firstName'));
-  //}),
-
   // used for auto suggest
   selectOptions: [],
 

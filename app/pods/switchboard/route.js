@@ -7,9 +7,7 @@ export default Ember.Route.extend({
    * function to figure out where lost users should land
    */
   beforeModel: function () {
-    debugger;
     let isAuthenticated = this.get('session.isAuthenticated');
-
     if (this.get('session.isAuthenticated')) {
       let userType = this.get('session.data.authenticated.userType');
 
