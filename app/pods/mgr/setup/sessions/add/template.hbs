@@ -1,0 +1,49 @@
+<div class="box box-warning">
+    <!-- /.box-header -->
+    <div class="box-body form-horizontal">
+        <div class="form-group required">
+            <label class="col-sm-4 control-label">Name</label>
+
+            <div class="col-sm-8">
+                {{input type="text" class="form-control" value=model.name}}
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="col-sm-4 control-label">Start Date</label>
+
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    {{pikaday-input value=model.start format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
+                    {{#input-tooltip content='When does the session begin?'}}
+                        {{fa-icon "info"}}
+                    {{/input-tooltip}}
+                </div>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="col-sm-4 control-label">End Date</label>
+
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    {{pikaday-input value=model.end format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
+                    {{#input-tooltip content='When does the session end?'}}
+                        {{fa-icon "info"}}
+                    {{/input-tooltip}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer clearfix">
+        <div class="btn-group pull-right">
+            <button class="btn btn-primary btn-xs" {{action "save" model}}>Save</button>
+            {{#link-to 'mgr.setup.sessions' class="btn btn-primary btn-xs"}}Cancel{{/link-to}}
+        </div>
+    </div>
+</div>
+

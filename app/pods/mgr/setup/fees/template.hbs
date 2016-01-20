@@ -1,0 +1,57 @@
+<h4>
+    Fees
+    {{#x-tooltip contentAsHTML=true
+    content="Use Fees to tell Smores when and how much to charge your camp's customers flat rate amounts. <ul>
+                 <li>For example, charge a standard fee when a new registration is created. </li>
+                 <li>Fee's are not required in order to accept camper registrations. </li>
+                 <li>Individual programs may also have a fee associated with them that only apply when a camper registers for them</li></ul>"}}
+        {{fa-icon "info"}}
+    {{/x-tooltip}}
+</h4>
+
+<div class="row">
+    <section class="col-lg-4">
+        <div class="box box-warning">
+            <div class="box-header">
+                <div class="box-tools">
+                    <div class="btn-group pull-right">
+                        {{#link-to 'mgr.setup.fees.add' class="btn btn-primary btn-xs"}}
+                            {{fa-icon "plus"}} Add
+                        {{/link-to}}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <ul class="todo-list">
+                    {{#each model as |record| }}
+                        {{#if record.id}}
+                            <li class="clearfix">
+                                        <span class="text">
+                                            {{record.name}}
+                                            ({{format-money record.amount symbol=selectedCurrency format="%s%v"}})<br/>
+                                            <small>
+                                                Basis: {{record.basis}}<br/>
+                                                Payment Schedule: {{record.paymentSchedule}}
+                                            </small>
+                                        </span>
+
+                                <div class="tools">
+                                    {{#link-to 'mgr.setup.fees.info' record}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                                    {{#link-to 'mgr.setup.fees.edit' record}}{{fa-icon "edit"}}{{/link-to}}
+                                </div>
+                            </li>
+                        {{/if}}
+                    {{else}}
+                        <li>no records found ... :-(</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <!-- /. end box-primary -->
+    </section>
+    <section class="col-lg-8">
+        {{outlet}}
+    </section>
+</div>
+<!-- ./row -->

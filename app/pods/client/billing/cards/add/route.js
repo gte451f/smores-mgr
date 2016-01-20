@@ -23,7 +23,7 @@ export default Ember.Route.extend(ErrorHandler, {
       // set some default values on the model
       model.active = 1;
       var accountId = this.get('session.secure.accountId');
-      model.account = this.store.getById('account', accountId);
+      model.account = this.store.peekRecord('account', accountId);
 
       if (Ember.isEmpty(model.account)) {
         // error, no account detected

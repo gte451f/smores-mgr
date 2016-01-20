@@ -23,7 +23,7 @@
 
             <div class="box-header with-border">
                 <h3 class="box-title">
-                    {{#link-to 'mgr.users'}}Users{{/link-to}}
+                    {{#link-to 'mgr.setup.users'}}Users{{/link-to}}
                 </h3>
             </div>
             <div class="box-body" style="display: block;">
@@ -32,7 +32,7 @@
 
             <div class="box-header">
                 <h3 class="box-title">
-                    {{#link-to 'mgr.fees'}}Fees{{/link-to}}
+                    {{#link-to 'mgr.setup.fees'}}Fees{{/link-to}}
                 </h3>
             </div>
             <div class="box-body" style="display: block;">
@@ -45,10 +45,10 @@
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-4">
-        {{setup/info-box count=model.locationCount name='Locations' color='bg-green' location='locations'}}
-        {{setup/info-box count=model.programCount name='Programs' color='bg-aqua' location='programs'}}
-        {{setup/info-box count=model.cabinCount name='Cabins' color='bg-yellow' location='cabins'}}
-        {{setup/info-box count=model.sessionCount name='Sessions' color='bg-red' location='sessions'}}
-        {{setup/info-box count=model.eventCount name='Events' color='bg-blue' location='events.list'}}
+        {{setup/info-box count=model.locationCount name='Locations' color='bg-green' location='mgr.setup.locations'}}
+        {{setup/info-box count=model.programCount name='Programs' color='bg-aqua' location='mgr.setup.programs'}}
+        {{setup/info-box count=model.cabinCount name='Cabins' color='bg-yellow' location='mgr.setup.cabins'}}
+        {{setup/info-box count=model.sessionCount name='Sessions' color='bg-red' location='mgr.setup.sessions'}}
+        {{setup/info-box count=model.eventCount name='Events' color='bg-blue' location='mgr.setup.events.list'}}
     </div>
 </div>

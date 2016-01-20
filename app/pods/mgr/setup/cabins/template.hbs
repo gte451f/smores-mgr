@@ -1,0 +1,56 @@
+<h4>
+    Setup: Cabins
+    {{#x-tooltip contentAsHTML=true
+    content='Each cabin represents a camper dwelling usually grouped by age and/or gender. <ul>
+                <li>The restrictions you place on a cabin carry over to limit the types of campers who can register for an event</li>
+                <li>Smores requires at least one cabin to be configured in order to accept registrations</li> </ul>'}}
+        {{fa-icon "info"}}
+    {{/x-tooltip}}
+</h4>
+<div class="row">
+    <section class="col-lg-4">
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+
+                <div class="box-tools">
+                    <div class="btn-group pull-right">
+                        {{#link-to 'mgr.setup.cabins.add' class="btn btn-primary btn-xs"}}{{fa-icon "plus"}}
+                            Cabin {{/link-to}}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <ul class="todo-list">
+                    {{#each model as |record| }}
+                        {{#if record.id}}
+                            <li>
+                                        <span class="text">
+                                            {{record.name}}
+                                            <small>({{record.gender}})</small> <br/>
+                                            <small>
+                                                Ages: {{record.minAge}} - {{record.maxAge}} |
+                                                Capacity: {{record.capacity}}
+                                            </small>
+                                        </span>
+
+                                <div class="tools">
+                                    {{#link-to 'mgr.setup.cabins.edit' record}}{{fa-icon "edit"}}{{/link-to}}
+                                    <a {{action 'showModal' 'modals/delete-confirm' record}}>{{fa-icon "trash-o"}}</a>
+                                </div>
+                            </li>
+                        {{/if}}
+                    {{else}}
+                        <li>no records found ... :-(</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <!-- /. end box-primary -->
+    </section>
+    <section class="col-lg-8">
+        {{outlet}}
+    </section>
+</div>
+<!-- ./row -->

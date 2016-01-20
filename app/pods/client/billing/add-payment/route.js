@@ -135,7 +135,7 @@ export default Ember.Route.extend(ErrorHandler, {
     // set some default values on the newCard
     newCard.active = 1;
     var accountId = this.get('session.data.authenticated.accountId');
-    newCard.account = this.store.getById('account', accountId);
+    newCard.account = this.store.peekRecord('account', accountId);
 
     if (Ember.isEmpty(newCard.account)) {
       // error, no account detected

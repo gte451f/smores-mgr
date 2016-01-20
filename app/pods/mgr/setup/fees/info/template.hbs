@@ -1,0 +1,28 @@
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title"><span class="glyphicon glyphicon-tent"></span> {{model.name}}</h3>
+
+        <div class="box-tools">
+            <button {{action 'showModal' 'modals/delete-confirm' model}} class="btn btn-primary btn-xs">Delete</button>
+            {{#link-to 'mgr.setup.fees.edit' model class="btn btn-primary btn-xs"}}Edit{{/link-to}}
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd>{{model.name}}</dd>
+            <dt>Amount</dt>
+            <dd>{{model.amount}}</dd>
+            <dt>Basis</dt>
+            <dd>{{model.basis}}</dd>
+            <dt>Payment Schedule</dt>
+            <dd>{{model.paymentSchedule}}</dd>
+            <dt>Description</dt>
+            <dd>{{model.description}}</dd>
+        </dl>
+    </div>
+    <div class="box-footer">
+
+    </div>
+</div>

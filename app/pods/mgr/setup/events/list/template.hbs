@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary box-top">
+            <div class="box-body">
+                <div role="grid" class="form-inline">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label>Per Page:</label>
+                            {{#x-select value=perPage class='form-control input-sm'}}
+                                {{#each pageList as |item|}}
+                                    {{#x-option value=item}}{{item}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
+                            <button {{action 'refresh'}} class="btn btn-sm btn-primary">{{fa-icon 'refresh'}}</button>
+                            {{#link-to 'mgr.setup.events.add' class="btn btn-primary btn-sm"}}
+                                {{fa-icon "plus"}} Add
+                            {{/link-to}}
+                        </div>
+
+                        <div class="col-xs-7">
+                            {{#x-select value=location_id class='form-control input-sm'}}
+                                <option>All Locations</option>
+                                {{#each locations as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
+                            {{#x-select value=cabin_id class='form-control input-sm'}}
+                                <option>All Cabins</option>
+                                {{#each cabins as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
+                            {{#x-select value=program_id class='form-control input-sm'}}
+                                <option>All Programs</option>
+                                {{#each programs as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
+                            {{#x-select value=session_id class='form-control input-sm'}}
+                                <option>All Sessions</option>
+                                {{#each sessions as |item|}}
+                                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+                                {{/each}}
+                            {{/x-select}}
+
+                        </div>
+
+                        <div class="col-xs-2">
+                            {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-striped">
+                        {{partial 'table-pager/table/table-header'}}
+                        <tbody>
+                        {{#each model as |record| }}
+                            <tr>
+                                {{#each columns as |col| }}
+                                    <td>{{pager-loop model=record field=col}}</td>
+                                {{/each}}
+                                <td class="pull-right">
+                                    {{#link-to 'mgr.setup.events.edit' record.id class="btn btn-primary btn-xs"}}
+                                        Edit
+                                    {{/link-to}}
+                                    {{#link-to linkPath record.id class="btn btn-primary btn-xs"}}
+                                        Open
+                                    {{/link-to}}
+                                    <button {{action 'showModal' 'modals/delete-confirm' record}}
+                                            class="btn btn-primary btn-xs">Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>no records found ... :-(</tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    {{partial 'table-pager/table/footer'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

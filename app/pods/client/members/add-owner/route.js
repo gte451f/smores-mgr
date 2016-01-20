@@ -21,7 +21,7 @@ export default Ember.Route.extend(Error, {
 
       //first save the owner
       var accountId = this.get('session.secure.accountId');
-      var account = this.store.getById('account', accountId);
+      var account = this.store.peekRecord('account', accountId);
       model.owner.account = account;
 
       if (Ember.isEmpty(account)) {

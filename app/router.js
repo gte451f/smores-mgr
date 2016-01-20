@@ -19,7 +19,6 @@ Router.map(function () {
 
     this.route('dash');
     this.route('reports');
-
     this.route('test');
 
     this.route('registrations', function () {
@@ -45,43 +44,44 @@ Router.map(function () {
       this.route('settings');
       this.route('fields');
       this.route('dash');
-    });
-    this.route('fees', function () {
-      this.route('info', {"path": "info/:fee_id"});
-      this.route('edit', {"path": "edit/:fee_id"});
-      this.route('add');
+
+      this.route('fees', function () {
+        this.route('info', {"path": "info/:fee_id"});
+        this.route('edit', {"path": "edit/:fee_id"});
+        this.route('add');
+      });
+      this.route('locations', function () {
+        this.route('add');
+        this.route('edit', {"path": "edit/:location_id"});
+        this.route('info', {"path": "info/:location_id"});
+      });
+      this.route('programs', function () {
+        this.route('add');
+        this.route('edit', {"path": "edit/:program_id"});
+        this.route('info', {"path": "info/:program_id"});
+      });
+      this.route('events', function () {
+        this.route('list');
+        this.route('edit', {"path": "edit/:event_id"});
+        this.route('info', {"path": "info/:event_id"});
+        this.route('add');
+      });
+
+      this.route('cabins', function () {
+        this.route('add');
+        this.route('edit', {"path": "edit/:cabin_id"});
+      });
+      this.route('sessions', function () {
+        this.route('add');
+        this.route('edit', {"path": "edit/:session_id"});
+      });
+      this.route('users', function () {
+        this.route('add');
+        this.route('edit', {"path": "edit/:employee_id"});
+        this.route('info', {"path": "info/:employee_id"});
+      });
     });
 
-    this.route('locations', function () {
-      this.route('add');
-      this.route('edit', {"path": "edit/:location_id"});
-      this.route('info', {"path": "info/:location_id"});
-    });
-    this.route('programs', function () {
-      this.route('add');
-      this.route('edit', {"path": "edit/:program_id"});
-      this.route('info', {"path": "info/:program_id"});
-    });
-    this.route('events', function () {
-      this.route('list');
-      this.route('edit', {"path": "edit/:event_id"});
-      this.route('info', {"path": "info/:event_id"});
-      this.route('add');
-    });
-
-    this.route('cabins', function () {
-      this.route('add');
-      this.route('edit', {"path": "edit/:cabin_id"});
-    });
-    this.route('sessions', function () {
-      this.route('add');
-      this.route('edit', {"path": "edit/:session_id"});
-    });
-    this.route('users', function () {
-      this.route('add');
-      this.route('edit', {"path": "edit/:employee_id"});
-      this.route('info', {"path": "info/:employee_id"});
-    });
     this.route('billing', function () {
       this.route('dash');
       this.route('batch', function () {

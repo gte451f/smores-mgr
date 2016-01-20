@@ -12,7 +12,7 @@ export default Ember.Route.extend(Paginate, {
 
   modelName: 'registration',
   controllerName: 'registrations.list',
-  currentRoute: 'registrations.list',
+  currentRoute: 'mgr.registrations.list',
 
   actions: {
     //wipe the supplied record and go back to the mother ship
