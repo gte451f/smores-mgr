@@ -4,6 +4,21 @@
         {{#link-to 'client.billing.add-payment' class="btn btn-primary"}}
             {{fa-icon 'usd'}} Make Payment
         {{/link-to}}
+
+
+
+
+        <div class="form-group pull-right" style="width: 350px;">
+            <label class="col-sm-7 control-label">Filter Entires By Year:</label>
+
+            <div class="col-sm-5">
+                {{#x-select value=selectedYear class="form-control"}}
+                    {{#each availableYears as |item|}}
+                        {{#x-option value=item}}{{item}}{{/x-option}}
+                    {{/each}}
+                {{/x-select}}
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
@@ -31,7 +46,7 @@
                         <th style="width: 40px">Amount</th>
                         <th></th>
                     </tr>
-                    {{#each model.charges as |item|}}
+                    {{#each activeCharges as |item|}}
                         <tr>
                             <td>{{moment item.createdOn 'MM-DD-YYYY'}}</td>
                             <td>{{item.name}}</td>
@@ -71,7 +86,7 @@
                         <th style="width: 40px">Amount</th>
                         <th>Status</th>
                     </tr>
-                    {{#each model.payments as |item|}}
+                    {{#each activePayments as |item|}}
                         <tr>
                             <td>{{moment item.createdOn 'MM-DD-YYYY'}}</td>
                             <td>{{capitalize-word item.mode}}</td>

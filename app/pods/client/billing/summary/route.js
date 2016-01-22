@@ -4,18 +4,22 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   notify: Ember.inject.service(),
   session: Ember.inject.service(),
+  currentAccount: Ember.inject.service(),
 
   model: function (params) {
-    var sessionData = this.get('session.data.authenticated');
-    if (sessionData.accountId > 0) {
-      return this.store.query('account', {id: sessionData.accountId, with: 'all'});
-    } else {
-      this.get('notify').error('Could not load your account!  Please logout and log back into the system.');
-    }
+    let currentAccount = this.get('currentAccount');
+    return Ember.RSVP.hash({
+      account: currentAccount.get('account'),
+      payments: this.store.query('payment', {account_id: currentAccount.get('id')}),
+      charges: this.store.query('charge', {account_id: currentAccount.get('id')})
+    });
+
   },
 
   setupController: function (controller, resolved) {
-    var model = resolved.get('firstObject');
-    this._super(controller, model);
+    this._super(controller, resolved.account);
+
+    controller.set('activePayments', resolved.payments);
+    controller.set('activeCharges', resolved.charges);
   }
 });

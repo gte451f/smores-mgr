@@ -1,10 +1,12 @@
 import Ember from 'ember';
-import Error from 'smores-mgr/mixins/crud/error';
+import Error from 'bigstuf-client/mixins/crud/error';
 
 export default Ember.Route.extend(Error, {
   notify: Ember.inject.service(),
+  currentAccount: Ember.inject.service(),
 
   model: function (params) {
+    // fill out some default values
     return {phone: {primary: 1}, owner: {userType: 'Owner', active: true}};
   },
   actions: {
@@ -20,8 +22,7 @@ export default Ember.Route.extend(Error, {
       var self = this;
 
       //first save the owner
-      var accountId = this.get('session.secure.accountId');
-      var account = this.store.peekRecord('account', accountId);
+      var account = this.get('currentAccount.account');
       model.owner.account = account;
 
       if (Ember.isEmpty(account)) {
@@ -37,7 +38,7 @@ export default Ember.Route.extend(Error, {
         model.phone.owner = newOwner;
         var newPhone = self.store.createRecord('owner-number', model.phone);
         newPhone.save().then(function () {
-          that.notify.success('Owner created');
+          that.get('notify').success('Owner created');
           //reset to original position
           that.set('model', {phone: {primary: 1}, owner: {userType: 'Owner', active: true}});
           that.transitionTo('client.members.list');
@@ -55,3 +56,4 @@ export default Ember.Route.extend(Error, {
     }
   }
 });
+

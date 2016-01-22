@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 
   // load account_id at the earliest possible moment for nested routes to reference
   beforeModel: function (transition) {
-    let parentRoute = transition.params['account'];
+    let parentRoute = transition.params['mgr.account'];
     let account_id = parentRoute.account_id;
 
     if (Ember.isEmpty(account_id)) {
