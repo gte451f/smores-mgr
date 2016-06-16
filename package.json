@@ -56,6 +56,7 @@
     "ember-simple-auth": "1.0.1",
     "ember-spinner-button": "0.0.10",
     "ember-watson": "^0.6.2",
-    "smores-common": "git+https://github.com/gte451f/smores-common.git"
+    "smores-common": "git+https://github.com/gte451f/smores-common.git",
+    "emberx-select": "2.0.2"
   }
 }

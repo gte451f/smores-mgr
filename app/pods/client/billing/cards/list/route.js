@@ -11,7 +11,7 @@ export default Ember.Route.extend(ErrorHandler, {
    * @returns {*}
    */
   model: function (params) {
-    var accountId = this.get('session.data.authenticated.accountId');
+    var accountId = this.get('session.data.authenticated.data.attributes.account-id');
 
     if (Ember.isEmpty(accountId)) {
       // error, no account detected

@@ -73,7 +73,7 @@ export default Ember.Route.extend(ErrorHandler, {
       // end simple validation
 
       payment.amount = model.amount;
-      var accountId = this.get('session.data.authenticated.accountId');
+      var accountId = this.get('session.data.authenticated.data.attributes.account-id');
       payment.account = this.store.peekRecord('account', accountId);
 
       var mode = model.mode;
@@ -134,7 +134,7 @@ export default Ember.Route.extend(ErrorHandler, {
 
     // set some default values on the newCard
     newCard.active = 1;
-    var accountId = this.get('session.data.authenticated.accountId');
+    var accountId = this.get('session.data.authenticated.data.attributes.account-id');
     newCard.account = this.store.peekRecord('account', accountId);
 
     if (Ember.isEmpty(newCard.account)) {

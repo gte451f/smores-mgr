@@ -124,7 +124,7 @@ export default Ember.Controller.extend(ErrorHandler, {
      */
     save: function () {
       var self = this;
-      var session = this.get('session.data.authenticated');
+      var session = this.get('session.data.authenticated.data.attributes');
 
       let minPaymentAmount = this.get('minPaymentAmount');
       let minPaymentType = this.get('minPaymentType');

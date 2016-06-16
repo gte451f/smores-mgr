@@ -52,7 +52,7 @@ export default Ember.Controller.extend(Error, {
       var self = this;
       var currentFields = this.get('currentFields');
       var saveList = [];
-      var session = this.get('session.data.authenticated');
+      var session = this.get('session.data.authenticated.data.attributes');
 
       currentFields.forEach(function (item) {
         // reset this value when text or text area is selected

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Error from 'bigstuf-client/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(Error, {
   notify: Ember.inject.service(),
