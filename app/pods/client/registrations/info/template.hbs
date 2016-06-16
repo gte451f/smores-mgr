@@ -22,18 +22,18 @@
                         <dt>Grade</dt>
                         <dd>{{model.attendee.schoolGrade}}</dd>
                         <dt>BirthDay</dt>
-                        <dd>{{moment model.attendee.dob 'MM/DD/YYYY'}}</dd>
+                        <dd>{{moment-format model.attendee.dob 'MM/DD/YYYY'}}</dd>
                         <dt>Gender</dt>
                         <dd>{{model.attendee.gender}}</dd>
                         <dt>Notes</dt>
                         <dd>{{model.notes}}</dd>
 
                         <dt>Created On</dt>
-                        <dd>{{moment model.createdOn 'MM/DD/YYYY'}}</dd>
+                        <dd>{{moment-format model.createdOn 'MM/DD/YYYY'}}</dd>
 
                         <dt>Updated On</dt>
                         <dd>
-                          {{moment model.updatedOn 'MM/DD/YYYY'}}
+                          {{moment-format model.updatedOn 'MM/DD/YYYY'}}
                         </dd>
                     </dl>
                 </div>

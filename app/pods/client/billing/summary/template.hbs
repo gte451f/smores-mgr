@@ -49,7 +49,7 @@
                     </tr>
                     {{#each activeCharges as |item|}}
                         <tr>
-                            <td>{{moment item.createdOn 'MM-DD-YYYY'}}</td>
+                            <td>{{moment-format item.createdOn 'MM-DD-YYYY'}}</td>
                             <td>{{item.name}}</td>
                             <td>
                               {{item.registration.attendee.firstName}}
@@ -89,7 +89,7 @@
                     </tr>
                     {{#each activePayments as |item|}}
                         <tr>
-                            <td>{{moment item.createdOn 'MM-DD-YYYY'}}</td>
+                            <td>{{moment-format item.createdOn 'MM-DD-YYYY'}}</td>
                             <td>{{capitalize-word item.mode}}</td>
                             <td><span class="label label-success">{{format-money item.amount}}</span></td>
                             <td><span class="label label-info">Pending</span></td>

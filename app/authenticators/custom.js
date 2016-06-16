@@ -35,7 +35,6 @@ export default Base.extend(ErrorHandler, {
           self.get('notify').alert({raw: errorMessage, closeAfter: 10000});
           reject(response);
         } else {
-          debugger;
           console.log('authenticators:custom:authenticate....resolving');
           resolve(response);
         }

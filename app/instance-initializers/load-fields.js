@@ -8,7 +8,8 @@ export function initialize(applicationInstance) {
     registrationFields: [],
     accountFields: []
   });
-  var store = applicationInstance.registry.lookup('store:main');
+  var container = applicationInstance.lookup ? applicationInstance : applicationInstance.container;
+  var store = container.lookup('service:store');
 
   store.findAll('field').then(function (fields) {
     customFields.set('allFields', fields);
@@ -21,7 +22,9 @@ export function initialize(applicationInstance) {
     ];
 
     groupList.forEach(function (item) {
-      var model = applicationInstance.registry.lookupFactory('model:' + item.model);
+      // var model = applicationInstance.registry.lookupFactory('model:' + item.model);
+      var model = container.lookupFactory('model:' + item.model);
+
       var fieldList = [];
       var attrs = {};
       fields.forEach(function (field) {

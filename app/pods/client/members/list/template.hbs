@@ -44,7 +44,7 @@
                         <h4 class="list-group-item-heading">{{item.firstName}} {{item.lastName}}</h4>
 
                         <p class="list-group-item-text">
-                          {{moment item.dob 'MM/DD/YYYY'}} -
+                          {{moment-format item.dob 'MM/DD/YYYY'}} -
                           {{#if item.active}}
                               <span class="label label-success">Active</span>
                           {{else}}

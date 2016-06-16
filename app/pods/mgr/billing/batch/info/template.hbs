@@ -22,7 +22,7 @@
                     <dt>Created By</dt>
                     <dd>{{model.createdBy.firstName}} {{model.createdBy.lastName}}</dd>
                     <dt>Processed On</dt>
-                    <dd>{{moment model.processedOn 'MM-DD-YYYY'}}</dd>
+                    <dd>{{moment-format model.processedOn 'MM-DD-YYYY'}}</dd>
                     <dt>Status</dt>
                     <dd>{{model.status}}</dd>
                     <dt>Payment Method</dt>
