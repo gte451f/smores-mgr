@@ -8,8 +8,8 @@
 
                 <div class="box-tools">
                     <div class="btn-group pull-right">
-                        {{#link-to 'mgr.setup.events.edit' model.id class="btn btn-default btn-xs"}} {{fa-icon "pencil"}}
-                            Edit{{/link-to}}
+                      {{#link-to 'mgr.setup.events.edit' model.id class="btn btn-default btn-xs"}} {{fa-icon "pencil"}}
+                          Edit{{/link-to}}
                         <button class="btn btn-default btn-xs"  {{action 'showModal' 'modals/delete-confirm' model}}>{{fa-icon "trash"}}
                             Delete
                         </button>
@@ -27,7 +27,8 @@
                     <dt>Session</dt>
                     <dd>{{model.session.name}}</dd>
                     <dt>Date Range</dt>
-                    <dd>{{moment-format model.session.start 'MM/DD/YYYY'}} - {{moment model.session.end 'MM/DD/YYYY'}}</dd>
+                    <dd>{{moment-format model.session.start 'MM/DD/YYYY'}}
+                        - {{moment model.session.end 'MM/DD/YYYY'}}</dd>
                     <dt>Age Range</dt>
                     <dd>{{model.cabin.minAge}} - {{model.cabin.maxAge}} years</dd>
                     <dt>Gender</dt>
@@ -52,9 +53,9 @@
             </div>
             <div class="box-body">
                 <ul>
-                    {{#each requests as |item| }}
-                        <li>{{item.id}}</li>
-                    {{/each}}
+                  {{#each requests as |item| }}
+                      <li>{{item.id}}</li>
+                  {{/each}}
                 </ul>
             </div>
         </div>

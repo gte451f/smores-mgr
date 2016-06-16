@@ -1,20 +1,20 @@
 <li class="pull-left header">
-    {{fa-icon 'fa-th'}}
+  {{fa-icon 'fa-th'}}
 </li>
 
 <li class="pull-left" style="width: 300px; margin-top:5px;">
-    {{#x-autosuggest
-    options=selectOptions
-    action="refreshOptions"
-    selectedValue=model.fullName
-    placeHolderText=suggestedEntry
-    noMesssagePlaceHolderText="No matching entries found"
-    selectItem="itemSelected" as |result search|}}
-        <div>
+  {{#x-autosuggest
+  options=selectOptions
+  action="refreshOptions"
+  selectedValue=model.fullName
+  placeHolderText=suggestedEntry
+  noMesssagePlaceHolderText="No matching entries found"
+  selectItem="itemSelected" as |result search|}}
+      <div>
             <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{result.accountId}}
                 - {{highlight-result result.fullName query=search}}</span>
-        </div>
-    {{/x-autosuggest}}
+      </div>
+  {{/x-autosuggest}}
 </li>
 
 <li class="{{isPayment}}">{{#link-to 'mgr.account.payments.info' model.id }}Balance{{/link-to}}</li>

@@ -4,29 +4,29 @@
 
             <div class="box box-{{box}} box-top">
 
-                {{#if tableTitle}}
-                    {{ partial "table-pager/table/header"}}
-                {{/if}}
+              {{#if tableTitle}}
+                {{ partial "table-pager/table/header"}}
+              {{/if}}
 
                 <div class="box-body">
                     <div role="grid" class="form-inline">
                         <div class="row">
                             <div class="col-xs-7">
-                                {{partial "table-pager/table/widgets/quick-search"}}
-                                {{partial "table-pager/table/widgets/per-page"}}
+                              {{partial "table-pager/table/widgets/quick-search"}}
+                              {{partial "table-pager/table/widgets/per-page"}}
                             </div>
                             <div class="col-xs-5">
-                                {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+                              {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
 
                                 <div class="pull-right" style="margin-right: 10px;">
-                                    {{#link-to "mgr.registrations.add.step1" class="btn btn-default btn-sm"}}{{fa-icon 'plus'}}
-                                        Registration{{/link-to}}
+                                  {{#link-to "mgr.registrations.add.step1" class="btn btn-default btn-sm"}}{{fa-icon 'plus'}}
+                                      Registration{{/link-to}}
                                 </div>
                             </div>
                         </div>
 
                         <table class="table table-bordered table-striped">
-                            {{partial "table-pager/table/table-header"}}
+                          {{partial "table-pager/table/table-header"}}
                             <tbody>
                             {{#each this as |record| }}
                                 <tr>
@@ -36,11 +36,12 @@
                                     <td>{{moment-format record.createdOn 'MM/DD/YYYY'}}</td>
                                     <td>{{record.notes}}</td>
                                     <td class="clearfix">
-                                        {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}
-                                            {{fa-icon 'folder-open'}}
-                                        {{/link-to}}
-                                        <a {{action 'showModal' 'modals/delete-confirm' record}} class="btn btn-default btn-xs pull-right">
-                                            {{fa-icon "trash"}}
+                                      {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}
+                                        {{fa-icon 'folder-open'}}
+                                      {{/link-to}}
+                                        <a {{action 'showModal' 'modals/delete-confirm' record}}
+                                                class="btn btn-default btn-xs pull-right">
+                                          {{fa-icon "trash"}}
                                         </a>
                                     </td>
                                 </tr>
@@ -50,7 +51,7 @@
                             </tbody>
 
                         </table>
-                        {{partial "table-pager/table/footer"}}
+                      {{partial "table-pager/table/footer"}}
                     </div>
                 </div>
             </div>

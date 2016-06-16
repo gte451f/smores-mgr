@@ -1,6 +1,6 @@
 <div class="wrapper">
-    {{partial "navigation/main-header"}}
-    {{partial "navigation/main-sidebar"}}
+  {{partial "navigation/main-header"}}
+  {{partial "navigation/main-sidebar"}}
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height: 1068px;">
         <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
             <h1>
                 Attendees
             </h1>
-            {{partial "navigation/main-breadcrumb"}}
+          {{partial "navigation/main-breadcrumb"}}
         </section>
         <!-- Main content -->
         <section class="content">
@@ -17,9 +17,9 @@
                     <div class="box box-primary box-top">
                         <div class="box-body">
                             <div role="grid" class="form-inline">
-                                {{partial 'table-pager/table/tools'}}
+                              {{partial 'table-pager/table/tools'}}
                                 <table class="table table-bordered table-striped">
-                                    {{partial 'table-pager/table/table-header'}}
+                                  {{partial 'table-pager/table/table-header'}}
                                     <tbody>
                                     {{#each this as |model| }}
                                         <tr>
@@ -27,17 +27,19 @@
                                             <td>{{model.lastName}}</td>
                                             <td>{{model.schoolGrade}}</td>
 
-                                            {{#if model.active}}
-                                                <td><span class="label label-success">Active</span></td>
-                                            {{else}}
-                                                <td><span class="label label-warning">Inactive</span></td>
-                                            {{/if}}
+                                          {{#if model.active}}
+                                              <td><span class="label label-success">Active</span></td>
+                                          {{else}}
+                                              <td><span class="label label-warning">Inactive</span></td>
+                                          {{/if}}
 
                                             <td>{{moment-format model.dob 'MM/DD/YYYY'}}</td>
 
                                             <td class="pull-right">
-                                                {{#link-to linkPath model.id class="btn btn-primary btn-sm"}} Open {{/link-to}}
-                                                {{#link-to "attendees.edit" model.id class="btn btn-primary btn-sm"}} Edit {{/link-to}}
+                                              {{#link-to linkPath model.id class="btn btn-primary btn-sm"}}
+                                                  Open {{/link-to}}
+                                              {{#link-to "attendees.edit" model.id class="btn btn-primary btn-sm"}}
+                                                  Edit {{/link-to}}
                                             </td>
                                         </tr>
                                     {{else}}
@@ -45,7 +47,7 @@
                                     {{/each}}
                                     </tbody>
                                 </table>
-                                {{partial 'table-pager/table/footer'}}
+                              {{partial 'table-pager/table/footer'}}
                             </div>
                         </div>
                     </div>
@@ -55,5 +57,5 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    {{partial "navigation/main-footer"}}
+  {{partial "navigation/main-footer"}}
 </div>

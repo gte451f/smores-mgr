@@ -35,13 +35,13 @@
                         <label class="col-sm-4 control-label">Email Address</label>
 
                         <div class="col-sm-8">
-                            {{input type="text" class="form-control" value=model.email placeholder="my@email.address"}}
+                          {{input type="text" class="form-control" value=model.email placeholder="my@email.address"}}
                         </div>
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    {{#link-to 'mgr.auth.login' class="btn btn-primary"}}Return To Login{{/link-to}}
+                  {{#link-to 'mgr.auth.login' class="btn btn-primary"}}Return To Login{{/link-to}}
                     <button class="btn btn-primary pull-right" {{action "reminder" model}}>Send Reset Code</button>
                 </div>
                 <!-- /.box-footer -->

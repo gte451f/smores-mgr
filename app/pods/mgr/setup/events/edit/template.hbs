@@ -11,12 +11,12 @@
                     <label class="col-sm-2  control-label">Location</label>
 
                     <div class="col-sm-10">
-                        {{#x-select value=model.location class='form-control'}}
-                            <option>Select</option>
-                            {{#each locations as |item|}}
-                                {{#x-option value=item}}{{item.name}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.location class='form-control'}}
+                          <option>Select</option>
+                        {{#each locations as |item|}}
+                          {{#x-option value=item}}{{item.name}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
 
                     </div>
                 </div>
@@ -24,12 +24,12 @@
                     <label class="col-sm-2  control-label">Program</label>
 
                     <div class="col-sm-10">
-                        {{#x-select value=model.program class='form-control'}}
-                            <option>Select</option>
-                            {{#each programs as |item|}}
-                                {{#x-option value=item}}{{item.name}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.program class='form-control'}}
+                          <option>Select</option>
+                        {{#each programs as |item|}}
+                          {{#x-option value=item}}{{item.name}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
 
                     </div>
                 </div>
@@ -38,12 +38,12 @@
                     <label class="col-sm-2  control-label">Cabin</label>
 
                     <div class="col-sm-10">
-                        {{#x-select value=model.cabin class='form-control'}}
-                            <option>Select</option>
-                            {{#each cabins as |item|}}
-                                {{#x-option value=item}}{{item.name}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.cabin class='form-control'}}
+                          <option>Select</option>
+                        {{#each cabins as |item|}}
+                          {{#x-option value=item}}{{item.name}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
                     </div>
                 </div>
 
@@ -51,12 +51,12 @@
                     <label class="col-sm-2  control-label">Session</label>
 
                     <div class="col-sm-10">
-                        {{#x-select value=model.session class='form-control'}}
-                            <option>Select</option>
-                            {{#each sessions as |item|}}
-                                {{#x-option value=item}}{{item.name}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.session class='form-control'}}
+                          <option>Select</option>
+                        {{#each sessions as |item|}}
+                          {{#x-option value=item}}{{item.name}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
                     </div>
                 </div>
 
@@ -64,14 +64,14 @@
                     <label class="col-sm-2  control-label">Cost</label>
 
                     <div class="col-sm-10">
-                        {{input type="text" class="form-control" value=model.fee }}
+                      {{input type="text" class="form-control" value=model.fee }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-1">
-                        {{#link-to 'mgr.setup.events.list' class="btn btn-primary pull-right"}}
-                            Cancel{{/link-to}}
+                      {{#link-to 'mgr.setup.events.list' class="btn btn-primary pull-right"}}
+                          Cancel{{/link-to}}
                     </div>
                     <div class="col-md-1">
                         <button class="btn btn-primary pull-right" {{action "save" model}}>Save</button>

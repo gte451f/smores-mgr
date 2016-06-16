@@ -5,19 +5,19 @@
                 <h3 class="box-title">Batch Payments By Rule</h3>
 
                 <div class="box-tools pull-right">
-                    {{#x-tooltip contentAsHTML=true
-                    content='Choose between the rules below to build a list of accounts for inclusion.'}}
-                        {{fa-icon "info"}}
-                    {{/x-tooltip}}
+                  {{#x-tooltip contentAsHTML=true
+                  content='Choose between the rules below to build a list of accounts for inclusion.'}}
+                    {{fa-icon "info"}}
+                  {{/x-tooltip}}
                 </div>
                 <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="form-group">
-                    {{radio-button value='days' groupValue=paymentRule}} All accounts with a positive balance who
+                  {{radio-button value='days' groupValue=paymentRule}} All accounts with a positive balance who
                     have not been billed within the last [{{paymentDays}}] of days <br/>
-                    {{radio-button value='unpaid' groupValue=paymentRule}} Only accounts that have yet to make any
+                  {{radio-button value='unpaid' groupValue=paymentRule}} Only accounts that have yet to make any
                     payments
                 </div>
 
@@ -26,7 +26,7 @@
                     <label class="col-sm-4 control-label">Days since last payment</label>
 
                     <div class="col-sm-4">
-                        {{input type="text" class="form-control" value=paymentDays}}
+                      {{input type="text" class="form-control" value=paymentDays}}
                     </div>
                 </div>
             </div>
@@ -63,21 +63,21 @@
                 <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            {{radio-button value='Flat' groupValue=minPaymentType}}
+                          {{radio-button value='Flat' groupValue=minPaymentType}}
                             Bill a flat amount
                         </label>
                     </div>
 
                     <div class="checkbox">
                         <label>
-                            {{radio-button value='Outstanding' groupValue=minPaymentType}}
+                          {{radio-button value='Outstanding' groupValue=minPaymentType}}
                             Bill a percent of <strong>outstanding</strong> balance
                         </label>
                     </div>
 
                     <div class="checkbox">
                         <label>
-                            {{radio-button value='Total' groupValue=minPaymentType}}
+                          {{radio-button value='Total' groupValue=minPaymentType}}
                             Bill a percent of <strong>total</strong> balance
                         </label>
                     </div>
@@ -87,7 +87,7 @@
                     <label class="col-sm-6 control-label">Amount to bill {{minPaymentNotes}}</label>
 
                     <div class="col-sm-4">
-                        {{input type="text" class="form-control" value=minPaymentAmount}}
+                      {{input type="text" class="form-control" value=minPaymentAmount}}
                     </div>
                 </div>
 
@@ -104,9 +104,9 @@
                 <h3 class="box-title">Eligible Accounts</h3>
 
                 <div class="box-tools pull-right">
-                    {{#x-tooltip content='Listed below are all accounts that fit your selected rule.  You may further customize by selecting only some accounts to be included in the batch'}}
-                        {{fa-icon "info"}}
-                    {{/x-tooltip}}
+                  {{#x-tooltip content='Listed below are all accounts that fit your selected rule.  You may further customize by selecting only some accounts to be included in the batch'}}
+                    {{fa-icon "info"}}
+                  {{/x-tooltip}}
                 </div>
                 <!-- /.box-tools -->
             </div>
@@ -116,7 +116,7 @@
                     <tbody>
                     <tr>
                         <th style="width: 10px">
-                            {{x-checkbox action="toggleAllAccounts" checked=allSelected}}
+                          {{x-checkbox action="toggleAllAccounts" checked=allSelected}}
                         </th>
                         <th>Account #</th>
                         <th>Primary Owner</th>
@@ -126,7 +126,7 @@
                     {{#each availableAccounts as |record|}}
                         <tr>
                             <td>
-                                {{x-checkbox action="toggleAccount" checked=record.isSelected value=record.account}}
+                              {{x-checkbox action="toggleAccount" checked=record.isSelected value=record.account}}
                             </td>
                             <td>{{record.account.id}}</td>
                             <td>Tom Selleck</td>
@@ -146,11 +146,11 @@
 </div>
 <div class="row">
     <div class="col-md-3 col-md-offset-9">
-        {{#spinner-button action="save" isSpinning=isProcessing class="btn btn-primary"}}
-            Submit
-        {{/spinner-button}}
+      {{#spinner-button action="save" isSpinning=isProcessing class="btn btn-primary"}}
+          Submit
+      {{/spinner-button}}
 
-        {{#link-to 'mgr.billing.dash' class='btn btn-primary'}}Cancel{{/link-to}}
+      {{#link-to 'mgr.billing.dash' class='btn btn-primary'}}Cancel{{/link-to}}
     </div>
 
 </div>

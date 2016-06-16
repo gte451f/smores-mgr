@@ -8,13 +8,13 @@
             <!-- form start -->
             <form role="form">
                 <div class="box-body">
-                    {{#each model as |item|}}
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">{{item.name}}</label>
-                            {{input value=item.value class="form-control"}}
-                            <p class="help-block">{{item.help}}</p>
-                        </div>
-                    {{/each}}
+                  {{#each model as |item|}}
+                      <div class="form-group">
+                          <label for="exampleInputEmail1">{{item.name}}</label>
+                        {{input value=item.value class="form-control"}}
+                          <p class="help-block">{{item.help}}</p>
+                      </div>
+                  {{/each}}
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

@@ -1,16 +1,18 @@
 <div class="nav-tabs-custom">
-    {{accounts/tab-nav model=model isInfo='active' redirect="redirect" suggestedEntry=suggestedEntry}}
+  {{accounts/tab-nav model=model isInfo='active' redirect="redirect" suggestedEntry=suggestedEntry}}
     <div class="tab-content">
         <div id="main" class="tab-pane active">
             <div class="row">
                 <div class="col-md-3">
-                    <h4 class="text-blue">#{{model.id}} - {{model.name}}:   {{#link-to 'mgr.account.edit' model.id class="btn btn-default btn-xs pull-right"}}Edit{{/link-to}}</h4>
+                    <h4 class="text-blue">#{{model.id}} - {{model.name}}
+                        :   {{#link-to 'mgr.account.edit' model.id class="btn btn-default btn-xs pull-right"}}
+                            Edit{{/link-to}}</h4>
 
                     <dl class="dl">
-                        {{#each customFields as |field|}}
-                            <dt>{{field.display}}</dt>
-                            <dd>{{get model field.modelName}}</dd>
-                        {{/each}}
+                      {{#each customFields as |field|}}
+                          <dt>{{field.display}}</dt>
+                          <dd>{{get model field.modelName}}</dd>
+                      {{/each}}
 
                         <dt>Notes</dt>
                         <dd>{{model.notes}}</dd>
@@ -20,40 +22,40 @@
                 <div class="col-md-3">
                     <h4 class="text-blue">Owners:</h4>
                     <ul class="nav nav-pills nav-stacked">
-                        {{#each model.owners as |owner| }}
-                            <li>
-                                {{#link-to "owner.info" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
-                            </li>
-                        {{/each}}
+                      {{#each model.owners as |owner| }}
+                          <li>
+                            {{#link-to "owner.info" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
+                          </li>
+                      {{/each}}
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h4 class="text-blue">Attendees:</h4>
                     <ul class="nav nav-pills nav-stacked">
-                        {{#each model.attendees as |attendee| }}
-                            <li>
-                                {{#link-to "attendees.info" attendee.id}}{{attendee.firstName}} {{attendee.lastName}}{{/link-to}}
-                            </li>
-                        {{/each}}
+                      {{#each model.attendees as |attendee| }}
+                          <li>
+                            {{#link-to "attendees.info" attendee.id}}{{attendee.firstName}} {{attendee.lastName}}{{/link-to}}
+                          </li>
+                      {{/each}}
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h4 class="text-blue">Addresses:</h4>
                     <ul class="list-unstyled">
-                        {{#each model.accountAddrs as |addr| }}
-                            <address>
-                                {{addr.addr_1}}<br>
-                                {{addr.city}}, {{addr.state}} {{addr.zip}}<br>
+                      {{#each model.accountAddrs as |addr| }}
+                          <address>
+                            {{addr.addr_1}}<br>
+                            {{addr.city}}, {{addr.state}} {{addr.zip}}<br>
 
-                                {{#if addr.billing}}
-                                    <span class="label label-primary">Billing</span>
-                                {{/if}}
+                            {{#if addr.billing}}
+                                <span class="label label-primary">Billing</span>
+                            {{/if}}
 
-                                {{#if addr.mailing}}
-                                    <span class="label label-primary">Mailing</span>
-                                {{/if}}
-                            </address>
-                        {{/each}}
+                            {{#if addr.mailing}}
+                                <span class="label label-primary">Mailing</span>
+                            {{/if}}
+                          </address>
+                      {{/each}}
                     </ul>
                 </div>
             </div>

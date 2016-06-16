@@ -11,7 +11,7 @@ export default DS.Model.extend({
   processedOn: DS.attr('utcdate'),
   log: DS.attr('string'),
 
-  createdBy: DS.belongsTo('user', { async: true }),
+  createdBy: DS.belongsTo('user', {async: true}),
   payments: DS.hasMany('payment', {
     async: false
   })

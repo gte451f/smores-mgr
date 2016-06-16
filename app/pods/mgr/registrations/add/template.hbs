@@ -1,26 +1,26 @@
 <section class="content">
     <div class="wizard">
         <ul class='nav nav-wizard'>
-            {{x-wizard steps=routeValues currentPath=currentPath}}
+          {{x-wizard steps=routeValues currentPath=currentPath}}
         </ul>
 
         <div class="step-content">
-            {{outlet}}
+          {{outlet}}
         </div>
 
         <div class="actions">
-            {{#if showPrev}}
-                <button type="button" {{action 'prev'}} class="btn btn-primary btn-prev">
-                    <span class="glyphicon glyphicon-arrow-left"></span>
-                    {{prevButton}}
-                </button>
-            {{/if}}
-            {{#if showNext}}
-                <button {{action 'next'}} type="button" class="btn btn-primary btn-next">
-                    {{nextButton}}
-                    <span class="glyphicon glyphicon-arrow-right"></span>
-                </button>
-            {{/if}}
+          {{#if showPrev}}
+              <button type="button" {{action 'prev'}} class="btn btn-primary btn-prev">
+                  <span class="glyphicon glyphicon-arrow-left"></span>
+                {{prevButton}}
+              </button>
+          {{/if}}
+          {{#if showNext}}
+              <button {{action 'next'}} type="button" class="btn btn-primary btn-next">
+                {{nextButton}}
+                  <span class="glyphicon glyphicon-arrow-right"></span>
+              </button>
+          {{/if}}
         </div>
     </div>
 

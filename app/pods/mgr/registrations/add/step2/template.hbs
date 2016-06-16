@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-md-3">
                         <strong>Grade: </strong>
-                        {{registration.camper.schoolGrade}}
+                      {{registration.camper.schoolGrade}}
                     </div>
                     <div class="col-md-3">
                         <strong>Gender: </strong> {{registration.camper.gender}}
@@ -36,7 +36,7 @@
                     <div class="col-md-3">
                         <dl class="">
                             <strong>Birthday: </strong>
-                            {{moment registration.camper.dob 'MM/DD/YYYY'}}
+                          {{moment registration.camper.dob 'MM/DD/YYYY'}}
                         </dl>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
     <div class="col-md-12">
         <div class="box box-solid bg-yellow disabled">
             <div class="box-header">
-                {{ fa-icon "calendar"}}
+              {{ fa-icon "calendar"}}
                 <h3 class="box-title">Step 2: Request Specific Events To Attend</h3>
                 <!-- tools box -->
                 <div class="pull-right box-tools">
@@ -67,9 +67,9 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-black">
-                {{#each registration.requests as |item|}}
-                    {{form-request request=item action="removeRequest" locations=locations sessions=sessions events=events mode=registration.mode}}
-                {{/each}}
+              {{#each registration.requests as |item|}}
+                {{form-request request=item action="removeRequest" locations=locations sessions=sessions events=events mode=registration.mode}}
+              {{/each}}
             </div>
         </div>
     </div>

@@ -10,14 +10,14 @@
             <label class="col-sm-2 control-label">First Name</label>
 
             <div class="col-sm-10">
-                {{input type="text" class="form-control" value=model.firstName}}
+              {{input type="text" class="form-control" value=model.firstName}}
             </div>
         </div>
         <div class="form-group required">
             <label class="col-sm-2 control-label">Last Name</label>
 
             <div class="col-sm-10">
-                {{input type="text" class="form-control" value=model.lastName}}
+              {{input type="text" class="form-control" value=model.lastName}}
             </div>
         </div>
         <div class="form-group required">
@@ -28,7 +28,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    {{date-picker date=model.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0" allowBlank=true}}
+                  {{date-picker date=model.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0" allowBlank=true}}
                 </div>
             </div>
         </div>
@@ -38,27 +38,27 @@
             <label class="col-sm-2 control-label">Gender</label>
 
             <div class="col-sm-10">
-                {{#each listService.gender as |item|}}
-                    {{radio-button value=item.value groupValue=model.gender}} {{item.display}}
-                {{/each}}
+              {{#each listService.gender as |item|}}
+                {{radio-button value=item.value groupValue=model.gender}} {{item.display}}
+              {{/each}}
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Grade</label>
 
             <div class="col-sm-10">
-                {{#x-select value=model.schoolGrade class="form-control"}}
-                    {{#each listService.grade as |item|}}
-                        {{#x-option value=item.value}}{{item.display}}{{/x-option}}
-                    {{/each}}
-                {{/x-select}}
+              {{#x-select value=model.schoolGrade class="form-control"}}
+                {{#each listService.grade as |item|}}
+                  {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
             </div>
         </div>
     </div>
 
     <div class="box-footer clearfix">
         <div class="pull-right">
-            {{#link-to 'client.members.list' class="btn btn-primary "}}Back{{/link-to}}
+          {{#link-to 'client.members.list' class="btn btn-primary "}}Back{{/link-to}}
             <button class="btn btn-primary" {{action "save" model}}>Save</button>
         </div>
     </div>

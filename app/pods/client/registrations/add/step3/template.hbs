@@ -13,38 +13,38 @@
         <div class="row">
             <div class="col-md-3">
                 <strong>Camper: </strong>
-                {{registration.camper.firstName}} {{registration.camper.lastName}}
+              {{registration.camper.firstName}} {{registration.camper.lastName}}
             </div>
             <div class="col-md-3">
                 <strong>Grade: </strong>
-                {{registration.camper.schoolGrade}}
+              {{registration.camper.schoolGrade}}
             </div>
             <div class="col-md-3">
                 <strong>Gender: </strong>
-                {{registration.camper.gender}}
+              {{registration.camper.gender}}
             </div>
             <div class="col-md-3">
                 <strong>Birthday: </strong>
-                {{moment registration.camper.dob 'MM/DD/YYYY'}}
+              {{moment registration.camper.dob 'MM/DD/YYYY'}}
             </div>
         </div>
 
         <div class="panel-body">
             <div class="row">
                 <strong>Notes: </strong>
-                {{#if registration.registrationNote}}
-                    {{registration.registrationNote}}
-                {{else}}
-                    No notes supplied.
-                {{/if}}
+              {{#if registration.registrationNote}}
+                {{registration.registrationNote}}
+              {{else}}
+                  No notes supplied.
+              {{/if}}
             </div>
         </div>
 
-        {{#each registration.requests as |item|}}
-            <div class="info-box">
-                <span class="info-box-icon bg-green">#{{item.priority}}</span>
+      {{#each registration.requests as |item|}}
+          <div class="info-box">
+              <span class="info-box-icon bg-green">#{{item.priority}}</span>
 
-                <div class="info-box-content">
+              <div class="info-box-content">
                     <span class="info-box-text">
                             <div class="row">
                                 <div class="col-md-6">
@@ -65,28 +65,28 @@
                                             <dt>Event Fee</dt>
                                             <dd>{{format-money item.event.fee}}</dd>
                                         {{/if}}
-                                        {{#if item.event.program.fee}}
-                                            <dt>Program Fee</dt>
+                                      {{#if item.event.program.fee}}
+                                          <dt>Program Fee</dt>
                                             <dd>{{format-money item.event.program.fee}}</dd>
-                                        {{/if}}
+                                      {{/if}}
                                     </dl>
                                 </div>
                             </div>
                     </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-        {{/each}}
+              </div>
+              <!-- /.info-box-content -->
+          </div>
+      {{/each}}
 
 
         <div class="alert bg-gray">
             <h4>{{fa-icon 'money'}} Registration Fees </h4>
-            {{#each fees as |item|}}
-                <div>
-                    <h5>{{item.name}}: {{format-money item.amount}}</h5>
-                    <small>{{item.description}}</small>
-                </div>
-            {{/each}}
+          {{#each fees as |item|}}
+              <div>
+                  <h5>{{item.name}}: {{format-money item.amount}}</h5>
+                  <small>{{item.description}}</small>
+              </div>
+          {{/each}}
         </div>
     </div>
 </div>

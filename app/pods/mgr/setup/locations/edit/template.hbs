@@ -5,61 +5,61 @@
             <label class="col-sm-4 control-label">Name:</label>
 
             <div class="col-sm-8">
-                {{input value=model.name class="form-control"}}
+              {{input value=model.name class="form-control"}}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-4 control-label">Description:</label>
 
             <div class="col-sm-8">
-                {{textarea value=model.description class="form-control"}}
+              {{textarea value=model.description class="form-control"}}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-4 control-label">Street:</label>
 
             <div class="col-sm-8">
-                {{input value=model.addr_1 class="form-control"}}
+              {{input value=model.addr_1 class="form-control"}}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-4 control-label">Street2:</label>
 
             <div class="col-sm-8">
-                {{input value=model.addr_2 class="form-control"}}
+              {{input value=model.addr_2 class="form-control"}}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-4 control-label">State:</label>
 
             <div class="col-sm-8">
-                {{#x-select value=model.state class='form-control'}}
-                    <option>Select</option>
-                    {{#each listService.americanStates as |item|}}
-                        {{#x-option value=item.value}}{{item.label}}{{/x-option}}
-                    {{/each}}
-                {{/x-select}}
+              {{#x-select value=model.state class='form-control'}}
+                  <option>Select</option>
+                {{#each listService.americanStates as |item|}}
+                  {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-4 control-label">City:</label>
 
             <div class="col-sm-8">
-                {{input value=model.city class="form-control"}}
+              {{input value=model.city class="form-control"}}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-4 control-label">Zip:</label>
 
             <div class="col-sm-8">
-                {{input value=model.zip class="form-control"}}
+              {{input value=model.zip class="form-control"}}
             </div>
         </div>
     </div>
     <div class="box-footer clearfix">
         <div class="btn-group pull-right">
             <button class="btn btn-primary btn-xs" {{action "save" model}}>Save</button>
-            {{#link-to 'mgr.setup.locations.info' model class="btn btn-primary btn-xs"}}Cancel{{/link-to}}
+          {{#link-to 'mgr.setup.locations.info' model class="btn btn-primary btn-xs"}}Cancel{{/link-to}}
         </div>
     </div>
 </div>

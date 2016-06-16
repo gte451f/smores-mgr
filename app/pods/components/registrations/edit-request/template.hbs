@@ -2,44 +2,44 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>Priority</label>
-            {{#x-select value=request.priority class="form-control"}}
-                {{#each priorities as |item|}}
-                    {{#x-option value=item}}{{item}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select value=request.priority class="form-control"}}
+            {{#each priorities as |item|}}
+              {{#x-option value=item}}{{item}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="form-group">
             <label>Location</label>
-            {{#x-select action="locationChanged" class="form-control" comp=this value=currentLocation}}
-                {{#each locations as |item|}}
-                    {{#x-option value=item}}{{item.name}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select action="locationChanged" class="form-control" comp=this value=currentLocation}}
+            {{#each locations as |item|}}
+              {{#x-option value=item}}{{item.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label>Session</label>
-            {{#x-select action="sessionChanged" class="form-control" comp=this disabled=isSessionDisabled value=currentSession}}
-                {{#x-option value=null}}Select{{/x-option}}
-                {{#each filteredSessions as |item|}}
-                    {{#x-option value=item}}{{item.name}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select action="sessionChanged" class="form-control" comp=this disabled=isSessionDisabled value=currentSession}}
+            {{#x-option value=null}}Select{{/x-option}}
+            {{#each filteredSessions as |item|}}
+              {{#x-option value=item}}{{item.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Program / Cabin</label>
-            {{#x-select class="form-control" comp=this disabled=isEventDisabled value=request.event.content}}
-                {{#x-option value=null}}Select{{/x-option}}
-                {{#each filteredEvents as |item|}}
-                    {{#x-option value=item}}{{item.program.name}} / {{item.cabin.name}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select class="form-control" comp=this disabled=isEventDisabled value=request.event.content}}
+            {{#x-option value=null}}Select{{/x-option}}
+            {{#each filteredEvents as |item|}}
+              {{#x-option value=item}}{{item.program.name}} / {{item.cabin.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
 </div>
@@ -48,33 +48,33 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>Status</label>
-            {{#x-select class="form-control" value=request.submitStatus}}
-                {{#each listService.regStatus as |item|}}
-                    {{#x-option value=item.value}}{{item.label}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select class="form-control" value=request.submitStatus}}
+            {{#each listService.regStatus as |item|}}
+              {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="form-group">
             <label>Confirmed
-                {{#x-tooltip content="Will this request occupy one of the available spaces for this event?"}}
-                    {{fa-icon "info"}}
-                {{/x-tooltip}}
+              {{#x-tooltip content="Will this request occupy one of the available spaces for this event?"}}
+                {{fa-icon "info"}}
+              {{/x-tooltip}}
             </label>
-            {{#x-select class="form-control" value=request.attending}}
-                {{#each listService.boolean as |item|}}
-                    {{#x-option value=item.value}}{{item.name}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select class="form-control" value=request.attending}}
+            {{#each listService.boolean as |item|}}
+              {{#x-option value=item.value}}{{item.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="form-group">
             <label>Note</label>
-            {{input type="text" class="form-control" value=request.note}}
+          {{input type="text" class="form-control" value=request.note}}
         </div>
     </div>
 </div>
@@ -84,7 +84,7 @@
     <div class="col-md-1">
         <div class="form-group">
             <a {{action "removeRequest" }} class="btn btn-primary">
-                {{fa-icon 'trash'}}
+              {{fa-icon 'trash'}}
             </a>
         </div>
     </div>

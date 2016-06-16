@@ -7,9 +7,9 @@ export default Ember.Controller.extend({
      * handle login form authenticate request
      * TODO validate inputs
      */
-      authenticate() {
+    authenticate() {
       console.log('action to attempt to authenticate');
-      let { identification, password } = this.getProperties('identification', 'password');
+      let {identification, password} = this.getProperties('identification', 'password');
       this.get('session').authenticate('authenticator:custom', identification, password).catch((reason) => {
         this.set('errorMessage', reason.error || reason);
       });

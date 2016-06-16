@@ -1,6 +1,6 @@
 <div class="wrapper">
-    {{partial "navigation/setup-header"}}
-    {{partial "navigation/main-sidebar"}}
+  {{partial "navigation/setup-header"}}
+  {{partial "navigation/main-sidebar"}}
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height: 1068px;">
         <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
             <h1>
                 Dashboard
             </h1>
-            {{partial "navigation/main-breadcrumb"}}
+          {{partial "navigation/main-breadcrumb"}}
         </section>
         <!-- Main content -->
         <section class="content">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="box-body">
                             Chart Here
-                            {{chartist-chart type='bar' data=model.chartData1}}
+                          {{chartist-chart type='bar' data=model.chartData1}}
                         </div>
                     </div>
                     <!-- /.box -->
@@ -37,7 +37,7 @@
                         </div>
                         <div class="box-body">
                             Chart here
-                            {{chartist-chart data=model.chartData2}}
+                          {{chartist-chart data=model.chartData2}}
                         </div>
                     </div>
                     <!-- /.box -->
@@ -47,5 +47,5 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    {{partial "navigation/main-footer"}}
+  {{partial "navigation/main-footer"}}
 </div>

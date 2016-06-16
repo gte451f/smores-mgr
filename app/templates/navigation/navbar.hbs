@@ -1,6 +1,7 @@
 <div role="navigation" class="navbar navbar-inverse" id="main-navbar">
     <!-- Main menu toggle -->
-    <button id="main-menu-toggle" type="button"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+    <button id="main-menu-toggle" type="button"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span>
+    </button>
 
     <div class="navbar-inner">
         <!-- Main navbar header -->
@@ -12,7 +13,8 @@
             </a>
 
             <!-- Main navbar toggle -->
-            <button data-target="#main-navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">{{fa-icon "bars" classNames="navbar-icon"}}</button>
+            <button data-target="#main-navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed"
+                    type="button">{{fa-icon "bars" classNames="navbar-icon"}}</button>
 
         </div> <!-- / .navbar-header -->
 
@@ -20,12 +22,12 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li>
-                        {{#link-to 'mgr.dash'}}Home{{/link-to}}
+                      {{#link-to 'mgr.dash'}}Home{{/link-to}}
                     </li>
 
                 </ul> <!-- / .navbar-nav -->
 
-                {{partial "navigation/profile"}}
+              {{partial "navigation/profile"}}
             </div>
         </div> <!-- / #main-navbar-collapse -->
     </div> <!-- / .navbar-inner -->

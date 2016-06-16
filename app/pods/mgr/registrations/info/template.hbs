@@ -8,8 +8,8 @@
 
                     <div class="box-tools pull-right">
                         <div class="btn-group">
-                            {{#link-to "registrations.edit" model.id class="btn btn-primary btn-sm"}}Edit{{/link-to}}
-                            {{#link-to "registrations.list" class="btn btn-primary btn-sm"}}Back{{/link-to}}
+                          {{#link-to "registrations.edit" model.id class="btn btn-primary btn-sm"}}Edit{{/link-to}}
+                          {{#link-to "registrations.list" class="btn btn-primary btn-sm"}}Back{{/link-to}}
                         </div>
                     </div>
                 </div>
@@ -18,9 +18,9 @@
                     <dl class="dl-horizontal">
                         <dt>Attendee</dt>
                         <dd>
-                            {{#link-to 'mgr.attendees.info' model.attendee.id}}
-                                {{model.attendee.firstName}} {{model.attendee.lastName}}
-                            {{/link-to}}
+                          {{#link-to 'mgr.attendees.info' model.attendee.id}}
+                            {{model.attendee.firstName}} {{model.attendee.lastName}}
+                          {{/link-to}}
                         </dd>
                         <dt>Grade</dt>
                         <dd>{{model.attendee.schoolGrade}}</dd>
@@ -29,10 +29,10 @@
                         <dt>Gender</dt>
                         <dd>{{model.attendee.gender}}</dd>
 
-                        {{#each customFields as |field|}}
-                            <dt>{{field.display}}</dt>
-                            <dd>{{get model field.modelName}}</dd>
-                        {{/each}}
+                      {{#each customFields as |field|}}
+                          <dt>{{field.display}}</dt>
+                          <dd>{{get model field.modelName}}</dd>
+                      {{/each}}
 
                         <dt>Notes</dt>
                         <dd>{{model.notes}}</dd>
@@ -42,7 +42,7 @@
 
                         <dt>Updated On</dt>
                         <dd>
-                            {{moment-format model.updatedOn 'MM/DD/YYYY'}}
+                          {{moment-format model.updatedOn 'MM/DD/YYYY'}}
                         </dd>
                     </dl>
                 </div>
@@ -56,10 +56,10 @@
                 </div>
                 <div class="box-body">
                     <dl class="dl-horizontal">
-                        {{#each model.charges as |item| }}
-                            <dt>{{item.name}}</dt>
-                            <dd>{{format-money item.amount}}</dd>
-                        {{/each}}
+                      {{#each model.charges as |item| }}
+                          <dt>{{item.name}}</dt>
+                          <dd>{{format-money item.amount}}</dd>
+                      {{/each}}
                     </dl>
                 </div>
                 <div class="box-footer">
@@ -104,11 +104,11 @@
                                     <td>{{record.event.cabin.name}}</td>
                                     <td><span class="label label-success">{{record.submitStatus}}</span></td>
                                     <td>
-                                        {{#if record.attending}}
-                                            <span class="label label-success">Yes</span>
-                                        {{else}}
-                                            <span class="label label-warning">No</span>
-                                        {{/if}}
+                                      {{#if record.attending}}
+                                          <span class="label label-success">Yes</span>
+                                      {{else}}
+                                          <span class="label label-warning">No</span>
+                                      {{/if}}
                                     </td>
                                 </tr>
                             {{/each}}

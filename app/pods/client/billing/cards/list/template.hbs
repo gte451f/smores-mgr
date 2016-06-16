@@ -5,26 +5,26 @@
                 <h3 class="box-title">Stored Credit Cards</h3>
 
                 <div class="box-tools pull-right">
-                    {{#link-to 'client.billing.cards.add' class="btn btn-box-tool"}} {{fa-icon 'plus'}} {{/link-to}}
+                  {{#link-to 'client.billing.cards.add' class="btn btn-box-tool"}} {{fa-icon 'plus'}} {{/link-to}}
                 </div>
                 <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
 
-                {{#each model as |record|}}
-                    {{#if record.id}}
-                        <div class="row">
-                            <div class="col-md-10">
-                                {{client/billing/cards/card-info card=record}}
-                            </div>
-                            <div class="col-md-2">
-                                <a {{action 'showModal' 'modals/delete-confirm' record}}
-                                        class="btn btn-default btn-block">{{fa-icon "trash-o"}}</a>
-                            </div>
+              {{#each model as |record|}}
+                {{#if record.id}}
+                    <div class="row">
+                        <div class="col-md-10">
+                          {{client/billing/cards/card-info card=record}}
                         </div>
-                    {{/if}}
-                {{/each}}
+                        <div class="col-md-2">
+                            <a {{action 'showModal' 'modals/delete-confirm' record}}
+                                    class="btn btn-default btn-block">{{fa-icon "trash-o"}}</a>
+                        </div>
+                    </div>
+                {{/if}}
+              {{/each}}
             </div>
             <!-- /.box-body -->
         </div>

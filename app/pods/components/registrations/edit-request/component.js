@@ -48,7 +48,7 @@ export default Ember.Component.extend({
    * refresh list of sessions based on previous choices
    *
    */
-    buildSessions() {
+  buildSessions() {
     var currentLocation = this.get('currentLocation.id');
     var allEvents = this.get('events');
     var eventList = allEvents.filterBy('location.id', currentLocation);
@@ -71,7 +71,7 @@ export default Ember.Component.extend({
    * build a list of events based on previous choices
    *
    */
-    buildEvents() {
+  buildEvents() {
     var currentLocation = this.get('currentLocation.id');
     var currentSession = this.get('currentSession.id');
 
@@ -135,7 +135,7 @@ export default Ember.Component.extend({
     /**
      * pass it out to controller to handle this record
      */
-      removeRequest() {
+    removeRequest() {
       this.sendAction('action', this.get('request'));
     }
   }

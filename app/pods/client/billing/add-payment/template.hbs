@@ -19,16 +19,16 @@
                     <label></label>
 
                     <div class="input-group">
-                        {{#x-select value=model.selectedCard class="form-control"}}
-                            <option>Select</option>
-                            {{#each model.cards as |item|}}
-                                {{#x-option value=item}}{{item.name}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.selectedCard class="form-control"}}
+                          <option>Select</option>
+                        {{#each model.cards as |item|}}
+                          {{#x-option value=item}}{{item.name}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
 
-                        {{#input-tooltip content="Only active credit cards will appear in this list."}}
-                            {{fa-icon "info"}}
-                        {{/input-tooltip}}
+                      {{#input-tooltip content="Only active credit cards will appear in this list."}}
+                        {{fa-icon "info"}}
+                      {{/input-tooltip}}
                     </div>
                 </div>
 
@@ -44,62 +44,62 @@
                     <label class="col-sm-4 control-label">Name On Card</label>
 
                     <div class="col-sm-8">
-                        {{input type="text" class="form-control" value=model.newCard.nameOnCard}}
+                      {{input type="text" class="form-control" value=model.newCard.nameOnCard}}
                     </div>
                 </div>
                 <div class="row form-group required">
                     <label class="col-sm-4 control-label">Expiration</label>
 
                     <div class="col-sm-4">
-                        {{#x-select value=model.newCard.expirationMonth class="form-control"}}
-                            <option>Month</option>
-                            {{#each listService.monthNumber as |item|}}
-                                {{#x-option value=item.value}}{{item.label}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.newCard.expirationMonth class="form-control"}}
+                          <option>Month</option>
+                        {{#each listService.monthNumber as |item|}}
+                          {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
                     </div>
                     <div class="col-sm-4">
-                        {{#x-select value=model.newCard.expirationYear class="form-control"}}
-                            <option>Year</option>
-                            {{#each listService.cardExpirationYear as |item|}}
-                                {{#x-option value=item.value}}{{item.label}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.newCard.expirationYear class="form-control"}}
+                          <option>Year</option>
+                        {{#each listService.cardExpirationYear as |item|}}
+                          {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
                     </div>
                 </div>
                 <div class="row form-group required">
                     <label class="col-sm-4 control-label">Card Number</label>
 
                     <div class="col-sm-8">
-                        {{input type="text" class="form-control" value=model.newCard.number}}
+                      {{input type="text" class="form-control" value=model.newCard.number}}
                     </div>
                 </div>
                 <div class="row form-group required">
                     <label class="col-sm-4 control-label">Vendor</label>
 
                     <div class="col-sm-8">
-                        {{#x-select value=model.newCard.vendor class="form-control"}}
-                            <option>Select</option>
-                            {{#each listService.cardVendor as |item|}}
-                                {{#x-option value=item.value}}{{item.label}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{#x-select value=model.newCard.vendor class="form-control"}}
+                          <option>Select</option>
+                        {{#each listService.cardVendor as |item|}}
+                          {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                        {{/each}}
+                      {{/x-select}}
                     </div>
                 </div>
                 <div class="row form-group required">
                     <label class="col-sm-4 control-label">Is this a debit card?</label>
 
                     <div class="col-sm-8">
-                        {{#each listService.boolean  as |item|}}
-                            {{radio-button value=item.value groupValue=model.newCard.isDebit}} {{item.name}}
-                        {{/each}}
+                      {{#each listService.boolean  as |item|}}
+                        {{radio-button value=item.value groupValue=model.newCard.isDebit}} {{item.name}}
+                      {{/each}}
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Save card for future use?</label>
 
                     <div class="col-sm-8">
-                        {{input type="checkbox" checked="saveCard"}}
+                      {{input type="checkbox" checked="saveCard"}}
                     </div>
                 </div>
                 <div class="row">
@@ -125,20 +125,20 @@
             <div class="panel-body">
                 <div class="form-group">
                     <div class="input-group">
-                        {{input type="text" class="form-control" value=model.amount}}
+                      {{input type="text" class="form-control" value=model.amount}}
 
-                        {{#input-tooltip content="Amount should not exceed this account's outstanding balance."}}
-                            {{fa-icon "info"}}
-                        {{/input-tooltip}}
+                      {{#input-tooltip content="Amount should not exceed this account's outstanding balance."}}
+                        {{fa-icon "info"}}
+                      {{/input-tooltip}}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    {{#spinner-button action="save" isSpinning=model.isSpinning class="btn btn-primary" }}
-                        Submit Payment
-                    {{/spinner-button}}
+                  {{#spinner-button action="save" isSpinning=model.isSpinning class="btn btn-primary" }}
+                      Submit Payment
+                  {{/spinner-button}}
 
-                    {{#link-to 'client.billing.summary' class="btn btn-primary"}}Cancel{{/link-to}}
+                  {{#link-to 'client.billing.summary' class="btn btn-primary"}}Cancel{{/link-to}}
                 </div>
             </div>
         </div>

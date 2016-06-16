@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
         return;
       }
       var requestContainer = this.get('registration.requestContainer');
-      requests.pushObject(requestContainer.create({priority: requestLength+1}));
+      requests.pushObject(requestContainer.create({priority: requestLength + 1}));
     },
 
     /**

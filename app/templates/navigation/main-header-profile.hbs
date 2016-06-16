@@ -122,12 +122,12 @@
                 </li>
             </ul>
         </li>
-        {{!--{{#if session.isAuthenticated}}--}}
-            <li class="user-menu">
-                <a {{ action 'invalidateSession' }}>
-                    <span class="hidden-xs">{{fa-icon 'sign-out'}} Logout</span>
-                </a>
-            </li>
-        {{!--{{/if}}--}}
+      {{!--{{#if session.isAuthenticated}}--}}
+        <li class="user-menu">
+            <a {{ action 'invalidateSession' }}>
+                <span class="hidden-xs">{{fa-icon 'sign-out'}} Logout</span>
+            </a>
+        </li>
+      {{!--{{/if}}--}}
     </ul>
 </div>

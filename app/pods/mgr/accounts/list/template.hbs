@@ -10,7 +10,7 @@
 
 
             <div class="box-body">
-                {{input class="form-control" value=termsSurrogate placeholder="Enter search terms here"}}
+              {{input class="form-control" value=termsSurrogate placeholder="Enter search terms here"}}
             </div>
         </div>
         <!-- /.box -->
@@ -22,29 +22,29 @@
                 <div class="box-tools pull-right"></div>
             </div>
             <div class="box-body chat" id="chat-box">
-                {{#each model as |item| }}
-                    <div class="row">
-                        <div class="col-md-1">
-                            {{fa-icon 'user' size=2}}
-                        </div>
-                        <div class="col-md-3">
-                            <strong>
-                                {{#link-to 'mgr.account.info' item.id}}
-                                    {{item.name}}
-                                {{/link-to}}
-                            </strong>
-                        </div>
-                        <div class="col-md-8">
-                            {{#each item.owners as |item|}}
-                                <span class="label label-default">{{item.firstName}} {{item.lastName}}</span>
-                            {{/each}}
-                        </div>
+              {{#each model as |item| }}
+                  <div class="row">
+                      <div class="col-md-1">
+                        {{fa-icon 'user' size=2}}
+                      </div>
+                      <div class="col-md-3">
+                          <strong>
+                            {{#link-to 'mgr.account.info' item.id}}
+                              {{item.name}}
+                            {{/link-to}}
+                          </strong>
+                      </div>
+                      <div class="col-md-8">
+                        {{#each item.owners as |item|}}
+                            <span class="label label-default">{{item.firstName}} {{item.lastName}}</span>
+                        {{/each}}
+                      </div>
 
-                    </div>
-                {{else}}
-                    <p class="message">no records found ... :-(</p>
-                    <!-- /.item -->
-                {{/each}}
+                  </div>
+              {{else}}
+                  <p class="message">no records found ... :-(</p>
+                  <!-- /.item -->
+              {{/each}}
             </div>
             <!-- /.chat -->
         </div>

@@ -54,7 +54,7 @@ export default Ember.Controller.extend(Error, {
     /**
      * remove an expense record from the store and possibly from the API
      */
-      removeRequest(object) {
+    removeRequest(object) {
       var requestList = this.get('model.requests');
       requestList.removeObject(object);
       // remove from api if an ID is present

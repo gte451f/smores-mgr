@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="box box-solid bg-yellow disabled">
             <div class="box-header">
-                {{ fa-icon "calendar"}}
+              {{ fa-icon "calendar"}}
                 <h3 class="box-title">Step 1: Choose A Camper</h3>
                 <!-- tools box -->
                 <div class="pull-right box-tools">
@@ -29,17 +29,17 @@
                             <label>Select the camper attending camp:</label>
                             <div class="form-group">
                                 <label>Attending Camper:</label>
-                                {{#x-autosuggest
-                                options=selectOptions
-                                action="refreshOptions"
-                                selectedValue=dummyContent.name
-                                placeHolderText="Find an attendee"
-                                noMesssagePlaceHolderText="No attendees found"
-                                selectItem="itemSelected" as |result search|}}
-                                    <div>
-                                        <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{highlight-result result.name query=search}}</span>
-                                    </div>
-                                {{/x-autosuggest}}
+                              {{#x-autosuggest
+                              options=selectOptions
+                              action="refreshOptions"
+                              selectedValue=dummyContent.name
+                              placeHolderText="Find an attendee"
+                              noMesssagePlaceHolderText="No attendees found"
+                              selectItem="itemSelected" as |result search|}}
+                                  <div>
+                                      <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{highlight-result result.name query=search}}</span>
+                                  </div>
+                              {{/x-autosuggest}}
                             </div>
                         </div>
                     </div>
@@ -49,10 +49,10 @@
                     <div class="col-md-12">
                         <div class="form-group required">
                             <label>How many sessions is your camper attending?:</label>
-                            {{#x-select value=registration.mode class="form-control"}}
-                                <option value="0">A single session of camp</option>
-                                <option value="1">Multiple sessions of camp</option>
-                            {{/x-select}}
+                          {{#x-select value=registration.mode class="form-control"}}
+                              <option value="0">A single session of camp</option>
+                              <option value="1">Multiple sessions of camp</option>
+                          {{/x-select}}
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Enter any important notes to camp staff here:</label>
-                            {{textarea class="form-control" value=registration.registrationNote cols="80" rows="6"}}
+                          {{textarea class="form-control" value=registration.registrationNote cols="80" rows="6"}}
                         </div>
                     </div>
                 </div>

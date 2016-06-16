@@ -6,73 +6,73 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-                {{#link-to 'mgr.dash'}}
-                    {{fa-icon "dashboard"}}
-                    <span>Dashboard</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.dash'}}
+                {{fa-icon "dashboard"}}
+                  <span>Dashboard</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.registrations.list'}}
-                    {{fa-icon "clipboard"}}
-                    <span>Registrations</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.registrations.list'}}
+                {{fa-icon "clipboard"}}
+                  <span>Registrations</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.accounts.list'}}
-                    <span class="glyphicon glyphicon-user"></span>
-                    <span>Accounts</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.accounts.list'}}
+                  <span class="glyphicon glyphicon-user"></span>
+                  <span>Accounts</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.attendees.list'}}
-                    {{fa-icon "child"}}
-                    <span>Attendees</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.attendees.list'}}
+                {{fa-icon "child"}}
+                  <span>Attendees</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.reports'}}
-                    {{fa-icon "pie-chart"}}
-                    <span>Reports</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.reports'}}
+                {{fa-icon "pie-chart"}}
+                  <span>Reports</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.billing.dash'}}
-                    {{fa-icon "usd"}}
-                    <span>Billing</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.billing.dash'}}
+                {{fa-icon "usd"}}
+                  <span>Billing</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.setup.dash'}}
-                    <span class="glyphicon glyphicon-tent menu-icon"></span>
-                    <span>Setup</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.setup.dash'}}
+                  <span class="glyphicon glyphicon-tent menu-icon"></span>
+                  <span>Setup</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li>
-                {{#link-to 'mgr.test'}}
-                    {{fa-icon "flask"}}
-                    <span>Experiments</span>
-                    {{fa-icon "angle-left" classNames="pull-right"}}
-                {{/link-to}}
+              {{#link-to 'mgr.test'}}
+                {{fa-icon "flask"}}
+                  <span>Experiments</span>
+                {{fa-icon "angle-left" classNames="pull-right"}}
+              {{/link-to}}
             </li>
             <li><a>{{fa-icon "envelope"}} <span>Camper Email</span></a></li>
             <li><a>{{fa-icon "photo"}} <span>Photo Album</span></a></li>
 
-            {{#if session.isAuthenticated}}
-                <li>
-                    <a href="" {{ action 'invalidateSession' }}>
-                        <span class="glyphicon glyphicon-log-out menu-icon"></span>
-                        <span>Logout</span>
-                        {{fa-icon "angle-left" classNames="pull-right"}}
-                    </a>
-                </li>
-            {{/if}}
+          {{#if session.isAuthenticated}}
+              <li>
+                  <a href="" {{ action 'invalidateSession' }}>
+                      <span class="glyphicon glyphicon-log-out menu-icon"></span>
+                      <span>Logout</span>
+                    {{fa-icon "angle-left" classNames="pull-right"}}
+                  </a>
+              </li>
+          {{/if}}
         </ul>
     </section>
     <!-- /.sidebar -->

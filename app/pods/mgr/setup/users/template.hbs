@@ -1,9 +1,9 @@
 <h4>
     Users
-    {{#x-tooltip
-    content='A system user is allowed to login to the Smores Manager and process registrations, payments and other aspects of camp registration.'}}
-        {{fa-icon "info"}}
-    {{/x-tooltip}}
+  {{#x-tooltip
+  content='A system user is allowed to login to the Smores Manager and process registrations, payments and other aspects of camp registration.'}}
+    {{fa-icon "info"}}
+  {{/x-tooltip}}
 </h4>
 
 <div class="row">
@@ -12,38 +12,38 @@
             <div class="box-header with-border">
                 <div class="box-tools">
                     <div class="btn-group pull-right">
-                        {{#link-to "mgr.setup.users.add" class="btn btn-primary btn-xs"}}
-                            {{fa-icon "plus"}} User
-                        {{/link-to}}
+                      {{#link-to "mgr.setup.users.add" class="btn btn-primary btn-xs"}}
+                        {{fa-icon "plus"}} User
+                      {{/link-to}}
                     </div>
                 </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <ul class="todo-list">
-                    {{#each model as |record|}}
-                        {{#if record.id}}
-                            <li class="clearfix">
+                  {{#each model as |record|}}
+                    {{#if record.id}}
+                        <li class="clearfix">
                                         <span class="text">
                                             {{record.firstName}} {{record.lastName}}
                                         </span>
 
-                                <div class="tools">
-                                    {{#link-to "mgr.setup.users.info" record.id}}{{fa-icon "folder-open-o"}}{{/link-to}}
-                                    {{#link-to "mgr.setup.users.edit" record.id}}{{fa-icon "edit"}}{{/link-to}}
-                                </div>
-                            </li>
-                        {{/if}}
-                    {{else}}
-                        <li>no records found ... :-(</li>
-                    {{/each}}
+                            <div class="tools">
+                              {{#link-to "mgr.setup.users.info" record.id}}{{fa-icon "folder-open-o"}}{{/link-to}}
+                              {{#link-to "mgr.setup.users.edit" record.id}}{{fa-icon "edit"}}{{/link-to}}
+                            </div>
+                        </li>
+                    {{/if}}
+                  {{else}}
+                      <li>no records found ... :-(</li>
+                  {{/each}}
                 </ul>
             </div>
         </div>
         <!-- /. end box-primary -->
     </section>
     <section class="col-lg-8">
-        {{outlet}}
+      {{outlet}}
     </section>
 </div>
 <!-- ./row -->

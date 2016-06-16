@@ -9,10 +9,10 @@
                 <div class="box-tools">
                     <div class="btn-group pull-right">
                         <button class="btn btn-default btn-sm" {{action "deleteBatch" model}}>
-                            {{fa-icon "trash"}} Delete
+                          {{fa-icon "trash"}} Delete
                         </button>
                         <button class="btn btn-default btn-sm">
-                            {{fa-icon "printer"}} Print?
+                          {{fa-icon "printer"}} Print?
                         </button>
                     </div>
                 </div>
@@ -59,11 +59,11 @@
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool hidden"
                             id="fail-show" {{action 'togglePayments' 'fail'}}>
-                        {{fa-icon "plus"}}
+                      {{fa-icon "plus"}}
                     </button>
                     <button type="button" class="btn btn-box-tool"
                             id="fail-hide" {{action 'togglePayments' 'fail'}}>
-                        {{fa-icon "minus"}}
+                      {{fa-icon "minus"}}
                     </button>
                 </div>
 
@@ -71,13 +71,13 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                {{#each failedPayments as |record|}}
-                    <li>
-                        #{{record.id}} for {{format-money record.amount}} in
-                        Account {{#link-to 'mgr.account.info' record.account.id}}
-                        #{{record.account.id}}{{/link-to}}
-                    </li>
-                {{/each}}
+              {{#each failedPayments as |record|}}
+                  <li>
+                      #{{record.id}} for {{format-money record.amount}} in
+                      Account {{#link-to 'mgr.account.info' record.account.id}}
+                      #{{record.account.id}}{{/link-to}}
+                  </li>
+              {{/each}}
             </div>
             <!-- /.box-body -->
         </div>
@@ -91,11 +91,11 @@
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool hidden"
                             id="success-show" {{action 'togglePayments' 'success'}}>
-                        {{fa-icon "plus"}}
+                      {{fa-icon "plus"}}
                     </button>
                     <button type="button" class="btn btn-box-tool"
                             id="success-hide" {{action 'togglePayments' 'success'}}>
-                        {{fa-icon "minus"}}
+                      {{fa-icon "minus"}}
                     </button>
                 </div>
                 <!-- /.box-tools -->
@@ -103,15 +103,15 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <ul class="list-unstyled">
-                    {{#each successfulPayments as |record|}}
-                        <li>
-                            #{{record.id}} for {{format-money record.amount}} in
-                            Account
-                            {{#link-to 'mgr.account.info' record.account.id}}
-                                #{{record.account.id}} - {{record.account.name}}
+                  {{#each successfulPayments as |record|}}
+                      <li>
+                          #{{record.id}} for {{format-money record.amount}} in
+                          Account
+                        {{#link-to 'mgr.account.info' record.account.id}}
+                            #{{record.account.id}} - {{record.account.name}}
                         {{/link-to}}
-                        </li>
-                    {{/each}}
+                      </li>
+                  {{/each}}
                 </ul>
             </div>
             <!-- /.box-body -->

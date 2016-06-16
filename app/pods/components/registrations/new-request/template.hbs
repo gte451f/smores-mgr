@@ -2,57 +2,57 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>Priority</label>
-            {{#x-select value=request.priority class='form-control'}}
-                <option>Select</option>
-                {{#each priorities as |item|}}
-                    {{#x-option value=item}}{{item}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select value=request.priority class='form-control'}}
+              <option>Select</option>
+            {{#each priorities as |item|}}
+              {{#x-option value=item}}{{item}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
 
     <div class="col-md-2">
         <div class="form-group">
             <label>Location</label>
-            {{#x-select class='form-control' comp=this action=locationChanged}}
-                <option>Select</option>
-                {{#each locations as |item|}}
-                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select class='form-control' comp=this action=locationChanged}}
+              <option>Select</option>
+            {{#each locations as |item|}}
+              {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
 
         </div>
     </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>Session</label>
-            {{#x-select value=currentSession class='form-control' disabled=isSessionDisabled comp=this action=sessionChanged }}
-                <option>Select</option>
-                {{#each filteredSessions as |item|}}
-                    {{#x-option value=item.id}}{{item.name}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select value=currentSession class='form-control' disabled=isSessionDisabled comp=this action=sessionChanged }}
+              <option>Select</option>
+            {{#each filteredSessions as |item|}}
+              {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
 
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label>Program / Cabin</label>
-            {{#x-select value=request.event class='form-control' disabled=isEventDisabled}}
-                <option>Select</option>
-                {{#each filteredEvents as |item|}}
-                    {{#x-option value=item}}{{item.fullName}}{{/x-option}}
-                {{/each}}
-            {{/x-select}}
+          {{#x-select value=request.event class='form-control' disabled=isEventDisabled}}
+              <option>Select</option>
+            {{#each filteredEvents as |item|}}
+              {{#x-option value=item}}{{item.fullName}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="form-group">
             <label>Note</label>
-            {{input type="text" class="form-control" value=request.note}}
+          {{input type="text" class="form-control" value=request.note}}
             <a {{action "removeRequest" }}>
-                {{fa-icon 'trash'}}
+              {{fa-icon 'trash'}}
             </a>
         </div>
     </div>

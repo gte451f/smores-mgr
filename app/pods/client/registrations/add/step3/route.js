@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   registration: Ember.inject.service(),
-  
+
   /**
    * load fees for confirmation page
    * @param params

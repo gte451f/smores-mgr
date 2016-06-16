@@ -12,23 +12,23 @@
             <div class="login-box-body">
                 <p class="login-box-msg">Sign in to your {{campName}} site</p>
 
-                {{#if errorMessage}}
-                    <div class="alert alert-danger">
-                        <strong>Login failed:</strong> {{errorMessage}}
-                    </div>
-                {{/if}}
+              {{#if errorMessage}}
+                  <div class="alert alert-danger">
+                      <strong>Login failed:</strong> {{errorMessage}}
+                  </div>
+              {{/if}}
 
-                {{! login form; the fields must be named "identification" and "password"; the controller action is "authenticate" }}
+              {{! login form; the fields must be named "identification" and "password"; the controller action is "authenticate" }}
                 <form {{action 'authenticate' on='submit'}}>
                     <div class="form-group has-feedback">
                         <div class="input-group">
-                            {{input id='identification' type="text" class="form-control" value=identification }}
+                          {{input id='identification' type="text" class="form-control" value=identification }}
                             <span class="input-group-addon">{{fa-icon 'user'}}</span>
                         </div>
                     </div>
                     <div class="form-group has-feedback">
                         <div class="input-group">
-                            {{input id='password' type="password" class="form-control" value=password }}
+                          {{input id='password' type="password" class="form-control" value=password }}
                             <span class="input-group-addon">{{fa-icon 'lock'}}</span>
                         </div>
                     </div>
@@ -49,13 +49,14 @@
                 <p class="login-box-msg"></p>
 
                 <div class="text-center">
-                    {{#link-to "client.auth.new" class="btn btn-primary btn-block btn-flat"}}Create New Account{{/link-to}}
+                  {{#link-to "client.auth.new" class="btn btn-primary btn-block btn-flat"}}Create New
+                      Account{{/link-to}}
                     <div style="margin: 20px;"><strong> - OR - </strong></div>
-                    {{#link-to "client.auth.reminder" class="btn btn-primary btn-block btn-flat"}}Help! I forgot my
-                        password!{{/link-to}}
+                  {{#link-to "client.auth.reminder" class="btn btn-primary btn-block btn-flat"}}Help! I forgot my
+                      password!{{/link-to}}
                     <div style="margin: 20px;"><strong> - OR - </strong></div>
-                    {{#link-to "client.auth.activate" class="btn btn-primary btn-block btn-flat"}}Activate My
-                        Account{{/link-to}}
+                  {{#link-to "client.auth.activate" class="btn btn-primary btn-block btn-flat"}}Activate My
+                      Account{{/link-to}}
                 </div>
             </div>
             <!-- /.login-box-body -->
