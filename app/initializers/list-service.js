@@ -1,4 +1,4 @@
-export function initialize(container, application) {
+export function initialize(application) {
   // Make the ember-data store available in the service
   application.inject('service:list', 'store', 'service:store');
 

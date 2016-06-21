@@ -16,39 +16,30 @@
                 <div class="col-md-12">
                     <div class="box box-primary box-top">
                         <div class="box-body">
-                            <div role="grid" class="form-inline">
-                              {{partial 'table-pager/table/tools'}}
-                                <table class="table table-bordered table-striped">
-                                  {{partial 'table-pager/table/table-header'}}
-                                    <tbody>
-                                    {{#each this as |model| }}
-                                        <tr>
-                                            <td>{{model.firstName}}</td>
-                                            <td>{{model.lastName}}</td>
-                                            <td>{{model.schoolGrade}}</td>
 
-                                          {{#if model.active}}
-                                              <td><span class="label label-success">Active</span></td>
-                                          {{else}}
-                                              <td><span class="label label-warning">Inactive</span></td>
-                                          {{/if}}
+                          {{#bs-table-pagination
+                          content=items
+                          tableTitle="item table #3"
+                          fields=columns
+                          isRemoteHandled=true
+                          page=page
+                          perPage=perPage
+                          totalPages=totalPages
+                          sorting=sortProperty
+                          sortDirection=sortDirection
+                          searchString=quickSearch
+                          loading=currentlyLoading
+                          refresh=(route-action 'refresh')
+                          changePage=(route-action 'changePage')
+                          changeSort=(route-action 'changeSort')
+                          runQuickSearch=(route-action 'runQuickSearch')
+                          changePerPage=(route-action 'changePerPage')
+                          as |item|
+                          }}
+                            {{bs-table-pagination.table-row item=item columns=columns}}
+                          {{/bs-table-pagination}}
 
-                                            <td>{{moment-format model.dob 'MM/DD/YYYY'}}</td>
 
-                                            <td class="pull-right">
-                                              {{#link-to linkPath model.id class="btn btn-primary btn-sm"}}
-                                                  Open {{/link-to}}
-                                              {{#link-to "attendees.edit" model.id class="btn btn-primary btn-sm"}}
-                                                  Edit {{/link-to}}
-                                            </td>
-                                        </tr>
-                                    {{else}}
-                                        <tr>no records found ... :-(</tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                              {{partial 'table-pager/table/footer'}}
-                            </div>
                         </div>
                     </div>
                 </div>

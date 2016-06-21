@@ -38,10 +38,13 @@ export default Base.extend(ErrorHandler, {
           console.log('authenticators:custom:authenticate....resolving');
           resolve(response);
         }
-      }, function (xhr, status, error) {
-        // use local error handling mixin
-        self.handleXHR(xhr);
-        reject(error);
+      }, function (reason) {
+        if (reason && reason.status === 422) {
+          // Validation Error, inform user and swallow error
+          self.get('notify').alert('Some Error occured!');
+        } else {
+          self.get('notify').alert('An internal error occured');
+        }
       });
     });
   },

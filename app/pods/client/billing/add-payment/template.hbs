@@ -1,8 +1,6 @@
 <h3>Make A Credit Payment</h3>
 <div class="row">
     <div class="col-md-6">
-
-
         <div class="panel panel-success" id="credit-panel">
             <div class="panel-heading">
                 <div class="row">
@@ -10,7 +8,6 @@
                         <h3 class="panel-title">
                             <span class="label label-info">#1</span> Choose a card to make a payment
                         </h3>
-
                     </div>
                 </div>
             </div>
@@ -26,9 +23,9 @@
                         {{/each}}
                       {{/x-select}}
 
-                      {{#input-tooltip content="Only active credit cards will appear in this list."}}
+                      {{#util/input-tooltip content="Only active credit cards will appear in this list."}}
                         {{fa-icon "info"}}
-                      {{/input-tooltip}}
+                      {{/util/input-tooltip}}
                     </div>
                 </div>
 
@@ -127,9 +124,9 @@
                     <div class="input-group">
                       {{input type="text" class="form-control" value=model.amount}}
 
-                      {{#input-tooltip content="Amount should not exceed this account's outstanding balance."}}
+                      {{#util/input-tooltip content="Amount should not exceed this account's outstanding balance."}}
                         {{fa-icon "info"}}
-                      {{/input-tooltip}}
+                      {{/util/input-tooltip}}
                     </div>
                 </div>
 

@@ -47,7 +47,7 @@ export function initialize(applicationInstance) {
   //   });
   // });
 
-  applicationInstance.registry.register('service:custom-fields', customFields);
+  applicationInstance.register('service:custom-fields', customFields);
   // applicationInstance.inject('route', 'foobar', 'foobar:main');
 }
 

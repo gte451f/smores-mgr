@@ -16,3 +16,8 @@ App = Ember.Application.extend({
 loadInitializers(App, config.modulePrefix);
 
 export default App;
+
+// For those who are paranoid
+window.onerror = function (err) {
+  console.log(err);
+}

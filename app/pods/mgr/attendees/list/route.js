@@ -3,5 +3,13 @@ import Paginate from 'smores-mgr/mixins/table-pager/route';
 
 export default Ember.Route.extend(Paginate, {
   modelName: 'attendee',
-  controllerName: 'attendees.list'
+  controllerName: 'attendees.list',
+  queryParams: {
+    quickSearchField: {
+      refreshModel: true
+    },
+    q: {
+      refreshModel: true
+    }
+  },
 });

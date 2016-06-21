@@ -2,9 +2,17 @@ import Ember from 'ember';
 import Paginate from 'smores-mgr/mixins/table-pager/controller';
 import Column from 'smores-mgr/mixins/table-pager/column';
 
-export default Ember.ArrayController.extend(Paginate, {
 
-  sortField: 'id',
+
+const {
+  Controller,
+  computed,
+  inject
+} = Ember;
+const { reads } = computed;
+
+export default Controller.extend(Paginate, {
+  queryParams: ['quickSearchField', 'q'],
 
   //load pager specific variables
   columns: [
@@ -14,6 +22,10 @@ export default Ember.ArrayController.extend(Paginate, {
     Column.create({'displayName': 'Status', 'fieldName': 'active', 'order': 3}),
     Column.create({'displayName': 'Birthday', 'fieldName': 'dob', 'order': 3})
   ],
+
+  appController: inject.controller('application'),
+  items: reads('appController.items'),
+
   //need to open single matter record
   linkPath: "attendees.info"
 });
