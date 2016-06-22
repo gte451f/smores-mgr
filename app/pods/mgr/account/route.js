@@ -24,7 +24,7 @@ export default Ember.Route.extend({
    * @returns {*}
    */
   model: function (params) {
-    return this.store.queryRecord('account', {id: params.account_id, with: 'all'});
+    return this.store.findRecord('account', params.account_id, {include: 'all', reload: true});
   },
 
   /**

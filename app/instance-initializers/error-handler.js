@@ -27,6 +27,7 @@ export function initialize(appInstance) {
     } else {
       // handle internal error
       notify.alert("An internal error occurred! " + err.message);
+      Ember.Logger.error(err);
     }
   });
 }

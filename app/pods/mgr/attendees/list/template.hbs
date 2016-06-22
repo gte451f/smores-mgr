@@ -16,9 +16,8 @@
                 <div class="col-md-12">
                     <div class="box box-primary box-top">
                         <div class="box-body">
-
                           {{#bs-table-pagination
-                          content=items
+                          content=model
                           tableTitle="item table #3"
                           fields=columns
                           isRemoteHandled=true
@@ -28,17 +27,16 @@
                           sorting=sortProperty
                           sortDirection=sortDirection
                           searchString=quickSearch
+                          perPageOptions=pageList
                           loading=currentlyLoading
                           refresh=(route-action 'refresh')
                           changePage=(route-action 'changePage')
                           changeSort=(route-action 'changeSort')
                           runQuickSearch=(route-action 'runQuickSearch')
                           changePerPage=(route-action 'changePerPage')
-                          as |item|
-                          }}
-                            {{bs-table-pagination.table-row item=item columns=columns}}
+                          as |item| }}
+                            {{bs-table-pagination.table-row item=item columns=columns linkPath=linkPath}}
                           {{/bs-table-pagination}}
-
 
                         </div>
                     </div>

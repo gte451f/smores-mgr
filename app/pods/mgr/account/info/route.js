@@ -6,6 +6,6 @@ export default Ember.Route.extend(Account, {
 
   // can do this since account service will load the full record
   model: function (params) {
-    return this.store.peekRecord('account', this.get('currentAccount.id'));
+    return this.store.findRecord('account', this.get('currentAccount.id'));
   }
 });

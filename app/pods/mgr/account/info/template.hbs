@@ -34,7 +34,7 @@
                     <ul class="nav nav-pills nav-stacked">
                       {{#each model.attendees as |attendee| }}
                           <li>
-                            {{#link-to "attendees.info" attendee.id}}{{attendee.firstName}} {{attendee.lastName}}{{/link-to}}
+                            {{#link-to "mgr.attendees.info" attendee.id}}{{attendee.firstName}} {{attendee.lastName}}{{/link-to}}
                           </li>
                       {{/each}}
                     </ul>
