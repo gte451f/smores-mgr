@@ -2,13 +2,9 @@ import Ember from 'ember';
 import Paginate from 'smores-mgr/mixins/table-pager/controller';
 import Column from 'smores-mgr/mixins/table-pager/column';
 
-
 const {
   Controller,
-  computed,
-  inject
 } = Ember;
-const {reads} = computed;
 
 export default Controller.extend(Paginate, {
   queryParams: ['quickSearchField', 'q'],

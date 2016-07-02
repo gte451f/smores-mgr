@@ -3,7 +3,7 @@
         <li>{{#link-to "client.me"}}My Account{{/link-to}}</li>
         <li class="user-menu">
             <a {{ action 'invalidateSession' }}>
-                <span class="hidden-xs">{{fa-icon 'sign-out'}} Logout</span>
+                <span class="hidden-xs" id="logout">{{fa-icon 'sign-out'}}Logout</span>
             </a>
         </li>
     </ul>

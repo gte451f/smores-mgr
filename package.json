@@ -44,6 +44,8 @@
     "ember-cli-toggle": "0.5.11",
     "ember-cli-tooltipster": "0.4.1",
     "ember-cli-uglify": "^1.2.0",
+    "ember-composable-helpers": "0.26.2",
+    "ember-cp-validations": "3.0.0-beta.0",
     "ember-data": "^2.6.0",
     "ember-export-application-global": "^1.0.5",
     "ember-font-awesome": "2.1.1",
@@ -57,6 +59,7 @@
     "ember-route-action-helper": "0.3.2",
     "ember-simple-auth": "1.1.0",
     "ember-spinner-button": "0.2.0",
+    "ember-truth-helpers": "1.2.0",
     "ember-watson": "^0.8.2",
     "ember-welcome-page": "^1.0.1",
     "loader.js": "^4.0.1"

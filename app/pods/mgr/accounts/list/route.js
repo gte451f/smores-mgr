@@ -51,6 +51,13 @@ export default Ember.Route.extend({
     if (typeof resolved.searchValue !== 'undefined') {
       controller.set('termsSurrogate', resolved.searchValue);
     }
+  },
+
+  actions: {
+    // https://github.com/emberjs/ember.js/issues/5566
+    queryParamsDidChange: function () {
+      Ember.run.next(this, 'refresh');
+    }
   }
 
 });

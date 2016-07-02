@@ -6,8 +6,15 @@ export default Ember.Route.extend(Error, {
   currentAccount: Ember.inject.service(),
 
   model: function (params) {
+    // let owner = this.store.createRecord('owner', {userType: 'Owner', active: true});
+    // let phone = this.store.createdRecord('phone', );
+
+    var owner = this.store.createRecord('owner', {userType: 'Owner', active: true});
+    var phone = this.store.createRecord('owner-number', {primary: 1});
+
+
     // fill out some default values
-    return {phone: {primary: 1}, owner: {userType: 'Owner', active: true}};
+    return {phone: phone, owner: owner};
   },
   actions: {
     /**
@@ -18,40 +25,57 @@ export default Ember.Route.extend(Error, {
      *
      * @param model
      */
-    save: function (model) {
-      var self = this;
-
+    save: function (owner, phone) {
+      let currentAccount = this.get('currentAccount.account');
       //first save the owner
-      var account = this.get('currentAccount.account');
-      model.owner.account = account;
+      owner.set('account', currentAccount);
 
-      if (Ember.isEmpty(account)) {
+      if (Ember.isEmpty(currentAccount)) {
         // error, no account detected
         this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
         return false;
       }
-      var newOwner = this.store.createRecord('owner', model.owner);
 
-      newOwner.save().then(function (data) {
-        var that = self;
+      owner.save().then((data) => {
+        var self = this;
         //then save the phone
-        model.phone.owner = newOwner;
-        var newPhone = self.store.createRecord('owner-number', model.phone);
-        newPhone.save().then(function () {
-          that.get('notify').success('Owner created');
+        phone.set('owner', owner);
+        phone.save().then(function () {
+          self.get('notify').success('Owner created');
           //reset to original position
-          that.set('model', {phone: {primary: 1}, owner: {userType: 'Owner', active: true}});
-          that.transitionTo('client.members.list');
+          self.set('model', {phone: {primary: 1}, owner: {userType: 'Owner', active: true}});
+          self.transitionTo('client.members.list');
         }, function (reason) {
           // roll back progress
-          newPhone.deleteRecord();
-          newOwner.destoryRecord();
-          self.validationReport(newPhone);
+          phone.deleteRecord();
+          owner.destroyRecord();
+
+
+          // process validation or bubble up
+          if (reason && reason.errors[0].status === "422") {
+            // Validation Error, inform user and swallow error
+            this.get('notify').alert('Email address already registered.');
+            // this.validationReport(newOwner);
+          } else {
+            // Bubble up to global error handler
+            throw reason;
+          }
+
+
         });
-      }, function (reason) {
+      }, (reason) => {
         // roll back progress
-        newOwner.deleteRecord();
-        self.validationReport(newOwner);
+        owner.deleteRecord();
+
+        // process validation or Bubble up to global error handler
+        if (reason && reason.errors[0].status === "422") {
+          // Validation Error, inform user and swallow error
+          this.get('notify').alert('Email address already registered.');
+          // this.validationReport(newOwner);
+        } else {
+          // Bubble up to global error handler
+          throw reason;
+        }
       });
     }
   }

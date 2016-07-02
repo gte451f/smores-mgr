@@ -24,6 +24,12 @@ export default Ember.Service.extend({
     {label: "Other", value: 'Other'}
   ],
 
+  ownerNumberType: [
+    {label: "Mobile", value: 'Mobile'},
+    {label: "Office", value: 'Office'},
+    {label: "Home", value: 'Home'},
+    {label: "Other", value: 'Other'}
+  ],
 
   grade: [
     {display: "Pre-K", value: 'Pre-K'},
@@ -156,5 +162,4 @@ export default Ember.Service.extend({
     {label: '2018', value: '2018'},
     {label: '2019', value: '2019'}
   ]
-
 });
