@@ -11,8 +11,9 @@ export function initialize(applicationInstance) {
     registrationFields: [],
     accountFields: []
   });
-  var container = applicationInstance.lookup ? applicationInstance : applicationInstance.container;
-  var store = container.lookup('service:store');
+
+  // var container = applicationInstance.lookup ? applicationInstance : applicationInstance.container;
+  // var store = container.lookup('service:store');
   // var model = applicationInstance.container.lookup('model:owner');
   // debugger;
   Owner.reopen({

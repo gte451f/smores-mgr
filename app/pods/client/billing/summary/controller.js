@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
 
@@ -32,7 +33,7 @@ export default Ember.Controller.extend({
         if (this.get('selectedYear') === moment(item.get('createdOn')).year()) {
           return true;
         } else {
-          return false
+          return false;
         }
       }, this);
 
@@ -40,7 +41,7 @@ export default Ember.Controller.extend({
         if (this.get('selectedYear') === moment(item.get('createdOn')).year()) {
           return true;
         } else {
-          return false
+          return false;
         }
       }, this);
 

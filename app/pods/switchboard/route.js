@@ -8,7 +8,7 @@ export default Ember.Route.extend({
    */
   beforeModel: function () {
     if (this.get('session.isAuthenticated')) {
-      let userType = this.get('session.data.authenticated.data.attributes.user-type')
+      let userType = this.get('session.data.authenticated.data.attributes.user-type');
 
       if (userType === 'Owner') {
         this.transitionTo('client.dash');

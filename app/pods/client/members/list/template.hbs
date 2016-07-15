@@ -5,7 +5,7 @@
                 <h3 class="box-title">{{fa-icon 'users'}} Owners</h3>
 
                 <div class="box-tools">
-                  {{#link-to 'client.members.add-owner' class="btn btn-box-tool"}}{{fa-icon "plus"}} Owner{{/link-to}}
+                  {{#link-to 'client.members.add-owner' class="btn btn-box-tool" id="add-owner"}}{{fa-icon "plus"}} Owner{{/link-to}}
                 </div>
             </div>
             <div class="box-body">
@@ -33,8 +33,9 @@
                 <h3 class="box-title">{{fa-icon 'users'}} Campers</h3>
 
                 <div class="box-tools">
-                  {{#link-to 'client.members.add-attendee' class="btn btn-box-tool"}}{{fa-icon "plus"}}
-                      Camper{{/link-to}}
+                  {{#link-to 'client.members.add-attendee' class="btn btn-box-tool" id="add-camper"}}
+                    {{fa-icon "plus"}} Camper
+                  {{/link-to}}
                 </div>
             </div>
             <div class="box-body">

@@ -1,6 +1,7 @@
 import ENV from 'smores-mgr/config/environment';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 import DS from 'ember-data';
+import Ember from 'ember';
 import {pluralize} from 'ember-inflector';
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {

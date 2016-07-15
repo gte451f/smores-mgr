@@ -1,9 +1,6 @@
 import DS from 'ember-data';
 import {validator, buildValidations} from 'ember-cp-validations';
 
-const {computed} = Ember;
-const {attr} = DS;
-
 var Validations = buildValidations({
   number: {
     description: 'Phone Number',

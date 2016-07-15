@@ -4,18 +4,22 @@ import Error from 'smores-mgr/mixins/crud/error';
 export default Ember.Route.extend(Error, {
   notify: Ember.inject.service(),
   currentAccount: Ember.inject.service(),
+  apiValidationHandler: Ember.inject.service(),
 
+  /**
+   * create fake models so validation will work
+   *
+   * @param params
+   * @returns {{phone: *, owner: *}}
+   */
   model: function (params) {
-    // let owner = this.store.createRecord('owner', {userType: 'Owner', active: true});
-    // let phone = this.store.createdRecord('phone', );
-
     var owner = this.store.createRecord('owner', {userType: 'Owner', active: true});
     var phone = this.store.createRecord('owner-number', {primary: 1});
-
 
     // fill out some default values
     return {phone: phone, owner: owner};
   },
+
   actions: {
     /**
      * add a new owner to the current account
@@ -50,18 +54,14 @@ export default Ember.Route.extend(Error, {
           phone.deleteRecord();
           owner.destroyRecord();
 
-
           // process validation or bubble up
           if (reason && reason.errors[0].status === "422") {
             // Validation Error, inform user and swallow error
-            this.get('notify').alert('Email address already registered.');
-            // this.validationReport(newOwner);
+            self.get('apiValidationHandler').handleValidationResponse(reason);
           } else {
             // Bubble up to global error handler
             throw reason;
           }
-
-
         });
       }, (reason) => {
         // roll back progress
@@ -70,8 +70,7 @@ export default Ember.Route.extend(Error, {
         // process validation or Bubble up to global error handler
         if (reason && reason.errors[0].status === "422") {
           // Validation Error, inform user and swallow error
-          this.get('notify').alert('Email address already registered.');
-          // this.validationReport(newOwner);
+          this.get('apiValidationHandler').handleValidationResponse(reason);
         } else {
           // Bubble up to global error handler
           throw reason;

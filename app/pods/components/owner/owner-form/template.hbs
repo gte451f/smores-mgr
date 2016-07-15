@@ -1,13 +1,13 @@
 <div class="box box-default">
     <div class="box-header with-border">
-        <h3 class="box-title">
-            {{title}}
-        </h3>
+        <h3 class="box-title">{{title}}</h3>
+        <span class="pull-right required">
+          Indicates Required Field
+        </span>
     </div>
     <div class="box-body">
         <div class="row">
             <div class="col-md-6">
-                <div id="test">{{owner.validations.isValid}}</div>
               {{util/validated-input valuePath='firstName' model=owner placeholder="First Name" labelText="First Name"}}
               {{util/validated-input valuePath='lastName' model=owner placeholder="Last Name" labelText="Last Name"}}
                 <div class="form-group required">
@@ -49,9 +49,12 @@
     <!-- /.box-body -->
     <div class="box-footer clearfix">
         <div class="pull-right">
-          {{#link-to backAddr class="btn btn-primary "}}Back{{/link-to}}
+          {{#link-to backAddr class="btn btn-primary" id="back-button"}}Back{{/link-to}}
             <button id="save-owner" class="btn btn-primary" {{action (route-action "save" owner phone)}}
-                    disabled={{if (and owner.validations.isValid phone.validations.isValid) false true}} >Save
+                    disabled={{if (and owner.validations.isValid phone.validations.isValid) false true}}>Save
+            </button>
+            <button id="save-owner" class="btn btn-primary" {{action (route-action "save" owner phone)}}>
+                Save
             </button>
         </div>
     </div>
