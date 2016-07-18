@@ -9,7 +9,7 @@ export default Ember.Service.extend({
    */
   handleValidationResponse: function (response) {
     // build a list of validation messages
-    let errorMessage = '<h5>Errors prevented this request from completing:</h5>';
+    let errorMessage = '<h5>Validation errors prevented this request from completing:</h5>';
 
     response.errors.forEach(function (item) {
       errorMessage = errorMessage + '<li>' + item.detail + '</li>';

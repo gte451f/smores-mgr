@@ -1,48 +1,42 @@
-{{#if isEditing}}
-    <div class="clearfix form-horizontal" style="padding: 10px;">
-        <div class="form-group required">
-            <label class="col-sm-4 control-label">Telephone Number</label>
+{{#if (and isEditing localEditing)}}
+  {{util/validated-input valuePath='number' model=phone placeholder="###-###-####" labelText="Phone Number"}}
+  <div class="form-group required">
+      <label class="control-label">Phone Type</label>
 
-            <div class="col-sm-8">
-              {{input type="text" class="form-control" value=phone.number placeholder="###-###-####"}}
-            </div>
-        </div>
+      <div>
+        {{#each listService.ownerNumberType as |item|}}
+          {{radio-button value=item.value groupValue=phone.phoneType}} {{item.label}}
+        {{/each}}
+      </div>
+  </div>
+  <div class="form-group">
+      <label class="control-label">Primary Number?</label>
 
-        <div class="form-group required">
-            <label class="col-sm-4 control-label">Telephone Type</label>
+      <div>
+        {{input type="checkbox" checked=phone.primary}}
+      </div>
+  </div>
 
-            <div class="col-sm-8">
-              {{#each listService.ownerNumberType  as |item|}}
-                {{radio-button value=item.value groupValue=phone.phoneType}} {{item.label}}
-              {{/each}}
-            </div>
-        </div>
-
-        <div class="form-group required">
-            <label class="col-sm-4 control-label">Primary Number</label>
-
-            <div class="col-sm-8">
-              {{input type='checkbox' checked=phone.primary}}
-            </div>
-        </div>
-
-        <div class="pull-right">
-            <button class="btn btn-success" {{action 'save' phone}}>Save</button>
-            <button class="btn btn-success" {{action 'cancel'}}>Cancel</button>
-        </div>
-    </div>
-{{else}}
-    <li>
-        <div class="pill-item">
-            <i class="fa fa-circle-o text-blue"></i>
-          {{phone.phoneType}} - {{phone.number}}
-          {{#if phone.primary}}
-              <span class="label label-success">Primary</span>
-          {{/if}}
-            <div class="pill-tools pull-right">
-                <button class="btn btn-default btn-xs" {{action 'edit'}} > {{fa-icon 'pencil'}} </button>
-                <button class="btn btn-default btn-xs" {{action 'delete' phone}} > {{fa-icon 'trash'}} </button>
-            </div>
-        </div>
-    </li>
+  <div class="pull-right">
+      <button id="save-edit-phone" class="btn btn-primary" {{action "save" phone}}
+              disabled={{if phone.validations.isValid false true}}>Save
+      </button>
+      <button class="btn btn-primary" {{action 'cancel' phone}} id="cancel-edit-phone">Cancel</button>
+  </div>
 {{/if}}
+
+{{#unless isEditing}}
+  {{#unless localEditing}}
+      <li style="height: 35px;">
+          <i class="fa fa-circle-o text-blue"></i>
+        {{phone.phoneType}} - {{phone.number}}
+          <div class="pull-right">
+            {{#if phone.primary}}
+                <span class="label label-success">Primary</span>
+            {{/if}}
+              <button class="btn btn-primary btn-xs" {{action 'edit'}} > {{fa-icon 'pencil'}} </button>
+              <button class="btn btn-primary btn-xs" {{action 'delete' phone}} > {{fa-icon 'trash'}} </button>
+          </div>
+      </li>
+  {{/unless}}
+{{/unless}}

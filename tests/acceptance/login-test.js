@@ -11,8 +11,8 @@ test('user can login & out with 2 fake accounts', function (assert) {
     assert.equal(find(':submit').text(), 'Sign In');
   });
 
-  // login as demo
-  fillIn('#identification', 'demo@smores.camp');
+  // login with special user accounts to 1) verify real access, 2) don't mess with the usual demo accounts
+  fillIn('#identification', 'login-demo@smores.camp');
   fillIn('#password', 'password1234');
   click(':submit');
   andThen(() => assert.equal(find('#logout').text(), 'Logout'));
@@ -23,7 +23,7 @@ test('user can login & out with 2 fake accounts', function (assert) {
 
 
   // try again as admin
-  fillIn('#identification', 'admin@smores.camp');
+  fillIn('#identification', 'login-admin@smores.camp');
   fillIn('#password', 'password1234');
   click(':submit');
   andThen(() => assert.equal(find('#logout').text(), ''));

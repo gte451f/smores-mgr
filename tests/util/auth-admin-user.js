@@ -18,15 +18,15 @@
 
 let userData = {
     data: {
-      id: "595", type: "profile",
+      id: "6", type: "profile",
       attributes: {
-        email: "demo@smores.camp",
-        "last-name": "Owner",
-        "first-name": "Demo",
-        "account-id": "95",
-        "user-type": "Owner",
+        email: "test-admin@smores.camp",
+        "last-name": "Employee",
+        "first-name": "TEST-Admin",
+        "account-id": "",
+        "user-type": "Employee",
         "user-name": null,
-        "token": "RScvm1gRInzJJeLoyu6xhAbrs2UPfhKkUvyv1OttvVRa8GRAO0ZmwESPnjfEv70B"
+        "token": "ShEpslnket8Ngngnr1gjKgRumdgMmySuJcQ4sX9wfL64DiAEeI7oCSgwMOx93QCv"
       }
     }
 };

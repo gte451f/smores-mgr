@@ -5,22 +5,26 @@
                 <h3 class="box-title">{{fa-icon 'users'}} Owners</h3>
 
                 <div class="box-tools">
-                  {{#link-to 'client.members.add-owner' class="btn btn-box-tool" id="add-owner"}}{{fa-icon "plus"}} Owner{{/link-to}}
+                  {{#link-to 'client.members.add-owner' class="btn btn-box-tool" id="add-owner"}}{{fa-icon "plus"}}
+                      Owner{{/link-to}}
                 </div>
             </div>
             <div class="box-body">
                 <div class="list-group parent-list">
                   {{#each model.owners as |item|}}
-                    {{#link-to 'client.members.edit-owner' item.id class="list-group-item"}}
-                        <h4 class="list-group-item-heading">{{item.firstName}} {{item.lastName}}
+                    {{#link-to 'client.members.edit-owner' item.id class="list-group-item" id=item.id}}
+                        <h4 class="list-group-item-heading">
+                          {{item.firstName}} {{item.lastName}}
+                          {{#if item.primaryContact}}
+                              <span class="label label-success">Primary</span>
+                          {{/if}}
+                            <span class="label label-info pull-right">{{item.relationship}}</span>
+
                         </h4>
-                      {{#if item.primaryContact}}
-                          <span class="label label-success">Primary</span>
-                      {{/if}}
-                        <p class="list-group-item-text">{{item.relationship}}</p>
+
                     {{/link-to}}
                   {{else}}
-                      <li>no records found ... :-(</li>
+                      <div class="no-records-found">no records found ... :-(</div>
                   {{/each}}
                 </div>
             </div>

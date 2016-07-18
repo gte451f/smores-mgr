@@ -14,7 +14,7 @@
                     <label class="control-label">Relationship to Camper</label>
                     <div>
                       {{#each listService.ownerRelationship as |item|}}
-                        {{radio-button value=item.value groupValue=owner.relationship}} {{item.label}}
+                        {{radio-button value=item.value groupValue=owner.relationship name='relationship'}} {{item.label}}
                       {{/each}}
                     </div>
                 </div>
@@ -23,14 +23,13 @@
                     <label class="control-label">Gender</label>
                     <div>
                       {{#each listService.gender as |item|}}
-                        {{radio-button value=item.value groupValue=owner.gender}} {{item.display}}
+                        {{radio-button value=item.value groupValue=owner.gender name='gender'}} {{item.display}}
                       {{/each}}
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
               {{util/validated-input valuePath='email' model=owner placeholder="Email" labelText="Email"}}
-
               {{util/validated-input valuePath='number' model=phone placeholder="###-###-####" labelText="Primary Phone Number"}}
 
                 <div class="form-group required">
@@ -38,7 +37,7 @@
 
                     <div>
                       {{#each listService.ownerNumberType as |item|}}
-                        {{radio-button value=item.value groupValue=phone.phoneType}} {{item.label}}
+                        {{radio-button value=item.value groupValue=phone.phoneType name='phoneType'}} {{item.label}}
                       {{/each}}
                     </div>
                 </div>
@@ -49,12 +48,9 @@
     <!-- /.box-body -->
     <div class="box-footer clearfix">
         <div class="pull-right">
-          {{#link-to backAddr class="btn btn-primary" id="back-button"}}Back{{/link-to}}
-            <button id="save-owner" class="btn btn-primary" {{action (route-action "save" owner phone)}}
+          {{#link-to backAddr class="btn btn-primary" id="cancel-new-owner"}}Back{{/link-to}}
+            <button id="save-new-owner" class="btn btn-primary" {{action (route-action "save" owner phone)}}
                     disabled={{if (and owner.validations.isValid phone.validations.isValid) false true}}>Save
-            </button>
-            <button id="save-owner" class="btn btn-primary" {{action (route-action "save" owner phone)}}>
-                Save
             </button>
         </div>
     </div>

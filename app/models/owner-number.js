@@ -5,7 +5,7 @@ var Validations = buildValidations({
   number: {
     description: 'Phone Number',
     validators: [
-      validator('presence', {presence: true}),
+      validator('presence', {presence: true, message: 'should not be empty'}),
       validator('format', {
         allowBlank: false,
         type: 'phone'

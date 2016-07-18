@@ -5,13 +5,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   session: Ember.inject.service(),
 
   model: function (params) {
-    var sessionData = this.get('session.data.authenticated');
-    return this.store.query('account', {with: 'owners,attendees', id: sessionData.accountId});
-  },
-
-  setupController: function (controller, resolved) {
-    var model = resolved.get('firstObject');
-    this._super(controller, model);
+    var id = this.get('session.data.authenticated.data.attributes.account-id');
+    return this.store.findRecord('account', id, {include: 'owners,attendees'});
   }
-
 });

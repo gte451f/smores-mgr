@@ -4,29 +4,53 @@ import Error from 'smores-mgr/mixins/crud/error';
 export default Ember.Component.extend(Error, {
   notify: Ember.inject.service(),
 
+  /**
+   * is the form editing a phone number anywhere?
+   */
   isEditing: false,
+  /**
+   * is this the phone number being edited?
+   */
+  localEditing: false,
 
   actions: {
+    /**
+     * toggle to edit mode
+     */
     edit: function () {
       this.set('isEditing', true);
+      this.set('localEditing', true);
     },
 
-    cancel: function () {
+    /**
+     * cancel out of edit mode
+     * reset changes
+     */
+    cancel: function (phone) {
       this.set('isEditing', false);
+      this.set('localEditing', false);
+      phone.rollbackAttributes();
     },
 
-    // send this action up to the controller
+    /**
+     * remove the phone record
+     * @param phone
+     */
     delete: function (phone) {
       phone.destroyRecord();
     },
 
-    save: function (model) {
-      var self = this;
-      model.save().then(function (data) {
-        self.get('notify').success('Phone Number saved');
-        self.set('isEditing', false);
+    /**
+     * save the existing phone number
+     * @param model
+     */
+    save: function (number) {
+      number.save().then((data) => {
+        this.get('notify').success('Phone Number Saved');
+        this.set('isEditing', false);
+        this.set('localEditing', false);
       }, function (reason) {
-        self.handleXHR(reason);
+        this.handleXHR(reason);
       });
     }
   }
