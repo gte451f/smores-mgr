@@ -18,6 +18,23 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
       return {phone: phone, owner: owner};
     },
 
+    /**
+     * inject current account after it has had a chance to load
+     *
+     * @param controller
+     * @param model
+     */
+    setupController: function (controller, model) {
+      let currentAccount = this.get('currentAccount.account');
+      if (Ember.isEmpty(currentAccount)) {
+        // error, no account detected
+        this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
+      } else {
+        model.owner.set('account', currentAccount);
+      }
+      this._super(controller, model);
+    },
+
     actions: {
       /**
        * add a new owner to the current account
@@ -26,16 +43,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
        * @param model
        */
       save(owner, phone) {
-        let currentAccount = this.get('currentAccount.account');
-
-        if (Ember.isEmpty(currentAccount)) {
-          // error, no account detected
-          this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-          return false;
-        } else {
-          owner.set('account', currentAccount);
-        }
-
+        var account = owner.get('account');
         owner.save().then((data) => {
           var self = this;
           //then save the phone
@@ -43,7 +51,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
           phone.save().then(function () {
             self.get('notify').success('Owner created');
             //reset to original position
-            var owner = self.store.createRecord('owner', {userType: 'Owner', active: true});
+            var owner = self.store.createRecord('owner', {userType: 'Owner', active: true, account: account});
             var phone = self.store.createRecord('owner-number', {primary: 1});
             self.set('model', {phone: phone, owner: owner});
             self.transitionTo('client.members.list');

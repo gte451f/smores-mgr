@@ -1,0 +1,54 @@
+<!-- Default box -->
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{title}}{{attendee.userType}}</h3>
+
+        <div class="box-tools"></div>
+    </div>
+    <div class="box-body">
+      {{util/validated-input valuePath='firstName' model=attendee placeholder="First Name" labelText="First Name"}}
+
+      {{util/validated-input valuePath='lastName' model=attendee placeholder="Last Name" labelText="Last Name"}}
+
+        <div class="form-group required">
+            <label class="control-label">Birthday</label>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+              {{date-picker date=attendee.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0" allowBlank=true}}
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label class="control-label">Gender</label>
+            <div>
+              {{#each listService.gender as |item|}}
+                {{radio-button value=item.value groupValue=attendee.gender name='gender'}} {{item.display}}
+              {{/each}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Grade</label>
+
+            <div>
+              {{#x-select value=attendee.schoolGrade class="form-control"}}
+                {{#each listService.grade as |item|}}
+                  {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer clearfix">
+        <div class="pull-right">
+          {{#link-to backAddr class="btn btn-primary" id="cancel-new-attendee"}}Back{{/link-to}}
+            <button id="save-new-attendee" class="btn btn-primary" {{action (route-action "save" attendee)}}
+                    disabled={{if attendee.validations.isValid false true}}>Save
+            </button>
+        </div>
+    </div>
+</div>
+<!-- /.box -->
