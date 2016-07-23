@@ -22,7 +22,11 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "selectChoose",
+    "selectSearch",
+    "removeMultiplOption",
+    "clearSelected"
   ],
   "node": false,
   "browser": false,

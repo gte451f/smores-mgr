@@ -20,9 +20,14 @@ test('visiting client -> account members page', function (assert) {
     andThen(() => assert.equal(find('h3.box-title').text(), 'Add New Owner'));
     click('#cancel-new-owner');
 
-    // click('#add-camper');
-    // andThen(() => assert.equal(find('h3.box-title').text(), 'Add New Camper'));
-    // click('#');
+    click('#add-attendee');
+    andThen(() => assert.equal(find('h3.box-title').text(), 'Add New Camper'));
+    click('#cancel-new-attendee');
+
+
+    // let's edit a record
+    click('div.attendee-list .list-group-item');
+    click('#cancel-edit-attendee');
 
     // let's edit a record
     click('div.parent-list .list-group-item');

@@ -9,16 +9,7 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{attendee/edit-form}}`);
+  this.render(hbs`{{attendee/add-form title='test attendee edit'}}`);
+  assert.equal(this.$('h3.box-title').text().trim(), 'test attendee edit');
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#attendee/edit-form}}
-      template block text
-    {{/attendee/edit-form}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

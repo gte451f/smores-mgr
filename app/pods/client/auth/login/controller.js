@@ -4,6 +4,7 @@ import ENV from 'smores-mgr/config/environment';
 export default Ember.Controller.extend({
   session: Ember.inject.service(),
   campName: ENV.camp.name,
+
   actions: {
     /**
      * handle login form authenticate request

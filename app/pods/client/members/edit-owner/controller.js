@@ -9,6 +9,11 @@ export default Ember.Controller.extend({
   isAdding: false,
 
   /**
+   * is a save operation currently pending
+   */
+  ownerSaving: false,
+
+  /**
    * toggle whether to display other phone numbers...hide when editing a single phone number
    */
   isEditing: false,
@@ -17,7 +22,7 @@ export default Ember.Controller.extend({
     /**
      * trigger new phone form and reset the phone object
      */
-    toggleNewPhone: function () {
+    toggleNewPhone() {
       this.set('isAdding', true);
       let newPhone = this.store.createRecord('owner-number', {primary: 0});
       this.set('newPhone', newPhone);

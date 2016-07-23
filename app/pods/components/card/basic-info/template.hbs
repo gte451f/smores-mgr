@@ -1,0 +1,28 @@
+<div class="info-box bg-green">
+    <span class="info-box-icon">{{fa-icon 'credit-card'}}</span>
+
+    <div class="info-box-content">
+        <span class="info-box-text">
+          {{card.vendor}} ending in {{card.number}}
+
+            <button {{action (toggle "deleteModal" this)}} class="btn btn-default pull-right btn-xs delete-card">
+              {{fa-icon "trash-o"}}
+            </button>
+        </span>
+        <span class="progress-description">
+            Expires: {{card.expirationMonth}}/{{card.expirationYear}} <br/>
+            Added: {{moment-format card.createdOn 'MM-DD-YYYY'}}
+        </span>
+    </div>
+    <!-- /.info-box-content -->
+</div>
+
+{{#if deleteModal}}
+  {{#util/confirm-modal
+  title="Confirm: Delete Credit Card"
+  close=(toggle "deleteModal" this)
+  proceed=(action 'delete' card)
+  isPending=isDeleting}}
+      <p>Are you sure you want to delete this credit card?  This action cannot be undone.</p>
+  {{/util/confirm-modal}}
+{{/if}}

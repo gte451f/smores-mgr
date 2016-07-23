@@ -10,7 +10,7 @@ export default Ember.Route.extend(ErrorHandler, {
    * @param params
    * @returns {*}
    */
-  model: function (params) {
+  model(params) {
     var accountId = this.get('session.data.authenticated.data.attributes.account-id');
 
     if (Ember.isEmpty(accountId)) {
@@ -19,21 +19,5 @@ export default Ember.Route.extend(ErrorHandler, {
       return false;
     }
     return this.store.query('card', {account_id: accountId});
-  },
-
-  actions: {
-
-    /**
-     * delete a credit card from the server
-     * @param card
-     */
-    delete: function (card) {
-      var self = this;
-      card.destroyRecord().then(function () {
-        self.get('notify').success('Credit Card Removed');
-      }, function (reason) {
-        self.validationReport(card);
-      });
-    }
   }
 });

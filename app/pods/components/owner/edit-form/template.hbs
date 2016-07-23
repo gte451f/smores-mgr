@@ -1,8 +1,10 @@
-<div class="box box-{{box}}">
+<div class="box owner-box">
     <div class="box-header with-border">
         <h3 class="box-title">{{title}}</h3>
         <div class="box-tools">
-            <button class="btn btn-box-tool" {{action (route-action "delete" owner)}} id="delete-owner">{{fa-icon 'trash'}} Delete</button>
+            <button class="btn btn-box-tool" {{action (route-action "delete" owner)}}
+                    id="delete-owner">{{fa-icon 'trash'}} Delete
+            </button>
         </div>
     </div>
     <div class="box-body">
@@ -30,10 +32,16 @@
     <!-- /.box-body -->
     <div class="box-footer clearfix">
         <div class="pull-right">
-            <button id="cancel-edit-owner" class="btn btn-primary" {{action (route-action "cancel" owner)}}>Cancel</button>
-            <button id="save-edit-owner" class="btn btn-primary" {{action (route-action "save" owner)}}
-                    disabled={{if owner.validations.isValid false true}}>Save
+            <button id="cancel-edit-owner" class="btn btn-primary" {{action (route-action "cancel" owner)}}>Cancel
             </button>
+          {{#spinner-button
+          id="save-edit-owner"
+          onclick=(action (route-action "save" owner))
+          isSpinning=isPending
+          class="btn btn-primary"
+          disabled=(if owner.validations.isValid false true)}}
+              Save
+          {{/spinner-button}}
         </div>
     </div>
     <!-- /.box-footer -->

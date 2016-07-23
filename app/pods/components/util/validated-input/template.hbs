@@ -2,10 +2,9 @@
   {{labelText}}
   {{#if isValid}}
       &nbsp; {{fa-icon 'check-circle'}}
-{{/if}}
+  {{/if}}
 </label>
 {{input type=type value=value placeholder=placeholder class="form-control" name=valuePath}}
-
 <span class="help-block">
   {{#if showWarningMessage}}
     {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'varningMessage'}}

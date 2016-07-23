@@ -1,45 +1,58 @@
 import Ember from 'ember';
-import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(ErrorHandler, {
+export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
   notify: Ember.inject.service(),
+  currentAccount: Ember.inject.service(),
 
-  //reset the model in case you return to add another record
+  /**
+   * create fake models so validation will work
+   *
+   * @param params
+   * @returns {{phone: *, owner: *}}
+   */
   model: function (params) {
-    return {};
+    return this.store.createRecord('card', {active: 1});
   },
+
+  /**
+   * inject current account after it has had a chance to load
+   *
+   * @param controller
+   * @param model
+   */
+  setupController: function (controller, model) {
+    let currentAccount = this.get('currentAccount.account');
+    if (Ember.isEmpty(currentAccount)) {
+      // error, no account detected
+      this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
+    }
+    this._super(controller, model);
+  },
+
 
   actions: {
 
     /**
      * save a new card record
      *
-     * @param model
+     * @param card
      * @returns {boolean}
      */
-    save: function (model) {
-      var self = this;
-
+    save: function (card) {
+      this.controller.set('cardSaving', true);
       // set some default values on the model
-      model.active = 1;
-      var accountId = this.get('session.data.authenticated.data.attributes.account-id');
-      model.account = this.store.peekRecord('account', accountId);
-
-      if (Ember.isEmpty(model.account)) {
-        // error, no account detected
-        this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-        return false;
-      }
-
-      var newRecord = this.store.createRecord('card', model);
-      newRecord.save().then(function (post) {
-        self.set('model', {});
-        self.transitionTo('cards');
-        self.get('notify').success('Card Added');
-      }, function (reason) {
-        // roll back progress
-        newRecord.deleteRecord();
-        self.validationReport(newRecord);
+      card.set('account', this.get('currentAccount.account'));
+      card.save().then((data) => {
+        //reset to original position
+        this.set('model', this.store.createRecord('card', {active: 1}));
+        this.get('notify').success('Card Added');
+        this.controller.set('cardSaving', false);
+        this.transitionTo('client.billing.cards.list');
+      }, (reason) => {
+        this.controller.set('cardSaving', false);
+        this.handleFormError(reason);
       });
     }
   }

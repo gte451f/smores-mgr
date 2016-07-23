@@ -2,6 +2,10 @@ import Ember from 'ember';
 import Application from '../../app';
 import config from '../../config/environment';
 
+// include helpers for power select testing
+import registerPowerSelectHelpers from '../../tests/helpers/ember-power-select';
+registerPowerSelectHelpers();
+
 export default function startApp(attrs) {
   let application;
 

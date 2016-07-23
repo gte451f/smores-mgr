@@ -12,7 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
      * @param params
      * @returns {{phone: *, owner: *}}
      */
-    model: function (params) {
+    model(params) {
       var owner = this.store.createRecord('owner', {userType: 'Owner', active: true});
       var phone = this.store.createRecord('owner-number', {primary: 1});
       return {phone: phone, owner: owner};
@@ -24,13 +24,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
      * @param controller
      * @param model
      */
-    setupController: function (controller, model) {
+    setupController(controller, model) {
       let currentAccount = this.get('currentAccount.account');
       if (Ember.isEmpty(currentAccount)) {
         // error, no account detected
         this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-      } else {
-        model.owner.set('account', currentAccount);
       }
       this._super(controller, model);
     },
@@ -43,7 +41,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
        * @param model
        */
       save(owner, phone) {
-        var account = owner.get('account');
+        owner.set('account', this.get('currentAccount.account'));
         owner.save().then((data) => {
           var self = this;
           //then save the phone
@@ -51,9 +49,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
           phone.save().then(function () {
             self.get('notify').success('Owner created');
             //reset to original position
-            var owner = self.store.createRecord('owner', {userType: 'Owner', active: true, account: account});
-            var phone = self.store.createRecord('owner-number', {primary: 1});
-            self.set('model', {phone: phone, owner: owner});
+            var newOwner = self.store.createRecord('owner', {userType: 'Owner', active: true});
+            var newPhone = self.store.createRecord('owner-number', {primary: 1});
+            self.set('model', {phone: newPhone, owner: newOwner});
             self.transitionTo('client.members.list');
           }, function (reason) {
             self.handleFormError(reason);

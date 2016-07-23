@@ -9,7 +9,7 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{owner/add-form}}`);
-  assert.equal(this.$('h3.box-title').text().trim(), 'Add New Owner');
+  this.render(hbs`{{owner/add-form title='foobar'}}`);
+  assert.equal(this.$('h3.box-title').text().trim(), 'foobar');
 
 });

@@ -1,7 +1,7 @@
 <!-- Default box -->
 <div class="box box-default">
     <div class="box-header with-border">
-        <h3 class="box-title">{{title}}{{attendee.userType}}</h3>
+        <h3 class="box-title">{{title}}</h3>
 
         <div class="box-tools"></div>
     </div>
@@ -12,11 +12,12 @@
 
         <div class="form-group required">
             <label class="control-label">Birthday</label>
+
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-              {{date-picker date=attendee.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0" allowBlank=true}}
+              {{date-picker date=model.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0" allowBlank=true name='dob'}}
             </div>
         </div>
 
@@ -33,7 +34,7 @@
             <label class="control-label">Grade</label>
 
             <div>
-              {{#x-select value=attendee.schoolGrade class="form-control"}}
+              {{#x-select value=attendee.schoolGrade class="form-control school-grade" name='schooldGrade'}}
                 {{#each listService.grade as |item|}}
                   {{#x-option value=item.value}}{{item.display}}{{/x-option}}
                 {{/each}}

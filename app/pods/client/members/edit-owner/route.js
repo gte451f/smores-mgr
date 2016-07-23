@@ -35,10 +35,13 @@ export default Ember.Route.extend(Error, {
      * @param owner
      */
     save(owner) {
+      this.controller.set('ownerSaving', true);
       owner.save().then((data) => {
         this.get('notify').success('Owner Saved');
+        this.controller.set('ownerSaving', false);
       }, function (reason) {
         this.validationReport(reason);
+        this.controller.set('ownerSaving', false);
       });
     },
 

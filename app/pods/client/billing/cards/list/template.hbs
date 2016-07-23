@@ -1,11 +1,13 @@
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-5">
         <div class="box box-default">
             <div class="box-header">
-                <h3 class="box-title">Stored Credit Cards</h3>
+                <h3 class="box-title">{{fa-icon 'credit-card'}} Stored Credit Cards</h3>
 
                 <div class="box-tools pull-right">
-                  {{#link-to 'client.billing.cards.add' class="btn btn-box-tool"}} {{fa-icon 'plus'}} {{/link-to}}
+                  {{#link-to 'client.billing.cards.add' class="btn btn-box-tool" id="add-card"}}
+                    {{fa-icon 'plus'}} Credit Card
+                  {{/link-to}}
                 </div>
                 <!-- /.box-tools -->
             </div>
@@ -15,12 +17,8 @@
               {{#each model as |record|}}
                 {{#if record.id}}
                     <div class="row">
-                        <div class="col-md-10">
-                          {{client/billing/cards/card-info card=record}}
-                        </div>
-                        <div class="col-md-2">
-                            <a {{action 'showModal' 'modals/delete-confirm' record}}
-                                    class="btn btn-default btn-block">{{fa-icon "trash-o"}}</a>
+                        <div class="col-md-12">
+                          {{card/basic-info card=record}}
                         </div>
                     </div>
                 {{/if}}

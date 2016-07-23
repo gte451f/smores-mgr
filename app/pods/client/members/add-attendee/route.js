@@ -12,23 +12,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
    * @param params
    * @returns {*}
    */
-  model: function (params) {
-    return this.store.createRecord('attendee', {userType: 'Attendee', active: true})
+  model(params) {
+    return this.store.createRecord('attendee', {userType: 'Attendee', active: true});
   },
 
   /**
-   * inject current account after it has had a chance to load
+   * verify current account after it has had a chance to load
    *
    * @param controller
    * @param model
    */
-  setupController: function (controller, model) {
+  setupController(controller, model) {
     let currentAccount = this.get('currentAccount.account');
     if (Ember.isEmpty(currentAccount)) {
       // error, no account detected
       this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-    } else {
-      model.set('account', currentAccount);
     }
     this._super(controller, model);
   },
@@ -39,12 +37,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
      *
      * @param model
      */
-    save: function (attendee) {
-      var account = attendee.get('account');
+    save(attendee) {
+      attendee.set('account', this.get('currentAccount.account'));
       attendee.save().then((data) => {
         this.get('notify').success('Camper Added');
         //reset to original position
-        let resetAttendee = this.store.createRecord('attendee', {userType: 'Attendee', active: true, account: account});
+        let resetAttendee = this.store.createRecord('attendee', {userType: 'Attendee', active: true});
         this.set('model', resetAttendee);
         this.transitionTo('client.members.list');
       }, function (reason) {
