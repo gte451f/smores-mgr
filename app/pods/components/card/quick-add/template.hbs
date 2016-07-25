@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Name On Card</label>
+
+            <div class="col-sm-8">
+              {{input type="text" class="form-control" value=newCard.nameOnCard}}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Expiration</label>
+
+            <div class="col-sm-4">
+              {{#x-select value=newCard.expirationMonth class="form-control"}}
+                  <option>Month</option>
+                {{#each listService.monthNumber as |item|}}
+                  {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
+            </div>
+            <div class="col-sm-4">
+              {{#x-select value=newCard.expirationYear class="form-control"}}
+                  <option>Year</option>
+                {{#each listService.cardExpirationYear as |item|}}
+                  {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Card Number</label>
+
+            <div class="col-sm-8">
+              {{input type="text" class="form-control" value=newCard.number}}
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">CVN or CVC</label>
+
+            <div class="col-sm-8">
+                <div class="input-group">
+                  {{input type="text" class="form-control" value=newCard.cvc}}
+
+                  {{#util/input-tooltip content="A 3 or 4 digit code on your credit card."}}
+                    {{fa-icon "info"}}
+                  {{/util/input-tooltip}}
+                </div>
+            </div>
+        </div>
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Vendor</label>
+
+            <div class="col-sm-8">
+              {{#x-select value=newCard.vendor class="form-control"}}
+                  <option>Select</option>
+                {{#each listService.cardVendor as |item|}}
+                  {{#x-option value=item.value}}{{item.label}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
+            </div>
+        </div>
+
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Billing Address</label>
+
+            <div class="col-sm-8">
+              {{input type="text" class="form-control" value=newCard.address}}
+            </div>
+        </div>
+
+        <div class="row form-group required">
+            <label class="col-sm-4 control-label">Billing Zip Code</label>
+
+            <div class="col-sm-8">
+              {{input type="text" class="form-control" value=newCard.zip}}
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 control-label">Save card for future use?</label>
+
+            <div class="col-sm-8">
+              {{input type="checkbox" checked=model.saveCard}}
+            </div>
+        </div>
+    </div>
+</div>

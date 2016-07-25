@@ -3,7 +3,7 @@
 </li>
 
 <li class="pull-left" style="width: 300px; margin-top:5px;">
-  {{#x-autosuggest
+  {{#util/x-autosuggest
   options=selectOptions
   action="refreshOptions"
   selectedValue=model.fullName
@@ -14,7 +14,7 @@
             <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{result.accountId}}
                 - {{highlight-result result.fullName query=search}}</span>
       </div>
-  {{/x-autosuggest}}
+  {{/util/x-autosuggest}}
 </li>
 
 <li class="{{isPayment}}">{{#link-to 'mgr.account.payments.info' model.id }}Balance{{/link-to}}</li>

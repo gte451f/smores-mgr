@@ -2,8 +2,6 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-// export default Ember.Route.extend({
-
   model: function (params) {
     return Ember.RSVP.hash({
       location: this.store.findAll('location')
@@ -11,7 +9,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   setupController: function (controller, resolved) {
-
     this._super(controller, resolved.location);
 
     var data1 = {

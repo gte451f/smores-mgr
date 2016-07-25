@@ -1,0 +1,26 @@
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-12">
+        <div class="pull-right">
+            <button class="btn btn-primary" {{action "toggleCredit" model.cardMode}}>{{toggleText}}</button>
+        </div>
+    </div>
+</div>
+
+{{card/quick-add newCard=model.newCard}}
+
+<div class="form-group required" id="card-on-file-form">
+    <label>Credit Card On File</label>
+
+    <div class="input-group">
+      {{#x-select value=model.selectedCard class='form-control' disabled=false id="cardOnFile"}}
+          <option>Select</option>
+        {{#each model.cards as |item|}}
+          {{#x-option value=item}}{{item.name}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
+
+      {{#util/input-tooltip content="Only active credit cards will appear in this list."}}
+        {{fa-icon "info"}}
+      {{/util/input-tooltip}}
+    </div>
+</div>

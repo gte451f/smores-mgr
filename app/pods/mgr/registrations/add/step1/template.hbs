@@ -29,7 +29,7 @@
                             <label>Select the camper attending camp:</label>
                             <div class="form-group">
                                 <label>Attending Camper:</label>
-                              {{#x-autosuggest
+                              {{#util/x-autosuggest
                               options=selectOptions
                               action="refreshOptions"
                               selectedValue=dummyContent.name
@@ -39,7 +39,7 @@
                                   <div>
                                       <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{highlight-result result.name query=search}}</span>
                                   </div>
-                              {{/x-autosuggest}}
+                              {{/util/x-autosuggest}}
                             </div>
                         </div>
                     </div>

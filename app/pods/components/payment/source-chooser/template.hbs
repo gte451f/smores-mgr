@@ -1,0 +1,52 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="panel-title">Payment Type</h3>
+            </div>
+            <div class="col-sm-6">
+                <div class="pull-right">
+                  {{#if enableCash}}
+                      <button class="btn btn-xs {{if (eq mode 'Cash') 'btn-primary' 'btn-default'}}"
+                              id="cash-button" {{action 'setMode' 'Cash'}}>
+                          Cash
+                      </button>
+                  {{/if}}
+
+                  {{#if enableCredit}}
+                      <button class="btn btn-xs {{if (eq mode 'Credit') 'btn-primary' 'btn-default'}}"
+                              id="credit-button" {{action 'setMode' 'Credit'}}>
+                          Credit
+                      </button>
+                  {{/if}}
+
+                  {{#if enableCheck}}
+                      <button class="btn btn-xs {{if (eq mode 'Check') 'btn-primary' 'btn-default'}}"
+                              id="check-button" {{action 'setMode' 'Check'}}>
+                          Check
+                      </button>
+                  {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel-body">
+      {{#if (eq mode 'Credit') }}
+        {{card/card-chooser model=model}}
+      {{/if}}
+
+      {{#if (eq mode 'Check') }}
+        {{check/quick-add newCheck=model.check}}
+      {{/if}}
+
+      {{#if (eq mode 'Cash') }}
+          <div class="row">
+              <div class="col-md-12">
+                  Cash selected, skip to amount.
+              </div>
+          </div>
+      {{/if}}
+    </div>
+</div>

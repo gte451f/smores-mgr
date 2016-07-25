@@ -24,7 +24,7 @@
                     <ul class="nav nav-pills nav-stacked">
                       {{#each model.owners as |owner| }}
                           <li>
-                            {{#link-to "owner.info" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
+                            {{#link-to "mgr.owner.info" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
                           </li>
                       {{/each}}
                     </ul>
