@@ -34,9 +34,9 @@ export default Ember.Route.extend(Error, {
         this.get('notify').success('Attendee Saved');
         this.controller.set('attendeeSaving', false);
         this.transitionTo('client.members.list');
-      }, function (reason) {
+      }, (reason) => {
         this.controller.set('attendeeSaving', false);
-        this.validationReport(reason);
+        this.handleFormError(reason);
       });
     },
 

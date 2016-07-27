@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ENV from 'smores-mgr/config/environment';
+import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 /**
  * consolidate logic to save payments (including with a new card)
@@ -26,9 +27,9 @@ export default Ember.Mixin.create({
   /**
    * logic to return to the correct originating route
    */
-  returnWhenFinished: function () {
-    let returnRoute = this.get('returnRoute');
-    let returnRouteData = this.get('returnRouteData');
+  returnWhenFinished: function (model) {
+    let returnRoute = model.returnRoute;
+    let returnRouteData = model.returnRouteData;
 
     if (Ember.isEmpty(returnRouteData)) {
       this.transitionTo(returnRoute);
@@ -38,104 +39,41 @@ export default Ember.Mixin.create({
   },
 
   actions: {
+
     /**
-     * process various payment scenarios
-     * break up to allow for clean separation of isolated logic
+     * handle payment save operations
+     * delegate out to helper functions depending on the path the payment takes
      *
+     * @param model
      */
-    save: function () {
-      var self = this;
-      // var model = this.get('model');
-      var controller = this.controllerFor(this.routeName);
-      this.set('saveCard', controller.get('model.saveCard'));
-      var model = controller.get('model');
-      controller.set('model.isSpinning', true);
+    save(model){
+      Ember.set(model, 'isPending', true);
 
-      // payment must have a positive amount
-      // strip alpha chars from amount
-      this.set('amount', model.payment.amount.replace(/[^\d.-]/g, ''));
-
-      if (this.get('amount') <= 0) {
-        this.get('notify').alert('Error: You must choose an amount greater than 0');
-        controller.set('model.isSpinning', false);
-        return;
-      }
-
-      if (controller.isCash === true) {
-        model.payment.mode = 'Cash';
+      if (model.mode === 'Cash') {
+        Ember.set(model, 'newPayment.mode', 'Cash');
         this.savePayment(model);
-      } else if (controller.isCheck === true) {
-        model.payment.mode = 'Check';
+      } else if (model.mode === 'Check') {
+        Ember.set(model, 'newPayment.mode', 'Check');
         this.saveCheck(model);
       } else {
-        model.payment.mode = 'Credit';
-        if (model.cardMode === 'file') {
+        Ember.set(model, 'newPayment.mode', 'Credit');
+        if (model.useNewCard === true) {
+
+          if (model.saveNewCard === true) {
+            this.saveNewFilePayment(model);
+          } else {
+            this.saveOneTimeCardPayment(model);
+          }
+        } else {
           // use existing card, skip to the payment with file'd card in tow
           if (model.selectedCard) {
-            model.payment.card = model.selectedCard;
+            Ember.set(model, 'newPayment.card', model.selectedCard);
           } else {
             this.get('notify').alert('Error: You must choose a credit card on file or enter a new card.');
-            controller.set('model.isSpinning', false);
+            Ember.set(model, 'isPending', false);
             return;
           }
           this.savePayment(model);
-        } else {
-          if (this.get('saveCard') === false) {
-
-            // what do we do with a new credit card that we only want for this payment?
-            // probably a custom jquery xhr request here
-            // since we can't post a model w/ custom properties
-
-            // setup the new card & payment to mirror what ember passes the api
-            var newPayment = {
-              payment: {
-                amount: this.get('amount'),
-                mode: 'Credit',
-                account_id: model.account.id,
-                cvc: model.newCard.cvc,
-                name_on_card: model.newCard.nameOnCard,
-                expiration_month: model.newCard.expirationMonth,
-                expiration_year: model.newCard.expirationYear,
-                number: model.newCard.number,
-                vendor: model.newCard.vendor,
-                address: model.newCard.address,
-                zip: model.newCard.zip,
-                is_debit: model.newCard.isDebit
-              }
-            };
-
-            Ember.$.ajax({
-              url: ENV.APP.restDestination + ENV.APP.restNameSpace + '/payments',
-              type: "POST",
-              data: JSON.stringify(newPayment),
-              dataType: 'json',
-              contentType: "application/json",
-              headers: {'X-Authorization': 'Token: ' + this.get('session.data.authenticated.token')},
-            }).then(function (response) {
-              //create a local version of the newly created payment
-              self.store.createRecord('payment', response);
-
-              // reset the spinner no matter the result
-              var controller = self.controllerFor(self.routeName);
-              controller.set('model.isSpinning', false);
-
-              //return to payments w/ alert
-              self.get('notify').success('Success creating payment!');
-
-              self.returnWhenFinished();
-
-            }, function (reason) {
-              // reset the spinner no matter the result
-              var controller = self.controllerFor(self.routeName);
-              controller.set('model.isSpinning', false);
-
-              self.handleXHR(reason);
-            });
-
-          } else {
-            // must be a new card
-            this.saveNewFilePayment(model);
-          }
         }
       }
     }
@@ -145,18 +83,17 @@ export default Ember.Mixin.create({
    * save a check before passing on to save a regular payment
    * @param model
    */
-  saveCheck: function (model) {
-    var self = this;
-
-    //todo validation data
-    model.check.account = model.account;
-    var check = this.store.createRecord('check', model.check);
-
-    check.save().then(function (post) {
-      model.payment.check = post;
-      self.savePayment(model);
+  saveCheck (model) {
+    var newCheck = model.newCheck;
+    newCheck.set('account', model.account);
+    newCheck.save().then(()=> {
+      Ember.set(model, 'newPayment.check', newCheck);
+      this.savePayment(model);
     }, function (reason) {
-      self.validationReport(check);
+      // report error
+      this.handleFormError(reason);
+      // reset the spinner no matter the result
+      Ember.set(model, 'isPending', false);
     });
   },
 
@@ -168,45 +105,76 @@ export default Ember.Mixin.create({
    * @param payment
    * @returns {boolean}
    */
-  saveNewFilePayment: function (model) {
-    var self = this;
-    var controller = self.controllerFor(self.routeName);
-
-    // prep local variable
+  saveNewFilePayment (model) {
+    // prep local variable with some values
     var newCard = model.newCard;
+    newCard.set('account', model.account);
 
-    // set some default values on the newCard
-    newCard.account = model.account;
-
-    //validate card before proceeding
-    var passedValidation = this.get('validateCredit').validateCard(newCard);
-    if (passedValidation === false) {
-      let errorMessage = this.get('validateCredit').getErrorMessages();
-      this.get('notify').alert({html: errorMessage});
-      controller.set('model.isSpinning', false);
-      return;
-    }
-
-    var newRecord = this.store.createRecord('card', newCard);
-    newRecord.save().then(function (post) {
-      self.get('notify').success('Card saved to your file');
+    newCard.save().then(() => {
+      this.get('notify').success('Card saved to your file');
       // update selected card to match the newly created card
-      model.payment.card = newRecord;
+      Ember.set(model, 'newPayment.card', newCard);
       // now save the payment
-      self.savePayment(model);
-      // reset the spinner no matter the result
-      controller.set('model.isSpinning', false);
-      //return to payments w/ alert
-      self.get('notify').success('Success creating payment!');
-      self.returnWhenFinished();
+      this.savePayment(model);
     }, function (reason) {
-      // roll back progress
-      newRecord.deleteRecord();
-      self.validationReport(newRecord);
-
+      // report error
+      this.handleFormError(reason);
       // reset the spinner no matter the result
-      var controller = self.controllerFor(self.routeName);
-      controller.set('model.isSpinning', false);
+      Ember.set(model, 'isPending', false);
+    });
+  },
+
+
+  // what do we do with a new credit card that we only want for this payment?
+  // probably a custom jquery xhr request here
+  // since we can't post a model w/ custom properties
+  saveOneTimeCardPayment(model){
+    var self = this;
+    // setup the new card & payment to mirror what ember passes the api
+    var newPayment = {
+      data: {
+        attributes: {
+          amount: model.newPayment.get('amount'),
+          mode: 'Credit',
+          cvc: model.newCard.get('cvc'),
+          name_on_card: model.newCard.get('nameOnCard'),
+          expiration_month: model.newCard.get('expirationMonth'),
+          expiration_year: model.newCard.get('expirationYear'),
+          number: model.newCard.get('number'),
+          vendor: model.newCard.get('vendor'),
+          address: model.newCard.get('address'),
+          zip: model.newCard.get('zip'),
+          is_debit: model.newCard.get('isDebit')
+        },
+        relationships:{
+          account:{type: 'accounts', id: model.account.id}
+        },
+        type: "payments"
+      }
+    };
+
+    Ember.$.ajax({
+      url: ENV.APP.restDestination + '/' + ENV.APP.restNameSpace + '/payments',
+      type: "POST",
+      data: JSON.stringify(newPayment),
+      dataType: 'json',
+      contentType: "application/json",
+      headers: {'X-Authorization': 'Token: ' + this.get('session.data.authenticated.data.attributes.token')},
+    }).then((response)=> {
+      //create a local version of the newly created payment
+      this.store.createRecord('payment', response);
+
+      Ember.set(model, 'isPending', false);
+      //return to payments w/ alert
+      this.get('notify').success('Success creating payment!');
+      this.returnWhenFinished();
+
+    }, (reason) => {
+
+      // report error
+      this.handleFormError(reason);
+      // reset the spinner no matter the result
+      Ember.set(model, 'isPending', false);
     });
   },
 
@@ -216,24 +184,19 @@ export default Ember.Mixin.create({
    *
    * @param model
    */
-  savePayment: function (model) {
-    var self = this;
-    model.payment.account = model.account;
-    var payment = this.store.createRecord('payment', model.payment);
-
-    payment.set('amount', this.get('amount'));
-    payment.save().then(function (post) {
+  savePayment (model) {
+    var payment = model.newPayment;
+    payment.set('account', model.account);
+    payment.save().then(() => {
       // var id = model.account.get('id');
-      self.get('notify').success('Success saving payment!');
-      self.returnWhenFinished();
+      this.get('notify').success('Success saving payment!');
+      Ember.set(model, 'isPending', false);
+      this.returnWhenFinished(model);
     }, function (reason) {
-      // roll back payment
-      payment.deleteRecord();
       // report error
-      self.validationReport(payment);
+      this.handleFormError(reason);
       // reset the spinner no matter the result
-      var controller = self.controllerFor(self.routeName);
-      controller.set('model.isSpinning', false);
+      Ember.set(model, 'isPending', false);
     });
   }
 });

@@ -2,7 +2,10 @@
     <div class="panel-heading">
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="panel-title">Payment Type</h3>
+                <h3 class="panel-title">
+                    <span class="label label-info">#1</span>
+                    Choose which type of payment to make
+                </h3>
             </div>
             <div class="col-sm-6">
                 <div class="pull-right">
@@ -34,11 +37,11 @@
 
     <div class="panel-body">
       {{#if (eq mode 'Credit') }}
-        {{card/card-chooser model=model}}
+        {{card/card-chooser newCard=newCard selectedCard=selectedCard existingCards=existingCards useNewCard=useNewCard}}
       {{/if}}
 
       {{#if (eq mode 'Check') }}
-        {{check/quick-add newCheck=model.check}}
+        {{check/quick-add newCheck=newCheck}}
       {{/if}}
 
       {{#if (eq mode 'Cash') }}

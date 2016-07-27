@@ -1,26 +1,28 @@
 <div class="row" style="margin-bottom: 10px;">
     <div class="col-md-12">
         <div class="pull-right">
-            <button class="btn btn-primary" {{action "toggleCredit" model.cardMode}}>{{toggleText}}</button>
+            <button class="btn btn-primary btn-xs" {{action (toggle 'useNewCard' this)}}>{{toggleText}}</button>
         </div>
     </div>
 </div>
 
-{{card/quick-add newCard=model.newCard}}
+{{#if useNewCard}}
+  {{card/quick-add newCard=newCard saveNewCard=saveNewCard}}
+{{else}}
+    <div class="form-group required" id="card-on-file-form">
+        <label>Credit Card On File</label>
 
-<div class="form-group required" id="card-on-file-form">
-    <label>Credit Card On File</label>
+        <div class="input-group">
+          {{#x-select value=selectedCard class='form-control' disabled=false id="cardOnFile"}}
+              <option>Select</option>
+            {{#each existingCards as |item|}}
+              {{#x-option value=item}}{{item.name}}{{/x-option}}
+            {{/each}}
+          {{/x-select}}
 
-    <div class="input-group">
-      {{#x-select value=model.selectedCard class='form-control' disabled=false id="cardOnFile"}}
-          <option>Select</option>
-        {{#each model.cards as |item|}}
-          {{#x-option value=item}}{{item.name}}{{/x-option}}
-        {{/each}}
-      {{/x-select}}
-
-      {{#util/input-tooltip content="Only active credit cards will appear in this list."}}
-        {{fa-icon "info"}}
-      {{/util/input-tooltip}}
+          {{#util/input-tooltip content="Only active credit cards will appear in this list."}}
+            {{fa-icon "info"}}
+          {{/util/input-tooltip}}
+        </div>
     </div>
-</div>
+{{/if}}

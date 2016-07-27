@@ -45,7 +45,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
         let resetAttendee = this.store.createRecord('attendee', {userType: 'Attendee', active: true});
         this.set('model', resetAttendee);
         this.transitionTo('client.members.list');
-      }, function (reason) {
+      }, (reason) => {
         this.handleFormError(reason);
       });
 

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="row form-group required">
             <label class="col-sm-4 control-label">Name On Card</label>
 
@@ -47,6 +47,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-6">
         <div class="row form-group required">
             <label class="col-sm-4 control-label">Vendor</label>
 
@@ -59,7 +61,6 @@
               {{/x-select}}
             </div>
         </div>
-
         <div class="row form-group required">
             <label class="col-sm-4 control-label">Billing Address</label>
 
@@ -80,8 +81,9 @@
             <label class="col-sm-4 control-label">Save card for future use?</label>
 
             <div class="col-sm-8">
-              {{input type="checkbox" checked=model.saveCard}}
+              {{input type="checkbox" checked=saveNewCard}}
             </div>
         </div>
+
     </div>
 </div>

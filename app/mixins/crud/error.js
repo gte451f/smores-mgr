@@ -107,14 +107,16 @@ export default Ember.Mixin.create({
    * @param reason
    */
   handleFormError(reason){
-    // process validation or bubble up
-    if (reason && reason.errors[0].status === "422") {
+    // process "standard" api validation errors
+    if (reason && reason.errors && reason.errors[0].status === "422") {
       // Validation Error, inform user and swallow error
-      this.get('apiValidationHandler').handleValidationResponse(reason);
+      this.get('apiValidationHandler').handleValidationResponse(reason.errors);
+      // check for non-standard error responses, this occurred when pushing custom payment POSTs to the API
+    } else if (reason && reason.responseJSON.errors && reason.status === 422) {
+      this.get('apiValidationHandler').handleValidationResponse(reason.responseJSON.errors);
     } else {
       // Bubble up to global error handler
       throw reason;
     }
   }
-
 });
