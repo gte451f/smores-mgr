@@ -6,10 +6,10 @@
         <div class="box-tools"></div>
     </div>
     <div class="box-body">
-      {{util/validated-input valuePath='nameOnCard' model=card placeholder="Cardholder Name" labelText="Name On Card"}}
+      {{util/validated-text valuePath='nameOnCard' model=card placeholder="Cardholder Name" labelText="Name On Card"}}
 
         <div class="form-group required">
-          {{#util/validated-select valuePath='expirationMonth' model=card labelText="Expiration Month"}}
+          {{#util/validated-input valuePath='expirationMonth' model=card labelText="Expiration Month"}}
                 {{#util/x-select
                 class='expirationMonth'
                 options=listService.monthNumber
@@ -20,11 +20,11 @@
                 onchange=(action (mut-list card 'expirationMonth')) as |item|}}
                   {{item.label}}
                 {{/util/x-select}}
-          {{/util/validated-select}}
+          {{/util/validated-input}}
         </div>
 
         <div class="form-group required">
-          {{#util/validated-select valuePath='expirationYear' model=card labelText="Expiration Year"}}
+          {{#util/validated-input valuePath='expirationYear' model=card labelText="Expiration Year"}}
             {{#util/x-select
             class='expirationYear'
             options=listService.cardExpirationYear
@@ -35,14 +35,14 @@
             onchange=(action (mut-list card 'expirationYear')) as |item|}}
               {{item.label}}
             {{/util/x-select}}
-          {{/util/validated-select}}
+          {{/util/validated-input}}
         </div>
 
-      {{util/validated-input valuePath='number' model=card placeholder="Card Number" labelText="Card Number"}}
-      {{util/validated-input valuePath='cvc' model=card placeholder="CVC" labelText="Card Verification Code"}}
+      {{util/validated-text valuePath='number' model=card placeholder="Card Number" labelText="Card Number"}}
+      {{util/validated-text valuePath='cvc' model=card placeholder="CVC" labelText="Card Verification Code"}}
 
         <div class="form-group required">
-          {{#util/validated-select valuePath='vendor' model=card labelText="Vendor"}}
+          {{#util/validated-input valuePath='vendor' model=card labelText="Vendor"}}
             {{#util/x-select
             class='vendor'
             options=listService.cardVendor
@@ -53,27 +53,27 @@
             onchange=(action (mut-list card 'vendor')) as |item|}}
               {{item.label}}
             {{/util/x-select}}
-          {{/util/validated-select}}
+          {{/util/validated-input}}
         </div>
 
         <div class="form-group required">
-          {{#util/validated-select valuePath='isDebit' model=card labelText="Is this a debit card?"}}
+          {{#util/validated-input valuePath='isDebit' model=card labelText="Is this a debit card?"}}
               <div class="checkbox">
                 {{#each listService.boolean  as |item|}}
                   {{radio-button value=item.value groupValue=card.isDebit name='isDebit'}} {{item.name}}
                 {{/each}}
               </div>
-          {{/util/validated-select}}
+          {{/util/validated-input}}
         </div>
 
         <div class="form-group required">
-          {{#util/validated-select valuePath='allowReoccuring' model=card labelText="Can this card be used for re-occuring charges?"}}
+          {{#util/validated-input valuePath='allowReoccuring' model=card labelText="Can this card be used for re-occuring charges?"}}
               <div class="checkbox">
                 {{#each listService.boolean  as |item|}}
                   {{radio-button value=item.value groupValue=card.allowReoccuring name='allowReoccuring'}} {{item.name}}
                 {{/each}}
               </div>
-          {{/util/validated-select}}
+          {{/util/validated-input}}
         </div>
 
         <div class="row">

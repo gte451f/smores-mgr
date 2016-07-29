@@ -4,7 +4,9 @@
         <div id="main" class="tab-pane active">
             <h3>Add A {{mode}} Payment for account #{{model.account.id}}</h3>
 
-          {{payment/source-chooser newCard=model.newCard newCheck=newCheck
+          {{payment/source-chooser
+          newCard=model.newCard
+          newCheck=model.newCheck
           selectedCard=model.selectedCard
           existingCards=existingCards
           mode=model.mode
@@ -22,22 +24,14 @@
                     </div>
                 </div>
                 <div class="panel-body">
-
-                    <div class="row" style="margin-bottom: 10px;">
+                    <div class="row form-horizontal" style="margin-bottom: 10px;">
                         <div class="col-md-6">
-                            <div class="row form-group required">
-                                <label class="col-sm-4 control-label">Amount $</label>
-
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                      {{input type="text" class="form-control" value=model.newPayment.amount}}
-
-                                      {{#util/input-tooltip content="Amount should not exceed this account's outstanding balance."}}
-                                        {{fa-icon "info"}}
-                                      {{/util/input-tooltip}}
-                                    </div>
-                                </div>
-                            </div>
+                          {{util/validated-text valuePath='amount'
+                          model=model.newPayment
+                          placeholder="$$"
+                          labelText="Amount"
+                            horizontal=true
+                          tooltip="Amount should not exceed this account's outstanding balance."}}
                         </div>
                         <div class="col-md-6">
                             <div class="pull-right">

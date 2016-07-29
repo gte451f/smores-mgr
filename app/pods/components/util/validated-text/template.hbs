@@ -1,0 +1,55 @@
+<label class="control-label {{if horizontal "col-sm-4"}}">
+  {{labelText}}
+  {{#if isValid}}
+      &nbsp; {{fa-icon 'check-circle'}}
+  {{/if}}
+</label>
+
+{{#if horizontal}}
+    <div class="col-sm-8">
+
+      {{#if tooltip}}
+          <div class="input-group">
+            {{input type=type value=value placeholder=placeholder class="form-control" name=valuePath}}
+
+            {{#util/input-tooltip content=tooltip}}
+              {{fa-icon "info"}}
+            {{/util/input-tooltip}}
+          </div>
+      {{else}}
+        {{input type=type value=value placeholder=placeholder class="form-control" name=valuePath}}
+      {{/if}}
+
+        <span class="help-block">
+            {{#if showWarningMessage}}
+              {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'warningMessage'}}
+            {{/if}}
+          {{#if showErrorMessage}}
+            {{fa-icon 'times-circle'}} {{v-get model valuePath 'message'}}
+          {{/if}}
+          </span>
+    </div>
+{{else}}
+  {{#if tooltip}}
+      <div class="input-group">
+        {{input type=type value=value placeholder=placeholder class="form-control" name=valuePath}}
+
+        {{#util/input-tooltip content=tooltip}}
+          {{fa-icon "info"}}
+        {{/util/input-tooltip}}
+      </div>
+  {{else}}
+    {{input type=type value=value placeholder=placeholder class="form-control" name=valuePath}}
+  {{/if}}
+
+  <span class="help-block">
+      {{#if showWarningMessage}}
+        {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'warningMessage'}}
+      {{/if}}
+    {{#if showErrorMessage}}
+      {{fa-icon 'times-circle'}} {{v-get model valuePath 'message'}}
+    {{/if}}
+    </span>
+{{/if}}
+
+

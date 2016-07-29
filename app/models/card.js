@@ -5,7 +5,7 @@ var Validations = buildValidations({
   nameOnCard: {
     description: 'Name On Card',
     validators: [
-      validator('presence', {presence: true, message: 'should not be empty'}),
+      validator('presence', {presence: true, message: 'Card Name is required'}),
       validator('length', {
         min: 2,
         max: 25
@@ -16,12 +16,6 @@ var Validations = buildValidations({
     description: 'Is this a debit card?',
     validators: [
       validator('presence', true),
-      validator('number', {
-        allowBlank: false,
-        integer: true,
-        gte: 0,
-        lte: 1
-      })
     ]
   },
   allowReoccuring: {

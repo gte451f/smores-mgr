@@ -1,23 +1,8 @@
-<div class="row">
+<div class="row form-horizontal">
     <div class="col-md-6">
-        <div class="form-group">
-            <label>Check #</label>
-
-            <div class="input-group">
-              {{input type="text" class="form-control" value=newCheck.number id="checkNumber"}}
-            </div>
-        </div>
+      {{util/validated-text valuePath='number' model=newCheck placeholder="##-##-##" labelText="Check #" horizontal=true}}
     </div>
     <div class="col-md-6">
-        <div class="form-group">
-            <label>Check Date</label>
-
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-              {{pikaday-input value=newCheck.date format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="5" id="checkDate"}}
-            </div>
-        </div>
+      {{util/validated-date valuePath='date' model=newCheck placeholder="mm-dd-yyyy" labelText="Check Date" horizontal=true}}
     </div>
 </div>

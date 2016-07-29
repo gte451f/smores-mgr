@@ -1,7 +1,27 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import {validator, buildValidations} from 'ember-cp-validations';
 
-export default DS.Model.extend({
+var Validations = buildValidations({
+  amount: {
+    description: 'Amount',
+    validators: [
+      validator('number', {
+        allowBlank: false,
+        allowString: true,
+        integer: true,
+        positive: true,
+        gte: 5,
+        let: 10000
+      })
+    ]
+  }
+}, {
+  debounce: 500
+});
+
+
+export default DS.Model.extend(Validations, {
   externalId: DS.attr('string'),
   createdOn: DS.attr('string'),
   settledOn: DS.attr('string'),

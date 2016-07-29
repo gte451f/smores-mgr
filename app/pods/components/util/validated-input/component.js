@@ -7,8 +7,11 @@ const {
 } = Ember;
 
 export default Ember.Component.extend({
+  // should the input be rendered with the label to the left of the input?
+  horizontal: false,
+
   classNames: ['form-group'],
-  classNameBindings: ['showErrorMessage:has-error', 'isValid:has-success', 'validation.options.presence.presence:required'],
+  classNameBindings: ['showErrorMessage:has-error', 'isValid:has-success', 'validation.options.presence.presence:required', 'horizontal:row'],
   model: null,
   value: null,
   type: 'text',

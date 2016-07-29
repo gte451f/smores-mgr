@@ -8,8 +8,8 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-6">
-              {{util/validated-input valuePath='firstName' model=owner placeholder="First Name" labelText="First Name"}}
-              {{util/validated-input valuePath='lastName' model=owner placeholder="Last Name" labelText="Last Name"}}
+              {{util/validated-text valuePath='firstName' model=owner placeholder="First Name" labelText="First Name"}}
+              {{util/validated-text valuePath='lastName' model=owner placeholder="Last Name" labelText="Last Name"}}
                 <div class="form-group required">
                     <label class="control-label">Relationship to Camper</label>
                     <div>
@@ -29,8 +29,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-              {{util/validated-input valuePath='email' model=owner placeholder="Email" labelText="Email"}}
-              {{util/validated-input valuePath='number' model=phone placeholder="###-###-####" labelText="Primary Phone Number"}}
+              {{util/validated-text valuePath='email' model=owner placeholder="Email" labelText="Email"}}
+              {{util/validated-text valuePath='number' model=phone placeholder="###-###-####" labelText="Primary Phone Number"}}
 
                 <div class="form-group required">
                     <label class="control-label">Phone Type</label>

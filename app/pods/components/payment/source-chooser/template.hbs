@@ -37,7 +37,7 @@
 
     <div class="panel-body">
       {{#if (eq mode 'Credit') }}
-        {{card/card-chooser newCard=newCard selectedCard=selectedCard existingCards=existingCards useNewCard=useNewCard}}
+        {{card/card-chooser newCard=newCard selectedCard=selectedCard existingCards=existingCards useNewCard=useNewCard saveNewCard=saveNewCard}}
       {{/if}}
 
       {{#if (eq mode 'Check') }}

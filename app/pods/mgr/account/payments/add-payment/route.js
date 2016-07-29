@@ -21,14 +21,8 @@ export default Ember.Route.extend(ErrorHandler, AddPayment, {
     return Ember.RSVP.hash({
       model: {
         newPayment: this.store.createRecord('payment', {amount: null}),
-        newCheck: this.store.createRecord('check', {
-          number: null,
-          date: null,
-          accountNumber: null,
-          routingNumber: null,
-          nameOnCheck: null
-        }),
-        newCard: this.store.createRecord('card', {active: 1, account: null}),
+        newCheck: this.store.createRecord('check', {}),
+        newCard: this.store.createRecord('card', {active: 1, account: null, isDebit: 0, allowReoccuring: 1}),
         selectedCard: null, // the card object to be used
         isPending: false,   // used to drive the spinner button
         useNewCard: false,  // if paying by credit, should we expect a new card or use an existing card on file
@@ -58,9 +52,6 @@ export default Ember.Route.extend(ErrorHandler, AddPayment, {
     });
     controller.set('model.existingCards', cards);
     controller.set('model.account', this.get('currentAccount.account'));
-    // controller.set('model.cardMode', this.get('cardMode'));
-    // controller.set('model.saveCard', this.get('saveCard'));
-
     //supply return route data for save action
     this.set('model.returnRouteData', this.get('currentAccount.id'));
   }
