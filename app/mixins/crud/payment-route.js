@@ -6,7 +6,7 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
  * consolidate logic to save payments (including with a new card)
  * this mixin maxes several assumptions on what data is collected for use
  */
-export default Ember.Mixin.create({
+export default Ember.Mixin.create(ErrorHandler, {
   notify: Ember.inject.service(),
   currentAccount: Ember.inject.service(),
   session: Ember.inject.service(),

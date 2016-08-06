@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{payment/source-chooser}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#payment/source-chooser}}
-      template block text
-    {{/payment/source-chooser}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('h3.panel-title span').text().trim(), '#1');
 });
