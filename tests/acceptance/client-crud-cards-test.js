@@ -1,4 +1,4 @@
-import {test} from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'smores-mgr/tests/helpers/module-for-acceptance';
 
 // tests/acceptance/…
@@ -6,14 +6,14 @@ import {authenticateSession} from 'smores-mgr/tests/helpers/ember-simple-auth';
 // custom helpers here
 import {userData} from '../util/auth-demo-user';
 
-moduleForAcceptance('Acceptance | client crud billing');
+moduleForAcceptance('Acceptance | client crud cards');
 
-test('visiting /client-crud-billing', function (assert) {
+test('visiting /client-crud-cards', function(assert) {
   authenticateSession(this.application, userData);
-  visit('/client/billing/cards/list');
+  visit('/client/billing/cards');
 
   andThen(function () {
-    assert.equal(currentURL(), '/client/billing/cards/list');
+    assert.equal(currentURL(), '/client/billing/cards');
 
     //let's add a card
     click('#add-card');
@@ -28,17 +28,16 @@ test('visiting /client-crud-billing', function (assert) {
       fillIn("input[name='isDebit']", true);
       fillIn("input[name='allowReoccuring']", true);
       click('#save-new-card');
-      andThen(() => assert.equal(currentURL(), '/client/billing/cards/list'));
+      andThen(() => assert.equal(currentURL(), '/client/billing/cards'));
 
       click('button.delete-card:last');
       andThen(function () {
         // now let's remove the record and verify we land back on the member list page
         // verify modal appeared
         assert.equal(find('.modal-dialog .modal-content .modal-header h4:first').text(), 'Confirm: Delete Credit Card');
-        click('.confirm-delete-card');
-        andThen(() => assert.equal(currentURL(), '/client/billing/cards/list'));
+        click('.confirm-delete');
+        andThen(() => assert.equal(currentURL(), '/client/billing/cards'));
       });
-
     });
   });
 });

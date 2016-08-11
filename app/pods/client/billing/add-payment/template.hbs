@@ -1,72 +1,54 @@
-<h3>Make A Credit Payment</h3>
 <div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-success" id="credit-panel">
+    <div class="col-md-12">
+        <h3>Add A {{model.mode}} Payment</h3>
+
+      {{payment/source-chooser
+      newCard=model.newCard
+      newCheck=model.newCheck
+      selectedCard=model.selectedCard
+      existingCards=existingCards
+      mode=model.mode
+      enableCash=false
+      enableCheck=false
+      useNewCard=model.useNewCard
+      saveNewCard=model.saveNewCard }}
+
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-12">
                         <h3 class="panel-title">
-                            <span class="label label-info">#1</span> Choose a card to make a payment
+                            <span class="label label-info">#2</span>
+                            Enter the payment amount
                         </h3>
                     </div>
                 </div>
             </div>
             <div class="panel-body">
-
-                <div class="form-group required">
-                    <label></label>
-                    <div class="input-group">
-                      {{#x-select value=model.selectedCard class="form-control"}}
-                          <option>Select</option>
-                        {{#each model.cards as |item|}}
-                          {{#x-option value=item}}{{item.name}}{{/x-option}}
-                        {{/each}}
-                      {{/x-select}}
-
-                      {{#util/input-tooltip content="Only active credit cards will appear in this list."}}
-                        {{fa-icon "info"}}
-                      {{/util/input-tooltip}}
+                <div class="row form-horizontal" style="margin-bottom: 10px;">
+                    <div class="col-md-6">
+                      {{util/validated-text valuePath='amount'
+                      model=model.newPayment
+                      placeholder="$$"
+                      labelText="Amount"
+                      horizontal=true
+                      tooltip="Amount should not exceed this account's outstanding balance."}}
                     </div>
-                </div>
-                      {{card/quick-add newCard=model.newCard}}
-                <div class="text-center">
-                    <p>- or -</p>
-                    <button class="btn btn-primary" {{action "toggleCredit" model.mode}}> {{toggleText}}</button>
-                </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                          {{#spinner-button
+                          onclick=(action (route-action "save" model))
+                          isSpinning=model.isPending
+                          id="save-new-payment"
+                          class="btn btn-primary"}}
+                              Submit Payment
+                          {{/spinner-button}}
 
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-6">
-
-
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title"><span class="label label-info">#3</span> Enter the payment amount</h3>
-            </div>
-
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="input-group">
-                      {{input type="text" class="form-control" value=model.payment.amount}}
-
-                      {{#util/input-tooltip content="Amount should not exceed this account's outstanding balance."}}
-                        {{fa-icon "info"}}
-                      {{/util/input-tooltip}}
+                          {{#link-to model.returnRoute class="btn btn-primary"}}Cancel{{/link-to}}
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                  {{#spinner-button action="save" isSpinning=model.isSpinning class="btn btn-primary" }}
-                      Submit Payment
-                  {{/spinner-button}}
-
-                  {{#link-to 'client.billing.summary' class="btn btn-primary"}}Cancel{{/link-to}}
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>

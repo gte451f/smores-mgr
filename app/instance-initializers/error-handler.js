@@ -18,16 +18,19 @@ export function initialize(appInstance) {
    * Deal with either an expected JSON API formatted array of error objects
    * or some sort of internal error with a simple err.message
    */
-  Ember.RSVP.on('error', function(err) {
+  Ember.RSVP.on('error', function (err) {
     // print out api errors
     if (!Ember.isEmpty(err.errors) && Ember.isArray(err.errors)) {
       err.errors.forEach((error) => {
         notify.alert({html: "The API Returned an unexpected error! <br /> " + error.title + "<br />  Error #" + error.id});
       });
     } else {
-      // handle internal error
-      notify.alert("An internal error occurred! " + err.message);
-      Ember.Logger.error(err);
+      // handle internal error...bug ignore transition aborted
+      // which appear here for some reason
+      if (err.name !== 'TransitionAborted') {
+        notify.alert("An internal error occurred! " + err.message);
+        Ember.Logger.error(err);
+      }
     }
   });
 }

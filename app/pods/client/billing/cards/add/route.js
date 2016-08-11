@@ -6,52 +6,23 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
   notify: Ember.inject.service(),
   currentAccount: Ember.inject.service(),
 
-  /**
-   * create fake models so validation will work
-   *
-   * @param params
-   * @returns {{phone: *, owner: *}}
-   */
+  //reset the model in case you return to add another record
   model: function (params) {
-    return this.store.createRecord('card', {active: 1});
+    return this.store.createRecord('card', {active: 1, account: null, isDebit: 0, allowReoccuring: null});
   },
-
-  /**
-   * inject current account after it has had a chance to load
-   *
-   * @param controller
-   * @param model
-   */
-  setupController: function (controller, model) {
-    let currentAccount = this.get('currentAccount.account');
-    if (Ember.isEmpty(currentAccount)) {
-      // error, no account detected
-      this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-    }
-    this._super(controller, model);
-  },
-
 
   actions: {
-
     /**
-     * save a new card record
-     *
+     * save a new card to api
      * @param card
-     * @returns {boolean}
      */
     save: function (card) {
-      this.controller.set('cardSaving', true);
-      // set some default values on the model
-      card.set('account', this.get('currentAccount.account'));
+      let currentAccount = this.get('currentAccount.account');
+      card.set('account', currentAccount);
       card.save().then((data) => {
-        //reset to original position
-        this.set('model', this.store.createRecord('card', {active: 1}));
-        this.get('notify').success('Card Added');
-        this.controller.set('cardSaving', false);
-        this.transitionTo('client.billing.cards.list');
+        this.get('notify').success('Success saving card!');
+        this.transitionTo('client.billing.cards');
       }, (reason) => {
-        this.controller.set('cardSaving', false);
         this.handleFormError(reason);
       });
     }

@@ -5,26 +5,23 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
 /**
  * consolidate logic to save payments (including with a new card)
  * this mixin maxes several assumptions on what data is collected for use
+ *
+ * mixin expects a model object with certain pre-defined properties like
+ * model.mode
+ * model.isPending
+ * model.newPayment
+ * model.newCard
+ * model.useNewCard
+ * model.saveNewCard
+ * model.returnRoute
+ * model.returnRouteData
+ *
  */
 export default Ember.Mixin.create(ErrorHandler, {
   notify: Ember.inject.service(),
   currentAccount: Ember.inject.service(),
   session: Ember.inject.service(),
   apiValidationHandler: Ember.inject.service(),
-
-  // have to save a copy of this locally for some reason
-  amount: null,
-
-  // where should the payment form return to when a payment is made?
-  returnRoute: 'TO BE POPULATED BY ROUTE',
-  returnRouteData: 'TO BE POPULATED BY ROUTE',
-
-  // file|new
-  // tell the system which way to process card data
-  cardMode: 'file',
-
-  // should the card be saved for future use
-  saveCard: false,
 
   /**
    * logic to return to the correct originating route
@@ -59,7 +56,7 @@ export default Ember.Mixin.create(ErrorHandler, {
         Ember.set(model, 'newPayment.mode', 'Cash');
         this.savePayment(model);
       } else if (model.mode === 'Check') {
-        if (model.newCheck.validations.isValid) {
+        if (model.newCheck.get('validations.isValid')) {
           Ember.set(model, 'newPayment.mode', 'Check');
           this.saveCheck(model);
         } else {
@@ -69,7 +66,7 @@ export default Ember.Mixin.create(ErrorHandler, {
       } else {
         Ember.set(model, 'newPayment.mode', 'Credit');
         if (model.useNewCard === true) {
-          if (model.newCard.validations.isValid) {
+          if (model.newCard.get('validations.isValid')) {
             if (model.saveNewCard === true) {
               this.saveNewFilePayment(model);
             } else {

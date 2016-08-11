@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ErrorHandler from 'smores-mgr/mixins/crud/error';
-// import ENV from 'smores-mgr/config/environment';
 import AddPayment from 'smores-mgr/mixins/crud/payment-route';
 import moment from 'moment';
 

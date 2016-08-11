@@ -1,0 +1,36 @@
+<div class="box box-success">
+    <div class="box-header">
+      {{fa-icon 'money'}}
+        <h3 class="box-title">
+            Payments
+          {{#util/x-tooltip content='Settled and pending payments are listed here.'}}
+            {{fa-icon "info"}}
+          {{/util/x-tooltip}}
+        </h3>
+
+        <div class="pull-right box-tools">
+          {{#link-to addLink class="btn btn-primary btn-xs" id="add-payment"}}
+            {{fa-icon 'plus'}} Payment
+          {{/link-to}}
+        </div>
+    </div>
+
+    <!-- /.box-header -->
+    <div class="box-body no-padding">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th style="width: 40px">Amount</th>
+                <th></th>
+            </tr>
+
+            {{#each payments as |item| }}
+              {{payment/payment-list-item payment=item admin=admin}}
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>

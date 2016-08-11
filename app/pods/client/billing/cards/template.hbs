@@ -1,0 +1,28 @@
+<div class="row">
+    <section class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header">
+                <h3 class="box-title">Stored Credit Cards</h3>
+
+                <div class="box-tools pull-right">
+                  {{#link-to 'client.billing.cards.add' class="btn btn-box-tool" id="add-card"}} {{fa-icon 'plus'}} {{/link-to}}
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <div class="box-body">
+                <div class="col-md-12">
+                    <div class="row">
+                      {{#each model.cards as |item| }}
+                        {{#if item.id}}
+                          {{card/basic-info card=item}}
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="col-md-6">
+      {{outlet}}
+    </section>
+</div>

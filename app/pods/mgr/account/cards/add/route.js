@@ -1,7 +1,8 @@
 import Ember from 'ember';
-import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(ErrorHandler, {
+export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
   notify: Ember.inject.service(),
   currentAccount: Ember.inject.service(),
 
@@ -13,7 +14,7 @@ export default Ember.Route.extend(ErrorHandler, {
   actions: {
     /**
      * save a new card to api
-     * @param model
+     * @param card
      */
     save: function (card) {
       let currentAccount = this.get('currentAccount.account');

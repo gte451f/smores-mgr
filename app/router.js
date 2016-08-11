@@ -158,10 +158,10 @@ Router.map(function () {
     this.route('billing', function () {
       this.route('summary');
       this.route('add-payment');
-      this.route('cards', function () {
-        this.route('add');
-        this.route('list');
-      });
+      this.route('cards',
+        function () {
+          this.route('add');
+        });
     });
   });
   this.route('switchboard');
