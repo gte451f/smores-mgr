@@ -1,0 +1,26 @@
+<td>{{moment-format payment.createdOn 'MM-DD-YY'}}</td>
+<td>
+    <span class="label label-default">{{payment.mode}}</span>
+</td>
+<td>
+    <span class="label label-success">{{format-money payment.amount}}</span>
+</td>
+<td>
+  {{#if admin}}
+    {{#unless payment.isRefund}}
+        <button {{action (toggle "deleteModal" this)}} class="btn btn-default btn-xs delete-payment">
+          {{fa-icon "trash-o"}}
+        </button>
+    {{/unless}}
+  {{/if}}
+</td>
+
+{{#if deleteModal}}
+  {{#util/confirm-modal
+  title="Confirm: Delete Payment"
+  close=(toggle "deleteModal" this)
+  proceed=(action 'delete' payment)
+  isPending=isDeleting}}
+      <p>Are you sure you want to delete this payment? This action cannot be undone.</p>
+  {{/util/confirm-modal}}
+{{/if}}
