@@ -1,9 +1,10 @@
 <section class="content">
     <div class="wizard">
         <ul class='nav nav-wizard'>
-          {{x-wizard steps=routeValues currentPath=currentPath}}
+          {{util/x-wizard steps=routeValues currentPath=currentPath}}
         </ul>
 
+        <h3>Current Path: {{currentPath}}</h3>
         <div class="step-content">
           {{outlet}}
         </div>

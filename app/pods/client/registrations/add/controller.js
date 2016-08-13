@@ -1,9 +1,16 @@
 import Ember from 'ember';
 import RouteAware from 'smores-mgr/mixins/wizard/route-aware';
 
+/**
+ * this seems to pull a value from the route?
+ * @param routeVals
+ * @param prop
+ * @returns {*}
+ */
 function routeVal(routeVals, prop) {
   return Ember.computed('currentPath', function () {
     var currentRoute = Ember.get(this, 'currentPath');
+    var foo = this.get('currentPath');
     var routeValues = Ember.get(this, routeVals);
     for (var i = 0; i < routeValues.length; i++) {
       if (routeValues[i].route === currentRoute) {
@@ -19,33 +26,37 @@ export default Ember.Controller.extend(RouteAware, {
 
   registration: Ember.inject.service(),
 
+  routeName: Ember.computed('controllers.application.currentPath', function () {
+    return this.get('controllers.application.currentPath');
+  }),
+
   routeValues: [
     Ember.Object.create({
-      route: 'registrations.add.step1',
+      route: 'client.registrations.add.step1',
       step: 'Choose Attendee',
       next: 'Step 2',
-      nextTransition: 'registrations.add.step2',
-      prevTransition: 'registrations.add.step1',
+      nextTransition: 'client.registrations.add.step2',
+      prevTransition: 'client.registrations.add.step1',
       showNext: true,
       showPrev: false
     }),
     Ember.Object.create({
-      route: 'registrations.add.step2',
+      route: 'client.registrations.add.step2',
       step: 'Choose Events',
       next: 'Step 3',
       prev: 'Step 1',
-      nextTransition: 'registrations.add.step3',
-      prevTransition: 'registrations.add.step1',
+      nextTransition: 'client.registrations.add.step3',
+      prevTransition: 'client.registrations.add.step1',
       showNext: true,
       showPrev: true
     }),
     Ember.Object.create({
-      route: 'registrations.add.step3',
+      route: 'client.registrations.add.step3',
       step: 'Review',
       next: 'Make Another',
       prev: 'Step 2',
-      nextTransition: 'registrations.add.step3',
-      prevTransition: 'registrations.add.step2',
+      nextTransition: 'client.registrations.add.step3',
+      prevTransition: 'client.registrations.add.step2',
       showNext: false,
       showPrev: true
     })
@@ -67,7 +78,7 @@ export default Ember.Controller.extend(RouteAware, {
       var currentRoute = Ember.get(this, 'currentPath');
       var self = this;
 
-      if (currentRoute === 'registrations.add.step1') {
+      if (currentRoute === 'client.registrations.add.step1') {
         if (Ember.isEmpty(this.get('registration.camper'))) {
           this.get('notify').alert('Must select a camper before proceeding.');
           return;
@@ -75,7 +86,7 @@ export default Ember.Controller.extend(RouteAware, {
       }
 
       // verify data coming out of step2 works
-      if (currentRoute === 'registrations.add.step2') {
+      if (currentRoute === 'client.registrations.add.step2') {
         if (this.get('registration.requests').length === 0) {
           this.get('notify').alert('Must include at least on request before proceeding');
           return;

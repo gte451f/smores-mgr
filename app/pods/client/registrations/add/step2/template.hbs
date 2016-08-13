@@ -36,7 +36,7 @@
                     <div class="col-md-3">
                         <dl class="">
                             <strong>Birthday: </strong>
-                          {{moment registration.camper.dob 'MM/DD/YYYY'}}
+                          {{moment-format registration.camper.dob 'MM/DD/YYYY'}}
                         </dl>
                     </div>
                 </div>
@@ -67,36 +67,8 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-black">
-
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Priority</label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Location</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Session</label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Program / Cabin</label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-1">
-                        <label>&nbsp;</label>
-                    </div>
-                </div>
               {{#each registration.requests as |item|}}
-                {{form-request request=item action="removeRequest" locations=locations sessions=sessions events=events mode=registration.mode}}
+                {{registrations/new-request request=item action="removeRequest" locations=locations sessions=sessions events=events mode=registration.mode}}
               {{/each}}
             </div>
         </div>

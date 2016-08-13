@@ -10,7 +10,7 @@ export default Ember.Route.extend({
    */
   activate: function () {
     if (this.get('registration.wizardToken') === 'start') {
-      this.transitionTo('registrations.add.step1');
+      this.transitionTo('client.registrations.add.step1');
     } else {
       this.get('registration').set('wizardToken', 'step2');
     }

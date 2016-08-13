@@ -9,7 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function (params) {
     let currentAccount = this.get('currentAccount');
     return Ember.RSVP.hash({
-      account: currentAccount.get('account'),
+      account: this.store.peekRecord('account', this.get('currentAccount.id')),
       payments: this.store.query('payment', {account_id: currentAccount.get('id')}),
       charges: this.store.query('charge', {account_id: currentAccount.get('id')})
     });

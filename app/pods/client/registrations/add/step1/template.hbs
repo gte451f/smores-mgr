@@ -40,7 +40,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group required">
-                            <label>How many sessions is your camper attending?:</label>
+                            <label>How many sessions is your camper attending?:
+                              {{#util/x-tooltip contentAsHTML=true
+                              content="Something helpful here" }}?
+                              {{/util/x-tooltip}}
+                            </label>
                           {{#x-select value=registration.mode class="form-control"}}
                               <option value="0">A single session of camp</option>
                               <option value="1">Multiple sessions of camp</option>

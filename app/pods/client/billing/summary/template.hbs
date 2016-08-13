@@ -1,3 +1,4 @@
+<h4>{{model.name}}-{{model.id}}</h4>
 <div class="row" style="margin-bottom: 5px;">
     <div class="col-md-12">
       {{#link-to 'client.billing.cards' class="btn btn-primary"}}{{fa-icon 'credit-card'}} Manage Credit
@@ -10,14 +11,10 @@
 
 
         <div class="form-group pull-right" style="width: 350px;">
-            <label class="col-sm-7 control-label">Filter Entires By Year:</label>
+            <label class="col-sm-7 control-label">Filter Entires By Year: {{selectedYear}}</label>
 
             <div class="col-sm-5">
-              {{#x-select value=selectedYear class="form-control"}}
-                {{#each availableYears as |item|}}
-                  {{#x-option value=item}}{{item}}{{/x-option}}
-                {{/each}}
-              {{/x-select}}
+              {{payment/camp-years changeYear=(action "changeYear")}}
             </div>
         </div>
     </div>
