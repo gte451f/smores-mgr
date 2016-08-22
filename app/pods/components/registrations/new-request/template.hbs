@@ -1,7 +1,6 @@
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-1">
         <div class="form-group">
-            <label>Priority</label>
           {{#x-select value=request.priority class='form-control'}}
               <option>Select</option>
             {{#each priorities as |item|}}
@@ -10,50 +9,58 @@
           {{/x-select}}
         </div>
     </div>
-
     <div class="col-md-2">
         <div class="form-group">
-            <label>Location</label>
-          {{#x-select class='form-control' comp=this action=locationChanged}}
-              <option>Select</option>
-            {{#each locations as |item|}}
-              {{#x-option value=item.id}}{{item.name}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
-
+          {{#util/x-select
+          options=locations
+          searchEnabled=false
+          selected=currentLocation
+          placeholder='Select'
+          onchange=(action "locationChanged")
+          class="input-assigned-to"
+          as |result|
+          }}
+            {{result.name}}
+          {{/util/x-select}}
         </div>
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <label>Session</label>
-          {{#x-select value=currentSession class='form-control' disabled=isSessionDisabled comp=this action=sessionChanged }}
-              <option>Select</option>
-            {{#each filteredSessions as |item|}}
-              {{#x-option value=item.id}}{{item.name}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
-
+          {{#util/x-select
+          options=filteredSessions
+          searchEnabled=false
+          selected=currentSession
+          placeholder='Select'
+          onchange=(action "sessionChanged")
+          disabled=isSessionDisabled
+          as |result|
+          }}
+            {{result.name}}
+          {{/util/x-select}}
         </div>
     </div>
     <div class="col-md-3">
-        <div class="form-group">
-            <label>Program / Cabin</label>
-          {{#x-select value=request.event class='form-control' disabled=isEventDisabled}}
-              <option>Select</option>
-            {{#each filteredEvents as |item|}}
-              {{#x-option value=item}}{{item.fullName}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
-        </div>
-    </div>
 
+      {{#util/x-select
+      options=filteredEvents
+      searchEnabled=false
+      selected=request.event
+      placeholder='Select'
+      onchange=(action (mut request.event))
+      disabled=isEventDisabled
+      as |result|
+      }}
+        {{result.fullName}}
+      {{/util/x-select}}
+    </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label>Note</label>
           {{input type="text" class="form-control" value=request.note}}
-            <a {{action "removeRequest" }}>
-              {{fa-icon 'trash'}}
-            </a>
         </div>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-defaul btn-xs" {{action (route-action "removeRequest" request)}}>
+          {{fa-icon 'trash'}}
+        </button>
     </div>
 </div>

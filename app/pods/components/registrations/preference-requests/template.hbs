@@ -1,0 +1,12 @@
+<h4>
+    Preference # {{pref}}
+  {{#util/x-tooltip content='Requests are grouped by preference and attempted from 1 to 3 until one group or requests is accepted.'}}
+    {{fa-icon "info"}}
+  {{/util/x-tooltip}}
+</h4>
+
+{{#each requests as |item|}}
+  {{#if (eq item.priority pref)}}
+    {{registrations/new-request request=item locations=locations sessions=sessions events=events mode=registration.mode}}
+  {{/if}}
+{{/each}}

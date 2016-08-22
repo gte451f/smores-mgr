@@ -4,6 +4,8 @@ export default Ember.Controller.extend({
   notify: Ember.inject.service(),
   registration: Ember.inject.service(),
 
+  preferences: [1, 2, 3],
+
   actions: {
     /**
      * add a new request to the local list
@@ -20,6 +22,7 @@ export default Ember.Controller.extend({
       var requestContainer = this.get('registration.requestContainer');
       var request = requestContainer.create({priority: requestLength + 1});
       requests.pushObject(request);
+      this.set('registration.requests', requests);
     },
 
     /**

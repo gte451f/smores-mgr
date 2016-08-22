@@ -1,0 +1,51 @@
+<div class="box box-solid" style="box-shadow: 0px 0px 0px;">
+    <div class="box-header">
+        <h3 class="box-title">
+          {{registrationMode}} Registration for {{registration.attendee.firstName}} {{registration.attendee.lastName}}
+        </h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" {{action (route-action 'addRequest') }}>
+                <i class="fa fa-plus"></i> Event Request
+            </button>
+        </div>
+        <!-- /.box-tools -->
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" style="display: block;">
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<div class="row">
+    <div class="col-md-1">
+        <label>Preference</label>
+    </div>
+
+    <div class="col-md-2">
+        <label>Location</label>
+    </div>
+    <div class="col-md-2">
+        <label>Session</label>
+    </div>
+    <div class="col-md-3">
+        <label>Program / Cabin</label>
+    </div>
+
+    <div class="col-md-3">
+        <label>Note</label>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+{{#if (gt pref1Count 0)}}
+  {{registrations/preference-requests locations=locations sessions=sessions events=events requests=newRequests pref=1}}
+{{/if}}
+
+{{#if (gt pref2Count 0)}}
+  {{registrations/preference-requests locations=locations sessions=sessions events=events requests=newRequests pref=2}}
+{{/if}}
+
+{{#if (gt pref3Count 0)}}
+  {{registrations/preference-requests locations=locations sessions=sessions events=events requests=newRequests pref=3}}
+{{/if}}

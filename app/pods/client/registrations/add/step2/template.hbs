@@ -3,12 +3,11 @@
     <h4><i class="icon fa fa-info"></i> Help</h4>
     <ul>
         <li>Registration options are limited to what your attendee is eligible for based on age and gender.</li>
-        <li>Use different Priorities to indicated how many weeks your camper wishes to attend and in which order to
+        <li>Use different Priorities to indicated how many events your camper wishes to attend and in which order to
             process your preferences.
         </li>
         <p>For example, to attend One session and indicate a second choice (in case your first choice is full), add
-            another request with a
-            priority of 2.</p>
+            another request with a priority of 2.</p>
 
         <p>To attend multiple weeks of camp, make more than one request <strong>with the same priority</strong>.</p>
 
@@ -49,7 +48,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-solid bg-yellow disabled">
+        <div class="box box-solid box-warning">
             <div class="box-header">
               {{ fa-icon "calendar"}}
                 <h3 class="box-title">Step 2: Request Specific Events To Attend</h3>
@@ -57,19 +56,23 @@
                 <div class="pull-right box-tools">
                     <!-- button with a dropdown -->
                     <div class="btn-group">
-                        <button class="btn btn-primary btn-sm" {{action "addRequest"}}>Add Request</button>
+                        <button class="btn btn-primary btn-sm" {{action "addRequest"}}>Add Request ({{requestCount}})</button>
                     </div>
                 </div>
                 <!-- /. tools -->
             </div>
             <!-- /.box-header -->
-            <div class="box-body no-padding">
+
+            <div class="box-body">
+              {{registrations/preference-requests locations=locations sessions=sessions events=events registration=registration pref=1}}
+              {{registrations/preference-requests locations=locations sessions=sessions events=events registration=registration pref=2}}
+              {{registrations/preference-requests locations=locations sessions=sessions events=events registration=registration pref=3}}
             </div>
+
+
             <!-- /.box-body -->
             <div class="box-footer text-black">
-              {{#each registration.requests as |item|}}
-                {{registrations/new-request request=item action="removeRequest" locations=locations sessions=sessions events=events mode=registration.mode}}
-              {{/each}}
+
             </div>
         </div>
     </div>

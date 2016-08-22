@@ -145,6 +145,7 @@ Router.map(function () {
       });
       this.route('list');
       this.route('info', {path: "/info/:registration_id"});
+      this.route('new');
     });
 
     this.route('members', function () {

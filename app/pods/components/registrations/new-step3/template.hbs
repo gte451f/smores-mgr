@@ -1,0 +1,62 @@
+<div class="alert bg-gray alert-dismissable hidden" id="helpBox">
+    <button type="button" class="close" {{action 'hideHelp'}}>×</button>
+    <h4><i class="icon fa fa-info"></i> Help</h4>
+    Listed below are the full details to be registration request to be submitted. Please review selected sessions as
+    well as related fees. To make changes, click back to Step 2.
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <strong>Camper: </strong>
+      {{registration.attendee.firstName}} {{registration.attendee.lastName}}
+    </div>
+    <div class="col-md-3">
+        <strong>Grade: </strong>
+      {{registration.attendee.schoolGrade}}
+    </div>
+    <div class="col-md-3">
+        <strong>Gender: </strong>
+      {{registration.attendee.gender}}
+    </div>
+    <div class="col-md-3">
+        <strong>Birthday: </strong>
+      {{moment-format registration.attendee.dob 'MM/DD/YYYY'}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+      {{#if registration.notes}}
+          <strong>Notes: </strong>
+        {{registration.notes}}
+      {{/if}}
+    </div>
+</div>
+
+{{#if (gt pref1Count 0)}}
+  {{registrations/preference-review requests=newRequests pref=1}}
+{{/if}}
+
+{{#if (gt pref2Count 0)}}
+  {{registrations/preference-review requests=newRequests pref=2}}
+{{/if}}
+
+{{#if (gt pref3Count 0)}}
+  {{registrations/preference-review requests=newRequests pref=3}}
+{{/if}}
+
+<div class="alert bg-gray">
+    <h4>{{fa-icon 'money'}} Registration Fees </h4>
+  {{#each fees as |item|}}
+      <div>
+          <h5>{{item.name}}: {{format-money item.amount}}</h5>
+          <small>{{item.description}}</small>
+      </div>
+  {{/each}}
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-primary pull-right" {{action (route-action 'save')}}>Confirm & Submit</button>
+    </div>
+</div>

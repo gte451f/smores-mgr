@@ -47,11 +47,24 @@ export default Ember.Service.extend({
   /**
    * reset a registration back to its original state
    */
-    resetRegistration(){
+  resetRegistration(){
     this.set('camper', null);
     this.set('mode', 0);
     this.set('registrationNote', null);
     this.set('requests', []);
     this.set('wizardToken', 'start');
+  },
+
+  addRequest(request){
+    this.get('requests').pushObject(request);
+  },
+
+  /**
+   * show a preference be displayed?
+   * @param pref
+   * @returns {boolean}
+   */
+  showPref(pref){
+    return true;
   }
 });

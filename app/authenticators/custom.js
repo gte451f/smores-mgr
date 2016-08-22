@@ -26,27 +26,38 @@ export default Base.extend(ErrorHandler, {
   authenticate: function (identification, password) {
     console.log('authenticators:custom:authenticate was called');
     var self = this;
-    return new Ember.RSVP.Promise(function (resolve, reject) {
-      // make XHR request to api
-      self.makeRequest({email: identification, password: password}).then(function (response) {
-        // perform some validation to verify that we got a valid response from API
-        if ((typeof response.data === 'undefined') || (typeof response.data.id === 'undefined')) {
-          var errorMessage = "<h4>Could not log you into the system: </h4> No valid user found";
-          self.get('notify').alert({raw: errorMessage, closeAfter: 10000});
-          reject(response);
-        } else {
-          console.log('authenticators:custom:authenticate....resolving');
-          resolve(response);
-        }
-      }, function (reason) {
-        if (reason && reason.status === 422) {
-          // Validation Error, inform user and swallow error
-          self.get('notify').alert('Some Error occured!');
-        } else {
-          self.get('notify').alert('An internal error occured');
-        }
+
+
+    if (Ember.isEmpty(identification) || Ember.isEmpty(password) || identification.length < 5 || password.length < 4) {
+      return new Ember.RSVP.Promise(function (resolve, reject) {
+        reject({
+          error: "Please fill in a complete username and password to login."
+        });
       });
-    });
+    } else {
+      return new Ember.RSVP.Promise(function (resolve, reject) {
+        // make XHR request to api
+        self.makeRequest({email: identification, password: password}).then(function (response) {
+          // perform some validation to verify that we got a valid response from API
+          if ((typeof response.data === 'undefined') || (typeof response.data.id === 'undefined')) {
+            var errorMessage = "<h4>Could not log you into the system: </h4> No valid user found";
+            self.get('notify').alert({raw: errorMessage, closeAfter: 10000});
+            reject(response);
+          } else {
+            console.log('authenticators:custom:authenticate....resolving');
+            resolve(response);
+          }
+        }, function (reason) {
+          if (reason && reason.status === 422) {
+            // Validation Error, inform user and swallow error
+            self.get('notify').alert('Some Error occured!');
+          } else {
+            self.get('notify').alert('An internal error occured');
+          }
+        });
+      });
+
+    }
   },
 
   /**
