@@ -17,10 +17,9 @@
                                 <label>Session</label>
                             </div>
                             <div class="col-md-2">
-
+                                <label>Fees</label>
                             </div>
                         </div>
-
 
                       {{#each requests as |item index|}}
                         {{#if (eq item.priority pref)}}
@@ -30,16 +29,18 @@
                               <div class="col-md-2">{{item.event.program.name}}</div>
                               <div class="col-md-2">{{item.event.session.name}}</div>
                                 <div class="col-md-2">
-                                    <dl class="dl-horizontal">
-                                        {{#if item.event.fee}}
-                                            <dt>Event Fee</dt>
-                                            <dd>{{format-money item.event.fee}}</dd>
-                                        {{/if}}
-                                      {{#if item.event.program.fee}}
-                                          <dt>Program Fee</dt>
-                                            <dd>{{format-money item.event.program.fee}}</dd>
-                                      {{/if}}
-                                    </dl>
+                                  {{#if item.event.fee}}
+                                      <div>
+                                          <strong>Event: </strong><br/>
+                                        {{format-money item.event.fee}}
+                                      </div>
+                                  {{/if}}
+                                  {{#if item.event.program.fee}}
+                                      <div>
+                                          <strong>Program</strong><br/>
+                                        {{format-money item.event.program.fee}}
+                                        </div>
+                                  {{/if}}
                                 </div>
                             </div>
                         {{/if}}
