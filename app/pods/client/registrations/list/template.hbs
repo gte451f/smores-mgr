@@ -12,20 +12,21 @@
         </div>
     </div>
     <div class="box-body">
-      {{partial "table-pager/slim-table/widgets/quick-search"}}
         <div class="list-group registration-list">
-          {{#each this.model as |item|}}
+          {{#each this.model.registrations as |item|}}
             {{#link-to 'client.registrations.info' item.id class="list-group-item"}}
                 <h4 class="list-group-item-heading">#
                   {{item.id}} for {{item.attendee.firstName}} {{item.attendee.lastName}}
-                    on {{moment-format item.createdOn 'MM/DD/YY'}}
+                    created on {{moment-format item.createdOn 'MM/DD/YY'}}
                 </h4>
 
-                <p class="list-group-item-text">
-                <h4>Registration Requests:</h4>
-              {{#each record.requests as |item|}}
-                  <div class="well">{{item.submitStatus}} - {{item.priority}} - {{item.note}}
-                      - {{item.event.location.name}}</div>
+                <strong>Registration Requests:</strong>
+            <p class="list-group-item-text">
+              {{#each item.requests as |req|}}
+                  <div class="well well-sm">
+                    {{req.submitStatus}} - {{req.priority}} - {{req.note}} - {{req.event.id}}
+                      - {{req.event.location.name}}
+                  </div>
               {{/each}}
                 </p>
             {{/link-to}}

@@ -7,7 +7,7 @@ export default DS.Model.extend({
 
   // relationshps
   attendee: DS.belongsTo('attendee', {
-    async: true
+    async: false
   }),
   charges: DS.hasMany('charge', {async: true}),
 

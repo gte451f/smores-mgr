@@ -21,6 +21,10 @@ export default DS.Model.extend({
   cabin: DS.belongsTo('cabin', {
     async: false
   }),
+  requests: DS.hasMany('request', {
+    async: true
+  }),
+
   fullName: computed('program', 'cabin', function () {
     return this.get('program.name') + ' - ' + this.get('cabin.name');
   })
