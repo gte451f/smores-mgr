@@ -1,8 +1,8 @@
 <div class="nav-tabs-custom">
-  {{accounts/tab-nav model=model isRegistration='active'  redirect="redirect" suggestedEntry=suggestedEntry}}
+  {{accounts/tab-nav model=model.account isRegistration='active'  redirect="redirect" suggestedEntry=suggestedEntry}}
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-          {{#each registrations as |reg| }}
+          {{#each model.registrations as |reg| }}
               <div class="row">
                   <div class="col-md-12">
                       <div class="box box-default">

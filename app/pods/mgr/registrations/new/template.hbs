@@ -1,0 +1,60 @@
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="wizard">
+              {{util/x-wizard steps=wizardSteps currentStep=currentStep}}
+                <div class="step-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-solid box-warning">
+                                <div class="box-header">
+                                  {{ fa-icon "calendar"}}
+                                    <h3 class="box-title">{{stepTitle}}</h3>
+                                    <!-- tools box -->
+                                    <div class="pull-right box-tools">
+                                        <!-- button with a dropdown -->
+                                        <div class="btn-group">
+                                        </div>
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body ">
+                                  {{#if (eq currentStep 1)}}
+                                    {{registrations/mgr-new-step1 registration=model.registration}}
+                                  {{/if}}
+                                  {{#if (eq currentStep 2)}}
+                                    {{registrations/new-step2 registration=model.registration newRequests=newRequests locations=model.locations sessions=model.sessions events=model.events }}
+                                  {{/if}}
+                                  {{#if (eq currentStep 3)}}
+                                    {{registrations/new-step3 registration=model.registration newRequests=newRequests fees=model.fees}}
+                                  {{/if}}
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer text-black">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                  {{#if showPrev}}
+                      <button type="button" {{action 'prev'}} class="btn btn-primary btn-prev">
+                          <span class="glyphicon glyphicon-arrow-left"></span>
+                        {{prevButtonText}}
+                      </button>
+                  {{/if}}
+                  {{#if showNext}}
+                      <button {{action 'next'}} type="button" class="btn btn-primary btn-next">
+                        {{nextButtonText}}
+                          <span class="glyphicon glyphicon-arrow-right"></span>
+                      </button>
+                  {{/if}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

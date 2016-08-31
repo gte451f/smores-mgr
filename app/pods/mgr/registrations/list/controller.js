@@ -18,8 +18,8 @@ export default Controller.extend(Paginate, {
   //load pager specific variables
   columns: [
     Column.create({displayName: '#', fieldName: 'id', order: 0}),
-    Column.create({displayName: 'First', fieldName: 'firstName', apiName: 'attendee:first_name', order: 1}),
-    Column.create({displayName: 'Last', fieldName: 'lastName', order: 2}),
+    Column.create({displayName: 'First', fieldName: 'attendee.firstName', apiName: 'attendee:first_name', order: 1}),
+    Column.create({displayName: 'Last', fieldName: 'attendee.lastName', order: 2}),
     Column.create({displayName: 'Created', fieldName: 'createdOn', order: 2}),
     Column.create({displayName: 'Notes', fieldName: 'notes', order: 4})
   ],

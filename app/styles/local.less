@@ -1,5 +1,22 @@
-.foobar-doobar {
-  max-height: 15px;
+// create a version of the well known well but for xs
+.well-xs {
+  padding: 7px;
+  border-radius: 3px;
+  margin-bottom: 7px;
+}
+
+// lock app in a box!
+.content-wrapper {
+  //set height based on available space
+  min-height: calc(~"100vh - 70px");
+  // required to breadcrumb display
+  margin-top: 20px;
+}
+
+// include an option to make a box use full height
+.box-body-full-height {
+  max-height: calc(~"100vh - 210px");
+  overflow-y: auto;
 }
 
 /* modify  auto suggest list box height */

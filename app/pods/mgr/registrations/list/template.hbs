@@ -1,17 +1,16 @@
 <section class="content">
     <div class="row">
-        <div class="col-md-12">
 
             <div class="col-md-12">
               {{#bs-table-pagination
               content=model
               tableTitle=null
-              fields=columns
+              columns=columns
               isRemoteHandled=true
               page=page
               perPage=perPage
               totalPages=totalPages
-              sorting=sortProperty
+              sortProperty=sortProperty
               sortDirection=sortDirection
               searchString=quickSearch
               perPageOptions=pageList
@@ -25,8 +24,5 @@
                 {{bs-table-pagination.table-row item=item columns=columns linkPath=linkPath}}
               {{/bs-table-pagination}}
             </div>
-
-
-        </div>
     </div>
 </section>

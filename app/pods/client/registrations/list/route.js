@@ -16,7 +16,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     var self = this;
     // get the full event here since we need to side load in event details
     resolved.registrations.forEach(function (reg) {
-      self.store.query('request', {'registration_id': reg.get('id'), with: 'all'});
+      self.store.query('request', {'registration_id': reg.get('id'), with: 'all', sort: 'priority'});
     });
 
     this._super(controller, resolved);

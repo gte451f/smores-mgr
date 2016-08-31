@@ -20,6 +20,7 @@ export default Ember.Route.extend(Paginate, {
     // remove the query params b/c are sent to the backend and return error
     delete params.q;
     delete params.quickSearchField;
+    params.with = 'attendees'
     return this._super(params);
   },
 

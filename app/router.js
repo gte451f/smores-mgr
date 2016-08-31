@@ -29,6 +29,7 @@ Router.map(function () {
       });
       this.route('edit', {"path": "edit/:registration_id"});
       this.route('list');
+      this.route('new');
       this.route('info', {"path": "info/:registration_id"});
     });
 

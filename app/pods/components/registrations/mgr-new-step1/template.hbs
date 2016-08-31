@@ -2,12 +2,16 @@
     <div class="col-md-12">
         <div class="form-group required">
             <label>Select the camper attending camp:</label>
-          {{#x-select value=registration.attendee class="form-control"}}
-              <option>Select</option>
-            {{#each attendees as |item|}}
-              {{#x-option value=item}}{{item.firstName}} {{item.lastName}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
+          {{#util/x-select
+          search=(action 'searchAttendees')
+          searchEnabled=true
+          selected=registration.attendee
+          placeholder='Search By Camper Name'
+          onchange=(action (mut registration.attendee))
+          as |result|
+          }}
+            {{result.fullName}}
+          {{/util/x-select}}
         </div>
     </div>
 </div>
