@@ -25,6 +25,7 @@ export default Controller.extend(Paginate, {
   ],
 
   //need to open single matter record
-  linkPath: "mgr.registrations.info"
+  linkPath: 'mgr.registrations.info',
+  editPath: 'mgr.registrations.edit'
 });
 

@@ -11,7 +11,9 @@
             <div class="box box-solid bg-yellow">
                 <div class="box-header">
                   {{ fa-icon "calendar"}}
-                    <h3 class="box-title">Event Registration</h3>
+                    <h3 class="box-title">
+                        Event Registration for {{model.attendee.firstName}} {{model.attendee.lastName}}
+                    </h3>
                     <!-- tools box -->
                     <div class="pull-right box-tools">
                         <!-- button with a dropdown -->
@@ -39,9 +41,20 @@
         <div class="col-md-2">
             <div class="pull-right">
                 <button class="btn btn-primary" {{action "save"}}>Save</button>
-              {{#link-to "registrations.info" model.id class="btn btn-primary"}}Back{{/link-to}}
+              {{#if (eq origin 'registration')}}
+                {{#link-to 'mgr.registrations.list' class="btn btn-primary"}}
+                    Back
+                {{/link-to}}
+              {{/if}}
+              {{#if (eq origin 'account')}}
+                {{#link-to 'mgr.account.info' model.attendee.account.id class="btn btn-primary"}}
+                    Back
+                {{/link-to}}
+              {{/if}}
+              {{#if (eq origin 'info')}}
+                {{#link-to 'mgr.registrations.info' model.id class="btn btn-primary"}}Back{{/link-to}}
+              {{/if}}
             </div>
         </div>
-
     </div>
 </section>

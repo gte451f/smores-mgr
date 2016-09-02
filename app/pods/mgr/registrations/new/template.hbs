@@ -40,6 +40,16 @@
                 </div>
 
                 <div class="actions">
+                  {{#if (eq origin 'registration')}}
+                    {{#link-to 'mgr.registrations.list' class="btn btn-primary btn-prev"}}
+                        Cancel
+                    {{/link-to}}
+                  {{else}}
+                    {{#link-to 'mgr.accounts.list' class="btn btn-primary btn-prev"}}
+                        Cancel
+                    {{/link-to}}
+                  {{/if}}
+
                   {{#if showPrev}}
                       <button type="button" {{action 'prev'}} class="btn btn-primary btn-prev">
                           <span class="glyphicon glyphicon-arrow-left"></span>

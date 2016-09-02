@@ -11,125 +11,96 @@ export default Ember.Component.extend({
   // store the selected values
   currentLocation: false,
   currentSession: false,
-  currentEvent: false,
   currentPriority: false,
 
-  // listbox state
-  // should the following listboxes be enabled/disabled
-  isSessionDisabled: true,
-  isEventDisabled: true,
+  // should the session list box be enabled?
+  isSessionDisabled: Ember.computed('currentLocation', function () {
+    return Ember.isEmpty(this.get('currentLocation')) ? true : false;
+  }),
+  // should the event list box be enabled?
+  isEventDisabled: Ember.computed('currentSession', function () {
+    return Ember.isEmpty(this.get('currentSession')) ? true : false;
+  }),
 
   /**
    * set some default values based on the supplied object
    */
   setup: Ember.on("init", function () {
-    let event = this.get('request.event');
+    console.log('component setup called');
+    var event = this.get('request.event.id');
     if (event) {
-      this.set('currentLocation', event.get('location'));
-      this.set('currentSession', event.get('session'));
-      this.buildSessions();
-      this.buildEvents();
-      this.set('isSessionDisabled', false);
-      this.set('isEventDisabled', false);
+      this.set('currentLocation', this.get('request.event.location'));
+      this.set('currentSession', this.get('request.event.session'));
+    } else {
+      this.set('currentLocation', this.get('request.location'));
+      this.set('currentSession', this.get('request.session'));
     }
   }),
 
   request: null,
 
-  // the actual list of objects fed into the select box
-  filteredSessions: [],
-  filteredEvents: [],
 
   //available priorities
-  priorities: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  priorities: [1, 2, 3],
 
   /**
-   * reset select to a default state by enabling and setting to null value
-   * refresh list of sessions based on previous choices
-   *
+   * build a list of sessions based on previous choices
    */
-  buildSessions() {
-    var currentLocation = this.get('currentLocation.id');
-    var allEvents = this.get('events');
-    var eventList = allEvents.filterBy('location.id', currentLocation);
-    var sessionList = this.get('sessions');
+  // filteredSessions: Ember.computed('currentLocation', 'events', 'session', function () {
+  filteredSessions: Ember.computed('currentLocation', function () {
+    let currentLocation = this.get('currentLocation');
+    let allEvents = this.get('events');
+    if (Ember.isEmpty(currentLocation) || Ember.isEmpty(allEvents)) {
+      return [];
+    }
+
+    var filteredEvents = this.get('events').filterBy('location.id', currentLocation.get('id'));
     var finalList = [];
-    sessionList.forEach(function (item) {
-      var value = eventList.findBy('session', item);
-      if (!Ember.isEmpty(value)) {
+    this.get('sessions').forEach(function (item) {
+      if (!Ember.isEmpty(filteredEvents.findBy('session', item))) {
         finalList.pushObject(item);
       }
-
     });
-
-    // finally set the session list with the correct options
-    this.set('filteredSessions', finalList);
-  },
+    return finalList;
+  }),
 
   /**
-   * reset select to a default state by enabling and setting to null value
    * build a list of events based on previous choices
-   *
    */
-  buildEvents() {
-    var currentLocation = this.get('currentLocation.id');
-    var currentSession = this.get('currentSession.id');
+  filteredEvents: Ember.computed('currentSession', 'currentLocation', 'events', function () {
+    let currentLocation = this.get('currentLocation');
+    let currentSession = this.get('currentSession');
+    let allEvents = this.get('events');
+    if (Ember.isEmpty(currentLocation) || Ember.isEmpty(currentSession) || Ember.isEmpty(allEvents)) {
+      return [];
+    }
+    var eventsFilteredByLocation = allEvents.filterBy('location.id', currentLocation.get('id'));
+    return eventsFilteredByLocation.filterBy('session.id', currentSession.get('id'));
+  }),
 
-    var allEvents = this.get('events');
-    var eventList2 = allEvents.filterBy('location.id', currentLocation);
-    var eventList3 = eventList2.filterBy('session.id', currentSession);
-
-    // finally set the session list with the correct options
-    this.set('filteredEvents', eventList3);
-  },
   actions: {
 
     /**
-     * assume it is only called post render
-     * disable or enable and build list
+     * update this value so computed properties will also trigger
      *
+     * @param value
+     * @returns {boolean}
      */
-    locationChanged: function (value, component) {
-      console.log('Location Changed');
-      var self = this;
-      //use provided context if provided
-      if (!Ember.isEmpty(component)) {
-        self = component.get('comp');
-      }
-      console.log(value);
-      if (Ember.isEmpty(value)) {
-
-      } else {
-        self.set('currentLocation', value);
-        self.buildSessions();
-      }
-      // reset downstream components
-      self.send('sessionChanged', null, component);
+    locationChanged: function (value) {
+      this.set('currentLocation', value);
+      //reset down stream selects since the up stream select has changed
+      this.set('currentSession', null);
+      this.set('request.event', null);
     },
 
     /**
-     * since this is driven by an x-select, use that context if one is provided
-     * disable or enable and build list
-     *
+     * update this value so computed properties will also trigger
      * @param value
-     * @param component
      */
-    sessionChanged: function (value, component) {
-      var self = this;
-      //use provided context instead
-      if (!Ember.isEmpty(component)) {
-        self = component.get('comp');
-      }
-      console.log('Session Changed');
-      if (Ember.isEmpty(value)) {
-        self.set('isEventDisabled', true);
-        //self.set('currentEvent', null);
-        self.set('request.event', null);
-      } else {
-        self.set('isEventDisabled', false);
-        self.set('currentSession', value);
-        self.buildEvents();
-      }
+    sessionChanged: function (value) {
+      this.set('currentSession', value);
+      //reset down stream selects since the up stream select has changed
+      this.set('request.event', null);
     },
 
     /**

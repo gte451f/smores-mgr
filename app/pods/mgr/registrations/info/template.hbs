@@ -8,8 +8,19 @@
 
                     <div class="box-tools pull-right">
                         <div class="btn-group">
-                          {{#link-to "mgr.registrations.edit" model.id class="btn btn-primary btn-sm"}}Edit{{/link-to}}
-                          {{#link-to "mgr.registrations.list" class="btn btn-primary btn-sm"}}Back{{/link-to}}
+                          {{#link-to "mgr.registrations.edit" model.id (query-params origin="info") class="btn btn-primary btn-sm"}}
+                              Edit
+                          {{/link-to}}
+
+                          {{#if (eq origin 'registration')}}
+                            {{#link-to 'mgr.registrations.list' class="btn btn-primary btn-sm"}}
+                                Back
+                            {{/link-to}}
+                          {{else}}
+                            {{#link-to 'mgr.accounts.list' class="btn btn-primary btn-sm"}}
+                                Back
+                            {{/link-to}}
+                          {{/if}}
                         </div>
                     </div>
                 </div>

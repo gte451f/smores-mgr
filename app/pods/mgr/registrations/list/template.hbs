@@ -1,28 +1,29 @@
 <section class="content">
     <div class="row">
 
-            <div class="col-md-12">
-              {{#bs-table-pagination
-              content=model
-              tableTitle=null
-              columns=columns
-              isRemoteHandled=true
-              page=page
-              perPage=perPage
-              totalPages=totalPages
-              sortProperty=sortProperty
-              sortDirection=sortDirection
-              searchString=quickSearch
-              perPageOptions=pageList
-              loading=currentlyLoading
-              refresh=(route-action 'refresh')
-              changePage=(route-action 'changePage')
-              changeSort=(route-action 'changeSort')
-              runQuickSearch=(route-action 'runQuickSearch')
-              changePerPage=(route-action 'changePerPage')
-              as |item| }}
-                {{bs-table-pagination.table-row item=item columns=columns linkPath=linkPath}}
-              {{/bs-table-pagination}}
-            </div>
+        <div class="col-md-12">
+          {{#bs-table-pagination
+          content=model
+          tableTitle=null
+          columns=columns
+          isRemoteHandled=true
+          page=page
+          perPage=perPage
+          totalPages=totalPages
+          sortProperty=sortProperty
+          sortDirection=sortDirection
+          searchString=quickSearch
+          perPageOptions=pageList
+          loading=currentlyLoading
+          pagerComponent='registrations.list.table-pager'
+          refresh=(route-action 'refresh')
+          changePage=(route-action 'changePage')
+          changeSort=(route-action 'changeSort')
+          runQuickSearch=(route-action 'runQuickSearch')
+          changePerPage=(route-action 'changePerPage')
+          as |item| }}
+            {{registrations/list/table-row item=item columns=columns linkPath=linkPath editPath=editPath}}
+          {{/bs-table-pagination}}
+        </div>
     </div>
 </section>

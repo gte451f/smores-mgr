@@ -29,12 +29,14 @@ export default Ember.Route.extend({
    */
   setupController: function (controller, resolved) {
     var model = resolved.registration.get('firstObject');
-    var requests = model.get('requests');
 
-    var activeEvents = [];
-    requests.forEach(function (item) {
-      activeEvents.pushObject(item);
-    });
+
+    // var requests = model.get('requests');
+    // this doesn't seem to be used
+    // var activeEvents = [];
+    // requests.forEach(function (item) {
+    //   activeEvents.pushObject(item);
+    // });
 
     this._super(controller, model);
     // tweak location list since it is the only select not driven by a previously selected value
@@ -44,6 +46,9 @@ export default Ember.Route.extend({
         locationList.pushObject(item);
       }
     });
+
+    // load the account record since we'll need it for one of the links
+    controller.set('account', this.store.findRecord('attendee', model.get('attendee.id'), {include: 'accounts'}));
 
     controller.set('locations', locationList);
     controller.set('programs', resolved.programs);

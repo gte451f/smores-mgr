@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   // store the selected values
   currentLocation: false,
   currentSession: false,
-  currentEvent: false,
   currentPriority: false,
 
   // should the session list box be enabled?
@@ -21,7 +20,6 @@ export default Ember.Component.extend({
   // should the event list box be enabled?
   isEventDisabled: Ember.computed('currentSession', function () {
     return Ember.isEmpty(this.get('currentSession')) ? true : false;
-
   }),
 
 
@@ -113,6 +111,9 @@ export default Ember.Component.extend({
      */
     locationChanged: function (value) {
       this.set('currentLocation', value);
+      //reset down stream selects since the up stream select has changed
+      this.set('currentSession', null);
+      this.set('request.event', null);
     },
 
     /**
@@ -121,6 +122,8 @@ export default Ember.Component.extend({
      */
     sessionChanged: function (value) {
       this.set('currentSession', value);
+      //reset down stream selects since the up stream select has changed
+      this.set('request.event', null);
     },
 
   }

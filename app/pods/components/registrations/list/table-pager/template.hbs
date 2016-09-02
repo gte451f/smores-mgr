@@ -1,0 +1,10 @@
+{{pagination-pager
+count=count
+current=current
+change=(action this.attrs.changePage)}}
+
+<div class="box-tools pull-right">
+  {{#link-to 'mgr.registrations.new' (query-params origin="registration") class="btn btn-box-tool"}}
+      <i class="fa fa-plus"></i> New Registration
+  {{/link-to}}
+</div>

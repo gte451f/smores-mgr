@@ -5,5 +5,9 @@ export default Ember.Controller.extend(CustomFields, {
   breadCrumb: 'Info',
 
   // configure custom fields base table
-  baseTable: 'registrations'
+  baseTable: 'registrations',
+
+  // where does the back button return to?
+  queryParams: ['origin'],
+  origin: null
 });
