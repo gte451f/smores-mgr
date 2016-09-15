@@ -1,6 +1,6 @@
-import DS from 'ember-data';
+import JSONSerializer from 'ember-data/serializers/json';
 
-export default DS.ActiveModelSerializer.extend({
+export default JSONSerializer.extend({
   normalize: function (typeClass, hash, prop) {
     hash.account_id = hash.id;
     return this._super(typeClass, hash, prop);

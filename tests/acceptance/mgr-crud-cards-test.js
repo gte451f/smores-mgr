@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import {test} from 'qunit';
 import moduleForAcceptance from 'smores-mgr/tests/helpers/module-for-acceptance';
 
 // tests/acceptance/…
@@ -8,7 +8,7 @@ import {userData} from '../util/auth-admin-user';
 
 moduleForAcceptance('Acceptance | mgr crud cards');
 
-test('visiting /mgr-crud-cards', function(assert) {
+test('visiting /mgr-crud-cards', function (assert) {
   authenticateSession(this.application, userData);
   visit('/mgr/account/1/cards');
 

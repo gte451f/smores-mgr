@@ -62,5 +62,5 @@ export default DS.Model.extend(Validations, {
   registrations: DS.hasMany('registration', {
     async: false
   }),
-  account: DS.belongsTo('account', {async: true})
+  account: DS.belongsTo('account', {async: false})
 });

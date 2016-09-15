@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function (params) {
     return Ember.RSVP.hash({
-      model: this.store.query('registration', {id: params.registration_id, with: 'attendees'}),
+      model: this.store.query('registration', {id: params.registration_id, with: 'attendees,charges'}),
       requests: this.store.query('request', {registration_id: params.registration_id, with: 'all'}),
       charges: this.store.query('charge', {registration_id: params.registration_id})
     });

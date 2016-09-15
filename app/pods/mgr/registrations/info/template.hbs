@@ -17,7 +17,7 @@
                                 Back
                             {{/link-to}}
                           {{else}}
-                            {{#link-to 'mgr.accounts.list' class="btn btn-primary btn-sm"}}
+                            {{#link-to 'mgr.account.registrations' model.account.id class="btn btn-primary btn-sm"}}
                                 Back
                             {{/link-to}}
                           {{/if}}
@@ -31,6 +31,12 @@
                         <dd>
                           {{#link-to 'mgr.attendees.info' model.attendee.id}}
                             {{model.attendee.firstName}} {{model.attendee.lastName}}
+                          {{/link-to}}
+                        </dd>
+                        <dt>Account</dt>
+                        <dd>
+                          {{#link-to 'mgr.account.info' model.account.id}}
+                            {{model.account.name}}
                           {{/link-to}}
                         </dd>
                         <dt>Grade</dt>

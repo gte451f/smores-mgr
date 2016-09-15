@@ -11,7 +11,7 @@ export default Ember.Route.extend(ErrorHandler, Account, {
    *
    * @param params
    * @returns {*}
-     */
+   */
   model(params) {
     return Ember.RSVP.hash({
       cards: this.store.query('card', {account_id: this.get('currentAccount.id')}),

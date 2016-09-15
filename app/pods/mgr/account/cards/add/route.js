@@ -21,7 +21,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
       card.set('account', currentAccount);
       card.save().then((data) => {
         this.get('notify').success('Success saving card!');
-        this.transitionTo('mgr.account.cards');
+        this.transitionTo('mgr.account.cards', this.get('currentAccount.id'));
       }, (reason) => {
         this.handleFormError(reason);
       });

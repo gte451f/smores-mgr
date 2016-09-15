@@ -9,7 +9,7 @@
     "moment": "^2.13.0",
     "bootstrap": "~3.3.5",
     "ember-cli-moment-shim": "~0.0.3",
-    "admin-lte": "2.3.0",
+    "admin-lte": "git@github.com:gte451f/AdminLTE.git#4324c93a2dac8c58abcd1f871bc20d066d63e0c2",
     "chartist": "~0.7.4",
     "moment-timezone": ">= 0.1.0",
     "spin.js": "^2.3.2",

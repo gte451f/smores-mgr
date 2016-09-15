@@ -1,4 +1,7 @@
 import DS from 'ember-data';
+import Ember from 'ember';
+
+const {computed} = Ember;
 
 export default DS.Model.extend({
   notes: DS.attr('string'),
@@ -7,6 +10,9 @@ export default DS.Model.extend({
 
   // relationshps
   attendee: DS.belongsTo('attendee', {
+    async: false
+  }),
+  account: DS.belongsTo('account', {
     async: false
   }),
   charges: DS.hasMany('charge', {async: true}),

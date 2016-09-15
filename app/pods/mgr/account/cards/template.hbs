@@ -14,10 +14,10 @@
                             <!-- /.box-tools -->
                         </div>
                         <div class="box-body">
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <div class="row">
-                                  {{#each model.cards as |item| }}
-                                    {{#if record.id}}
+                                  {{#each model.account.cards as |item| }}
+                                    {{#if item.id}}
                                       {{card/basic-info card=item}}
                                     {{/if}}
                                   {{/each}}
