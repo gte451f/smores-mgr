@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import {test} from 'qunit';
 import moduleForAcceptance from 'smores-mgr/tests/helpers/module-for-acceptance';
 
 // tests/acceptance/…
@@ -8,7 +8,7 @@ import {userData} from '../util/auth-demo-user';
 
 moduleForAcceptance('Acceptance | client crud cards');
 
-test('visiting /client-crud-cards', function(assert) {
+test('visiting /client-crud-cards', function (assert) {
   authenticateSession(this.application, userData);
   visit('/client/billing/cards');
 

@@ -12,12 +12,12 @@
     <div class="col-md-2">
         <div class="form-group">
           {{#util/x-select
+          class='registrationLocations'
           options=locations
           searchEnabled=false
           selected=currentLocation
           placeholder='Select'
           onchange=(action "locationChanged")
-          class="input-assigned-to"
           as |result|
           }}
             {{result.name}}
@@ -27,6 +27,7 @@
     <div class="col-md-2">
         <div class="form-group">
           {{#util/x-select
+          class='registrationSessions'
           options=filteredSessions
           searchEnabled=false
           selected=currentSession
@@ -42,6 +43,7 @@
     <div class="col-md-3">
 
       {{#util/x-select
+      class='registrationEvents'
       options=filteredEvents
       searchEnabled=false
       selected=request.event
@@ -59,7 +61,7 @@
         </div>
     </div>
     <div class="col-md-1">
-        <button class="btn btn-defaul btn-xs" {{action (route-action "removeRequest" request)}}>
+        <button class="btn btn-default btn-xs" {{action (route-action "removeRequest" request)}}>
           {{fa-icon 'trash'}}
         </button>
     </div>

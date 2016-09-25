@@ -2,12 +2,15 @@
     <div class="col-md-12">
         <div class="form-group required">
             <label>Select the camper attending camp:</label>
-          {{#x-select value=registration.attendee class="form-control"}}
-              <option>Select</option>
-            {{#each attendees as |item|}}
-              {{#x-option value=item}}{{item.firstName}} {{item.lastName}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
+          {{#util/x-select
+          class='registrationAttendee'
+          options=attendees
+          selected=registration.attendee
+          placeholder='Select'
+          searchEnabled=false
+          onchange=(action (mut registration.attendee)) as |item|}}
+            {{item.firstName}} {{item.lastName}}
+          {{/util/x-select}}
         </div>
     </div>
 </div>
@@ -16,7 +19,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label>Enter any important notes to camp staff here:</label>
-          {{textarea class="form-control" value=registration.notes cols="80" rows="6"}}
+          {{textarea class="form-control" value=registration.notes cols="80" rows="6" name="registrationNote"}}
         </div>
     </div>
 </div>
