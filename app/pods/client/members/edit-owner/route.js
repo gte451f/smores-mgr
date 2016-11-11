@@ -2,11 +2,11 @@ import Ember from 'ember';
 import Error from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(Error, {
-  notify: Ember.inject.service(),
+  notify : Ember.inject.service(),
   session: Ember.inject.service(),
 
   model: function (params) {
-    return this.store.findRecord('owner', params.owner_id, {include: 'all'});
+    return this.store.findRecord('owner', params.owner_id, { include: 'all' });
   },
 
   actions: {
@@ -47,10 +47,10 @@ export default Ember.Route.extend(Error, {
 
     /**
      * cancel edit and revert changes
-     * @param phone
+     * @param owner
      */
-    cancel(phone) {
-      phone.rollbackAttributes();
+    cancel(owner) {
+      owner.rollbackAttributes();
       this.transitionTo('client.members.list');
     }
   }

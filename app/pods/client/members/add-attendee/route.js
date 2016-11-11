@@ -3,7 +3,7 @@ import Error from 'smores-mgr/mixins/crud/error';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
-  notify: Ember.inject.service(),
+  notify        : Ember.inject.service(),
   currentAccount: Ember.inject.service(),
 
   /**
@@ -13,7 +13,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
    * @returns {*}
    */
   model(params) {
-    return this.store.createRecord('attendee', {userType: 'Attendee', active: true});
+    return this.store.createRecord('attendee', { userType: 'Attendee', active: true });
   },
 
   /**
@@ -42,13 +42,20 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
       attendee.save().then((data) => {
         this.get('notify').success('Camper Added');
         //reset to original position
-        let resetAttendee = this.store.createRecord('attendee', {userType: 'Attendee', active: true});
+        let resetAttendee = this.store.createRecord('attendee', { userType: 'Attendee', active: true });
         this.set('model', resetAttendee);
         this.transitionTo('client.members.list');
       }, (reason) => {
         this.handleFormError(reason);
       });
+    },
 
+    /**
+     * cancel edit and revert changes
+     * @param attendee
+     */
+    cancel(attendee) {
+      this.transitionTo('client.members.list');
     }
   }
 });

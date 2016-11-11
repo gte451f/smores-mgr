@@ -49,7 +49,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
       }, (reason) => {
         this.handleFormError(reason);
       });
+    },
 
+    /**
+     * cancel edit and revert changes
+     * @param attendee
+     */
+    cancel(attendee) {
+      this.transitionTo('mgr.account.info', this.get('currentAccount.id'));
     }
   }
 });

@@ -20,10 +20,10 @@ test('visiting /mgr-crud-account-members', function (assert) {
   click('#add-attendee');
   andThen(function () {
     assert.equal(currentURL(), '/mgr/attendees/add');
-    fillIn("input[name='firstName']", 'Junior');
-    fillIn("input[name='lastName']", 'Jones');
+    fillIn("input[name='firstName']", 'Junior2');
+    fillIn("input[name='lastName']", 'Jones2');
     fillIn("input[name='gender']", 'Male');
-    fillIn("input[name='dob']", '2004-01-01');
+    fillIn("input[name='dob']", '2002-01-01');
     // fillIn("input[name='schoolGrade']", '7th');
     select('.school-grade', 'My Option');
     click('#save-new-attendee');
@@ -41,11 +41,11 @@ test('visiting /mgr-crud-account-members', function (assert) {
   click('#add-owner');
   andThen(function () {
     assert.equal(currentURL(), '/mgr/owner/add');
-    fillIn("input[name='firstName']", 'FIRST');
-    fillIn("input[name='lastName']", 'LAST');
+    fillIn("input[name='firstName']", 'FIRST1');
+    fillIn("input[name='lastName']", 'LAST1');
     fillIn("input[name='relationship']", 'Mother');
     fillIn("input[name='gender']", 'Male');
-    fillIn("input[name='email']", 'foobar@foobar.com');
+    fillIn("input[name='email']", 'foobar1@foobar.com');
     fillIn("input[name='number']", '789-789-7890');
     fillIn("input[name='phoneType']", 'Office');
     click('#save-new-owner');

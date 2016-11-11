@@ -1,95 +1,26 @@
-<!-- Default box -->
-<div class="box box-primary box-solid">
-    <div class="box-header with-border">
-        <h3 class="box-title">{{model.firstName}} {{model.lastName}}</h3>
-
+<div class="row">
+  <div class="col-md-6">
+    {{owner/edit-form owner=model title='Edit Owner Information' isPending=ownerSaving}}
+  </div>
+  <div class="col-md-6">
+    <div class="box box-{{box}}">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{fa-icon 'phone'}} Phone Information</h3>
         <div class="box-tools">
-            <div class="btn-group pull-right">
-              {{#link-to "mgr.attendees.edit" model.id class="btn btn-default"}}
-                  Cancel
-              {{/link-to}}
-            </div>
+          <button class="btn btn-box-tool" {{action 'toggleNewPhone'}} id="new-phone">{{fa-icon 'plus'}} Phone</button>
         </div>
-
+      </div>
+      <div class="box-body">
+        {{client/members/add-phone owner=model isAdding=isAdding newPhone=newPhone}}
+        {{#unless isAdding}}
+          <ul class="nav nav-pills nav-stacked">
+            {{#each model.ownerNumbers as |item|}}
+              {{client/members/edit-phone phone=item isEditing=isEditing}}
+            {{/each}}
+          </ul>
+        {{/unless}}
+      </div>
+      <!-- /.box-body -->
     </div>
-    <div class="box-body form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">First Name</label>
-
-            <div class="col-sm-10">
-              {{input type="text" class="form-control" value=model.firstName}}</div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Last Name</label>
-
-            <div class="col-sm-10">
-              {{input type="text" class="form-control" value=model.lastName}}</div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Email</label>
-
-            <div class="col-sm-10">
-              {{input type="text" class="form-control" value=model.email}}</div>
-        </div>
-
-        <div class="form-group required">
-            <label class="col-sm-2 control-label">Relationship to Campers</label>
-
-            <div class="col-sm-10">
-              {{#each listService.ownerRelationship as |item|}}
-                {{radio-button value=item.value groupValue=model.relationship}} {{item.label}}
-              {{/each}}
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Birthday</label>
-
-            <div class="col-sm-10">
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                  {{pikaday-input value=model.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0"}}
-                </div>
-            </div>
-        </div>
-        <div class="row form-group required">
-            <label class="col-sm-2 control-label">Gender</label>
-
-            <div class="col-sm-10">
-              {{#each listService.gender as |item| }}
-                {{radio-button value=item.value groupValue=model.gender}} {{item.display}}
-              {{/each}}
-            </div>
-        </div>
-
-
-
-      {{#each customFields as |item|}}
-          <div class="form-group">
-              <label class="col-sm-2 control-label">{{item.display}}</label>
-
-              <div class="col-sm-10">
-                {{custom-input customField=item model=model}}
-              </div>
-          </div>
-      {{/each}}
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Active?</label>
-
-            <div class="col-sm-10">
-              {{input type="checkbox" checked=model.active}} (Access to client portal)
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <button class="btn btn-primary pull-right" {{action "save" model}}>Save</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
-<!-- /.box -->

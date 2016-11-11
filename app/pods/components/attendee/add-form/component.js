@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  backAddr: 'client.members.list',
+  /**
+   * descriptive text for user display
+   */
   title: 'Add New Camper'
 });

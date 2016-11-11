@@ -3,7 +3,7 @@ import Error from 'smores-mgr/mixins/crud/error';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
-    notify: Ember.inject.service(),
+    notify        : Ember.inject.service(),
     currentAccount: Ember.inject.service(),
 
     /**
@@ -13,9 +13,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
      * @returns {{phone: *, owner: *}}
      */
     model(params) {
-      var owner = this.store.createRecord('owner', {userType: 'Owner', active: true});
-      var phone = this.store.createRecord('owner-number', {primary: 1});
-      return {phone: phone, owner: owner};
+      var owner = this.store.createRecord('owner', { userType: 'Owner', active: true });
+      var phone = this.store.createRecord('owner-number', { primary: 1 });
+      return { phone: phone, owner: owner };
     },
 
     /**
@@ -49,9 +49,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
           phone.save().then(function () {
             self.get('notify').success('Owner created');
             //reset to original position
-            var newOwner = self.store.createRecord('owner', {userType: 'Owner', active: true});
-            var newPhone = self.store.createRecord('owner-number', {primary: 1});
-            self.set('model', {phone: newPhone, owner: newOwner});
+            var newOwner = self.store.createRecord('owner', { userType: 'Owner', active: true });
+            var newPhone = self.store.createRecord('owner-number', { primary: 1 });
+            self.set('model', { phone: newPhone, owner: newOwner });
             self.transitionTo('client.members.list');
           }, function (reason) {
             self.handleFormError(reason);
@@ -59,7 +59,16 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
         }, (reason) => {
           this.handleFormError(reason);
         });
+      },
+
+      /**
+       * cancel edit and revert changes
+       * @param owner
+       */
+      cancel(owner) {
+        this.transitionTo('client.members.list');
       }
+
     }
   }
 )
