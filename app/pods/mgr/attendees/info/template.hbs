@@ -1,108 +1,111 @@
 <div class="wrapper">
   {{partial "navigation/main-header"}}
   {{partial "navigation/main-sidebar"}}
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="min-height: 1068px;">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Attendee: {{model.firstName}} {{model.lastName}}
-            </h1>
-          {{partial "navigation/main-breadcrumb"}}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 1068px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Attendee: {{model.firstName}} {{model.lastName}}
+      </h1>
+      {{partial "navigation/main-breadcrumb"}}
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="row">
+        <section class="col-md-6">
+          <!-- Default box -->
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title"></h3>
+
+              <div class="box-tools">
+                <div class="btn-group pull-right">
+                  {{#link-to "mgr.attendees.edit" model.id class="btn btn-default btn-xs"}}
+                    {{fa-icon "pencil"}} Edit
+                  {{/link-to}}
+                  <button class="btn btn-default btn-xs" {{action "delete" model}} id="delete-attendee">
+                    {{fa-icon "trash"}} Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="box-body">
+              <dl class="dl-horizontal">
+                <dt>Account</dt>
+                <dd>{{#link-to "mgr.account.info" model.account.id}}Open{{/link-to}}</dd>
+                <dt>Email</dt>
+                <dd>{{model.email}}</dd>
+                <dt>Birthday</dt>
+                <dd>{{moment-format model.dob 'MM/DD/YYYY'}}</dd>
+                <dt>Gender</dt>
+                <dd>{{model.gender}}</dd>
+                <dt>Grade</dt>
+                <dd>{{model.schoolGrade}}</dd>
+
+                {{#each customFields as |item|}}
+                  <dt>{{item.display}} ({{item.modelName}})</dt>
+                  <dd>{{get model item.modelName}}</dd>
+                {{/each}}
+
+
+                <dt>Status</dt>
+                <dd>
+                  {{#if model.active}}
+                    <span class="label label-success">Active</span>
+                  {{else}}
+                    <span class="label label-warning">Inactive</span>
+                  {{/if}}
+
+                </dd>
+                <dt>Siblings</dt>
+                <dd>
+                  <ul>
+                    {{#each siblings as |item| }}
+                      <li>{{#link-to 'mgr.attendees.info' item.id}}{{item.firstName}} {{item.lastName}}{{/link-to}}</li>
+                    {{/each}}
+                  </ul>
+                </dd>
+              </dl>
+            </div>
+            <div class="box-footer">
+              Footer
+            </div>
+          </div>
+          <!-- /.box -->
         </section>
-        <!-- Main content -->
-        <section class="content">
-            <!-- Default box -->
-            <div class="row">
-                <section class="col-md-6">
-                    <!-- Default box -->
-                    <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title"></h3>
+        <section class="col-md-6">
 
-                            <div class="box-tools">
-                                <div class="btn-group pull-right">
-                                  {{#link-to "mgr.attendees.edit" model.id class="btn btn-default btn-xs"}} {{fa-icon "pencil"}}
-                                      Edit{{/link-to}}
-                                    <button class="btn btn-default btn-xs">{{fa-icon "trash"}} Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <dl class="dl-horizontal">
-                                <dt>Account</dt>
-                                <dd>{{#link-to "mgr.account.info" model.account.id}}Open{{/link-to}}</dd>
-                                <dt>Email</dt>
-                                <dd>{{model.email}}</dd>
-                                <dt>Birthday</dt>
-                                <dd>{{moment-format model.dob 'MM/DD/YYYY'}}</dd>
-                                <dt>Gender</dt>
-                                <dd>{{model.gender}}</dd>
-                                <dt>Grade</dt>
-                                <dd>{{model.schoolGrade}}</dd>
-
-                              {{#each customFields as |item|}}
-                                  <dt>{{item.display}} ({{item.modelName}})</dt>
-                                  <dd>{{get model item.modelName}}</dd>
-                              {{/each}}
-
-
-                                <dt>Status</dt>
-                                <dd>
-                                  {{#if model.active}}
-                                      <span class="label label-success">Active</span>
-                                  {{else}}
-                                      <span class="label label-warning">Inactive</span>
-                                  {{/if}}
-
-                                </dd>
-                                <dt>Siblings</dt>
-                                <dd>
-                                    <ul>
-                                      {{#each siblings as |item| }}
-                                          <li>{{#link-to 'mgr.attendees.info' item.id}}{{item.firstName}} {{item.lastName}}{{/link-to}}</li>
-                                      {{/each}}
-                                    </ul>
-                                </dd>
-                            </dl>
-                        </div>
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                    </div>
-                    <!-- /.box -->
-                </section>
-                <section class="col-md-6">
-
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">{{fa-icon "clipboard"}}Registrations</h4>
-                        </div>
-                        <div class="panel-body">
-                            <ul class="list-group">
-                              {{#each model.registrations as |record| }}
-                                  <span class="list-group-item">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title">{{fa-icon "clipboard"}}Registrations</h4>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                {{#each model.registrations as |record| }}
+                  <span class="list-group-item">
                                         {{#link-to 'mgr.registrations.info' record.id}}
-                                            #{{record.id}} at {{moment-format record.createdOn 'MM/DD/YYYY'}}
+                                          #{{record.id}} at {{moment-format record.createdOn 'MM/DD/YYYY'}}
                                         {{/link-to}}
-                                      <ul>
+                    <ul>
                                             <li>Show request here but need to manually load related</li>
                                         </ul>
                                     </span>
-                                <span class="list-group-item">
-                                  {{record.note}}
-                                </span>
+                  <span class="list-group-item">
+                    {{record.note}}
+                  </span>
 
-                              {{/each}}
-                            </ul>
-                        </div>
-                    </div>
-
-                </section>
+                {{/each}}
+              </ul>
             </div>
+          </div>
+
         </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
   {{partial "navigation/main-footer"}}
 </div>

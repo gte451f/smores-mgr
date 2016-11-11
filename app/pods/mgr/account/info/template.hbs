@@ -23,8 +23,13 @@
 
         </div>
         <div class="col-md-3">
-          <h4 class="text-blue">Owners:</h4>
-          <ul class="nav nav-pills nav-stacked">
+          <h4 class="text-blue">
+            Owners:
+            {{#link-to 'mgr.owner.add' class="btn btn-default btn-xs" id="add-owner"}}
+              Add
+            {{/link-to}}
+          </h4>
+          <ul class="nav nav-pills nav-stacked owner-list">
             {{#each model.owners as |owner| }}
               <li>
                 {{#link-to "mgr.owner.info" owner.id}}{{owner.firstName}} {{owner.lastName}}{{/link-to}}
@@ -33,8 +38,13 @@
           </ul>
         </div>
         <div class="col-md-3">
-          <h4 class="text-blue">Attendees:</h4>
-          <ul class="nav nav-pills nav-stacked">
+          <h4 class="text-blue">
+            Attendees:
+            {{#link-to 'mgr.attendees.add' class="btn btn-default btn-xs" id="add-attendee"}}
+              Add
+            {{/link-to}}
+          </h4>
+          <ul class="nav nav-pills nav-stacked attendee-list">
             {{#each model.attendees as |attendee| }}
               <li>
                 {{#link-to "mgr.attendees.info" attendee.id}}{{attendee.firstName}} {{attendee.lastName}}{{/link-to}}
