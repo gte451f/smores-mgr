@@ -1,11 +1,34 @@
 import Ember from 'ember';
-import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(ErrorHandler, {
-  notify: Ember.inject.service(),
+export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
+  notify        : Ember.inject.service(),
+  currentAccount: Ember.inject.service(),
 
-  model: function (params) {
-    return {};
+  /**
+   * create fake models so validation will work
+   *
+   * @param params
+   * @returns {*}
+   */
+  model(params) {
+    return this.store.createRecord('attendee', { userType: 'Attendee', active: true });
+  },
+
+  /**
+   * verify current account after it has had a chance to load
+   *
+   * @param controller
+   * @param model
+   */
+  setupController(controller, model) {
+    let currentAccount = this.get('currentAccount.account');
+    if (Ember.isEmpty(currentAccount)) {
+      // error, no account detected
+      this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
+    }
+    this._super(controller, model);
   },
 
   actions: {
@@ -14,31 +37,25 @@ export default Ember.Route.extend(ErrorHandler, {
      *
      * @param model
      */
-    save: function (model) {
-      var self = this;
-      // set some default values
-      model.userType = "Attendee";
-      model.active = "1";
-
-      var accountId = this.get('session.data.authenticated.data.attributes.account-id');
-      model.account = this.store.peekRecord('account', accountId);
-
-      if (Ember.isEmpty(model.account)) {
-        // error, no account detected
-        this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-        return false;
-      }
-      var newRecord = this.store.createRecord('attendee', model);
-      newRecord.save().then(function (post) {
-        self.get('notify').success('Camper Added');
-        // reset to original position
-        self.set('model', {});
-        self.transitionTo('client.members.list');
-      }, function (reason) {
-        // roll back progress
-        newRecord.deleteRecord();
-        self.validationReport(newRecord);
+    save(attendee) {
+      attendee.set('account', this.get('currentAccount.account'));
+      attendee.save().then((data) => {
+        this.get('notify').success('Camper Added');
+        //reset to original position
+        let resetAttendee = this.store.createRecord('attendee', { userType: 'Attendee', active: true });
+        this.set('model', resetAttendee);
+        this.transitionTo('client.members.list');
+      }, (reason) => {
+        this.handleFormError(reason);
       });
+    },
+
+    /**
+     * cancel edit and revert changes
+     * @param attendee
+     */
+    cancel(attendee) {
+      this.transitionTo('client.members.list');
     }
   }
 });

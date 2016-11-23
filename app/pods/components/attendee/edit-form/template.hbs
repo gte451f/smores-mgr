@@ -1,0 +1,69 @@
+<!-- Default box -->
+<div class="box box-primary attendee-box">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{title}}</h3>
+
+        <div class="box-tools">
+            <button class="btn btn-box-tool" {{action (route-action "delete" attendee)}} id="delete-attendee">
+              {{fa-icon 'trash'}} Delete
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+      {{util/validated-text valuePath='firstName' model=attendee placeholder="First Name" labelText="First Name"}}
+
+      {{util/validated-text valuePath='lastName' model=attendee placeholder="Last Name" labelText="Last Name"}}
+        <div class="form-group required">
+            <label class="control-label">Birthday</label>
+
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+              {{date-picker date=model.dob format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" yearRange="-20,0" allowBlank=true}}
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label">Gender</label>
+            <div>
+              {{#each listService.gender as |item|}}
+                {{radio-button value=item.value groupValue=attendee.gender name='gender'}} {{item.display}}
+              {{/each}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Grade</label>
+
+            <div>
+              {{#x-select value=attendee.schoolGrade class="form-control"}}
+                {{#each listService.grade as |item|}}
+                  {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+                {{/each}}
+              {{/x-select}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Active?</label>
+
+          {{input type="checkbox" checked=attendee.active}}
+        </div>
+    </div>
+
+    <div class="box-footer clearfix">
+        <div class="pull-right">
+            <button id="cancel-edit-attendee" class="btn btn-primary" {{action (route-action "cancel" attendee)}}>
+                Cancel
+            </button>
+          {{#spinner-button
+          onclick=(action (route-action "save" attendee))
+          isSpinning=isPending
+          id="save-edit-attendee"
+          class="btn btn-primary"
+          disabled=(if attendee.validations.isValid false true)}}
+              Save
+          {{/spinner-button}}
+        </div>
+    </div>
+</div>
+<!-- /.box -->

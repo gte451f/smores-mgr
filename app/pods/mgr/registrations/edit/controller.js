@@ -6,12 +6,15 @@ export default Ember.Controller.extend(Error, {
 
   breadCrumb: 'Edit',
 
-  //list of request to submit
+  // where does the back button return to?
+  queryParams: ['origin'],
+  origin: null,
+
   actions: {
     /**
-     * add an expense record for a particular matter
+     * add a request record for a particular registration
      */
-    addRequest: function () {
+    addRequest() {
       var requests = this.get('model.requests');
       var newRecord = this.store.createRecord('request', {
         location: null,
@@ -24,18 +27,21 @@ export default Ember.Controller.extend(Error, {
       requests.pushObject(newRecord);
     },
 
-    save: function () {
+    /**
+     * save a series of requests for the existing registration
+     */
+    save() {
       var self = this;
       //array a billables that should be saved before the billable group is saved
       var subItems = [];
 
-      // a function to save a sub-item
+      // a function to save a sub-item, in this case a request
       var subItemSave = function (item) {
         //console.log('save updated record');
         return item.save();
       };
 
-      //add billables...but only if dirty
+      //add requests...but only if dirty
       this.get('model.requests').map(function (item) {
         // check receipts for expense only
         if (item.get('isDirty')) {
@@ -45,14 +51,14 @@ export default Ember.Controller.extend(Error, {
 
       Ember.RSVP.all(subItems).then(function () {
         self.get('notify').success('Success editing registration');
-        self.transitionToRoute('registrations.info', self.get('model.id'));
+        self.transitionToRoute('mgr.registrations.info', self.get('model.id'));
       }, function (reason) {
         self.handleXHR(reason);
       });
     },
 
     /**
-     * remove an expense record from the store and possibly from the API
+     * remove a request record from the store and possibly from the API
      */
     removeRequest(object) {
       var requestList = this.get('model.requests');

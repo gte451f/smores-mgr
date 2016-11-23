@@ -1,0 +1,21 @@
+<div class="wrapper">
+  {{partial "navigation/setup-header"}}
+  {{partial "navigation/main-sidebar"}}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 1068px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Attendee Information:
+      </h1>
+      {{partial "navigation/main-breadcrumb"}}
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      {{attendee/add-form attendee=model title='Add New Camper'}}
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {{partial "navigation/main-footer"}}
+</div>

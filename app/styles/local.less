@@ -1,3 +1,29 @@
+// create a version of the well known well but for xs
+.well-xs {
+  padding: 7px;
+  border-radius: 3px;
+  margin-bottom: 7px;
+}
+
+// lock app in a box!
+.content-wrapper {
+  //set height based on available space
+  min-height: calc(~"100vh - 70px");
+  // required to breadcrumb display
+  margin-top: 20px;
+}
+
+// include an option to make a box use full height
+.box-body-full-height {
+  max-height: calc(~"100vh - 210px");
+  overflow-y: auto;
+}
+
+/* modify  auto suggest list box height */
+.tt-suggestions {
+  max-height: 15rem;
+}
+
 /*
  * make font awesome icons behave like a button
  */
@@ -23,3 +49,43 @@ span.tt-dropdown-menu {
 .step-content {
   margin-top: 10px;
 }
+
+/* Modify power select to look like AdminLTE selects */
+.ember-power-select-trigger {
+  border-radius: 0;
+  line-height: 2.42857143;
+}
+
+.ember-power-select-search-input {
+  border-radius: 0;
+}
+
+.ember-power-select-dropdown {
+  border-radius: 0;
+}
+
+/* End Power Select */
+
+/* tone down success and error messages */
+.form-group.has-success label i {
+  color: #00a65a;
+}
+
+.form-group.has-error label i {
+  color: #dd4b39;
+}
+
+.form-group.has-warning label i {
+  color: #f39c12;
+}
+
+.form-group.has-success label, .form-group.has-error label, .form-group.has-warning label {
+  color: black;
+}
+
+/* Fix Modal */
+.modal-dialog {
+  margin: 0px;
+}
+
+

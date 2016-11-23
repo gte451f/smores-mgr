@@ -1,14 +1,13 @@
-@import 'bower_components/bootstrap/less/bootstrap.less';
-@import 'bower_components/admin-lte/build/less/AdminLTE.less';
-@import 'bower_components/admin-lte/build/less/skins/skin-blue.less';
-/* local changes */
-@import 'nav-wizard.less';
-@import 'local.less';
-@import 'template-tweaks.less';
-@import 'paginated-table.less';
-@import 'bread-crumb.less';
+@import 'bootstrap';
+@import 'AdminLTE';
+@import 'skins/skin-blue';
+@import 'nav-wizard';
+@import 'local';
+@import 'template-tweaks';
+@import 'paginated-table';
+@import 'bread-crumb';
 
-/* modify  auto suggest list box height */
-.tt-suggestions {
-  max-height: 15rem;
-}
+
+/* import some compiled sass files as css since we can't run both LESS and SASS in the same project */
+@import 'ember-modal-appearance.less';
+@import 'ember-modal-structure.less';

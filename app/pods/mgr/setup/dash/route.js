@@ -14,11 +14,11 @@ export default Ember.Route.extend({
 
   setupController: function (controller, resolved) {
     this._super(controller, {});
-    controller.set('model.locationCount', this.store.metadataFor("location").total_record_count);
-    controller.set('model.programCount', this.store.metadataFor("program").total_record_count);
-    controller.set('model.eventCount', this.store.metadataFor("event").total_record_count);
-    controller.set('model.cabinCount', this.store.metadataFor("cabin").total_record_count);
-    controller.set('model.sessionCount', this.store.metadataFor("session").total_record_count);
+    controller.set('model.locationCount', resolved.locations.content.length);
+    controller.set('model.programCount', resolved.programs.content.length);
+    controller.set('model.eventCount', resolved.events.content.length)
+    controller.set('model.cabinCount', resolved.cabins.content.length);
+    controller.set('model.sessionCount', resolved.sessions.content.length);
   }
 
 });

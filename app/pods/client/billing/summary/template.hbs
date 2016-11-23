@@ -1,6 +1,7 @@
+<h4>{{model.name}}-{{model.id}}</h4>
 <div class="row" style="margin-bottom: 5px;">
     <div class="col-md-12">
-      {{#link-to 'client.billing.cards.list' class="btn btn-primary"}}{{fa-icon 'credit-card'}} Manage Credit
+      {{#link-to 'client.billing.cards' class="btn btn-primary"}}{{fa-icon 'credit-card'}} Manage Credit
           Cards{{/link-to}}
       {{#link-to 'client.billing.add-payment' class="btn btn-primary"}}
         {{fa-icon 'usd'}} Make Payment
@@ -10,14 +11,10 @@
 
 
         <div class="form-group pull-right" style="width: 350px;">
-            <label class="col-sm-7 control-label">Filter Entires By Year:</label>
+            <label class="col-sm-7 control-label">Filter Entires By Year: {{selectedYear}}</label>
 
             <div class="col-sm-5">
-              {{#x-select value=selectedYear class="form-control"}}
-                {{#each availableYears as |item|}}
-                  {{#x-option value=item}}{{item}}{{/x-option}}
-                {{/each}}
-              {{/x-select}}
+              {{payment/camp-years changeYear=(action "changeYear")}}
             </div>
         </div>
     </div>
@@ -29,9 +26,9 @@
               {{fa-icon 'cart-plus'}}
                 <h3 class="box-title">
                     Charges
-                  {{#x-tooltip content='Charges appear here when registrations or other billable activity is confirmed by camp staff.'}}
+                  {{#util/x-tooltip content='Charges appear here when registrations or other billable activity is confirmed by camp staff.'}}
                     {{fa-icon "info"}}
-                  {{/x-tooltip}}
+                  {{/util/x-tooltip}}
                 </h3>
 
                 <div class="pull-right box-tools"></div>
@@ -64,42 +61,7 @@
         </div>
     </div>
     <div class="col-md-5">
-        <div class="box box-success">
-            <div class="box-header">
-              {{fa-icon 'money'}}
-                <h3 class="box-title">
-                    Payment History
-                  {{#x-tooltip content='Settled and pending payments are listed here.'}}
-                    {{fa-icon "info"}}
-                  {{/x-tooltip}}
-                </h3>
-
-                <div class="pull-right box-tools"></div>
-            </div>
-
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th style="width: 40px">Amount</th>
-                        <th>Status</th>
-                    </tr>
-                    {{#each activePayments as |item|}}
-                        <tr>
-                            <td>{{moment-format item.createdOn 'MM-DD-YYYY'}}</td>
-                            <td>{{capitalize-word item.mode}}</td>
-                            <td><span class="label label-success">{{format-money item.amount}}</span></td>
-                            <td><span class="label label-info">Pending</span></td>
-                        </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
+      {{payment/payment-list payments=activePayments admin=false}}
     </div>
 </div>
 <div class="row">

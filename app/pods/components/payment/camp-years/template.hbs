@@ -1,0 +1,5 @@
+{{#x-select value=selectedYear action=changeYear class="form-control"}}
+  {{#each adjustedAvailableYears as |item|}}
+    {{#x-option value=item.value}}{{item.display}}{{/x-option}}
+  {{/each}}
+{{/x-select}}

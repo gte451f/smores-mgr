@@ -14,9 +14,9 @@
             <div class="col-sm-8">
                 <div class="input-group">
                   {{input type="number" class="form-control" value=model.minAge}}
-                  {{#input-tooltip content='Restrict registrations to campers that exceed this age at the cut off date.'}}
+                  {{#util/input-tooltip content='Restrict registrations to campers that exceed this age at the cut off date.'}}
                     {{fa-icon "info"}}
-                  {{/input-tooltip}}
+                  {{/util/input-tooltip}}
                 </div>
             </div>
         </div>
@@ -26,9 +26,9 @@
             <div class="col-sm-8">
                 <div class="input-group">
                   {{input type="number" class="form-control" value=model.maxAge}}
-                  {{#input-tooltip content='Restrict registrations to campers that are under this age at the cut off date.'}}
+                  {{#util/input-tooltip content='Restrict registrations to campers that are under this age at the cut off date.'}}
                     {{fa-icon "info"}}
-                  {{/input-tooltip}}
+                  {{/util/input-tooltip}}
                 </div>
             </div>
         </div>
@@ -50,11 +50,11 @@
             <div class="col-sm-8">
                 <div class="input-group">
                   {{input type="number" class="form-control" value=model.capacity}}
-                  {{#input-tooltip contentAsHTML=true
+                  {{#util/input-tooltip contentAsHTML=true
                   content='What is the maxium number of campers allowed in this cabin?  <br />
                     This will set a limit on the number of campers who can register for events related to this cabin.'}}
                     {{fa-icon "info"}}
-                  {{/input-tooltip}}
+                  {{/util/input-tooltip}}
                 </div>
             </div>
         </div>

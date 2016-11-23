@@ -1,7 +1,7 @@
 <div class="alert bg-gray alert-dismissable hidden" id="helpBox">
     <button type="button" class="close" {{action 'hideHelp'}}>×</button>
     <h4><i class="icon fa fa-info"></i> Help</h4>
-    Use this wizard to register a singler attendee for a single camp event. You will get a chance to review your
+    Use this wizard to register a single attendee for a single camp event. You will get a chance to review your
     selections before saving the registration.
 </div>
 <div class="row">
@@ -29,7 +29,7 @@
                             <label>Select the camper attending camp:</label>
                             <div class="form-group">
                                 <label>Attending Camper:</label>
-                              {{#x-autosuggest
+                              {{#util/x-autosuggest
                               options=selectOptions
                               action="refreshOptions"
                               selectedValue=dummyContent.name
@@ -39,7 +39,7 @@
                                   <div>
                                       <span style="display:inline-block;padding-right:5px;overflow:hidden;">{{highlight-result result.name query=search}}</span>
                                   </div>
-                              {{/x-autosuggest}}
+                              {{/util/x-autosuggest}}
                             </div>
                         </div>
                     </div>

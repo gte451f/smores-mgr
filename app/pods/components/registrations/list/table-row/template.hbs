@@ -1,0 +1,22 @@
+{{#each columns as |col|}}
+    <td>{{pager-loop model=item field=col}}</td>
+{{/each}}
+<td class="clearfix">
+  {{#if linkPath}}
+      <span class="pull-right" style="margin-left:5px;">
+        {{#link-to linkPath item.id (query-params origin="registration") class="btn btn-default btn-xs pull-right"}}
+          {{fa-icon 'folder-open'}}
+        {{/link-to}}
+      </span>
+  {{/if}}
+  {{#if editPath}}
+    {{#link-to editPath item.id (query-params origin="registration") class="btn btn-default btn-xs pull-right"}}
+      {{fa-icon 'pencil'}}
+    {{/link-to}}
+  {{/if}}
+  {{#if this.attrs.deleteAction}}
+      <a {{action this.attrs.deleteAction item}} class="btn btn-default btn-xs pull-right" href="#">
+        {{fa-icon 'trash'}}
+      </a>
+  {{/if}}
+</td>

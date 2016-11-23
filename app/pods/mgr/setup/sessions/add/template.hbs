@@ -17,9 +17,9 @@
                         <i class="fa fa-calendar"></i>
                     </div>
                   {{pikaday-input value=model.start format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
-                  {{#input-tooltip content='When does the session begin?'}}
+                  {{#util/input-tooltip content='When does the session begin?'}}
                     {{fa-icon "info"}}
-                  {{/input-tooltip}}
+                  {{/util/input-tooltip}}
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
                         <i class="fa fa-calendar"></i>
                     </div>
                   {{pikaday-input value=model.end format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="0,4"}}
-                  {{#input-tooltip content='When does the session end?'}}
+                  {{#util/input-tooltip content='When does the session end?'}}
                     {{fa-icon "info"}}
-                  {{/input-tooltip}}
+                  {{/util/input-tooltip}}
                 </div>
             </div>
         </div>

@@ -1,45 +1,29 @@
 import Ember from 'ember';
-import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(ErrorHandler, {
+export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
   notify: Ember.inject.service(),
+  currentAccount: Ember.inject.service(),
 
   //reset the model in case you return to add another record
   model: function (params) {
-    return {};
+    return this.store.createRecord('card', {active: 1, account: null, isDebit: 0, allowReoccuring: null});
   },
 
   actions: {
-
     /**
-     * save a new card record
-     *
-     * @param model
-     * @returns {boolean}
+     * save a new card to api
+     * @param card
      */
-    save: function (model) {
-      var self = this;
-
-      // set some default values on the model
-      model.active = 1;
-      var accountId = this.get('session.data.authenticated.data.attributes.account-id');
-      model.account = this.store.peekRecord('account', accountId);
-
-      if (Ember.isEmpty(model.account)) {
-        // error, no account detected
-        this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-        return false;
-      }
-
-      var newRecord = this.store.createRecord('card', model);
-      newRecord.save().then(function (post) {
-        self.set('model', {});
-        self.transitionTo('cards');
-        self.get('notify').success('Card Added');
-      }, function (reason) {
-        // roll back progress
-        newRecord.deleteRecord();
-        self.validationReport(newRecord);
+    save: function (card) {
+      let currentAccount = this.get('currentAccount.account');
+      card.set('account', currentAccount);
+      card.save().then((data) => {
+        this.get('notify').success('Success saving card!');
+        this.transitionTo('client.billing.cards');
+      }, (reason) => {
+        this.handleFormError(reason);
       });
     }
   }

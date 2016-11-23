@@ -1,0 +1,26 @@
+{{#modal-dialog close=close targetAttachment="center" translucentOverlay=true}}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" {{action close}}>
+                    <span>×</span>
+                </button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+              {{yield}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" {{action close}} >Cancel</button>
+              {{#spinner-button
+              onclick=(action (action proceed model))
+              isSpinning=isPending
+              class="btn btn-primary confirm-delete"}}
+                  Yes, I am sure.
+              {{/spinner-button}}
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+{{/modal-dialog}}

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-1">
         <div class="form-group">
             <label>Priority</label>
           {{#x-select value=request.priority class="form-control"}}
@@ -13,34 +13,54 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>Location</label>
-          {{#x-select action="locationChanged" class="form-control" comp=this value=currentLocation}}
-            {{#each locations as |item|}}
-              {{#x-option value=item}}{{item.name}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
+          {{#util/x-select
+          options=locations
+          searchEnabled=false
+          selected=currentLocation
+          placeholder='Select'
+          onchange=(action "locationChanged")
+          class="input-assigned-to"
+          as |result|
+          }}
+            {{result.name}}
+          {{/util/x-select}}
+
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label>Session</label>
-          {{#x-select action="sessionChanged" class="form-control" comp=this disabled=isSessionDisabled value=currentSession}}
-            {{#x-option value=null}}Select{{/x-option}}
-            {{#each filteredSessions as |item|}}
-              {{#x-option value=item}}{{item.name}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
+          {{#util/x-select
+          options=filteredSessions
+          searchEnabled=false
+          selected=currentSession
+          placeholder='Select'
+          onchange=(action "sessionChanged")
+          disabled=isSessionDisabled
+          as |result|
+          }}
+            {{result.name}}
+          {{/util/x-select}}
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Program / Cabin</label>
-          {{#x-select class="form-control" comp=this disabled=isEventDisabled value=request.event.content}}
-            {{#x-option value=null}}Select{{/x-option}}
-            {{#each filteredEvents as |item|}}
-              {{#x-option value=item}}{{item.program.name}} / {{item.cabin.name}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
+          {{#util/x-select
+          options=filteredEvents
+          searchEnabled=false
+          selected=request.event
+          placeholder='Select'
+          onchange=(action (mut request.event))
+          disabled=isEventDisabled
+          as |result|
+          }}
+            {{result.fullName}}
+          {{/util/x-select}}
         </div>
+    </div>
+    <div class="col-md-1">
+
     </div>
 </div>
 
@@ -56,37 +76,25 @@
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="form-group">
-            <label>Confirmed
-              {{#x-tooltip content="Will this request occupy one of the available spaces for this event?"}}
-                {{fa-icon "info"}}
-              {{/x-tooltip}}
-            </label>
-          {{#x-select class="form-control" value=request.attending}}
-            {{#each listService.boolean as |item|}}
-              {{#x-option value=item.value}}{{item.name}}{{/x-option}}
-            {{/each}}
-          {{/x-select}}
-        </div>
-    </div>
-
     <div class="col-md-6">
         <div class="form-group">
             <label>Note</label>
           {{input type="text" class="form-control" value=request.note}}
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-11"></div>
-    <div class="col-md-1">
-        <div class="form-group">
-            <a {{action "removeRequest" }} class="btn btn-primary">
-              {{fa-icon 'trash'}}
-            </a>
-        </div>
+    <div class="col-md-2" style="padding: 25px;">
+        Count Towards Capacity?
+      {{input type="checkbox" checked=request.attending}}
+      {{#util/x-tooltip content='Will this request occupy one of the available spaces for this event?'}}
+        {{fa-icon "info"}}
+      {{/util/x-tooltip}}
+    </div>
+
+    <div class="col-md-1" style="padding: 25px;">
+        <a {{action "removeRequest" }} class="btn btn-xs btn-primary">
+          {{fa-icon 'trash'}}
+        </a>
     </div>
 </div>
 <hr/>

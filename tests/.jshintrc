@@ -12,6 +12,7 @@
     "exists",
     "fillIn",
     "click",
+    "select",
     "keyEvent",
     "triggerEvent",
     "find",
@@ -21,12 +22,16 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "selectChoose",
+    "selectSearch",
+    "removeMultiplOption",
+    "clearSelected"
   ],
   "node": false,
   "browser": false,
   "boss": true,
-  "curly": false,
+  "curly": true,
   "debug": false,
   "devel": false,
   "eqeqeq": true,
@@ -48,5 +53,5 @@
   "white": false,
   "eqnull": true,
   "esnext": true,
-  "unused": "vars"
+  "unused": true
 }

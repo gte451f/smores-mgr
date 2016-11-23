@@ -1,0 +1,30 @@
+<label class="control-label {{if horizontal "col-sm-4"}}">
+  {{labelText}}
+  {{#if isValid}}
+      &nbsp; {{fa-icon 'check-circle'}}
+  {{/if}}
+</label>
+
+{{#if horizontal}}
+    <div class="col-sm-8">
+      {{yield}}
+        <span class="help-block">
+            {{#if showWarningMessage}}
+              {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'warningMessage'}}
+            {{/if}}
+          {{#if showErrorMessage}}
+            {{fa-icon 'times-circle'}} {{v-get model valuePath 'message'}}
+          {{/if}}
+          </span>
+    </div>
+{{else}}
+  {{yield}}
+  <span class="help-block">
+  {{#if showWarningMessage}}
+    {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'warningMessage'}}
+  {{/if}}
+    {{#if showErrorMessage}}
+      {{fa-icon 'times-circle'}} {{v-get model valuePath 'message'}}
+    {{/if}}
+</span>
+{{/if}}

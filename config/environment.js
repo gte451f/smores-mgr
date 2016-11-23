@@ -70,14 +70,16 @@ module.exports = function (environment) {
   }
 
   //https://github.com/rwjblue/ember-cli-content-security-policy
+  //https://github.com/rwjblue/ember-cli-content-security-policy
   ENV.contentSecurityPolicy = {
-    'default-src': "'none'",
-    'script-src': "'self' 'unsafe-eval' 'unsafe-inline'",
-    'font-src': "'self' fonts.gstatic.com",
+    'default-src': "'none' https://smores.camp",
+    'script-src': "'self' 'unsafe-eval'",
+    'font-src': "'self' data: fonts.gstatic.com",
     'connect-src': "'self' " + ENV.APP.restDestination,
     'img-src': "'self' data:",
     'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-    'media-src': "'self'"
+    'media-src': "'self' " + ENV.APP.documentDownloadURL,
+    'frame-src': "'self' " + ENV.APP.documentDownloadURL
   };
 
   ENV['ember-simple-auth'] = {

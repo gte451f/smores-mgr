@@ -1,22 +1,52 @@
 import Ember from 'ember';
-import ErrorHandler from 'smores-mgr/mixins/crud/error';
+import Error from 'smores-mgr/mixins/crud/error';
 
-export default Ember.Route.extend(ErrorHandler, {
+export default Ember.Route.extend(Error, {
   notify: Ember.inject.service(),
+  session: Ember.inject.service(),
+
+  model: function (params) {
+    return this.store.findRecord('attendee', params.attendee_id, {include: 'all'});
+  },
 
   actions: {
     /**
-     * update an existing attendee
-     * @param model
+     * remove attendee from API as long as it isn't the current attendee
+     * @param attendee
      */
-    save: function (model) {
-      var self = this;
-      model.save().then(function () {
-        self.transitionTo('client.members.list');
-        self.get('notify').success('Camper Saved');
+    delete(attendee) {
+      attendee.destroyRecord().then((data) => {
+        this.get('notify').success('Attendee Deleted');
+        this.transitionTo('client.members.list');
       }, function (reason) {
-        self.validationReport(model);
+        this.validationReport(reason);
       });
+    },
+
+
+    /**
+     * save attendee to api
+     * @param attendee
+     */
+    save(attendee) {
+      this.controller.set('attendeeSaving', true);
+      attendee.save().then((data) => {
+        this.get('notify').success('Attendee Saved');
+        this.controller.set('attendeeSaving', false);
+        this.transitionTo('client.members.list');
+      }, (reason) => {
+        this.controller.set('attendeeSaving', false);
+        this.handleFormError(reason);
+      });
+    },
+
+    /**
+     * cancel edit and revert changes
+     * @param attendee
+     */
+    cancel(attendee) {
+      attendee.rollbackAttributes();
+      this.transitionTo('client.members.list');
     }
   }
 });

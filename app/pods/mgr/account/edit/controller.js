@@ -13,7 +13,7 @@ export default Ember.Controller.extend(ErrorHandler, CustomFields, {
       var self = this;
       model.save().then(function () {
         var id = model.get('id');
-        self.transitionToRoute('account.info', id);
+        self.transitionToRoute('mgr.account.info', id);
         self.get('notify').success('Account was updated');
       }, function (reason) {
         self.validationReport(model);

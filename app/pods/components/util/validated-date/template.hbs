@@ -1,0 +1,44 @@
+<label class="control-label {{if horizontal "col-sm-4"}}">
+  {{labelText}}
+  {{#if isValid}}
+      &nbsp; {{fa-icon 'check-circle'}}
+  {{/if}}
+</label>
+
+{{#if horizontal}}
+    <div class="col-sm-8">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </div>
+          {{pikaday-input value=value format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="5" name=valuePath}}
+        </div>
+
+        <span class="help-block">
+            {{#if showWarningMessage}}
+              {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'warningMessage'}}
+            {{/if}}
+          {{#if showErrorMessage}}
+            {{fa-icon 'times-circle'}} {{v-get model valuePath 'message'}}
+          {{/if}}
+          </span>
+    </div>
+{{else}}
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+        </div>
+      {{pikaday-input value=value format='MM-DD-YYYY' valueFormat='YYYY-MM-DD' class="form-control" allowBlank=true yearRange="5" name=valuePath}}
+    </div>
+
+    <span class="help-block">
+      {{#if showWarningMessage}}
+        {{fa-icon 'exclamation-cirlce'}} {{v-get model valuePath 'warningMessage'}}
+      {{/if}}
+      {{#if showErrorMessage}}
+        {{fa-icon 'times-circle'}} {{v-get model valuePath 'message'}}
+      {{/if}}
+    </span>
+{{/if}}
+
+

@@ -5,9 +5,7 @@
             <div class="box box-primary">
                 <div class="box-header ">
                     <h3 class="box-title">
-                      {{#link-to 'client.members.edit-attendee' model.attendee.id}}
-                        {{model.attendee.firstName}} {{model.attendee.lastName}}
-                      {{/link-to}}
+                      {{#link-to 'client.members.edit-attendee' model.attendee.id id="attendee-name"}}{{model.attendee.fullName}}{{/link-to}}
                     </h3>
 
                     <div class="box-tools pull-right">

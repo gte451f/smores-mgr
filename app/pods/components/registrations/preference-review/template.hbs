@@ -1,0 +1,51 @@
+<div class="info-box">
+    <span class="info-box-icon bg-green">#{{pref}}</span>
+
+    <div class="info-box-content">
+                    <span class="info-box-text">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Location</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Cabin</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Program</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Session</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Fees</label>
+                            </div>
+                        </div>
+
+                      {{#each requests as |item index|}}
+                        {{#if (eq item.priority pref)}}
+                            <div class="row">
+                                <div class="col-md-3">{{item.event.location.name}}</div>
+                                <div class="col-md-3">{{item.event.cabin.name}}</div>
+                              <div class="col-md-2">{{item.event.program.name}}</div>
+                              <div class="col-md-2">{{item.event.session.name}}</div>
+                                <div class="col-md-2">
+                                  {{#if item.event.fee}}
+                                      <div>
+                                          <strong>Event: </strong><br/>
+                                        {{format-money item.event.fee}}
+                                      </div>
+                                  {{/if}}
+                                  {{#if item.event.program.fee}}
+                                      <div>
+                                          <strong>Program</strong><br/>
+                                        {{format-money item.event.program.fee}}
+                                        </div>
+                                  {{/if}}
+                                </div>
+                            </div>
+                        {{/if}}
+                      {{/each}}
+                    </span>
+    </div>
+    <!-- /.info-box-content -->
+</div>

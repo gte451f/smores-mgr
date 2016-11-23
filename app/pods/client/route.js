@@ -42,7 +42,7 @@ export default Ember.Route.extend({
   model: function (params) {
     let currentAccount = this.get('currentAccount');
     if (!Ember.isEmpty(currentAccount.get('id'))) {
-      return this.store.queryRecord('account', {id: currentAccount.get('id'), with: 'all'});
+      return this.store.findRecord('account', currentAccount.get('id'), {include: 'owners'});
     } else {
       return false;
     }

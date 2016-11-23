@@ -3,7 +3,7 @@ import ErrorHandler from 'smores-mgr/mixins/crud/error';
 
 export default Ember.Route.extend(ErrorHandler, {
   model: function (params) {
-    return this.store.queryRecord('attendee', {id: params.attendee_id});
+    return this.store.findRecord('attendee', params.attendee_id);
   },
 
   setupController: function (controller, model) {

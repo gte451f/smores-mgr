@@ -1,3 +1,4 @@
+/*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
@@ -6,6 +7,11 @@ module.exports = function (defaults) {
     // Add options here
     lessOptions: {
       paths: [
+        'app/styles/app.less',
+        'app/styles/local.less',
+        'app/styles/nav-wizard.less',
+        'app/styles/paginated-table.less',
+        'app/styles/template-tweaks.less',
         'bower_components/bootstrap/less',
         'bower_components/admin-lte/build/less'
       ]

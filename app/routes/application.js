@@ -14,7 +14,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
    * session is destroyed, now go to the correct login page
    * depending on user type
    */
-  sessionInvalidated: function () {
+  sessionInvalidated() {
     let userType = this.get('userType');
     if (userType === 'Owner') {
       this.transitionTo('client.auth.login');
@@ -28,7 +28,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
    * session was just created, now go to the default route
    * depending on user type
    */
-  sessionAuthenticated: function () {
+  sessionAuthenticated() {
 
     let userType = this.get('session.data.authenticated.data.attributes.user-type');
     this.set('userType', userType);
@@ -44,7 +44,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     /**
      * logout action required by simple-auth
      */
-    invalidateSession: function () {
+    invalidateSession() {
       var self = this;
       let userType = this.get('session.data.authenticated.data.attributes.user-type');
       this.get('session').invalidate().then(function () {
@@ -57,20 +57,34 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       });
     },
 
-    showModal: function (name, model) {
+    /**
+     * utility function used around the app to show a modal with different types of content
+     *
+     * @param name
+     * @param model
+     */
+    showModal(name, model) {
       this.render(name, {
         into: 'application',
         outlet: 'modal',
         model: model
       });
     },
-    removeModal: function () {
+
+    /**
+     * utility function to close a modal
+     */
+    removeModal() {
       this.disconnectOutlet({
         outlet: 'modal',
         parentView: 'application'
       });
     },
-    showSidebar: function () {
+
+    /**
+     * utility to toggle the side bar open and closed
+     */
+    showSidebar() {
       Ember.$('#mainWrapper').toggleClass('sidebar-collapse');
     }
   }

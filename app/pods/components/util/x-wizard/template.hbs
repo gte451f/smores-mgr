@@ -1,0 +1,9 @@
+{{#each steps as |item| }}
+  {{util/x-wizard-step name=item.title currentStep=currentStep step=item.step}}
+{{/each}}
+
+<div class="pull-right">
+    <button class="btn btn-info" style="margin: 5px;" {{action 'showHelp'}}>{{fa-icon 'question'}}</button>
+</div>
+
+

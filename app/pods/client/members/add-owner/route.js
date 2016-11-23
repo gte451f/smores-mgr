@@ -1,59 +1,76 @@
 import Ember from 'ember';
 import Error from 'smores-mgr/mixins/crud/error';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend(Error, {
-  notify: Ember.inject.service(),
-  currentAccount: Ember.inject.service(),
+export default Ember.Route.extend(AuthenticatedRouteMixin, Error, {
+    notify        : Ember.inject.service(),
+    currentAccount: Ember.inject.service(),
 
-  model: function (params) {
-    // fill out some default values
-    return {phone: {primary: 1}, owner: {userType: 'Owner', active: true}};
-  },
-  actions: {
     /**
-     * add a new owner to the current account
-     * will create a new owner record followed by a phone record
+     * create fake models so validation will work
      *
-     * roll back in case of failure
+     * @param params
+     * @returns {{phone: *, owner: *}}
+     */
+    model(params) {
+      var owner = this.store.createRecord('owner', { userType: 'Owner', active: true });
+      var phone = this.store.createRecord('owner-number', { primary: 1 });
+      return { phone: phone, owner: owner };
+    },
+
+    /**
+     * inject current account after it has had a chance to load
      *
+     * @param controller
      * @param model
      */
-    save: function (model) {
-      var self = this;
-
-      //first save the owner
-      var account = this.get('currentAccount.account');
-      model.owner.account = account;
-
-      if (Ember.isEmpty(account)) {
+    setupController(controller, model) {
+      let currentAccount = this.get('currentAccount.account');
+      if (Ember.isEmpty(currentAccount)) {
         // error, no account detected
         this.get('notify').alert('An internal error occurred.  Please logout and log back into the system.');
-        return false;
       }
-      var newOwner = this.store.createRecord('owner', model.owner);
+      this._super(controller, model);
+    },
 
-      newOwner.save().then(function (data) {
-        var that = self;
-        //then save the phone
-        model.phone.owner = newOwner;
-        var newPhone = self.store.createRecord('owner-number', model.phone);
-        newPhone.save().then(function () {
-          that.get('notify').success('Owner created');
-          //reset to original position
-          that.set('model', {phone: {primary: 1}, owner: {userType: 'Owner', active: true}});
-          that.transitionTo('client.members.list');
-        }, function (reason) {
-          // roll back progress
-          newPhone.deleteRecord();
-          newOwner.destoryRecord();
-          self.validationReport(newPhone);
+    actions: {
+      /**
+       * add a new owner to the current account
+       * will create a new owner record followed by a phone record
+       *
+       * @param model
+       */
+      save(owner, phone) {
+        owner.set('account', this.get('currentAccount.account'));
+        owner.save().then((data) => {
+          var self = this;
+          //then save the phone
+          phone.set('owner', owner);
+          phone.save().then(function () {
+            self.get('notify').success('Owner created');
+            //reset to original position
+            var newOwner = self.store.createRecord('owner', { userType: 'Owner', active: true });
+            var newPhone = self.store.createRecord('owner-number', { primary: 1 });
+            self.set('model', { phone: newPhone, owner: newOwner });
+            self.transitionTo('client.members.list');
+          }, function (reason) {
+            self.handleFormError(reason);
+          });
+        }, (reason) => {
+          this.handleFormError(reason);
         });
-      }, function (reason) {
-        // roll back progress
-        newOwner.deleteRecord();
-        self.validationReport(newOwner);
-      });
+      },
+
+      /**
+       * cancel edit and revert changes
+       * @param owner
+       */
+      cancel(owner) {
+        this.transitionTo('client.members.list');
+      }
+
     }
   }
-});
+)
+;
 

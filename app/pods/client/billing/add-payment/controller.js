@@ -10,6 +10,8 @@ export default Ember.Controller.extend({
   // button text that changes onClick
   toggleText: 'Use New Card',
 
+  isFile: false,
+
   actions: {
     /**
      * toggle between a card on file to a new card form

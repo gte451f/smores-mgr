@@ -20,7 +20,7 @@
             <label class="col-sm-2 control-label">Notes</label>
 
             <div class="col-sm-10">
-              {{textarea class="form-control" value=model.notes}}</div>
+              {{textarea name="notes" class="form-control" value=model.notes}}</div>
         </div>
 
       {{#each customFields as |item|}}
@@ -36,7 +36,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary pull-right" {{action "save" model}}>Save</button>
+                <button id="save-account" class="btn btn-primary pull-right" {{action "save" model}}>Save</button>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <div class="nav-tabs-custom">
-  {{accounts/tab-nav model=model isCard='active' redirect="redirect" suggestedEntry=suggestedEntry}}
+  {{accounts/tab-nav model=model.account isCard='active' redirect="redirect" suggestedEntry=suggestedEntry}}
     <div class="tab-content">
         <div id="main" class="tab-pane active">
             <div class="row">
@@ -9,28 +9,22 @@
                             <h3 class="box-title">Stored Credit Cards</h3>
 
                             <div class="box-tools pull-right">
-                              {{#link-to 'mgr.account.cards.add' class="btn btn-box-tool"}} {{fa-icon 'plus'}} {{/link-to}}
+                              {{#link-to 'mgr.account.cards.add' class="btn btn-box-tool" id="add-card"}} {{fa-icon 'plus'}} {{/link-to}}
                             </div>
                             <!-- /.box-tools -->
                         </div>
-                        <!-- /.box-header -->
                         <div class="box-body">
-
-                          {{#each cards as |item| }}
-                              <div class="row">
-                                  <div class="col-md-10">
-                                    {{accounts/card-info card=item}}
-                                  </div>
-                                  <div class="col-md-2">
-                                      <a {{action 'showModal' 'modals/delete-confirm' item}}
-                                              class="btn btn-default btn-block">{{fa-icon "trash-o"}}</a>
-                                  </div>
-                              </div>
-                          {{/each}}
+                            <div class="col-md-12">
+                                <div class="row">
+                                  {{#each model.account.cards as |item| }}
+                                    {{#if item.id}}
+                                      {{card/basic-info card=item}}
+                                    {{/if}}
+                                  {{/each}}
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.box-body -->
                     </div>
-
                 </section>
                 <section class="col-md-6">
                   {{outlet}}
